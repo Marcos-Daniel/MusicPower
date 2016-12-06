@@ -23,6 +23,22 @@ public class Fornecedor {
     private String rua;
     private String nEstabelecimento;
 
+    public Fornecedor() {
+    }
+
+    public Fornecedor(int id, String nome, String cnpj, String telefone, String email, String UF, String cidade, String bairro, String rua, String nEstabelecimento) {
+        this.id = id;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.telefone = telefone;
+        this.email = email;
+        this.UF = UF;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.nEstabelecimento = nEstabelecimento;
+    }
+    
     public int getId() {
         return id;
     }

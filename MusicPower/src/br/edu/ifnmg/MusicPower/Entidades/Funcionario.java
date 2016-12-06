@@ -24,6 +24,23 @@ public class Funcionario {
     private String rua;
     private String nResidencia;  
 
+    public Funcionario() {
+    }
+
+    public Funcionario(int id, String nome, String cpf, String idade, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
+        this.id = id;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.idade = idade;
+        this.telefone = telefone;
+        this.email = email;
+        this.UF = UF;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.nResidencia = nResidencia;
+    }
+
     public int getId() {
         return id;
     }
