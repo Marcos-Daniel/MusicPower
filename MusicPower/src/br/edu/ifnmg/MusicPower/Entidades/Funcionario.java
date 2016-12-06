@@ -5,12 +5,14 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.util.Objects;
+
 /**
  *
  * @author marcos
  */
 public class Funcionario {
-    
+    private int id;
     private String nome;
     private String cpf;
     private String idade;
@@ -21,6 +23,14 @@ public class Funcionario {
     private String bairro;
     private String rua;
     private String nResidencia;  
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -100,6 +110,40 @@ public class Funcionario {
 
     public void setnResidencia(String nResidencia) {
         this.nResidencia = nResidencia;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.cpf);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Funcionario other = (Funcionario) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" + "id=" + id + ", cpf=" + cpf + '}';
     }
     
 }

@@ -5,12 +5,14 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.util.Objects;
+
 /**
  *
  * @author marcos
  */
 public class Fornecedor {
-    
+    private int id;
     private String nome;
     private String cnpj;
     private String telefone;
@@ -20,6 +22,14 @@ public class Fornecedor {
     private String bairro;
     private String rua;
     private String nEstabelecimento;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -92,5 +102,39 @@ public class Fornecedor {
     public void setnEstabelecimento(String nEstabelecimento) {
         this.nEstabelecimento = nEstabelecimento;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        hash = 97 * hash + Objects.hashCode(this.cnpj);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fornecedor other = (Fornecedor) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.cnpj, other.cnpj)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Fornecedor{" + "id=" + id + ", cnpj=" + cnpj + '}';
+    }
+   
 }
