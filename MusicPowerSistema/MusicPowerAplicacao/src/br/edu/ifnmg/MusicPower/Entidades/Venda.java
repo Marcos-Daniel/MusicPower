@@ -5,7 +5,6 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
-import java.util.Date;
 
 /**
  *
