@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * @author marcos
  */
 public class ItensCompraDAO {
-        Connection conn;
+    Connection conn;
     public ItensCompraDAO() throws SQLException{
         try {
             Conexao.iniciar();
@@ -27,32 +27,28 @@ public class ItensCompraDAO {
            System.out.println("Usuário/Senha incorrentos");
         }
     }
-    
-    public void preencherObjeto(ItensCompra obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(ItensCompra obj,PreparedStatement sql) throws SQLException{
         sql.setInt(1, obj.getCompra());
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());
     }
-    
-     public void Salvar(ItensCompra obj, int id) throws SQLException{
+    public void Salvar(ItensCompra obj, int id) throws SQLException{
          PreparedStatement sql;
         if(obj.getCompra()== 0 || obj.getCompra()== 0){
             sql = conn.prepareStatement("INSERT INTO itenscompra (compra, produto, valor)VALUES(?,?,?)");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.executeUpdate();
         }
         else{
             sql = conn.prepareStatement("UPDATE itenscompra SET compra = ?, produto = ?, valor =?, WHERE datacompra = ?");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.setInt(4, id);
             sql.executeUpdate();
         }
     }
-     
     public void Excluir(int id) throws SQLException{
         PreparedStatement sql = conn.prepareStatement("DELETE FROM itenscompra WHERE id = ?");
         sql.setInt(1, id);
         sql.executeUpdate();
     }
-   
 }

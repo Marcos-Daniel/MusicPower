@@ -9,6 +9,7 @@ import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -29,24 +30,43 @@ public class ContaDAO {
            System.out.println("Usuário/Senha incorrentos");
         }
     }
-    public void preencherObjeto(Conta obj, PreparedStatement sql) throws SQLException{
-        sql.setString(1, obj.getDescricao());
-        sql.setDouble(2, obj.getValor());
-        sql.setString(3, obj.getMesReferente());
-        sql.setDate(4, (Date) obj.getVencimento());
-        sql.setString(5, obj.getStatus());
+    public Conta preencherObjeto(ResultSet resultado) throws SQLException{
+        try {
+            Conta tmp = new Conta();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setValor(resultado.getDouble(3));
+            tmp.setMesReferente(resultado.getString(4));
+            tmp.setVencimento(resultado.getDate(5));
+            tmp.setStatus(resultado.getString(6));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+    public void preencherConsulta(Conta obj, PreparedStatement sql) throws SQLException{
+        try{
+            sql.setString(1, obj.getDescricao());
+            sql.setDouble(2, obj.getValor());
+            sql.setString(3, obj.getMesReferente());
+            sql.setDate(4, (Date) obj.getVencimento());
+            sql.setString(5, obj.getStatus());
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
     }
     public void Salvar(Conta obj, int id) throws SQLException{
         PreparedStatement sql;
         if(obj.getId()== 0){
             sql = conn.prepareStatement("INSERT INTO conta(descricao, valor, mesReferente, vencimento,StatusConta)+"
                     + "VALUES(?,?,?,?,?)"); 
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.executeUpdate();
         }
         else{
             sql = conn.prepareStatement("UPDATE conta SET descricao = ?, valor = ?, mesReferente = ?, vencimento = ?,StatusConta = ? WHERE id = ?");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.setInt(6, id);
             sql.executeUpdate();
         }
@@ -55,5 +75,16 @@ public class ContaDAO {
         PreparedStatement sql = conn.prepareStatement("DELETE FROM conta WHERE id = ?");
         sql.setInt(1, id);
         sql.executeUpdate();
+    }
+    public Conta Abrir(String mes) throws SQLException{
+        try{
+            PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE mesReferente = ?");
+            sql.setString(1,mes);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()) return preencherObjeto(resultado);
+        } catch(SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 }

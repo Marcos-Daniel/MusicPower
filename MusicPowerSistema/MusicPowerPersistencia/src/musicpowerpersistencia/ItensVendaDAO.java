@@ -28,7 +28,7 @@ public class ItensVendaDAO {
         }
     }
     
-    public void preencherObjeto(ItensVenda obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(ItensVenda obj,PreparedStatement sql) throws SQLException{
         sql.setInt(1, obj.getVenda());
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());
@@ -38,12 +38,12 @@ public class ItensVendaDAO {
          PreparedStatement sql;
         if(obj.getVenda()== 0 || obj.getProduto()== 0){
             sql = conn.prepareStatement("INSERT INTO itensvenda (venda, produto, valor)VALUES(?,?,?)");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.executeUpdate();
         }
         else{
             sql = conn.prepareStatement("UPDATE itensvenda SET venda = ?, produto = ?, valor =?, WHERE datacompra = ?");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.setInt(4, id);
             sql.executeUpdate();
         }

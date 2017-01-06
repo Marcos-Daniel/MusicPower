@@ -9,6 +9,7 @@ import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -27,32 +28,45 @@ public class ProdutoDAO {
            System.out.println("Usuário/Senha incorrentos");
         }
     }
-    
-    public void preencherObjeto(Produto obj,PreparedStatement sql) throws SQLException{
-        sql.setString(1, obj.getDescricao());
-        sql.setInt(2, obj.getQtd());
-        sql.setDouble(3, obj.getValor());
+    public Produto preencherObjeto(ResultSet resultado) throws SQLException{
+      try {
+            Produto tmp = new Produto();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setQtd(resultado.getInt(3));
+            tmp.setValor(resultado.getDouble(4));
+            return tmp;
+      } catch(SQLException ex){
+          System.out.println(ex);
+      }
+      return null;
     }
-    
+    public void preencherConsulta(Produto obj,PreparedStatement sql) throws SQLException{
+        try{
+            sql.setString(1, obj.getDescricao());
+            sql.setInt(2, obj.getQtd());
+            sql.setDouble(3, obj.getValor());
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+    } 
      public void Salvar(Produto obj, int id) throws SQLException{
          PreparedStatement sql;
         if(obj.getId() == 0){
             sql = conn.prepareStatement("INSERT INTO produto(descricao,qtd,valor)VALUES(?,?,?)");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.executeUpdate();
         }
         else{
             sql = conn.prepareStatement("UPDATE produto SET descricao = ?,qtd = ?, WHERE id = ?");
-            preencherObjeto(obj, sql);
+            preencherConsulta(obj, sql);
             sql.setInt(3, id);
             sql.executeUpdate();
         }
-    }
-     
+    } 
     public void Excluir(int id) throws SQLException{
         PreparedStatement sql = conn.prepareStatement("DELETE FROM produto WHERE id = ?");
         sql.setInt(1, id);
         sql.executeUpdate();
-    }
-    
+    }  
 }
