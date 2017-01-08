@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author marcos
  */
-public class Cliente {
+public class Cliente implements Entidade {
     private int id;
     private String nome;
     private String cpf;
@@ -39,10 +39,12 @@ public class Cliente {
         this.nResidencia = nResidencia;
     }
     
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

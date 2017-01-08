@@ -6,28 +6,23 @@
 package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 /**
  *
  * @author breno
  */
-public class ClienteDAO {
-    Connection conn;
+public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositorio {
     public ClienteDAO(){
-        try {
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        }  catch (ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        } catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+       setConsultaSalvar("INSERT INTO cliente(nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia)VALUES(?,?,?,?,?,?,?,?,?)");
+       setConsultaAlterar("UPDATE cliente SET nome = ?,cpf = ?,telefone = ?,email = ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
+       setConsultaExcluir("DELETE FROM cliente WHERE id = ?");
+       setConsultaAbrir("SELECT id, nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Cliente WHERE cpf = ?");
     } 
-    public Cliente preencherObjeto(ResultSet resultado) throws SQLException{
+    @Override
+    public Cliente preencherObjeto(ResultSet resultado) {
         try{
             Cliente tmp = new Cliente();
             tmp.setId(resultado.getInt(1));
@@ -46,7 +41,8 @@ public class ClienteDAO {
         }
         return null;
     }
-    public void preencherConsulta(Cliente obj,PreparedStatement sql) throws SQLException{
+   @Override
+    public void preencherConsulta(Cliente obj,PreparedStatement sql) {
         try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
@@ -61,32 +57,16 @@ public class ClienteDAO {
             System.out.println(ex);
         }
     }
-    public void Salvar(Cliente obj, int id) throws SQLException{ 
-        if(obj.getId() == 0){
-            PreparedStatement sql = conn.prepareStatement("INSERT INTO cliente(nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia)"
-                    + "VALUES(?,?,?,?,?,?,?,?,?)");
-            preencherConsulta(obj, sql);
-            sql.executeUpdate();
-       }
-       else{
-           PreparedStatement sql = conn.prepareStatement("UPDATE cliente SET nome = ?,cpf = ?,telefone = ?,email = ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
-           preencherConsulta(obj,sql);
-           sql.setInt(10, id);
-           sql.executeUpdate();
-       }
-    }
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM cliente WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
-    }
-    public Cliente Abrir(String cpf) throws SQLException{
-        try{
-        PreparedStatement sql = conn.prepareStatement("SELECT id, nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Cliente WHERE cpf = ?");
-        sql.setString(1, cpf);
-        ResultSet resultado = sql.executeQuery();
-        if(resultado.next()) return preencherObjeto(resultado);    
-        } catch (SQLException ex){
+   @Override
+    public Cliente Abrir(String cpf) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("select id,nome,cpf,dataNascimento from clientes where cpf = ?");
+            sql.setString(1, cpf);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()){   
+                return preencherObjeto(resultado);
+            }            
+        }  catch(SQLException ex){
             System.out.println(ex);
         }
         return null;
