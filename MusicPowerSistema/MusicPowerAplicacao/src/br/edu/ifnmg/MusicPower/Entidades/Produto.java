@@ -11,45 +11,46 @@ import java.util.Objects;
  *
  * @author breno
  */
-/*Produto: Descrição, Qtd, valor*/
-public class Produto {
+public class Produto implements Entidade {
     private int id;
     private String descricao;
     private int qtd;
     private Double valor;
-
+    public Produto() {
+        
+    }
+    public Produto(int id, String descricao, int qtd, Double valor) {
+        this.id = id;
+        this.descricao = descricao;
+        this.qtd = qtd;
+        this.valor = valor;
+    }
+    @Override
     public int getId() {
         return id;
     }
-
+    @Override
     public void setId(int id) {
         this.id = id;
     }
-
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
     public int getQtd() {
         return qtd;
     }
-
     public void setQtd(int qtd) {
         this.qtd = qtd;
     }
-
     public Double getValor() {
         return valor;
     }
-
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -57,7 +58,6 @@ public class Produto {
         hash = 79 * hash + Objects.hashCode(this.descricao);
         return hash;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -78,10 +78,8 @@ public class Produto {
         }
         return true;
     }
-
     @Override
     public String toString() {
         return "Produto{" + "id=" + id + ", descricao=" + descricao + '}';
-    }
-    
+    }   
 }

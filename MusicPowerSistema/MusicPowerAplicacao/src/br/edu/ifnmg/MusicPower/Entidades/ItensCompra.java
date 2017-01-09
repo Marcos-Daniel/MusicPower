@@ -9,35 +9,46 @@ package br.edu.ifnmg.MusicPower.Entidades;
  *
  * @author breno
  */
-public class ItensCompra {
+public class ItensCompra implements Entidade {
+    private int id;
     private int compra;
     private int produto;
     private Double valor;
-
+    public ItensCompra() {
+        
+    }
+    public ItensCompra(int id, int compra, int produto, Double valor) {
+        this.id = id;
+        this.compra = compra;
+        this.produto = produto;
+        this.valor = valor;
+    }
+    @Override
+    public int getId() {
+        return id;
+    }
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }    
     public int getCompra() {
         return compra;
     }
-
     public void setCompra(int compra) {
         this.compra = compra;
     }
-
     public int getProduto() {
         return produto;
     }
-
     public void setProduto(int produto) {
         this.produto = produto;
     }
-
     public Double getValor() {
         return valor;
     }
-
     public void setValor(Double valor) {
         this.valor = valor;
     }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -45,7 +56,6 @@ public class ItensCompra {
         hash = 23 * hash + this.produto;
         return hash;
     }
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -65,8 +75,5 @@ public class ItensCompra {
             return false;
         }
         return true;
-    }
-    
-    
-    
+    }    
 }
