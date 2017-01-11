@@ -6,7 +6,7 @@
 package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Serviço;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,19 +16,14 @@ import java.sql.SQLException;
  *
  * @author breno
  */
-public class ServicoDAO {
-    Connection conn;
+public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoRepositorio {
     public ServicoDAO() throws ClassNotFoundException, SQLException{
-        try{
-           Conexao.iniciar();
-           conn = Conexao.criarConexao();
-        }catch(ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        }
-        catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+        setConsultaSalvar("INSERT INTO (descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso)VALUES(?,?,?,?,?,?)");
+        setConsultaAlterar("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ? WHERE id = ?");
+        setConsultaExcluir("DELETE FROM servico WHERE id = ?");
+        setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
     }
+    @Override
     public Serviço preencherObjeto(ResultSet resultado) throws SQLException{
         try {
             Serviço tmp= new Serviço();
@@ -45,6 +40,7 @@ public class ServicoDAO {
         }
         return null;
     }
+    @Override
     public void preencherConsulta(Serviço obj, PreparedStatement sql) throws SQLException{
         try {
             sql.setString(1, obj.getDescricao());
@@ -57,24 +53,15 @@ public class ServicoDAO {
             System.out.println(ex);
         }
     }
-    public void Salvar(Serviço obj, int id) throws SQLException{
-        PreparedStatement sql;
-        if(obj.getId()==0){
-            sql = conn.prepareStatement("INSERT INTO (descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso)+"
-                    + "VALUES(?,?,?,?,?,?)");
-            preencherConsulta(obj,sql);
-            sql.executeUpdate();
+    @Override
+    public Serviço Abrir(String descricao) throws SQLException{
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
+            sql.setString(1, descricao);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()) return preencherObjeto(resultado);
+        } catch (Exception e) {
         }
-        else{
-            sql = conn.prepareStatement("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ? WHERE id = ?");
-            preencherConsulta(obj, sql);
-            sql.setInt(7, id);
-            sql.executeUpdate();
-        }
-    }
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM servico WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
+        return null;
     }
 }

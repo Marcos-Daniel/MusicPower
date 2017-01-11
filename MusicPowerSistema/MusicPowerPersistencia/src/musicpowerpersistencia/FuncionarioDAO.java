@@ -6,7 +6,7 @@
 package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,19 +15,14 @@ import java.sql.SQLException;
  *
  * @author breno
  */
-public class FuncionarioDAO {
-    Connection conn;
+public class FuncionarioDAO extends DAOGenerica<Funcionario> implements FuncionarioRepositorio {
     public FuncionarioDAO() throws ClassNotFoundException, SQLException{
-        try{
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        } catch(ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        }
-        catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+        setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
+        setConsultaExcluir("DELETE FROM Funcionario WHERE id = ?");
+        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Funcionario WHERE id = ?");
     }
+    @Override
     public Funcionario preencherObjeto(ResultSet resultado) throws SQLException {
         try{
             Funcionario tmp = new Funcionario();
@@ -48,6 +43,7 @@ public class FuncionarioDAO {
         }
         return null;
     }
+    @Override
     public void preencherConsulta(Funcionario obj,PreparedStatement sql) throws SQLException{
         try{
             sql.setString(1, obj.getNome());
@@ -64,26 +60,7 @@ public class FuncionarioDAO {
             System.out.println(ex);
         }
     }
-    public void Salvar(Funcionario obj, int id) throws SQLException{
-        PreparedStatement sql;
-        if(obj.getId()==0){
-            sql = conn.prepareStatement("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia)+"
-                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-            preencherConsulta(obj,sql);
-            sql.executeUpdate();
-        }
-        else{
-            sql = conn.prepareStatement("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
-            preencherConsulta(obj,sql);
-            sql.setInt(11, id);
-            sql.executeUpdate();
-        }
-    }
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM Funcionario WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
-    }
+    @Override
     public Funcionario Abrir(String cpf) throws SQLException{
         try{
           PreparedStatement sql = conn.prepareStatement("SELECT id,nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Funcionario WHERE cpf = ?");

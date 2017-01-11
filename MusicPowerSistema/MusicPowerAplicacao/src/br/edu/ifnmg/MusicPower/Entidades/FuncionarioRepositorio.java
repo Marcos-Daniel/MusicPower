@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author breno
  */
 public interface FuncionarioRepositorio extends Repositorio<Funcionario>{
-    public Funcionario Abrir(String cpf);
+    public Funcionario Abrir(String cpf) throws SQLException;
 }

@@ -6,7 +6,7 @@
 package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,20 +16,14 @@ import java.sql.SQLException;
  *
  * @author breno
  */
-public class ContaDAO {
-    Connection conn;
+public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
     public ContaDAO(){
-        try {
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        }
-        catch(ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        }
-        catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+        setConsultaSalvar("INSERT INTO conta(descricao, valor, mesReferente, vencimento,StatusConta)VALUES(?,?,?,?,?)");
+        setConsultaAlterar("UPDATE conta SET descricao = ?, valor = ?, mesReferente = ?, vencimento = ?,StatusConta = ? WHERE id = ?");
+        setConsultaExcluir("DELETE FROM conta WHERE id = ?");
+        setConsultaAbrir("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE id = ?");
     }
+    @Override
     public Conta preencherObjeto(ResultSet resultado) throws SQLException{
         try {
             Conta tmp = new Conta();
@@ -45,6 +39,7 @@ public class ContaDAO {
         }
         return null;
     }
+    @Override
     public void preencherConsulta(Conta obj, PreparedStatement sql) throws SQLException{
         try{
             sql.setString(1, obj.getDescricao());
@@ -56,26 +51,7 @@ public class ContaDAO {
             System.out.println(ex);
         }
     }
-    public void Salvar(Conta obj, int id) throws SQLException{
-        PreparedStatement sql;
-        if(obj.getId()== 0){
-            sql = conn.prepareStatement("INSERT INTO conta(descricao, valor, mesReferente, vencimento,StatusConta)+"
-                    + "VALUES(?,?,?,?,?)"); 
-            preencherConsulta(obj, sql);
-            sql.executeUpdate();
-        }
-        else{
-            sql = conn.prepareStatement("UPDATE conta SET descricao = ?, valor = ?, mesReferente = ?, vencimento = ?,StatusConta = ? WHERE id = ?");
-            preencherConsulta(obj, sql);
-            sql.setInt(6, id);
-            sql.executeUpdate();
-        }
-    }
-    public void Exluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM conta WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
-    }
+    @Override
     public Conta Abrir(String mes) throws SQLException{
         try{
             PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE mesReferente = ?");

@@ -6,7 +6,7 @@
 package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,18 +15,14 @@ import java.sql.SQLException;
  *
  * @author marcos
  */
-public class FornecedorDAO {
-    Connection conn;
-    public FornecedorDAO() throws SQLException{
-        try {
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        }  catch (ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        } catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+public class FornecedorDAO extends DAOGenerica<Fornecedor> implements FornecedorRepositorio {
+    public FornecedorDAO() {
+       setConsultaSalvar("INSERT INTO fornecedor(nome,cnpj,telefone,email,uf,cidade,nestabelecimento)VALUES(?,?,?,?,?,?,?)");
+       setConsultaAlterar("UPDATE fornecedor SET nome = ?,cnpj = ?,telefone = ?,email = ?,uf = ?, cidade = ? nestabelecimento = ?, WHERE id = ?");
+       setConsultaExcluir("DELETE FROM fornecedor WHERE id = ?");
+       setConsultaAbrir("SELECT id,nome,cnpj,telefone,email,uf,cidade,nestabelecimento FROM Fornecedor WHERE id = ?");
     }
+    @Override
     public Fornecedor preencherObjeto(ResultSet resultado) throws SQLException{
         try {
             Fornecedor tmp = new Fornecedor();
@@ -44,6 +40,7 @@ public class FornecedorDAO {
         }
         return null;
     }
+    @Override
     public void preencherConsulta(Fornecedor obj,PreparedStatement sql) throws SQLException{
         try {
             sql.setString(1, obj.getNome());
@@ -57,26 +54,8 @@ public class FornecedorDAO {
             System.out.println(ex);
         }
     }
-     public void Salvar(Fornecedor obj, int id) throws SQLException{
-         PreparedStatement sql;
-        if(obj.getId() == 0){
-            sql = conn.prepareStatement("INSERT INTO fornecedor(nome,cnpj,telefone,email,uf,cidade,nestabelecimento)VALUES(?,?,?,?,?,?,?)");
-            preencherConsulta(obj, sql);
-            sql.executeUpdate();
-        }
-        else{
-            sql = conn.prepareStatement("UPDATE fornecedor SET nome = ?,cnpj = ?,telefone = ?,email = ?,uf = ?, cidade = ? nestabelecimento = ?, WHERE id = ?");
-            preencherConsulta(obj, sql);
-            sql.setInt(8, id);
-            sql.executeUpdate();
-        }
-    }    
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM fornecedor WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
-    }
-    public Fornecedor Abrir(String nome){
+    @Override
+    public Fornecedor Abrir(String nome) throws SQLException{
         try {
             PreparedStatement sql = conn.prepareStatement("SELECT id,nome,cnpj,telefone,email,uf,cidade,nestabelecimento FROM Fornecedor WHERE nome = ?");
             sql.setString(1, nome);

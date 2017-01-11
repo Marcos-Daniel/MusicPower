@@ -31,8 +31,8 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
             System.out.println("Usuário/senha errados!");
         } 
     }
-    public abstract T preencherObjeto(ResultSet resultado);
-    public abstract void preencherConsulta(T obj,PreparedStatement sql);
+    public abstract T preencherObjeto(ResultSet resultado) throws SQLException;
+    public abstract void preencherConsulta(T obj,PreparedStatement sql) throws SQLException;
     @Override
        public boolean Salvar(T obj){
            try {

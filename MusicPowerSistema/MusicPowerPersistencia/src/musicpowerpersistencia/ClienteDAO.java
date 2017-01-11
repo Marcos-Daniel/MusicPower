@@ -22,7 +22,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
        setConsultaAbrir("SELECT id, nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Cliente WHERE cpf = ?");
     } 
     @Override
-    public Cliente preencherObjeto(ResultSet resultado) {
+    public Cliente preencherObjeto(ResultSet resultado) throws SQLException{
         try{
             Cliente tmp = new Cliente();
             tmp.setId(resultado.getInt(1));
@@ -42,7 +42,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         return null;
     }
    @Override
-    public void preencherConsulta(Cliente obj,PreparedStatement sql) {
+    public void preencherConsulta(Cliente obj,PreparedStatement sql) throws SQLException{
         try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
@@ -58,7 +58,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         }
     }
    @Override
-    public Cliente Abrir(String cpf) {
+    public Cliente Abrir(String cpf) throws SQLException {
         try {
             PreparedStatement sql = conn.prepareStatement("select id,nome,cpf,dataNascimento from clientes where cpf = ?");
             sql.setString(1, cpf);

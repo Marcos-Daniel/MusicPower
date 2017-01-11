@@ -5,50 +5,41 @@
  */
 package musicpowerpersistencia;
 
-import br.edu.ifnmg.MusicPower.Entidades.Compra;
 import br.edu.ifnmg.MusicPower.Entidades.ItensCompra;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.ItensCompraRepositorio;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
  *
  * @author marcos
  */
-public class ItensCompraDAO {
-    Connection conn;
+public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCompraRepositorio {
     public ItensCompraDAO() throws SQLException{
-        try {
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        }  catch (ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        } catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+        setConsultaSalvar("INSERT INTO itenscompra (compra, produto, valor)VALUES(?,?,?)");
+        setConsultaAlterar("UPDATE itenscompra SET compra = ?, produto = ?, valor =?, WHERE datacompra = ?");
+        setConsultaExcluir("DELETE FROM itenscompra WHERE id = ?");
+        setConsultaAbrir("SELECT id,compra, produto, valor FROM ItensCompra from id = ?");
     }
+    @Override
+    public ItensCompra preencherObjeto(ResultSet resultado) throws SQLException {
+        try {
+            ItensCompra tmp = new ItensCompra();
+            tmp.setId(resultado.getInt(1));
+            tmp.setCompra(resultado.getInt(2));
+            tmp.setProduto(resultado.getInt(3));
+            tmp.setValor(resultado.getDouble(4));
+            return tmp;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+    @Override
     public void preencherConsulta(ItensCompra obj,PreparedStatement sql) throws SQLException{
         sql.setInt(1, obj.getCompra());
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());
-    }
-    public void Salvar(ItensCompra obj, int id) throws SQLException{
-         PreparedStatement sql;
-        if(obj.getCompra()== 0 || obj.getCompra()== 0){
-            sql = conn.prepareStatement("INSERT INTO itenscompra (compra, produto, valor)VALUES(?,?,?)");
-            preencherConsulta(obj, sql);
-            sql.executeUpdate();
-        }
-        else{
-            sql = conn.prepareStatement("UPDATE itenscompra SET compra = ?, produto = ?, valor =?, WHERE datacompra = ?");
-            preencherConsulta(obj, sql);
-            sql.setInt(4, id);
-            sql.executeUpdate();
-        }
-    }
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM itenscompra WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
     }
 }

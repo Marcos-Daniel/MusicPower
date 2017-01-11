@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author breno
  */
 public interface ProdutoRepositorio extends Repositorio<Produto>{
-    public Produto Abrir(String descricao);
+    public Produto Abrir(String descricao) throws SQLException;
 }

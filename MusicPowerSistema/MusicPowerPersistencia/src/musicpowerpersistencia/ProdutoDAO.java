@@ -5,9 +5,8 @@
  */
 package musicpowerpersistencia;
 
-import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
-import java.sql.Connection;
+import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,18 +15,14 @@ import java.sql.SQLException;
  *
  * @author marcos
  */
-public class ProdutoDAO {
-     Connection conn;
+public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositorio {
     public ProdutoDAO() throws SQLException{
-        try {
-            Conexao.iniciar();
-            conn = Conexao.criarConexao();
-        }  catch (ClassNotFoundException ex){
-           System.out.println("Driver não encontrado!");
-        } catch (SQLException ex){
-           System.out.println("Usuário/Senha incorrentos");
-        }
+       setConsultaSalvar("INSERT INTO produto(descricao,qtd,valor)VALUES(?,?,?)");
+       setConsultaAlterar("UPDATE produto SET descricao = ?,qtd = ?, WHERE id = ?");
+       setConsultaExcluir("DELETE FROM produto WHERE id = ?");
+       setConsultaAbrir("SELECT id,descricao,qtd,valor FROM produto WHERE id = ?");
     }
+    @Override
     public Produto preencherObjeto(ResultSet resultado) throws SQLException{
       try {
             Produto tmp = new Produto();
@@ -41,6 +36,7 @@ public class ProdutoDAO {
       }
       return null;
     }
+    @Override
     public void preencherConsulta(Produto obj,PreparedStatement sql) throws SQLException{
         try{
             sql.setString(1, obj.getDescricao());
@@ -49,24 +45,17 @@ public class ProdutoDAO {
         } catch(SQLException ex){
             System.out.println(ex);
         }
-    } 
-     public void Salvar(Produto obj, int id) throws SQLException{
-         PreparedStatement sql;
-        if(obj.getId() == 0){
-            sql = conn.prepareStatement("INSERT INTO produto(descricao,qtd,valor)VALUES(?,?,?)");
-            preencherConsulta(obj, sql);
-            sql.executeUpdate();
+    }   
+    @Override
+    public Produto Abrir(String descricao) throws SQLException{
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,qtd,valor FROM produto WHERE descricao = ?");
+            sql.setString(1, descricao);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()) return preencherObjeto(resultado);
+        } catch (SQLException ex) {
+            System.out.println(ex);
         }
-        else{
-            sql = conn.prepareStatement("UPDATE produto SET descricao = ?,qtd = ?, WHERE id = ?");
-            preencherConsulta(obj, sql);
-            sql.setInt(3, id);
-            sql.executeUpdate();
-        }
-    } 
-    public void Excluir(int id) throws SQLException{
-        PreparedStatement sql = conn.prepareStatement("DELETE FROM produto WHERE id = ?");
-        sql.setInt(1, id);
-        sql.executeUpdate();
-    }  
+        return null;
+    }
 }

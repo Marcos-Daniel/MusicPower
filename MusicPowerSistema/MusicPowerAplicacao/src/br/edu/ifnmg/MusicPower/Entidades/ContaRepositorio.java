@@ -5,9 +5,12 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author breno
  */
 public interface ContaRepositorio extends Repositorio<Conta>{
+    public Conta Abrir(String mes) throws SQLException;
 }
