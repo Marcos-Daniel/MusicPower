@@ -58,4 +58,14 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Produto filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Produto filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

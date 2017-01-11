@@ -66,4 +66,14 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Fornecedor filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Fornecedor filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

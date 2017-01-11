@@ -63,4 +63,14 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Conta filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Conta filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

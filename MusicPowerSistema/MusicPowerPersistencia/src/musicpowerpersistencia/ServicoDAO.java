@@ -64,4 +64,14 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Serviço filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Serviço filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author breno
@@ -71,4 +73,26 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         }
         return null;
     }
+    
+    @Override
+    protected void preencheFiltros(Cliente filtro) {
+        if(filtro.getId() > 0) adicionarFiltro("id", "=");
+        if(filtro.getNome() != null) adicionarFiltro("nome", " like ");
+        if(filtro.getCpf() != null) adicionarFiltro("cpf", "=");
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Cliente filtro) {
+         try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
+            if(filtro.getCpf() != null){ sql.setString(cont, filtro.getCpf()); cont++; }
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
  }  

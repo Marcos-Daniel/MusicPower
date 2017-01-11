@@ -72,4 +72,14 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Funcionario filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Funcionario filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

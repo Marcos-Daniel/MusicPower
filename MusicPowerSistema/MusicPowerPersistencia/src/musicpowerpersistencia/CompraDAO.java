@@ -46,4 +46,14 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
             System.out.println(ex);
         }
     }
+
+    @Override
+    protected void preencheFiltros(Compra filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Compra filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

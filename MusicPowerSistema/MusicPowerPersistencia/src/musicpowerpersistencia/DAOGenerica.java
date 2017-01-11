@@ -11,7 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import static sun.misc.MessageUtils.where;
 
 /**
  *
@@ -20,6 +22,9 @@ import java.util.List;
 public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> {
     Connection conn;
     String ConsultaSalvar, ConsultaAlterar, ConsultaAbrir, ConsultaExcluir;
+    private String consultaBusca;
+    
+    private String where = "";
 
     DAOGenerica(){
         try {
@@ -33,6 +38,8 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     }
     public abstract T preencherObjeto(ResultSet resultado) throws SQLException;
     public abstract void preencherConsulta(T obj,PreparedStatement sql) throws SQLException;
+    protected abstract void preencheFiltros(T filtro);
+    protected abstract void preencheParametros(PreparedStatement sql, T filtro);
     @Override
        public boolean Salvar(T obj){
            try {
@@ -83,8 +90,37 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
        }
     @Override
        public List<T> Buscar(T filtro){
-           return null;
+           List<T> ret = new ArrayList<>();
+           preencheFiltros(filtro);
+           
+            if (where.length() > 0) {
+                where = "WHERE " + where;
+            }
+            
+            try {
+            PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where);
+            preencheParametros(sql, filtro);
+            ResultSet resultado = sql.executeQuery();
+            while (resultado.next()) {
+
+                T tmp = preencherObjeto( resultado);
+
+                ret.add(tmp);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }      
+           return ret;
        }
+       
+    protected void adicionarFiltro(String campo, String operador) {
+        if (where.length() > 0) {
+            where = where + " and ";
+        }
+
+        where = where + campo + " " + operador + " ?";
+    }
     public String getConsultaSalvar() {
         return ConsultaSalvar;
     }
@@ -109,4 +145,11 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     public void setConsultaExcluir(String ConsultaExcluir) {
         this.ConsultaExcluir = ConsultaExcluir;
     }   
+     public String getConsultaBusca() {
+        return consultaBusca;
+    }
+
+    public void setConsultaBusca(String consultaBusca) {
+        this.consultaBusca = consultaBusca;
+    }
 }

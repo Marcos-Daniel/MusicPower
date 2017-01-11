@@ -42,4 +42,14 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());
     }   
+
+    @Override
+    protected void preencheFiltros(ItensVenda filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, ItensVenda filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -63,4 +63,14 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         }
         return null;
     } 
+
+    @Override
+    protected void preencheFiltros(Evento filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Evento filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

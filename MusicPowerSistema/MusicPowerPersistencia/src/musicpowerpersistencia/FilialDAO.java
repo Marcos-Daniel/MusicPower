@@ -62,6 +62,16 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
         }
         return null;
     }
+
+    @Override
+    protected void preencheFiltros(Filial filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, Filial filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
 
 
