@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -66,11 +68,28 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
 
     @Override
     protected void preencheFiltros(Evento filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(filtro.getId() > 0) adicionarFiltro("id", "=");
+        if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
+        if(filtro.getInicio()!= null) adicionarFiltro("cpf", "=");
+        if(filtro.getTermino()!= null) adicionarFiltro("termino", "=");
+        if(filtro.getValor()!= null) adicionarFiltro("valor", "=");
+        if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
+        if(filtro.getStatus()!= null) adicionarFiltro("status", "=");
     }
 
-    @Override
+    @Override()
     protected void preencheParametros(PreparedStatement sql, Evento filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getDescricao() != null ){ sql.setString(cont, filtro.getDescricao()); cont++; }
+            if(filtro.getInicio()!= null){ sql.setDate(cont, (Date) filtro.getInicio()); cont++; }
+            if(filtro.getTermino()!= null){ sql.setDate(cont, (Date) filtro.getTermino()); cont++; }
+            if(filtro.getValor() != null ){ sql.setDouble(cont, filtro.getValor()); cont++; }
+            if(filtro.getStatus()!= null ){ sql.setString(cont, filtro.getStatus()); cont++; }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

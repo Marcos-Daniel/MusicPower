@@ -75,7 +75,8 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
 
     @Override
     protected void preencheFiltros(Funcionario filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(filtro.getId() > 0) adicionarFiltro("id", "=");
+        if(filtro.getNome() != null) adicionarFiltro("nome", "=");
     }
 
     @Override

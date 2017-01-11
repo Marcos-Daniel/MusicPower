@@ -65,7 +65,10 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
 
     @Override
     protected void preencheFiltros(Filial filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(filtro.getId() > 0) adicionarFiltro("id", "=");
+        if(filtro.getCidade()!= null) adicionarFiltro("cidade", "=");
+        if(filtro.getBairro()!= null) adicionarFiltro("bairro", "=");
+        if(filtro.getRua()!= null) adicionarFiltro("rua", "=");
     }
 
     @Override

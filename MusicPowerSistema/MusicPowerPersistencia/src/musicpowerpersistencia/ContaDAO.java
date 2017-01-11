@@ -66,7 +66,9 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
 
     @Override
     protected void preencheFiltros(Conta filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if(filtro.getId() > 0) adicionarFiltro("id", "=");
+       if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
+       if(filtro.getMesReferente()!= null) adicionarFiltro("mesreferente", "=");
     }
 
     @Override

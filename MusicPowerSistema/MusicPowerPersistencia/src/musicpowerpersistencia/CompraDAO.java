@@ -49,7 +49,8 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
 
     @Override
     protected void preencheFiltros(Compra filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if(filtro.getId()> 0) adicionarFiltro("id", "=");
+       if(filtro.getFornecedor()> 0) adicionarFiltro("fornecedor", "=");    
     }
 
     @Override

@@ -49,7 +49,8 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
 
     @Override
     protected void preencheFiltros(Venda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if(filtro.getId() > 0) adicionarFiltro("id", "=");
+       if(filtro.getDataVenda()!= null) adicionarFiltro("dataVenda", "="); 
     }
 
     @Override

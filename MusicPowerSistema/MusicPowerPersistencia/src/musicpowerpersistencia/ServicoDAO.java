@@ -67,7 +67,7 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
 
     @Override
     protected void preencheFiltros(Serviço filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(filtro.getId() > 0) adicionarFiltro("id", "=");
     }
 
     @Override

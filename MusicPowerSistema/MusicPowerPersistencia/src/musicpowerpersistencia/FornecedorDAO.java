@@ -69,7 +69,9 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
 
     @Override
     protected void preencheFiltros(Fornecedor filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       if(filtro.getId() > 0) adicionarFiltro("id", "=");
+       if(filtro.getNome() != null) adicionarFiltro("nome", "=");
+       if(filtro.getCnpj()!= null) adicionarFiltro("cnpj", "=");
     }
 
     @Override
