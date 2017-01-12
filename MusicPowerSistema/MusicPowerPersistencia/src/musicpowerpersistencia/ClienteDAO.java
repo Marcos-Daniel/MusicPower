@@ -89,7 +89,6 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
             if(filtro.getCpf() != null){ sql.setString(cont, filtro.getCpf()); cont++; }
             
-        
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

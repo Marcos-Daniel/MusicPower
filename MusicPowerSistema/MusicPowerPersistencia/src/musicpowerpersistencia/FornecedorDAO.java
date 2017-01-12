@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -76,6 +78,15 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Fornecedor filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
+            if(filtro.getCnpj()!= null){ sql.setString(cont, filtro.getCnpj()); cont++; }
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

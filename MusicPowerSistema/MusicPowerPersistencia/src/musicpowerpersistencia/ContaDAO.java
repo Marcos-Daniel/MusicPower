@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -73,6 +75,15 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Conta filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getDescricao()!= null ){ sql.setString(cont, filtro.getDescricao()); cont++; }
+            if(filtro.getMesReferente()!= null){ sql.setString(cont, filtro.getMesReferente()); cont++; }
+            
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(ContaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

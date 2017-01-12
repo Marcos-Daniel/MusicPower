@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.CompraRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,6 +57,13 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Compra filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getFornecedor()>0 ){ sql.setInt(cont, filtro.getFornecedor()); cont++; }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -54,7 +56,13 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
     }
 
     @Override
-    protected void preencheParametros(PreparedStatement sql, Venda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void preencheParametros(PreparedStatement sql, Venda filtro) { try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getDataVenda()!= null ){ sql.setDate(cont, filtro.getDataVenda()); cont++; }
+             
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -81,6 +83,13 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Funcionario filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
+                 
+        } catch (SQLException ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

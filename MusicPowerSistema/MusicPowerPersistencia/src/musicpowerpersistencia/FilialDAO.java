@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -73,7 +75,15 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Filial filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try {
+            int cont = 1;
+            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            if(filtro.getCidade() != null ){ sql.setString(cont, filtro.getCidade()); cont++; }
+            if(filtro.getBairro() != null){ sql.setString(cont, filtro.getBairro()); cont++; }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 

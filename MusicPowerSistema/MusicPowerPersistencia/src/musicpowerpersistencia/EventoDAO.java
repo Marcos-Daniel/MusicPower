@@ -89,7 +89,7 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             if(filtro.getStatus()!= null ){ sql.setString(cont, filtro.getStatus()); cont++; }
             
         } catch (SQLException ex) {
-            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
