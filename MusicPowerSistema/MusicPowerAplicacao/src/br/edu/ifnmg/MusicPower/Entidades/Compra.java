@@ -12,51 +12,64 @@ import java.sql.Date;
  * @author breno
  */
 public class Compra implements Entidade {
+
     private int id;
     private int fornecedor;
     private Double valor;
     private Date dataCompra;
+
     public Compra() {
-        
+
     }
+
     public Compra(int id, int fornecedor, Double valor, Date dataCompra) {
         this.id = id;
         this.fornecedor = fornecedor;
         this.valor = valor;
         this.dataCompra = dataCompra;
     }
+
     @Override
     public int getId() {
         return id;
     }
+
     @Override
     public void setId(int id) {
         this.id = id;
     }
+
     public int getFornecedor() {
         return fornecedor;
     }
+
     public void setFornecedor(int fornecedor) {
         this.fornecedor = fornecedor;
     }
+
     public Double getValor() {
         return valor;
     }
+
     public void setValor(Double valor) {
         this.valor = valor;
     }
+
     public Date getDataCompra() {
         return dataCompra;
     }
+
     public void setDataCompra(Date dataCompra) {
         this.dataCompra = dataCompra;
     }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 17 * hash + this.id;
         return hash;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,6 +87,7 @@ public class Compra implements Entidade {
         }
         return true;
     }
+
     @Override
     public String toString() {
         return "Compra{" + "id=" + id + '}';
