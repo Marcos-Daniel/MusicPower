@@ -44,7 +44,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         return null;
     }
    @Override
-    public void preencherConsulta(Cliente obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Cliente obj) throws SQLException{
         try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());

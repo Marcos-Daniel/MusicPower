@@ -37,7 +37,7 @@ public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCom
         return null;
     }
     @Override
-    public void preencherConsulta(ItensCompra obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, ItensCompra obj) throws SQLException{
         sql.setInt(1, obj.getCompra());
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());

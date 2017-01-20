@@ -20,13 +20,15 @@ import static sun.misc.MessageUtils.where;
  * @author breno
  */
 public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> {
+
     Connection conn;
     String ConsultaSalvar, ConsultaAlterar, ConsultaAbrir, ConsultaExcluir;
     private String consultaBusca;
-    
+    private String consultaUltimoId;
+
     private String where = "";
 
-    DAOGenerica(){
+    DAOGenerica() {
         try {
             Conexao.iniciar();
             conn = Conexao.criarConexao();
@@ -34,86 +36,112 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
             System.out.println("Driver não encontrado!");
         } catch (SQLException ex) {
             System.out.println("Usuário/senha errados!");
-        } 
+        }
     }
+
     public abstract T preencherObjeto(ResultSet resultado) throws SQLException;
-    public abstract void preencherConsulta(T obj,PreparedStatement sql) throws SQLException;
+
+    public abstract void preencherConsulta(PreparedStatement sql,T obj) throws SQLException;
+
     protected abstract void preencheFiltros(T filtro);
+
     protected abstract void preencheParametros(PreparedStatement sql, T filtro);
+
     @Override
-       public boolean Salvar(T obj){
-           try {
-               PreparedStatement sql = conn.prepareStatement(ConsultaSalvar);
-               preencherConsulta(obj,sql);
-               sql.executeUpdate();
-               return true;
-           } catch (SQLException ex) {
-             System.out.println(ex);
-           }
-           return false;
-       }
-    @Override
-       public boolean Alterar(T obj){
-           try {
-               PreparedStatement sql = conn.prepareStatement(ConsultaAlterar);
-               preencherConsulta(obj,sql);
-               sql.executeUpdate();
-               return true;
-           } catch (SQLException ex) {
-               System.out.println(ex);
-           }
-           return false;
-       }
-    @Override
-       public boolean Excluir(int id){
-           try {
-               PreparedStatement sql = conn.prepareStatement(ConsultaExcluir);
-               sql.setInt(1, id);
-               sql.executeUpdate();
-               return true;
-           } catch (SQLException ex) {
-               System.out.println(ex);
-           }
-           return false;
-       }
-   @Override
-       public T Abrir(int id){
-           try {
-               PreparedStatement sql = conn.prepareStatement(ConsultaAbrir);
-               sql.setInt(1, id);
-               ResultSet resultado = sql.executeQuery();
-               if(resultado.next()) return preencherObjeto(resultado);
-           } catch (SQLException ex) {
-               System.out.println(ex);
-           }
-           return null;
-       }
-    @Override
-       public List<T> Buscar(T filtro){
-           List<T> ret = new ArrayList<>();
-           preencheFiltros(filtro);
-           
-            if (where.length() > 0) {
-                where = "WHERE " + where;
+    public boolean Salvar(T obj) {
+        try {
+            if (obj.getId() == 0) {
+                PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
+                preencherConsulta(sql, obj);
+                sql.executeUpdate();
+                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoId());
+                preencherConsulta(sql2, obj);
+                ResultSet resultado = sql2.executeQuery();
+                if (resultado.next()) {
+                    obj.setId( resultado.getInt(1) );
+                }
+            } else {
+                PreparedStatement sql = conn.prepareStatement(getConsultaAlterar());
+                preencherConsulta(sql, obj);
+                sql.executeUpdate();
+
             }
-            
-            try {
+            return true;
+
+        } catch (SQLException e) {
+            System.out.print(e);
+
+        }
+        return false;
+    }
+
+    @Override
+    public boolean Alterar(T obj) {
+        try {
+            PreparedStatement sql = conn.prepareStatement(ConsultaAlterar);
+            preencherConsulta(sql, obj);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean Excluir(int id) {
+        try {
+            PreparedStatement sql = conn.prepareStatement(ConsultaExcluir);
+            sql.setInt(1, id);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+
+    @Override
+    public T Abrir(int id) {
+        try {
+            PreparedStatement sql = conn.prepareStatement(ConsultaAbrir);
+            sql.setInt(1, id);
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                return preencherObjeto(resultado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<T> Buscar(T filtro) {
+        List<T> ret = new ArrayList<>();
+        preencheFiltros(filtro);
+
+        if (where.length() > 0) {
+            where = "WHERE " + where;
+        }
+
+        try {
             PreparedStatement sql = conn.prepareStatement(getConsultaBusca() + where);
             preencheParametros(sql, filtro);
             ResultSet resultado = sql.executeQuery();
             while (resultado.next()) {
 
-                T tmp = preencherObjeto( resultado);
+                T tmp = preencherObjeto(resultado);
 
                 ret.add(tmp);
             }
 
         } catch (SQLException ex) {
             System.out.println(ex);
-        }      
-           return ret;
-       }
-       
+        }
+        return ret;
+    }
+
     protected void adicionarFiltro(String campo, String operador) {
         if (where.length() > 0) {
             where = where + " and ";
@@ -121,35 +149,52 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
 
         where = where + campo + " " + operador + " ?";
     }
+
     public String getConsultaSalvar() {
         return ConsultaSalvar;
     }
+
     public void setConsultaSalvar(String ConsultaSalvar) {
         this.ConsultaSalvar = ConsultaSalvar;
     }
+
     public String getConsultaAlterar() {
         return ConsultaAlterar;
     }
+
     public void setConsultaAlterar(String ConsultaAlterar) {
         this.ConsultaAlterar = ConsultaAlterar;
     }
+
     public String getConsultaAbrir() {
         return ConsultaAbrir;
     }
+
     public void setConsultaAbrir(String ConsultaAbrir) {
         this.ConsultaAbrir = ConsultaAbrir;
     }
+
     public String getConsultaExcluir() {
         return ConsultaExcluir;
     }
+
     public void setConsultaExcluir(String ConsultaExcluir) {
         this.ConsultaExcluir = ConsultaExcluir;
-    }   
-     public String getConsultaBusca() {
+    }
+
+    public String getConsultaBusca() {
         return consultaBusca;
     }
 
     public void setConsultaBusca(String consultaBusca) {
         this.consultaBusca = consultaBusca;
+    }
+    
+    public String getConsultaUltimoId() {
+        return consultaUltimoId;
+    }
+
+    public void setConsultaUltimoId(String consultaUltimoId) {
+        this.consultaUltimoId = consultaUltimoId;
     }
 }

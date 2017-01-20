@@ -43,7 +43,7 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
         return null;
     }
     @Override
-    public void preencherConsulta(Serviço obj, PreparedStatement sql) throws SQLException{
+    public void preencherConsulta( PreparedStatement sql, Serviço obj) throws SQLException{
         try {
             sql.setString(1, obj.getDescricao());
             sql.setDate(2, (Date) obj.getSolicitacao());
@@ -82,4 +82,5 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

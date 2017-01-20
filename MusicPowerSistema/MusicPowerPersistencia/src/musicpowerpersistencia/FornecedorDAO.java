@@ -43,7 +43,7 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
         return null;
     }
     @Override
-    public void preencherConsulta(Fornecedor obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Fornecedor obj) throws SQLException{
         try {
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCnpj());

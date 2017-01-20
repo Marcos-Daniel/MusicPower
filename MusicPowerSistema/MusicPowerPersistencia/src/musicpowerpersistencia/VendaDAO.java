@@ -39,7 +39,7 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
         return null;
     }
     @Override
-    public void preencherConsulta(Venda obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Venda obj) throws SQLException{
         try{
             sql.setInt(1, obj.getCliente());
             sql.setDouble(2, obj.getValor());
@@ -65,4 +65,5 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

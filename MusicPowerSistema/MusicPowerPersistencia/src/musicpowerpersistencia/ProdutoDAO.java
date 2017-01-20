@@ -39,7 +39,7 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
       return null;
     }
     @Override
-    public void preencherConsulta(Produto obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Produto obj) throws SQLException{
         try{
             sql.setString(1, obj.getDescricao());
             sql.setInt(2, obj.getQtd());
@@ -78,4 +78,5 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

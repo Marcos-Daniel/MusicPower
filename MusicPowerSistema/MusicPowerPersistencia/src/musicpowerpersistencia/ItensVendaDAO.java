@@ -37,7 +37,7 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
         return null;
     }
     @Override
-    public void preencherConsulta(ItensVenda obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, ItensVenda obj) throws SQLException{
         sql.setInt(1, obj.getVenda());
         sql.setInt(2, obj.getProduto());
         sql.setDouble(3, obj.getValor());
@@ -52,4 +52,5 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
     protected void preencheParametros(PreparedStatement sql, ItensVenda filtro) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

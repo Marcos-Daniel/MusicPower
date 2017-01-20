@@ -41,7 +41,7 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
         return null;
     }
     @Override
-    public void preencherConsulta(Filial obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Filial obj) throws SQLException{
         try{
             sql.setString(1, obj.getUF());
             sql.setString(2, obj.getCidade());
@@ -52,6 +52,8 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
             System.out.println(ex);
         }
     }
+    
+    
     @Override
     public Filial Abrir(String cidade) throws SQLException{
         try {
@@ -85,6 +87,7 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
             Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
 
 

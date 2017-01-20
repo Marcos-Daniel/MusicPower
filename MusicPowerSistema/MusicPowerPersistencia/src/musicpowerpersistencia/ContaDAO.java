@@ -42,7 +42,7 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
         return null;
     }
     @Override
-    public void preencherConsulta(Conta obj, PreparedStatement sql) throws SQLException{
+    public void preencherConsulta( PreparedStatement sql, Conta obj) throws SQLException{
         try{
             sql.setString(1, obj.getDescricao());
             sql.setDouble(2, obj.getValor());

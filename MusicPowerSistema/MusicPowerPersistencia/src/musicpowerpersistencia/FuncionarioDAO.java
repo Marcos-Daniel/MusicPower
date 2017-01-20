@@ -46,7 +46,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
         return null;
     }
     @Override
-    public void preencherConsulta(Funcionario obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Funcionario obj) throws SQLException{
         try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());

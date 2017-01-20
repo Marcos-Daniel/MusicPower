@@ -39,7 +39,7 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
         return null;
     }
     @Override
-    public void preencherConsulta(Compra obj,PreparedStatement sql) throws SQLException{
+    public void preencherConsulta(PreparedStatement sql, Compra obj) throws SQLException{
         try{
             sql.setInt(1, obj.getFornecedor());
             sql.setDouble(2, obj.getValor());
@@ -66,4 +66,5 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
             Logger.getLogger(CompraDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

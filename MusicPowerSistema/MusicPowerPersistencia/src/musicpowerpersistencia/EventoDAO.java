@@ -42,7 +42,7 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         return null;
     }
     @Override
-    public void preencherConsulta(Evento obj, PreparedStatement sql) throws SQLException{
+    public void preencherConsulta( PreparedStatement sql, Evento obj) throws SQLException{
         try{
             sql.setString(1, obj.getDescricao());
             sql.setDate(2, (Date) obj.getInicio());
@@ -92,4 +92,5 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
