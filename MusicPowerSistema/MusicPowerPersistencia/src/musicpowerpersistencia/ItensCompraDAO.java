@@ -10,20 +10,34 @@ import br.edu.ifnmg.MusicPower.Entidades.ItensCompraRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author marcos
  */
 public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCompraRepositorio {
-    public ItensCompraDAO() throws SQLException{
+
+    public ItensCompraDAO() throws SQLException {
         setConsultaSalvar("INSERT INTO itenscompra (compra, produto, valor)VALUES(?,?,?)");
         setConsultaAlterar("UPDATE itenscompra SET compra = ?, produto = ?, valor =?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM itenscompra WHERE id = ?");
         setConsultaAbrir("SELECT id,compra, produto, valor FROM ItensCompra from id = ?");
     }
+
     @Override
-    public ItensCompra preencherObjeto(ResultSet resultado) throws SQLException {
+    protected void preencheFiltros(ItensCompra filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, ItensCompra filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected ItensCompra preencheObjeto(ResultSet resultado) {
         try {
             ItensCompra tmp = new ItensCompra();
             tmp.setId(resultado.getInt(1));
@@ -36,20 +50,16 @@ public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCom
         }
         return null;
     }
-    @Override
-    public void preencherConsulta(PreparedStatement sql, ItensCompra obj) throws SQLException{
-        sql.setInt(1, obj.getCompra());
-        sql.setInt(2, obj.getProduto());
-        sql.setDouble(3, obj.getValor());
-    }
 
     @Override
-    protected void preencheFiltros(ItensCompra filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    protected void preencheConsulta(PreparedStatement sql, ItensCompra obj) {
+        try {
+            sql.setInt(1, obj.getCompra());
+            sql.setInt(2, obj.getProduto());
+            sql.setDouble(3, obj.getValor());
+        } catch (SQLException ex) {
+            Logger.getLogger(ItensCompraDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    @Override
-    protected void preencheParametros(PreparedStatement sql, ItensCompra filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

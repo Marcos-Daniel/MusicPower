@@ -25,43 +25,14 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
         setConsultaExcluir("DELETE FROM servico WHERE id = ?");
         setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
     }
-    @Override
-    public Serviço preencherObjeto(ResultSet resultado) throws SQLException{
-        try {
-            Serviço tmp= new Serviço();
-            tmp.setId(resultado.getInt(1));
-            tmp.setDescricao(resultado.getString(2));
-            tmp.setSolicitacao(resultado.getDate(3));
-            tmp.setEntrega(resultado.getDate(4));
-            tmp.setValor(resultado.getDouble(5));
-            tmp.setStatusPagamanto(resultado.getString(6));
-            tmp.setStatusProgresso(resultado.getString(7));
-            return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-    @Override
-    public void preencherConsulta( PreparedStatement sql, Serviço obj) throws SQLException{
-        try {
-            sql.setString(1, obj.getDescricao());
-            sql.setDate(2, (Date) obj.getSolicitacao());
-            sql.setDate(3, (Date) obj.getEntrega());
-            sql.setDouble(4, obj.getValor());
-            sql.setString(5, obj.getStatusPagamanto());
-            sql.setString(6, obj.getStatusProgresso());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
+  
     @Override
     public Serviço Abrir(String descricao) throws SQLException{
         try {
             PreparedStatement sql = conn.prepareStatement("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
             sql.setString(1, descricao);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
+            if(resultado.next()) return preencheObjeto(resultado);
         } catch (Exception e) {
         }
         return null;
@@ -80,6 +51,38 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Serviço preencheObjeto(ResultSet resultado) {
+         try {
+            Serviço tmp= new Serviço();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setSolicitacao(resultado.getDate(3));
+            tmp.setEntrega(resultado.getDate(4));
+            tmp.setValor(resultado.getDouble(5));
+            tmp.setStatusPagamanto(resultado.getString(6));
+            tmp.setStatusProgresso(resultado.getString(7));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Serviço obj) {
+       try {
+            sql.setString(1, obj.getDescricao());
+            sql.setDate(2, (Date) obj.getSolicitacao());
+            sql.setDate(3, (Date) obj.getEntrega());
+            sql.setDouble(4, obj.getValor());
+            sql.setString(5, obj.getStatusPagamanto());
+            sql.setString(6, obj.getStatusProgresso());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 

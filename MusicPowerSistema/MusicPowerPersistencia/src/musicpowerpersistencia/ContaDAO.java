@@ -25,41 +25,14 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
         setConsultaExcluir("DELETE FROM conta WHERE id = ?");
         setConsultaAbrir("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE id = ?");
     }
-    @Override
-    public Conta preencherObjeto(ResultSet resultado) throws SQLException{
-        try {
-            Conta tmp = new Conta();
-            tmp.setId(resultado.getInt(1));
-            tmp.setDescricao(resultado.getString(2));
-            tmp.setValor(resultado.getDouble(3));
-            tmp.setMesReferente(resultado.getString(4));
-            tmp.setVencimento(resultado.getDate(5));
-            tmp.setStatus(resultado.getString(6));
-            return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-    @Override
-    public void preencherConsulta( PreparedStatement sql, Conta obj) throws SQLException{
-        try{
-            sql.setString(1, obj.getDescricao());
-            sql.setDouble(2, obj.getValor());
-            sql.setString(3, obj.getMesReferente());
-            sql.setDate(4, (Date) obj.getVencimento());
-            sql.setString(5, obj.getStatus());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
+    
     @Override
     public Conta Abrir(String mes) throws SQLException{
         try{
             PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE mesReferente = ?");
             sql.setString(1,mes);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
+            if(resultado.next()) return preencheObjeto(resultado);
         } catch(SQLException ex) {
             System.out.println(ex);
         }
@@ -84,6 +57,36 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
         
         } catch (SQLException ex) {
             Logger.getLogger(ContaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Conta preencheObjeto(ResultSet resultado) {
+         try {
+            Conta tmp = new Conta();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setValor(resultado.getDouble(3));
+            tmp.setMesReferente(resultado.getString(4));
+            tmp.setVencimento(resultado.getDate(5));
+            tmp.setStatus(resultado.getString(6));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Conta obj) {
+         try{
+            sql.setString(1, obj.getDescricao());
+            sql.setDouble(2, obj.getValor());
+            sql.setString(3, obj.getMesReferente());
+            sql.setDate(4, (Date) obj.getVencimento());
+            sql.setString(5, obj.getStatus());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 }

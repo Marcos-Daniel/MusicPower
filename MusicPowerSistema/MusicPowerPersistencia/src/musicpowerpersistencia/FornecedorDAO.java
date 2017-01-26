@@ -24,45 +24,14 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
        setConsultaExcluir("DELETE FROM fornecedor WHERE id = ?");
        setConsultaAbrir("SELECT id,nome,cnpj,telefone,email,uf,cidade,nestabelecimento FROM Fornecedor WHERE id = ?");
     }
-    @Override
-    public Fornecedor preencherObjeto(ResultSet resultado) throws SQLException{
-        try {
-            Fornecedor tmp = new Fornecedor();
-            tmp.setId(resultado.getInt(1));
-            tmp.setNome(resultado.getString(2));
-            tmp.setCnpj(resultado.getString(3));
-            tmp.setTelefone(resultado.getString(4));
-            tmp.setEmail(resultado.getString(5));
-            tmp.setUF(resultado.getString(6));
-            tmp.setCidade(resultado.getString(7));
-            tmp.setnEstabelecimento(resultado.getString(8));
-            return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-    @Override
-    public void preencherConsulta(PreparedStatement sql, Fornecedor obj) throws SQLException{
-        try {
-            sql.setString(1, obj.getNome());
-            sql.setString(2, obj.getCnpj());
-            sql.setString(3, obj.getTelefone());
-            sql.setString(4, obj.getEmail());
-            sql.setString(5, obj.getUF());
-            sql.setString(6, obj.getCidade());
-            sql.setString(7, obj.getnEstabelecimento());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
+    
     @Override
     public Fornecedor Abrir(String nome) throws SQLException{
         try {
             PreparedStatement sql = conn.prepareStatement("SELECT id,nome,cnpj,telefone,email,uf,cidade,nestabelecimento FROM Fornecedor WHERE nome = ?");
             sql.setString(1, nome);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
+            if(resultado.next()) return preencheObjeto(resultado);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -87,6 +56,40 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
         
         } catch (SQLException ex) {
             Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Fornecedor preencheObjeto(ResultSet resultado) {
+       try {
+            Fornecedor tmp = new Fornecedor();
+            tmp.setId(resultado.getInt(1));
+            tmp.setNome(resultado.getString(2));
+            tmp.setCnpj(resultado.getString(3));
+            tmp.setTelefone(resultado.getString(4));
+            tmp.setEmail(resultado.getString(5));
+            tmp.setUF(resultado.getString(6));
+            tmp.setCidade(resultado.getString(7));
+            tmp.setnEstabelecimento(resultado.getString(8));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Fornecedor obj) {
+       try {
+            sql.setString(1, obj.getNome());
+            sql.setString(2, obj.getCnpj());
+            sql.setString(3, obj.getTelefone());
+            sql.setString(4, obj.getEmail());
+            sql.setString(5, obj.getUF());
+            sql.setString(6, obj.getCidade());
+            sql.setString(7, obj.getnEstabelecimento());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 }

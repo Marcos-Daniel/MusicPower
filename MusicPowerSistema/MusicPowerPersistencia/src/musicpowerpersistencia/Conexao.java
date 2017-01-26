@@ -19,6 +19,6 @@ public class Conexao {
         Class.forName("com.mysql.jdbc.Driver");
     }
     public static Connection criarConexao() throws SQLException{
-        return DriverManager.getConnection("jdbc:msql://localhost:3306/BDMusicPower","root","root");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/bdmusicpower","root","root");
     }
 }

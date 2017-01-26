@@ -10,6 +10,8 @@ import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,8 +24,19 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
         setConsultaExcluir("DELETE FROM itensvenda WHERE id = ?");
         setConsultaAbrir("SELECT id,venda, produto, valor FROM ItensVenda from id = ?");
     }
+
     @Override
-    public ItensVenda preencherObjeto(ResultSet resultado) throws SQLException {
+    protected void preencheFiltros(ItensVenda filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preencheParametros(PreparedStatement sql, ItensVenda filtro) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected ItensVenda preencheObjeto(ResultSet resultado) {
         try {
             ItensVenda tmp = new ItensVenda();
             tmp.setId(resultado.getInt(1));
@@ -36,21 +49,17 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
         }
         return null;
     }
-    @Override
-    public void preencherConsulta(PreparedStatement sql, ItensVenda obj) throws SQLException{
-        sql.setInt(1, obj.getVenda());
-        sql.setInt(2, obj.getProduto());
-        sql.setDouble(3, obj.getValor());
-    }   
 
     @Override
-    protected void preencheFiltros(ItensVenda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    protected void preencheParametros(PreparedStatement sql, ItensVenda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    protected void preencheConsulta(PreparedStatement sql, ItensVenda obj) {
+        try {
+            sql.setInt(1, obj.getVenda());
+            sql.setInt(2, obj.getProduto());
+            sql.setDouble(3, obj.getValor());
+        } catch (SQLException ex) {
+            Logger.getLogger(ItensVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
 
 }

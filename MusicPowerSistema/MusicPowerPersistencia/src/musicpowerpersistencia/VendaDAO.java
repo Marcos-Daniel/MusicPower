@@ -24,30 +24,6 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
         setConsultaExcluir("DELETE FROM venda WHERE id = ?");
         setConsultaAbrir("SELECT id,cliente,valor,datavenda FROM venda WHERE id = ?");
     }
-    @Override
-    public Venda preencherObjeto(ResultSet resultado) throws SQLException{
-        try{
-            Venda tmp = new Venda();
-            tmp.setId(resultado.getInt(1));
-            tmp.setCliente(resultado.getInt(2));
-            tmp.setValor(resultado.getDouble(3));
-            tmp.setDataVenda(resultado.getDate(4));
-            return tmp;
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-    @Override
-    public void preencherConsulta(PreparedStatement sql, Venda obj) throws SQLException{
-        try{
-            sql.setInt(1, obj.getCliente());
-            sql.setDouble(2, obj.getValor());
-            sql.setDate(3, obj.getDataVenda());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }   
 
     @Override
     protected void preencheFiltros(Venda filtro) {
@@ -63,6 +39,32 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
              
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Venda preencheObjeto(ResultSet resultado) {
+       try{
+            Venda tmp = new Venda();
+            tmp.setId(resultado.getInt(1));
+            tmp.setCliente(resultado.getInt(2));
+            tmp.setValor(resultado.getDouble(3));
+            tmp.setDataVenda(resultado.getDate(4));
+            return tmp;
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Venda obj) {
+          try{
+            sql.setInt(1, obj.getCliente());
+            sql.setDouble(2, obj.getValor());
+            sql.setDate(3, obj.getDataVenda());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 

@@ -25,41 +25,14 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         setConsultaExcluir("DELETE FROM evento WHERE id = ?");
         setConsultaAbrir("SELECT id, descricao, inicio, fim, valor, statusEvento FROM WHERE id = ?");
     }
-    @Override
-    public Evento preencherObjeto(ResultSet resultado) throws SQLException{
-        try {
-            Evento tmp = new Evento();
-            tmp.setId(resultado.getInt(1));
-            tmp.setDescricao(resultado.getString(2));
-            tmp.setInicio(resultado.getDate(3));
-            tmp.setTermino(resultado.getDate(4));
-            tmp.setValor(resultado.getDouble(5));
-            tmp.setStatus(resultado.getString(6));
-            return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-    @Override
-    public void preencherConsulta( PreparedStatement sql, Evento obj) throws SQLException{
-        try{
-            sql.setString(1, obj.getDescricao());
-            sql.setDate(2, (Date) obj.getInicio());
-            sql.setDate(3, (Date) obj.getTermino());
-            sql.setDouble(4, obj.getValor());
-            sql.setString(5, obj.getStatus());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
+    
     @Override
     public Evento Abrir (String descricao){
         try{    
             PreparedStatement sql = conn.prepareStatement("SELECT id, descricao, inicio, fim, valor, statusEvento FROM WHERE descricao = ?");
             sql.setString(1, descricao);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
+            if(resultado.next()) return preencheObjeto(resultado);
         } catch(SQLException ex){
             System.out.println(ex);
         }
@@ -90,6 +63,36 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             
         } catch (SQLException ex) {
             Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Evento preencheObjeto(ResultSet resultado) {
+        try {
+            Evento tmp = new Evento();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setInicio(resultado.getDate(3));
+            tmp.setTermino(resultado.getDate(4));
+            tmp.setValor(resultado.getDouble(5));
+            tmp.setStatus(resultado.getString(6));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Evento obj) {
+         try{
+            sql.setString(1, obj.getDescricao());
+            sql.setDate(2, (Date) obj.getInicio());
+            sql.setDate(3, (Date) obj.getTermino());
+            sql.setDouble(4, obj.getValor());
+            sql.setString(5, obj.getStatus());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 

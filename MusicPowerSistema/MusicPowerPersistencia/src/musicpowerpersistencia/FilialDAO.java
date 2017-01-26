@@ -17,15 +17,17 @@ import java.util.logging.Logger;
  *
  * @author breno
  */
-public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
-    public FilialDAO() throws SQLException{
-       setConsultaSalvar("INSERT INTO filial(uf,cidade,bairro,rua,numEstabelecimento)VALUES(?,?,?,?,?)");
-       setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelecimento = ? WHERE id = ?");
-       setConsultaExcluir("DELETE FROM filial WHERE id = ?");
-       setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelecimento FROM Filial WHERE id = ?");
+public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio {
+
+    public FilialDAO() throws SQLException {
+        setConsultaSalvar("INSERT INTO filial(id,uf,cidade,bairro,rua,numEstabelicimento)VALUES(?,?,?,?,?,?)");
+        setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelecimento = ? WHERE id = ?");
+        setConsultaExcluir("DELETE FROM filial WHERE id = ?");
+        setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelecimento FROM Filial WHERE id = ?");
     }
+
     @Override
-    public Filial preencherObjeto(ResultSet resultado) throws SQLException{
+    protected Filial preencheObjeto(ResultSet resultado) {
         try {
             Filial tmp = new Filial();
             tmp.setId(resultado.getInt(1));
@@ -34,63 +36,78 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio{
             tmp.setBairro(resultado.getString(4));
             tmp.setRua(resultado.getString(5));
             tmp.setnEstabelecimento(resultado.getString(6));
-        return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
+            System.out.println("txt");
+            return tmp;
+        } catch (SQLException ex) {
+            System.out.println(ex + " FILIAL DAO PREENCHER OBJETO");
         }
         return null;
     }
+
     @Override
-    public void preencherConsulta(PreparedStatement sql, Filial obj) throws SQLException{
-        try{
+    protected void preencheConsulta(PreparedStatement sql, Filial obj) {
+        try {
             sql.setString(1, obj.getUF());
             sql.setString(2, obj.getCidade());
             sql.setString(3, obj.getBairro());
             sql.setString(4, obj.getRua());
             sql.setString(5, obj.getnEstabelecimento());
-        } catch(SQLException ex){
-            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex + " FILIAL DAO PREENCHER CONSULTA");
         }
     }
-    
-    
+
     @Override
-    public Filial Abrir(String cidade) throws SQLException{
+    public Filial Abrir(String cidade) throws SQLException {
         try {
             PreparedStatement sql = conn.prepareStatement("SELECT id,uf,cidade,bairro,rua,numEstabelecimento FROM Filial WHERE cidade = ?");
             sql.setString(1, cidade);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
-        } catch (SQLException ex){
-            System.out.println(ex);
+            if (resultado.next()) {
+                return preencheObjeto(resultado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex + " FILIAL DAO ABRIR");
         }
         return null;
     }
 
     @Override
     protected void preencheFiltros(Filial filtro) {
-        if(filtro.getId() > 0) adicionarFiltro("id", "=");
-        if(filtro.getCidade()!= null) adicionarFiltro("cidade", "=");
-        if(filtro.getBairro()!= null) adicionarFiltro("bairro", "=");
-        if(filtro.getRua()!= null) adicionarFiltro("rua", "=");
+        if (filtro.getId() > 0) {
+            adicionarFiltro("id", "=");
+        }
+        if (filtro.getCidade() != null) {
+            adicionarFiltro("cidade", "=");
+        }
+        if (filtro.getBairro() != null) {
+            adicionarFiltro("bairro", "=");
+        }
+        if (filtro.getRua() != null) {
+            adicionarFiltro("rua", "=");
+        }
     }
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Filial filtro) {
-          try {
+        try {
             int cont = 1;
-            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
-            if(filtro.getCidade() != null ){ sql.setString(cont, filtro.getCidade()); cont++; }
-            if(filtro.getBairro() != null){ sql.setString(cont, filtro.getBairro()); cont++; }
-            
+            if (filtro.getId() > 0) {
+                sql.setInt(cont, filtro.getId());
+                cont++;
+            }
+            if (filtro.getCidade() != null) {
+                sql.setString(cont, filtro.getCidade());
+                cont++;
+            }
+            if (filtro.getBairro() != null) {
+                sql.setString(cont, filtro.getBairro());
+                cont++;
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
 }
-
-
-
-
-

@@ -24,37 +24,14 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
        setConsultaExcluir("DELETE FROM produto WHERE id = ?");
        setConsultaAbrir("SELECT id,descricao,qtd,valor FROM produto WHERE id = ?");
     }
-    @Override
-    public Produto preencherObjeto(ResultSet resultado) throws SQLException{
-      try {
-            Produto tmp = new Produto();
-            tmp.setId(resultado.getInt(1));
-            tmp.setDescricao(resultado.getString(2));
-            tmp.setQtd(resultado.getInt(3));
-            tmp.setValor(resultado.getDouble(4));
-            return tmp;
-      } catch(SQLException ex){
-          System.out.println(ex);
-      }
-      return null;
-    }
-    @Override
-    public void preencherConsulta(PreparedStatement sql, Produto obj) throws SQLException{
-        try{
-            sql.setString(1, obj.getDescricao());
-            sql.setInt(2, obj.getQtd());
-            sql.setDouble(3, obj.getValor());
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }   
+  
     @Override
     public Produto Abrir(String descricao) throws SQLException{
         try {
             PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,qtd,valor FROM produto WHERE descricao = ?");
             sql.setString(1, descricao);
             ResultSet resultado = sql.executeQuery();
-            if(resultado.next()) return preencherObjeto(resultado);
+            if(resultado.next()) return preencheObjeto(resultado);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -76,6 +53,32 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
             
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected Produto preencheObjeto(ResultSet resultado) {
+        try {
+            Produto tmp = new Produto();
+            tmp.setId(resultado.getInt(1));
+            tmp.setDescricao(resultado.getString(2));
+            tmp.setQtd(resultado.getInt(3));
+            tmp.setValor(resultado.getDouble(4));
+            return tmp;
+      } catch(SQLException ex){
+          System.out.println(ex);
+      }
+      return null;
+    }
+
+    @Override
+    protected void preencheConsulta(PreparedStatement sql, Produto obj) {
+       try{
+            sql.setString(1, obj.getDescricao());
+            sql.setInt(2, obj.getQtd());
+            sql.setDouble(3, obj.getValor());
+        } catch(SQLException ex){
+            System.out.println(ex);
         }
     }
 

@@ -23,29 +23,10 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
        setConsultaExcluir("DELETE FROM cliente WHERE id = ?");
        setConsultaAbrir("SELECT id, nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Cliente WHERE cpf = ?");
     } 
+    
     @Override
-    public Cliente preencherObjeto(ResultSet resultado) throws SQLException{
-        try{
-            Cliente tmp = new Cliente();
-            tmp.setId(resultado.getInt(1));
-            tmp.setNome(resultado.getString(2));
-            tmp.setCpf(resultado.getString(3));
-            tmp.setTelefone(resultado.getString(4));
-            tmp.setEmail(resultado.getString(5));
-            tmp.setUF(resultado.getString(6));
-            tmp.setCidade(resultado.getString(7));
-            tmp.setBairro(resultado.getString(8));
-            tmp.setRua(resultado.getString(9));
-            tmp.setnResidencia(resultado.getString(10));
-            return tmp;
-        } catch(SQLException ex){
-            System.out.println(ex);
-        }
-        return null;
-    }
-   @Override
-    public void preencherConsulta(PreparedStatement sql, Cliente obj) throws SQLException{
-        try{
+    protected void preencheConsulta(PreparedStatement sql, Cliente obj) {
+         try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
             sql.setString(3, obj.getTelefone());
@@ -59,6 +40,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             System.out.println(ex);
         }
     }
+ 
    @Override
     public Cliente Abrir(String cpf) throws SQLException {
         try {
@@ -66,7 +48,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             sql.setString(1, cpf);
             ResultSet resultado = sql.executeQuery();
             if(resultado.next()){   
-                return preencherObjeto(resultado);
+                return preencheObjeto(resultado);
             }            
         }  catch(SQLException ex){
             System.out.println(ex);
@@ -92,6 +74,27 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    protected Cliente preencheObjeto(ResultSet resultado) {
+      try{
+            Cliente tmp = new Cliente();
+            tmp.setId(resultado.getInt(1));
+            tmp.setNome(resultado.getString(2));
+            tmp.setCpf(resultado.getString(3));
+            tmp.setTelefone(resultado.getString(4));
+            tmp.setEmail(resultado.getString(5));
+            tmp.setUF(resultado.getString(6));
+            tmp.setCidade(resultado.getString(7));
+            tmp.setBairro(resultado.getString(8));
+            tmp.setRua(resultado.getString(9));
+            tmp.setnResidencia(resultado.getString(10));
+            return tmp;
+        } catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
     }
     
  }  
