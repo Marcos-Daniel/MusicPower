@@ -69,7 +69,7 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
             return true;
 
         } catch (SQLException e) {
-            System.out.print(e + "Dg Salvar");
+            System.out.print(e + " Dg Salvar");
 
         }
         return false;

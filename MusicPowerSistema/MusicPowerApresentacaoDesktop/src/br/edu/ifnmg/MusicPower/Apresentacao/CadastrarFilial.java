@@ -176,6 +176,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
         this.recuperaCampos();
         try {
             MPA.criarFilial(novo);
+            System.out.println("Salvou");
         } catch (SQLException ex) {
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
         }

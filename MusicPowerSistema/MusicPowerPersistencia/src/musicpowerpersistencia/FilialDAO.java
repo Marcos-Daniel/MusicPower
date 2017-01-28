@@ -21,9 +21,9 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
 
     public FilialDAO() throws SQLException {
         setConsultaSalvar("INSERT INTO filial(id,uf,cidade,bairro,rua,numEstabelicimento)VALUES(?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelecimento = ? WHERE id = ?");
+        setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelicimento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM filial WHERE id = ?");
-        setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelecimento FROM Filial WHERE id = ?");
+        setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE id = ?");
     }
 
     @Override
@@ -47,11 +47,12 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
     @Override
     protected void preencheConsulta(PreparedStatement sql, Filial obj) {
         try {
-            sql.setString(1, obj.getUF());
-            sql.setString(2, obj.getCidade());
-            sql.setString(3, obj.getBairro());
-            sql.setString(4, obj.getRua());
-            sql.setString(5, obj.getnEstabelecimento());
+            sql.setInt(1, obj.getId());
+            sql.setString(2, obj.getUF());
+            sql.setString(3, obj.getCidade());
+            sql.setString(4, obj.getBairro());
+            sql.setString(5, obj.getRua());
+            sql.setString(6, obj.getnEstabelecimento());
         } catch (SQLException ex) {
             System.out.println(ex + " FILIAL DAO PREENCHER CONSULTA");
         }
@@ -60,7 +61,7 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
     @Override
     public Filial Abrir(String cidade) throws SQLException {
         try {
-            PreparedStatement sql = conn.prepareStatement("SELECT id,uf,cidade,bairro,rua,numEstabelecimento FROM Filial WHERE cidade = ?");
+            PreparedStatement sql = conn.prepareStatement("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE cidade = ?");
             sql.setString(1, cidade);
             ResultSet resultado = sql.executeQuery();
             if (resultado.next()) {
