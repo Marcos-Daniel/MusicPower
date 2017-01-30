@@ -25,7 +25,7 @@ public class Filial implements Entidade {
     }
 
     public Filial(int id, String UF, String cidade, String bairro, String rua, String nEstabelecimento) {
-        this.id = id;
+        this.id = 0;
         this.UF = UF;
         this.cidade = cidade;
         this.bairro = bairro;

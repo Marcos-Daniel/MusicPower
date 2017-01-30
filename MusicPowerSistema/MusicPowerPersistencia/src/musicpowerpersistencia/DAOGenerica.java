@@ -50,16 +50,15 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     @Override
     public boolean Salvar(T obj) {
         try {
+            
+        /* PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
+                preencheConsulta(sql, obj);
+                sql.executeUpdate();*/
+            System.out.println(obj.getId());
             if (obj.getId() == 0) {
                 PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
                 preencheConsulta(sql, obj);
                 sql.executeUpdate();
-                PreparedStatement sql2 = conn.prepareStatement(getConsultaUltimoId());
-                preencheConsulta(sql2, obj);
-                ResultSet resultado = sql2.executeQuery();
-                if (resultado.next()) {
-                    obj.setId(resultado.getInt(1));
-                }
 
             } else {
                 PreparedStatement sql = conn.prepareStatement(getConsultaAlterar());

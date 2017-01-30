@@ -237,13 +237,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 private void recuperaCampos(){
-    
-   Integer id = Integer.parseInt(txtId.getText().trim());
-        if(id != null)
-            novo.setId(id);
-        else
-           JOptionPane.showMessageDialog(this,"ERRO, O CAMPO BAIRRO É OBRIGATORIO");
-        
+         
    String bairro  = txtBairro.getText().trim();
         if(!bairro.equals(""))
             novo.setBairro(bairro);

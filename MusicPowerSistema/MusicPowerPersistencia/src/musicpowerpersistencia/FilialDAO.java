@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio {
 
     public FilialDAO() throws SQLException {
-        setConsultaSalvar("INSERT INTO filial(id,uf,cidade,bairro,rua,numEstabelicimento)VALUES(?,?,?,?,?,?)");
+        setConsultaSalvar("INSERT INTO filial(uf,cidade,bairro,rua,numEstabelicimento)VALUES(?,?,?,?,?)");
         setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelicimento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM filial WHERE id = ?");
         setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE id = ?");
@@ -47,12 +47,11 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
     @Override
     protected void preencheConsulta(PreparedStatement sql, Filial obj) {
         try {
-            sql.setInt(1, obj.getId());
-            sql.setString(2, obj.getUF());
-            sql.setString(3, obj.getCidade());
-            sql.setString(4, obj.getBairro());
-            sql.setString(5, obj.getRua());
-            sql.setString(6, obj.getnEstabelecimento());
+            sql.setString(1, obj.getUF());
+            sql.setString(2, obj.getCidade());
+            sql.setString(3, obj.getBairro());
+            sql.setString(4, obj.getRua());
+            sql.setString(5, obj.getnEstabelecimento());
         } catch (SQLException ex) {
             System.out.println(ex + " FILIAL DAO PREENCHER CONSULTA");
         }
