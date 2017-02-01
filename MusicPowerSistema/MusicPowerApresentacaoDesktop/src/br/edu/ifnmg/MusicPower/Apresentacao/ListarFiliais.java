@@ -5,11 +5,16 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Filial;
+import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+
 /**
  *
  * @author marcos
  */
 public class ListarFiliais extends javax.swing.JFrame {
+    
+    FilialRepositorio dao = GerenciadorDeReferencias.getFilial();
 
     /**
      * Creates new form ListarClientes
@@ -300,4 +305,10 @@ public class ListarFiliais extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+public void buscar(String cidade,String bairro,String rua){
+    Filial filtro = new Filial(0,null,cidade,bairro,rua,null);
+    
+    List<Cliente> busca = 
+}    
 }

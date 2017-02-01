@@ -58,21 +58,6 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
     }
 
     @Override
-    public Filial Abrir(String cidade) throws SQLException {
-        try {
-            PreparedStatement sql = conn.prepareStatement("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE cidade = ?");
-            sql.setString(1, cidade);
-            ResultSet resultado = sql.executeQuery();
-            if (resultado.next()) {
-                return preencheObjeto(resultado);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex + " FILIAL DAO ABRIR");
-        }
-        return null;
-    }
-
-    @Override
     protected void preencheFiltros(Filial filtro) {
         if (filtro.getId() > 0) {
             adicionarFiltro("id", "=");
@@ -108,6 +93,21 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
         } catch (SQLException ex) {
             Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public Filial Abrir(String cidade) throws SQLException {
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE cidade = ?");
+            sql.setString(1, cidade);
+            ResultSet resultado = sql.executeQuery();
+            if (resultado.next()) {
+                return preencheObjeto(resultado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex + " FILIAL DAO ABRIR");
+        }
+        return null;
     }
 
 }
