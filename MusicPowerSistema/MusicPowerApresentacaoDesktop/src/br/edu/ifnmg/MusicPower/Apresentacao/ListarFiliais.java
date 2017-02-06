@@ -306,9 +306,9 @@ public class ListarFiliais extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 
-public void buscar(String cidade,String bairro,String rua){
-    Filial filtro = new Filial(0,null,cidade,bairro,rua,null);
-    
-    List<Cliente> busca = 
-}    
+    public void buscar(String cidade,String bairro,String rua){
+        Filial filtro = new Filial(0,null,cidade,bairro,rua,null);
+
+      //  List<Cliente> busca = 
+    }    
 }
