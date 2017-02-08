@@ -24,8 +24,7 @@ public class MuiscPowerApresentacao {
     }
 
     public static void criarFilial(Filial filial) throws SQLException {
-        filial.setId(1);
-        filial.setCidade("Montes claros");
+        
         FilialRepositorio bd_filial = new FilialDAO();
         bd_filial.Salvar(filial);
         

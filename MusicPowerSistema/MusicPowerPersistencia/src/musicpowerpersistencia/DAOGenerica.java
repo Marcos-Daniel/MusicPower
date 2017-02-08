@@ -50,16 +50,10 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     @Override
     public boolean Salvar(T obj) {
         try {
-            
-        /* PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
-                preencheConsulta(sql, obj);
-                sql.executeUpdate();*/
-            System.out.println(obj.getId());
             if (obj.getId() == 0) {
                 PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
                 preencheConsulta(sql, obj);
                 sql.executeUpdate();
-
             } else {
                 PreparedStatement sql = conn.prepareStatement(getConsultaAlterar());
                 preencheConsulta(sql, obj);
@@ -136,14 +130,14 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
             }
 
         } catch (SQLException ex) {
-            System.out.println(ex + "Dg Buscar");
+            System.out.println(ex + " Dg Buscar");
         }
         return ret;
     }
 
     protected void adicionarFiltro(String campo, String operador) {
         if (where.length() > 0) {
-            where = where + " and ";
+            where = where + " or ";
         }
 
         where = where + campo + " " + operador + " ?";

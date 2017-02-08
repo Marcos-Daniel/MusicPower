@@ -177,7 +177,9 @@ public class CadastrarFilial extends javax.swing.JFrame {
         try {
             MPA.criarFilial(novo);
             System.out.println("Salvou");
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: "+ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed

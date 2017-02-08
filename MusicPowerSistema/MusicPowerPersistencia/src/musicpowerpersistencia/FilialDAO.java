@@ -24,6 +24,7 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
         setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelicimento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM filial WHERE id = ?");
         setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial WHERE id = ?");
+        setConsultaBusca("select id,uf,cidade,bairro,rua,numEstabelicimento from Filial ");
     }
 
     @Override
@@ -36,7 +37,6 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
             tmp.setBairro(resultado.getString(4));
             tmp.setRua(resultado.getString(5));
             tmp.setnEstabelecimento(resultado.getString(6));
-            System.out.println("txt");
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex + " FILIAL DAO PREENCHER OBJETO");
@@ -89,7 +89,11 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
                 sql.setString(cont, filtro.getBairro());
                 cont++;
             }
-
+            if (filtro.getRua() != null) {
+                sql.setString(cont, filtro.getRua());
+                cont++;
+            }
+            
         } catch (SQLException ex) {
             Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

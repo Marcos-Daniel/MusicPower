@@ -42,7 +42,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuBuscarFilial = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
@@ -107,6 +107,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694467_user_profile_edit.png"))); // NOI18N
         jMenu1.setText("Cadastrar");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Cadastrar cliente");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +149,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         jMenu2.setText("Buscar");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenuItem5.setText("Buscar cliente");
         jMenu2.add(jMenuItem5);
@@ -151,8 +161,13 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem6.setText("Buscar funcionário");
         jMenu2.add(jMenuItem6);
 
-        jMenuItem7.setText("Buscar filial");
-        jMenu2.add(jMenuItem7);
+        menuBuscarFilial.setText("Buscar filial");
+        menuBuscarFilial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBuscarFilialActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuBuscarFilial);
 
         jMenuItem8.setText("Buscar fornecedor");
         jMenu2.add(jMenuItem8);
@@ -239,6 +254,19 @@ public class TelaInicial extends javax.swing.JFrame {
         telaCadastrarFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void menuBuscarFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarFilialActionPerformed
+        ListarFiliais telaListarFiliais = new ListarFiliais();
+        telaListarFiliais.setVisible(true);
+    }//GEN-LAST:event_menuBuscarFilialActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -294,10 +322,10 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblImagem;
+    private javax.swing.JMenuItem menuBuscarFilial;
     private javax.swing.JPanel pnlTelaInicial;
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables
