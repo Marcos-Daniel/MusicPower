@@ -5,11 +5,18 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Conta;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarContas extends javax.swing.JFrame {
+
+    Conta novo = new Conta();
 
     /**
      * Creates new form CadastrarContas
@@ -29,18 +36,18 @@ public class CadastrarContas extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtMesReferente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtStatus = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        txtDataDeVencimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +72,8 @@ public class CadastrarContas extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         jButton3.setText("Limpar campos");
 
+        txtDataDeVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,13 +90,13 @@ public class CadastrarContas extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)))
+                            .addComponent(txtDescricao)
+                            .addComponent(txtValor)
+                            .addComponent(txtMesReferente)
+                            .addComponent(txtStatus)
+                            .addComponent(txtDataDeVencimento)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 110, Short.MAX_VALUE)
+                        .addGap(0, 123, Short.MAX_VALUE)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
@@ -101,29 +110,29 @@ public class CadastrarContas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMesReferente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtDataDeVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -191,10 +200,40 @@ public class CadastrarContas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JFormattedTextField txtDataDeVencimento;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtMesReferente;
+    private javax.swing.JTextField txtStatus;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+
+    public void recuperarCampos() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+
+        Date dataDeVencimento = (Date) format.parse(txtDataDeVencimento.getText().trim());
+        if (!dataDeVencimento.equals("")) {
+            novo.setVencimento(dataDeVencimento);
+        }
+
+        String descricao = txtDescricao.getText().trim();
+        if (!descricao.equals("")) {
+            novo.setDescricao(descricao);
+        }
+
+        String mesReferente = txtMesReferente.getText().trim();
+        if (!mesReferente.equals("")) {
+            novo.setMesReferente(mesReferente);
+        }
+
+        String status = txtStatus.getText().trim();
+        if (!status.equals("")) {
+            novo.setStatus(status);
+        }
+
+        Double valor = Double.parseDouble(txtValor.getText().trim());
+        if (valor != 0) {
+            novo.setValor(valor);
+        }
+    }
+
 }

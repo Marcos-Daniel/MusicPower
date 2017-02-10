@@ -5,11 +5,18 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Evento;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarEvento extends javax.swing.JFrame {
+
+    Evento novo = new Evento();
 
     /**
      * Creates new form CadastrarEvento
@@ -54,6 +61,8 @@ public class CadastrarEvento extends javax.swing.JFrame {
 
         lblDataTerminio.setText("*Data terminio:");
 
+        txtDataTerminio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+
         lblValorInvestimento.setText("*Valor do investimento:");
 
         txtValorInvestimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
@@ -86,7 +95,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
             .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarEventoLayout.createSequentialGroup()
-                        .addGap(0, 126, Short.MAX_VALUE)
+                        .addGap(0, 141, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
@@ -220,4 +229,34 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JFormattedTextField txtValorInvestimento;
     // End of variables declaration//GEN-END:variables
+
+    public void recuperaCampos() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+
+        Date dataDeInicio = (Date) format.parse(txtDataInicio.getText().trim());
+        if (!dataDeInicio.equals("")) {
+            novo.setInicio(dataDeInicio);
+        }
+
+        Date dataDeTerminio = (Date) format.parse(txtDataTerminio.getText().trim());
+        if (!dataDeTerminio.equals("")) {
+            novo.setTermino(dataDeTerminio);
+        }
+
+        String descricao = txtDescricao.getText().trim();
+        if (!descricao.equals("")) {
+            novo.setDescricao(descricao);
+        }
+
+        String nome = txtNome.getText().trim();
+        if (!descricao.equals("")) {
+            novo.setNome(nome);
+        }
+
+        Double valor = Double.parseDouble(txtValorInvestimento.getText().trim());
+        if (valor != 0) {
+            novo.setValor(valor);
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ import java.util.Objects;
  */
 public class Evento implements Entidade {
     private int id;
+    private String nome;
     private String descricao;
     private Date inicio;
     private Date termino;
@@ -33,6 +34,14 @@ public class Evento implements Entidade {
     @Override
     public int getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     @Override
     public void setId(int id) {
