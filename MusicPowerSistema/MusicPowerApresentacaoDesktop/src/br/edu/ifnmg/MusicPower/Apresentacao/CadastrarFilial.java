@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -50,8 +51,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
         txtNestabelecimento = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,45 +83,40 @@ public class CadastrarFilial extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("*Id:");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        jButton1.setText("Limpar Campos");
 
         javax.swing.GroupLayout pnlCadastrarFilialLayout = new javax.swing.GroupLayout(pnlCadastrarFilial);
         pnlCadastrarFilial.setLayout(pnlCadastrarFilialLayout);
         pnlCadastrarFilialLayout.setHorizontalGroup(
             pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
-                .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
-                        .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(lblNestabelecimento)
-                            .addComponent(lblRua)
-                            .addComponent(lblBairro)
-                            .addComponent(lblCidade)
-                            .addComponent(lblUF))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUF)
-                            .addComponent(txtCidade)
-                            .addComponent(txtBairro)
-                            .addComponent(txtRua)
-                            .addComponent(txtNestabelecimento, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
-                            .addComponent(txtId)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarFilialLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSair)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(btnCadastrar)
+                .addGap(18, 18, 18)
+                .addComponent(btnSair)
                 .addContainerGap())
+            .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
+                .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNestabelecimento)
+                    .addComponent(lblRua)
+                    .addComponent(lblBairro)
+                    .addComponent(lblCidade)
+                    .addComponent(lblUF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUF)
+                    .addComponent(txtCidade)
+                    .addComponent(txtBairro)
+                    .addComponent(txtRua)
+                    .addComponent(txtNestabelecimento, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)))
         );
         pnlCadastrarFilialLayout.setVerticalGroup(
             pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUF))
@@ -141,11 +136,12 @@ public class CadastrarFilial extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNestabelecimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNestabelecimento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
-                    .addComponent(btnCadastrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton1))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,7 +155,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlCadastrarFilial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -223,7 +219,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnSair;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblNestabelecimento;
@@ -232,7 +228,6 @@ public class CadastrarFilial extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCadastrarFilial;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNestabelecimento;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtUF;

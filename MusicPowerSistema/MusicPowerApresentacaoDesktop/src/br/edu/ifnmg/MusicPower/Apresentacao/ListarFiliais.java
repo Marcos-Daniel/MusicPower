@@ -9,6 +9,8 @@ import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -18,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class ListarFiliais extends javax.swing.JFrame {
     
     FilialRepositorio dao = GerenciadorDeReferencias.getFilial();
+    FilialRepositorio rep;
 
     /**
      * Creates new form ListarClientes
@@ -254,7 +257,21 @@ public class ListarFiliais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarClientes.getSelectedRow();
+       
+        if(posicao > -1){
+           String mensagem = "Deseja realmente excluir esta filial?";
+           int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+           
+           if( opcao == JOptionPane.YES_OPTION){
+               int id = 1; //(int) tblListarClientes.getValueAt(posicao, 1);
+               System.out.println(id);
+               rep.Excluir(id);
+               JOptionPane.showMessageDialog(rootPane, "Filial excluída com sucesso!");
+           }
+       }
+           
+           
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -327,7 +344,7 @@ public class ListarFiliais extends javax.swing.JFrame {
         preencheTabela(busca);
     }    
 
-    private void preencheTabela(List<Filial> lista) {
+    public void preencheTabela(List<Filial> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod filial");
         modelo.addColumn("UF");

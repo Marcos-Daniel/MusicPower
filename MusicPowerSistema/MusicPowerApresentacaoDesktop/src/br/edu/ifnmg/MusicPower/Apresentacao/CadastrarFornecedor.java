@@ -48,6 +48,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         txtNEstabelecimento = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,6 +89,9 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        jButton1.setText("LImpar campos");
+
         javax.swing.GroupLayout pnlCadastrarFornecedorLayout = new javax.swing.GroupLayout(pnlCadastrarFornecedor);
         pnlCadastrarFornecedor.setLayout(pnlCadastrarFornecedorLayout);
         pnlCadastrarFornecedorLayout.setHorizontalGroup(
@@ -108,10 +112,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCadastrarFornecedorLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSair))
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNome)
                     .addComponent(txtEmail)
                     .addComponent(txtTelefone)
@@ -164,7 +170,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarFornecedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
-                    .addComponent(btnCadastrar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton1))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -234,6 +241,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblCnpj;

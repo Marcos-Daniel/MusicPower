@@ -51,6 +51,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         txtCpf = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -89,6 +90,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        jButton1.setText("Limpar campos");
+
         javax.swing.GroupLayout pnlCadastarFuncinarioLayout = new javax.swing.GroupLayout(pnlCadastarFuncinario);
         pnlCadastarFuncinario.setLayout(pnlCadastarFuncinarioLayout);
         pnlCadastarFuncinarioLayout.setHorizontalGroup(
@@ -117,11 +121,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                             .addComponent(txtCidade)
                             .addComponent(txtBairro)
                             .addComponent(txtRua)
-                            .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                            .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                             .addComponent(txtIdade)
                             .addComponent(txtCpf)))
                     .addGroup(pnlCadastarFuncinarioLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSair)))
@@ -173,7 +179,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
-                    .addComponent(btnCadastrar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -190,7 +197,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlCadastarFuncinario, javax.swing.GroupLayout.PREFERRED_SIZE, 475, Short.MAX_VALUE)
+                .addComponent(pnlCadastarFuncinario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -246,6 +253,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCidade;

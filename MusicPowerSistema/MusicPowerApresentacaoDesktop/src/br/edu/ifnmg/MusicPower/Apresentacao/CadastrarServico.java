@@ -45,6 +45,7 @@ public class CadastrarServico extends javax.swing.JFrame {
         txtValor = new javax.swing.JFormattedTextField();
         btnSair = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -148,6 +149,9 @@ public class CadastrarServico extends javax.swing.JFrame {
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        jButton1.setText("Limpar campos");
+
         javax.swing.GroupLayout pnlCadastrarServicoLayout = new javax.swing.GroupLayout(pnlCadastrarServico);
         pnlCadastrarServico.setLayout(pnlCadastrarServicoLayout);
         pnlCadastrarServicoLayout.setHorizontalGroup(
@@ -158,7 +162,9 @@ public class CadastrarServico extends javax.swing.JFrame {
                     .addComponent(pnlIdentificarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlDadosDoServiço, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarServicoLayout.createSequentialGroup()
-                        .addGap(0, 271, Short.MAX_VALUE)
+                        .addGap(0, 114, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSair)))
@@ -174,7 +180,8 @@ public class CadastrarServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarServicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
-                    .addComponent(btnCadastrar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -239,6 +246,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel lblDataDaSolicitacao;
     private javax.swing.JLabel lblDataEntrega;
