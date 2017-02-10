@@ -18,10 +18,10 @@ import muiscpowerapresentacao.MuiscPowerApresentacao;
  * @author marcos
  */
 public class CadastrarFilial extends javax.swing.JFrame {
-    Filial novo = new Filial();
-    MuiscPowerApresentacao  MPA = new MuiscPowerApresentacao();
 
-    
+    Filial novo = new Filial();
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
+
     /**
      * Creates new form CadastarFilial
      */
@@ -51,7 +51,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
         txtNestabelecimento = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -64,6 +64,12 @@ public class CadastrarFilial extends javax.swing.JFrame {
         lblBairro.setText("*Bairro:");
 
         lblRua.setText("*Rua:");
+
+        txtRua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRuaActionPerformed(evt);
+            }
+        });
 
         lblNestabelecimento.setText("*Nº estabelecimento:");
 
@@ -83,35 +89,42 @@ public class CadastrarFilial extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
-        jButton1.setText("Limpar Campos");
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        btnLimparCampos.setText("Limpar Campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCadastrarFilialLayout = new javax.swing.GroupLayout(pnlCadastrarFilial);
         pnlCadastrarFilial.setLayout(pnlCadastrarFilialLayout);
         pnlCadastrarFilialLayout.setHorizontalGroup(
             pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addGap(0, 125, Short.MAX_VALUE)
+                .addComponent(btnLimparCampos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCadastrar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSair)
-                .addContainerGap())
+                .addGap(8, 8, 8))
             .addGroup(pnlCadastrarFilialLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblNestabelecimento)
-                    .addComponent(lblRua)
-                    .addComponent(lblBairro)
                     .addComponent(lblCidade)
-                    .addComponent(lblUF))
+                    .addComponent(lblUF)
+                    .addComponent(lblBairro)
+                    .addComponent(lblRua)
+                    .addComponent(lblNestabelecimento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUF)
-                    .addComponent(txtCidade)
-                    .addComponent(txtBairro)
-                    .addComponent(txtRua)
-                    .addComponent(txtNestabelecimento, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)))
+                    .addComponent(txtCidade, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtBairro, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRua, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtNestabelecimento)
+                    .addComponent(txtUF))
+                .addContainerGap())
         );
         pnlCadastrarFilialLayout.setVerticalGroup(
             pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +153,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarFilialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnCadastrar)
-                    .addComponent(jButton1))
+                    .addComponent(btnLimparCampos))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -175,10 +188,18 @@ public class CadastrarFilial extends javax.swing.JFrame {
             System.out.println("Salvou");
             JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: "+ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void txtRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRuaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,8 +239,8 @@ public class CadastrarFilial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblBairro;
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblNestabelecimento;
@@ -233,37 +254,50 @@ public class CadastrarFilial extends javax.swing.JFrame {
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
 
-private void recuperaCampos(){
-         
-   String bairro  = txtBairro.getText().trim();
-        if(!bairro.equals(""))
+    private void recuperaCampos() {
+
+        String bairro = txtBairro.getText().trim();
+        if (!bairro.equals("")) {
             novo.setBairro(bairro);
-        else
-           JOptionPane.showMessageDialog(this,"ERRO, O CAMPO BAIRRO É OBRIGATORIO");
-   
-   String cidade = txtCidade.getText().trim();
-        if(!cidade.equals(""))
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO BAIRRO É OBRIGATORIO");
+        }
+
+        String cidade = txtCidade.getText().trim();
+        if (!cidade.equals("")) {
             novo.setCidade(cidade);
-        else
-            JOptionPane.showMessageDialog(this,"ERRO O CAMPO CIDADE É OBRIGATÓRIO");
-        
-   String nEstabelecimento = txtNestabelecimento.getText().trim();
-        if(!nEstabelecimento.equals(""))
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO O CAMPO CIDADE É OBRIGATÓRIO");
+        }
+
+        String nEstabelecimento = txtNestabelecimento.getText().trim();
+        if (!nEstabelecimento.equals("")) {
             novo.setnEstabelecimento(nEstabelecimento);
-        else
-            JOptionPane.showMessageDialog(this,"ERRO O CAMPO NUMERO ESTABELECIMENTO É OBRIGATÒRIO");
-        
-   String rua = txtRua.getText().trim();
-        if(!rua.equals(""))
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO O CAMPO NUMERO ESTABELECIMENTO É OBRIGATÒRIO");
+        }
+
+        String rua = txtRua.getText().trim();
+        if (!rua.equals("")) {
             novo.setRua(rua);
-        else
-            JOptionPane.showMessageDialog(this,"ERRO O CAMPO RUA É OBRIGATÓRIO");
-        
-   String UF = txtUF.getText().trim();
-        if(!UF.equals(""))
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO O CAMPO RUA É OBRIGATÓRIO");
+        }
+
+        String UF = txtUF.getText().trim();
+        if (!UF.equals("")) {
             novo.setUF(UF);
-        else
-            JOptionPane.showMessageDialog(this,"ERRO O CAMPO CIDADE É OBRIGATÓRIO");
-   }
-    
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO O CAMPO CIDADE É OBRIGATÓRIO");
+        }
+    }
+
+    public void limparCampos() {
+        txtBairro.setText("");
+        txtCidade.setText("");
+        txtNestabelecimento.setText("");
+        txtRua.setText("");
+        txtUF.setText("");
+    }
+
 }

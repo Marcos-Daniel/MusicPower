@@ -46,7 +46,7 @@ public class CadastrarContas extends javax.swing.JFrame {
         txtStatus = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
         txtDataDeVencimento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -69,8 +69,13 @@ public class CadastrarContas extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         jButton2.setText("Cadastrar");
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
-        jButton3.setText("Limpar campos");
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        btnLimparCampos.setText("Limpar campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         txtDataDeVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
@@ -97,7 +102,7 @@ public class CadastrarContas extends javax.swing.JFrame {
                             .addComponent(txtDataDeVencimento)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 123, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addComponent(btnLimparCampos)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)
                         .addGap(18, 18, 18)
@@ -131,7 +136,7 @@ public class CadastrarContas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnLimparCampos))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -154,6 +159,10 @@ public class CadastrarContas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,9 +200,9 @@ public class CadastrarContas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -236,4 +245,11 @@ public class CadastrarContas extends javax.swing.JFrame {
         }
     }
 
+    public void limparCampos() {
+        txtDataDeVencimento.setText("");
+        txtDescricao.setText("");
+        txtMesReferente.setText("");
+        txtStatus.setText("");
+        txtValor.setText("");
+    }
 }

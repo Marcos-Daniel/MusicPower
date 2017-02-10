@@ -47,7 +47,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnLimparCampos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,8 +85,13 @@ public class CadastrarEvento extends javax.swing.JFrame {
 
         lblNome.setText("*Nome:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
-        jButton1.setText("Limpar campos");
+        btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
+        btnLimparCampos.setText("Limpar campos");
+        btnLimparCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparCamposActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCadastrarEventoLayout = new javax.swing.GroupLayout(pnlCadastrarEvento);
         pnlCadastrarEvento.setLayout(pnlCadastrarEventoLayout);
@@ -95,11 +100,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
             .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarEventoLayout.createSequentialGroup()
-                        .addGap(0, 141, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addGap(0, 138, Short.MAX_VALUE)
+                        .addComponent(btnLimparCampos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCadastrar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair))
                     .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
                         .addContainerGap()
@@ -146,7 +151,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair)
                     .addComponent(btnCadastrar)
-                    .addComponent(jButton1))
+                    .addComponent(btnLimparCampos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -177,6 +182,10 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,8 +224,8 @@ public class CadastrarEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblDataInicio;
     private javax.swing.JLabel lblDataTerminio;
     private javax.swing.JLabel lblDescicao;
@@ -259,4 +268,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
         }
     }
 
+    public void limparCampos() {
+        txtDataInicio.setText("");
+        txtDataTerminio.setText("");
+        txtDescricao.setText("");
+        txtNome.setText("");
+        txtValorInvestimento.setText("");
+    }
 }
