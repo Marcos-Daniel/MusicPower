@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -20,7 +21,8 @@ import javax.swing.table.DefaultTableModel;
 public class ListarFiliais extends javax.swing.JFrame {
     
     FilialRepositorio dao = GerenciadorDeReferencias.getFilial();
-    FilialRepositorio rep;
+    
+    ArrayList<Filial> busca = new ArrayList<>();
 
     /**
      * Creates new form ListarClientes
@@ -50,7 +52,7 @@ public class ListarFiliais extends javax.swing.JFrame {
         txtRua = new javax.swing.JTextField();
         pnlCLientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblListarClientes = new javax.swing.JTable();
+        tblListarFiliais = new javax.swing.JTable();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -133,7 +135,7 @@ public class ListarFiliais extends javax.swing.JFrame {
 
         pnlCLientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Filiais"));
 
-        tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarFiliais.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -144,7 +146,7 @@ public class ListarFiliais extends javax.swing.JFrame {
                 "Cod filial", "UF", "Cidade", "Bairro", "Rua", "Nº estabelecimento"
             }
         ));
-        jScrollPane1.setViewportView(tblListarClientes);
+        jScrollPane1.setViewportView(tblListarFiliais);
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscartodos.setText("Buscar Todos");
@@ -167,6 +169,11 @@ public class ListarFiliais extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
@@ -257,19 +264,20 @@ public class ListarFiliais extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        int posicao = tblListarClientes.getSelectedRow();
+        int posicao = tblListarFiliais.getSelectedRow();
        
-        if(posicao > -1){
+        if(posicao>=0){
+           Filial filial = busca.get(posicao);
            String mensagem = "Deseja realmente excluir esta filial?";
            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
            
            if( opcao == JOptionPane.YES_OPTION){
-               int id = 1; //(int) tblListarClientes.getValueAt(posicao, 1);
-               System.out.println(id);
-               rep.Excluir(id);
+               dao.Excluir(filial);
                JOptionPane.showMessageDialog(rootPane, "Filial excluída com sucesso!");
            }
-       }
+        }else{
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        } 
            
            
     }//GEN-LAST:event_btnExcluirActionPerformed
@@ -277,6 +285,22 @@ public class ListarFiliais extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar(txtCidade.getText(), txtBairro.getText(), txtRua.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+       int posicao = tblListarFiliais.getSelectedRow();
+       if(posicao >= 0){
+           Filial filial = busca.get(posicao);
+            String mensagem = "Deseja realmente editar esta filial?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+            
+            if( opcao == JOptionPane.YES_OPTION){
+               CadastrarFilial telaCadastrarFilial = new CadastrarFilial(filial,this);
+               telaCadastrarFilial.setVisible(true); 
+            }
+       }else{
+           JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
+       }    
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,7 +353,7 @@ public class ListarFiliais extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlCLientes;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarClientes;
+    private javax.swing.JTable tblListarFiliais;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtRua;
@@ -339,7 +363,7 @@ public class ListarFiliais extends javax.swing.JFrame {
         
         Filial filtro = new Filial(0,null,cidade,bairro,rua,null);
    
-        List<Filial> busca = dao.Buscar(filtro);
+        this.busca = (ArrayList<Filial>) dao.Buscar(filtro);
      
         preencheTabela(busca);
     }    
@@ -364,6 +388,6 @@ public class ListarFiliais extends javax.swing.JFrame {
             modelo.addRow(linha);
         }
         
-        tblListarClientes.setModel(modelo);
+        tblListarFiliais.setModel(modelo);
     }
 }

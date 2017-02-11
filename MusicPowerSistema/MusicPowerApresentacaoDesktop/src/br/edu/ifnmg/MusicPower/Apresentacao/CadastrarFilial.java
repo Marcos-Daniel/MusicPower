@@ -21,12 +21,19 @@ public class CadastrarFilial extends javax.swing.JFrame {
 
     Filial novo = new Filial();
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
+    ListarFiliais telaListarFiliais;
 
     /**
      * Creates new form CadastarFilial
      */
     public CadastrarFilial() {
         initComponents();
+    }
+
+    CadastrarFilial(Filial filial, ListarFiliais telaListarFiliais) {
+        initComponents();
+        this.preencherCampos(filial);
+        this.telaListarFiliais = telaListarFiliais;
     }
 
     /**
@@ -55,7 +62,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pnlCadastrarFilial.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Filial"));
+        pnlCadastrarFilial.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar/Editar Filial"));
 
         lblUF.setText("*UF:");
 
@@ -183,10 +190,15 @@ public class CadastrarFilial extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         this.recuperaCampos();
+        int codigo = novo.getId();
+        
         try {
-            MPA.criarFilial(novo);
-            System.out.println("Salvou");
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
+            if(codigo < 0){
+                MPA.criarFilial(novo);
+                System.out.println("Salvou");
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
+            }else    
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
@@ -299,5 +311,13 @@ public class CadastrarFilial extends javax.swing.JFrame {
         txtRua.setText("");
         txtUF.setText("");
     }
-
+    
+    public void preencherCampos(Filial filial){
+        novo = filial;
+        txtBairro.setText( filial.getBairro());
+        txtCidade.setText( filial.getCidade());
+        txtNestabelecimento.setText( filial.getnEstabelecimento());
+        txtRua.setText( filial.getRua());
+        txtUF.setText( filial.getUF());
+    }
 }

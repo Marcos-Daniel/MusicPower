@@ -82,16 +82,16 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     }
 
     @Override
-    public T Excluir(int id) {
+    public boolean Excluir(T obj) {
         try {
             PreparedStatement sql = conn.prepareStatement(ConsultaExcluir);
-            sql.setInt(1, id);
+            sql.setInt(1, obj.getId());
             sql.executeUpdate();
-            return null;
+            return true;
         } catch (SQLException ex) {
             System.out.println(ex + "Dg Excluir");
         }
-        return null;
+        return false;
     }
 
     @Override
