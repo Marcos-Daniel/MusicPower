@@ -5,9 +5,12 @@
  */
 package muiscpowerapresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Conta;
+import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.sql.SQLException;
+import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.FilialDAO;
 
 /**
@@ -23,10 +26,17 @@ public class MuiscPowerApresentacao {
         // TODO code application logic here
     }
 
-    public static void criarFilial(Filial filial) throws SQLException {
+    public static void criarFilial(Filial filial) throws SQLException{
         
         FilialRepositorio bd_filial = new FilialDAO();
         bd_filial.Salvar(filial);
+        
+    }
+    
+    public static void criarConta(Conta conta) throws SQLException {
+        
+        ContaRepositorio bd_conta = new ContaDAO();
+        bd_conta.Salvar(conta);
         
     }
 

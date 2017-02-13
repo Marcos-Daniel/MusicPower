@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
+import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,12 +23,13 @@ public class CadastrarFilial extends javax.swing.JFrame {
     Filial novo = new Filial();
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
     ListarFiliais telaListarFiliais;
+    FilialRepositorio dao = GerenciadorDeReferencias.getFilial();
 
     /**
      * Creates new form CadastarFilial
      */
     public CadastrarFilial() {
-        initComponents();
+         initComponents();
     }
 
     CadastrarFilial(Filial filial, ListarFiliais telaListarFiliais) {
@@ -193,12 +195,15 @@ public class CadastrarFilial extends javax.swing.JFrame {
         int codigo = novo.getId();
         
         try {
-            if(codigo < 0){
+            if(codigo == 0){
                 MPA.criarFilial(novo);
-                System.out.println("Salvou");
                 this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso");
-            }else    
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            }else{    
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Filial editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);

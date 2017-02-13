@@ -22,10 +22,10 @@ public class GerenciadorDeReferencias {
     
     public static FilialRepositorio getFilial() {
         try{
-            if(daoFilial == null){
+            if(daoFilial == null){ 
                 daoFilial = new FilialDAO();
-                 return daoFilial;
             }
+            return daoFilial;
         } catch(SQLException e){
             System.out.print(e);
         }

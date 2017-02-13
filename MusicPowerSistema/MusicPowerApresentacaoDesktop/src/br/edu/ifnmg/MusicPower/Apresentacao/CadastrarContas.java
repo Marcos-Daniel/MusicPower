@@ -7,8 +7,13 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import muiscpowerapresentacao.MuiscPowerApresentacao;
 
 /**
  *
@@ -16,6 +21,7 @@ import java.text.SimpleDateFormat;
  */
 public class CadastrarContas extends javax.swing.JFrame {
 
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
     Conta novo = new Conta();
 
     /**
@@ -45,7 +51,7 @@ public class CadastrarContas extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         txtDataDeVencimento = new javax.swing.JFormattedTextField();
 
@@ -66,8 +72,13 @@ public class CadastrarContas extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         jButton1.setText("Sair");
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
-        jButton2.setText("Cadastrar");
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -104,7 +115,7 @@ public class CadastrarContas extends javax.swing.JFrame {
                         .addGap(0, 123, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1)))
                 .addContainerGap())
@@ -135,7 +146,7 @@ public class CadastrarContas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btnCadastrar)
                     .addComponent(btnLimparCampos))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -163,6 +174,19 @@ public class CadastrarContas extends javax.swing.JFrame {
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         this.limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        try {
+            this.recuperarCampos();
+            MPA.criarConta(novo);
+            this.limparCampos();
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,9 +224,9 @@ public class CadastrarContas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -216,10 +240,10 @@ public class CadastrarContas extends javax.swing.JFrame {
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
-    public void recuperarCampos() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
+    public void recuperarCampos() throws ParseException{
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
-        Date dataDeVencimento = (Date) format.parse(txtDataDeVencimento.getText().trim());
+        Date dataDeVencimento = new Date( format.parse(txtDataDeVencimento.getText().trim()).getTime());
         if (!dataDeVencimento.equals("")) {
             novo.setVencimento(dataDeVencimento);
         }

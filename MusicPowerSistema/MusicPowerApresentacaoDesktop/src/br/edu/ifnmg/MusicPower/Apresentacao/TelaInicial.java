@@ -34,11 +34,12 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lblImagem = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuCadastrar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        menuCadastrarContas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -93,9 +94,9 @@ public class TelaInicial extends javax.swing.JFrame {
         pnlTelaInicialLayout.setHorizontalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaInicialLayout.createSequentialGroup()
-                .addContainerGap(139, Short.MAX_VALUE)
+                .addContainerGap(145, Short.MAX_VALUE)
                 .addComponent(pnlTituloImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         pnlTelaInicialLayout.setVerticalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,11 +106,11 @@ public class TelaInicial extends javax.swing.JFrame {
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694467_user_profile_edit.png"))); // NOI18N
-        jMenu1.setText("Cadastrar");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694467_user_profile_edit.png"))); // NOI18N
+        menuCadastrar.setText("Cadastrar");
+        menuCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                menuCadastrarActionPerformed(evt);
             }
         });
 
@@ -119,7 +120,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuCadastrar.add(jMenuItem1);
 
         jMenuItem2.setText("Cadastrar funcionário");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +128,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuCadastrar.add(jMenuItem2);
 
         jMenuItem3.setText("Cadastrar filial");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +136,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        menuCadastrar.add(jMenuItem3);
 
         jMenuItem4.setText("Cadastrar fornecedor");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -143,9 +144,17 @@ public class TelaInicial extends javax.swing.JFrame {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        menuCadastrar.add(jMenuItem4);
 
-        jMenuBar1.add(jMenu1);
+        menuCadastrarContas.setText("Cadastrar contas");
+        menuCadastrarContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadastrarContasActionPerformed(evt);
+            }
+        });
+        menuCadastrar.add(menuCadastrarContas);
+
+        jMenuBar1.add(menuCadastrar);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         jMenu2.setText("Buscar");
@@ -254,9 +263,9 @@ public class TelaInicial extends javax.swing.JFrame {
         telaCadastrarFornecedor.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
+        
+    }//GEN-LAST:event_menuCadastrarActionPerformed
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         // TODO add your handling code here:
@@ -266,6 +275,11 @@ public class TelaInicial extends javax.swing.JFrame {
         ListarFiliais telaListarFiliais = new ListarFiliais();
         telaListarFiliais.setVisible(true);
     }//GEN-LAST:event_menuBuscarFilialActionPerformed
+
+    private void menuCadastrarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarContasActionPerformed
+        CadastrarContas telaCadastrarContas = new CadastrarContas();
+        telaCadastrarContas.setVisible(true);
+    }//GEN-LAST:event_menuCadastrarContasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,7 +318,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -326,6 +339,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JMenuItem menuBuscarFilial;
+    private javax.swing.JMenu menuCadastrar;
+    private javax.swing.JMenuItem menuCadastrarContas;
     private javax.swing.JPanel pnlTelaInicial;
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables
