@@ -5,17 +5,34 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
+import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import muiscpowerapresentacao.MuiscPowerApresentacao;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarFornecedor extends javax.swing.JFrame {
 
+    Fornecedor novo = new Fornecedor();
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
+    ListarFornecedores telaListarFornecedor;
+    FornecedorRepositorio dao = GerenciadorDeReferencias.getFornecedor();
     /**
      * Creates new form CadastrarFornecedor
      */
     public CadastrarFornecedor() {
         initComponents();
+    }
+    
+    CadastrarFornecedor(Fornecedor fornecedor, ListarFornecedores telaListarFornecedores){
+        initComponents();
+        this.preencherCampos(fornecedor);
+        this.telaListarFornecedor = telaListarFornecedores;
     }
 
     /**
@@ -80,6 +97,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -91,6 +113,11 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         jButton1.setText("LImpar campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCadastrarFornecedorLayout = new javax.swing.GroupLayout(pnlCadastrarFornecedor);
         pnlCadastrarFornecedor.setLayout(pnlCadastrarFornecedorLayout);
@@ -203,6 +230,32 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.limparCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        this.recuperarCampos();
+        int codigo = novo.getId();
+        
+        try {
+            if(codigo == 0){
+                MPA.criarFornecedor(novo);
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            }
+            else{
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Fornecedor editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -262,4 +315,22 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelefone;
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherCampos(Fornecedor fornecedor) {
+        novo = fornecedor;
+        txtBairro.setText(fornecedor.getBairro());
+        txtCidade.setText(fornecedor.getCidade());
+        txtCnpj.setText(fornecedor.getCnpj());
+        txtEmail.setText(fornecedor.getEmail());
+        txtNome.setText(fornecedor.getNome());   
+        
+    }
+
+    private void limparCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void recuperarCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

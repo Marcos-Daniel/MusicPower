@@ -1,9 +1,11 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.SQLException;
 import java.util.Locale;
 import musicpowerpersistencia.FilialDAO;
+import musicpowerpersistencia.FornecedorDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,6 +19,7 @@ import musicpowerpersistencia.FilialDAO;
 public class GerenciadorDeReferencias {
 
     private static FilialRepositorio daoFilial;
+    private static FornecedorRepositorio daoFornecedor;
 
     public static FilialRepositorio getFilial() {
         try {
@@ -25,6 +28,18 @@ public class GerenciadorDeReferencias {
             }
             return daoFilial;
         } catch (SQLException e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+    public static FornecedorRepositorio getFornecedor(){
+        try {
+            if(daoFornecedor == null){
+                daoFornecedor = new FornecedorDAO();
+            }
+            return daoFornecedor;
+        } catch (Exception e) {
             System.out.print(e);
         }
         return null;

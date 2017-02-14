@@ -9,9 +9,12 @@ import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
+import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.SQLException;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.FilialDAO;
+import musicpowerpersistencia.FornecedorDAO;
 
 /**
  *
@@ -30,6 +33,13 @@ public class MuiscPowerApresentacao {
         
         FilialRepositorio bd_filial = new FilialDAO();
         bd_filial.Salvar(filial);
+        
+    }
+    
+    public static void criarFornecedor(Fornecedor fornecedor){
+        
+        FornecedorRepositorio bd_fornecedor = new FornecedorDAO();
+        bd_fornecedor.Salvar(fornecedor);
         
     }
     
