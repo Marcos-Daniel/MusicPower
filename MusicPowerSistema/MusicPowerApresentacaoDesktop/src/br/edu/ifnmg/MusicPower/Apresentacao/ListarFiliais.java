@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class ListarFiliais extends javax.swing.JFrame {
     
     FilialRepositorio dao;
-    
+    Filial novo = new Filial();
     ArrayList<Filial> busca = new ArrayList<>();
 
     /**
@@ -257,11 +257,11 @@ public class ListarFiliais extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        this.limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -275,6 +275,7 @@ public class ListarFiliais extends javax.swing.JFrame {
            if( opcao == JOptionPane.YES_OPTION){
                dao.Excluir(filial);
                JOptionPane.showMessageDialog(rootPane, "Filial excluída com sucesso!");
+               buscarTodos();
            }
         }else{
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -368,6 +369,12 @@ public class ListarFiliais extends javax.swing.JFrame {
      
         preencheTabela(busca);
     }    
+    
+    public void buscarTodos(){
+        this.busca = (ArrayList<Filial>) dao.Abrir();
+        
+        preencheTabela(busca);
+    }
 
     public void preencheTabela(List<Filial> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -390,5 +397,11 @@ public class ListarFiliais extends javax.swing.JFrame {
         }
         
         tblListarFiliais.setModel(modelo);
+    }
+    
+    public void limparCampos(){
+        txtBairro.setText("");
+        txtCidade.setText("");
+        txtRua.setText("");
     }
 }

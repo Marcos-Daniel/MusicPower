@@ -29,7 +29,7 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     private String consultaBusca;
     private String consultaUltimoId;
 
-    private String where = "";
+    private String where;
 
     DAOGenerica() {
         try {
@@ -40,6 +40,7 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        where = "";
     }
 
     protected abstract T preencheObjeto(ResultSet resultado);
@@ -95,25 +96,28 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
     }
 
     @Override
-    public T Abrir(int id) {
+    public List<T> Abrir() {
+        List<T> todos = new ArrayList<>();
         try {
-            PreparedStatement sql = conn.prepareStatement(ConsultaAbrir);
-            sql.setInt(1, id);
+            PreparedStatement sql = conn.prepareStatement(getConsultaAbrir());
             ResultSet resultado = sql.executeQuery();
-            if (resultado.next()) {
-                return preencheObjeto(resultado);
+            
+            while(resultado.next()){
+                T tmp = preencheObjeto(resultado);
+                todos.add(tmp); 
             }
+            
         } catch (SQLException ex) {
             System.out.println(ex + "Dg Abrir");
         }
-        return null;
+        return todos;
     }
 
     @Override
     public List<T> Buscar(T filtro) {
         List<T> ret = new ArrayList<>();
         preencheFiltros(filtro);
-
+        
         if (where.length() > 0) {
             where = "WHERE " + where;
         }
@@ -132,12 +136,13 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
         } catch (SQLException ex) {
             System.out.println(ex + " Dg Buscar");
         }
+        this.where = "";
         return ret;
     }
 
     protected void adicionarFiltro(String campo, String operador) {
         if (where.length() > 0) {
-            where = where + " or ";
+            where = where + " and ";
         }
 
         where = where + campo + " " + operador + " ?";
