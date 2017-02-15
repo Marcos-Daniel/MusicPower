@@ -106,7 +106,7 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
                 T tmp = preencheObjeto(resultado);
                 todos.add(tmp); 
             }
-            
+          
         } catch (SQLException ex) {
             System.out.println(ex + "Dg Abrir");
         }

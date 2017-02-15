@@ -418,7 +418,7 @@ public class ListarFornecedores extends javax.swing.JFrame {
             linha.add(c.getBairro());
             linha.add(c.getRua());
             linha.add(c.getnEstabelecimento());
-            
+            modelo.addRow(linha);
         }
         
         tblListarFornecedor.setModel(modelo);
