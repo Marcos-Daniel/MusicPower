@@ -119,7 +119,7 @@ public abstract class DAOGenerica<T extends Entidade> implements Repositorio<T> 
         preencheFiltros(filtro);
         
         if (where.length() > 0) {
-            where = "WHERE " + where;
+            where = " WHERE " + where;
         }
 
         try {

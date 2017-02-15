@@ -19,10 +19,11 @@ import java.util.logging.Logger;
  */
 public class FornecedorDAO extends DAOGenerica<Fornecedor> implements FornecedorRepositorio {
     public FornecedorDAO() {
-       setConsultaSalvar("INSERT INTO fornecedor(nome,cnpj,telefone,email,uf,cidade,nestabelecimento)VALUES(?,?,?,?,?,?,?)");
+       setConsultaSalvar("INSERT INTO fornecedor(nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento)VALUES(?,?,?,?,?,?,?,?,?)");
        setConsultaAlterar("UPDATE fornecedor SET nome = ?,cnpj = ?,telefone = ?,email = ?,uf = ?, cidade = ? nestabelecimento = ?, WHERE id = ?");
        setConsultaExcluir("DELETE FROM fornecedor WHERE id = ?");
-       setConsultaAbrir("SELECT id,nome,cnpj,telefone,email,uf,cidade,nestabelecimento FROM Fornecedor WHERE id = ?");
+       setConsultaAbrir("SELECT id,nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento FROM fornecedor WHERE id = ?");     
+       setConsultaBusca("SELECT id,nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento FROM fornecedor");
     }
     
     @Override
@@ -40,9 +41,9 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
 
     @Override
     protected void preencheFiltros(Fornecedor filtro) {
-       if(filtro.getId() > 0) adicionarFiltro("id", "=");
-       if(filtro.getNome() != null) adicionarFiltro("nome", "=");
-       if(filtro.getCnpj()!= null) adicionarFiltro("cnpj", "=");
+       if(filtro.getId() > 0) adicionarFiltro(" id", "= ? ");
+       if(filtro.getNome() != null) adicionarFiltro("nome", "= ? ");
+       if(filtro.getCnpj()!= null) adicionarFiltro(" cnpj", "= ? ");
     }
 
     @Override
@@ -69,8 +70,10 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
             tmp.setTelefone(resultado.getString(4));
             tmp.setEmail(resultado.getString(5));
             tmp.setUF(resultado.getString(6));
-            tmp.setCidade(resultado.getString(7));
-            tmp.setnEstabelecimento(resultado.getString(8));
+            tmp.setBairro(resultado.getString(7));
+            tmp.setRua(resultado.getString(8));
+            tmp.setCidade(resultado.getString(9));
+            tmp.setnEstabelecimento(resultado.getString(10));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
@@ -87,7 +90,9 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
             sql.setString(4, obj.getEmail());
             sql.setString(5, obj.getUF());
             sql.setString(6, obj.getCidade());
-            sql.setString(7, obj.getnEstabelecimento());
+            sql.setString(7, obj.getBairro());
+            sql.setString(8,obj.getRua());
+            sql.setString(9, obj.getnEstabelecimento());
         } catch(SQLException ex){
             System.out.println(ex);
         }

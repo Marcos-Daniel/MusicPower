@@ -5,19 +5,31 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
+import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
 public class ListarFornecedores extends javax.swing.JFrame {
 
+    FornecedorRepositorio dao;
+    Fornecedor novo = new Fornecedor();
+    ArrayList<Fornecedor> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
     public ListarFornecedores() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getFornecedor();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,14 +44,14 @@ public class ListarFornecedores extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCodCliente = new javax.swing.JLabel();
-        txtCodCliente = new javax.swing.JTextField();
+        txtCodFornecedor = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtCnpj = new javax.swing.JTextField();
         pnlCLientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblListarClientes = new javax.swing.JTable();
+        tblListarFornecedor = new javax.swing.JTable();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -58,6 +70,11 @@ public class ListarFornecedores extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -84,8 +101,8 @@ public class ListarFornecedores extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
-                            .addComponent(txtCodCliente)
-                            .addComponent(jTextField1)))
+                            .addComponent(txtCodFornecedor)
+                            .addComponent(txtCnpj)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
@@ -103,11 +120,11 @@ public class ListarFornecedores extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -117,7 +134,7 @@ public class ListarFornecedores extends javax.swing.JFrame {
 
         pnlCLientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Fornecedores"));
 
-        tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -128,11 +145,11 @@ public class ListarFornecedores extends javax.swing.JFrame {
                 "Cod fornecedor", "Nome", "CNPJ", "Telefone", "Email", "UF", "CIdade", "Bairro", "Rua", "Nº estabelecimento"
             }
         ));
-        jScrollPane1.setViewportView(tblListarClientes);
-        if (tblListarClientes.getColumnModel().getColumnCount() > 0) {
-            tblListarClientes.getColumnModel().getColumn(5).setMinWidth(50);
-            tblListarClientes.getColumnModel().getColumn(5).setPreferredWidth(50);
-            tblListarClientes.getColumnModel().getColumn(5).setMaxWidth(50);
+        jScrollPane1.setViewportView(tblListarFornecedor);
+        if (tblListarFornecedor.getColumnModel().getColumnCount() > 0) {
+            tblListarFornecedor.getColumnModel().getColumn(5).setMinWidth(50);
+            tblListarFornecedor.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tblListarFornecedor.getColumnModel().getColumn(5).setMaxWidth(50);
         }
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -156,6 +173,11 @@ public class ListarFornecedores extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
@@ -238,17 +260,58 @@ public class ListarFornecedores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        this.limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarFornecedor.getSelectedRow();
+        
+        if (posicao>=0) {
+            Fornecedor fornecedor = busca.get(posicao);
+            String mensagem = "Deseja realmente excluir esta fornecedor?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+           
+           if(opcao == JOptionPane.YES_OPTION){
+               dao.Excluir(fornecedor);
+               JOptionPane.showMessageDialog(rootPane, "Fornecedor excluido com sucesso!");
+               buscarTodos();
+           }
+           
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar(txtNome.getText(),txtCodFornecedor.getText(),txtCnpj.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int posicao = tblListarFornecedor.getSelectedRow();
+        
+        if (posicao>=0) {
+            Fornecedor fornecedor = busca.get(posicao);
+            String mensagem = "Deseja realmente editar este fornedor?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem,"Mensagem de Confirmação",JOptionPane.YES_NO_OPTION);
+            
+            if (opcao == JOptionPane.YES_OPTION) {
+                CadastrarFornecedor telaCadastrarFornecedor = new CadastrarFornecedor();
+                telaCadastrarFornecedor.setVisible(true);
+            } 
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
+        }
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -296,13 +359,69 @@ public class ListarFornecedores extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCodCliente;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlCLientes;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarClientes;
-    private javax.swing.JTextField txtCodCliente;
+    private javax.swing.JTable tblListarFornecedor;
+    private javax.swing.JTextField txtCnpj;
+    private javax.swing.JTextField txtCodFornecedor;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        
+        txtNome.setText("");
+        txtCodFornecedor.setText("");
+        txtCnpj.setText("");
+        
+    }
+
+    private void buscarTodos() {
+        
+        this.busca = (ArrayList<Fornecedor>) dao.Abrir();
+        preencherTabela(busca);
+        
+    }
+
+    private void buscar(String nome, String codFornecedor, String cnpj) {
+        int id = Integer.parseInt(codFornecedor);
+        Fornecedor filtro = new Fornecedor(id,nome,cnpj,null,null,null,null,null,null,null);
+        this.busca = (ArrayList<Fornecedor>) dao.Buscar(filtro);
+        preencherTabela(busca);
+    }
+
+    private void preencherTabela(ArrayList<Fornecedor> busca) {
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("CodFornecedor");
+        modelo.addColumn("Nome");
+        modelo.addColumn("CNPJ");
+        modelo.addColumn("Telefone");
+        modelo.addColumn("Email");
+        modelo.addColumn("UF");
+        modelo.addColumn("Cidade");
+        modelo.addColumn("Bairro");
+        modelo.addColumn("Rua");
+        modelo.addColumn("N° Estabelecimento");
+        
+        for(Fornecedor c:busca){
+            Vector linha = new Vector();
+            
+            linha.add(c.getId());
+            linha.add(c.getNome());
+            linha.add(c.getCnpj());
+            linha.add(c.getTelefone());
+            linha.add(c.getEmail());
+            linha.add(c.getUF());
+            linha.add(c.getCidade());
+            linha.add(c.getBairro());
+            linha.add(c.getRua());
+            linha.add(c.getnEstabelecimento());
+            
+        }
+        
+        tblListarFornecedor.setModel(modelo);
+        
+    }
 }

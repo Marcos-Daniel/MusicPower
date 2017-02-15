@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author marcos
  */
 public class Fornecedor implements Entidade {
-    private int id;
+    private int id = 0;
     private String nome;
     private String cnpj;
     private String telefone;

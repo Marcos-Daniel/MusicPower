@@ -317,20 +317,98 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencherCampos(Fornecedor fornecedor) {
+        
         novo = fornecedor;
         txtBairro.setText(fornecedor.getBairro());
         txtCidade.setText(fornecedor.getCidade());
         txtCnpj.setText(fornecedor.getCnpj());
         txtEmail.setText(fornecedor.getEmail());
-        txtNome.setText(fornecedor.getNome());   
-        
+        txtNEstabelecimento.setText(fornecedor.getnEstabelecimento());
+        txtNome.setText(fornecedor.getNome());
+        txtRua.setText(fornecedor.getRua());
+        txtTelefone.setText(fornecedor.getTelefone());
+        txtUF.setText(fornecedor.getUF());
+  
     }
 
     private void limparCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        txtBairro.setText("");
+        txtCidade.setText("");
+        txtCnpj.setText("");
+        txtEmail.setText("");
+        txtNEstabelecimento.setText("");
+        txtNome.setText("");
+        txtRua.setText("");
+        txtTelefone.setText("");
+        txtUF.setText("");
+        
     }
 
     private void recuperarCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String bairro = txtBairro.getText().trim();
+        if(!bairro.equals("")){
+            novo.setBairro(bairro);
+        }else{
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO BAIRRO É OBRIGATORIO");
+        }
+        
+        String cidade = txtCidade.getText().trim();
+        if (!cidade.equals("")) {
+            novo.setCidade(cidade);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CIDADE É OBRIGATORIO");
+        }
+        
+        String cnpj = txtCnpj.getText().trim();
+        if (!cnpj.equals("")) {
+            novo.setCnpj(cnpj);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CNPJ É OBRIGATORIO");
+        }
+        
+        String email = txtEmail.getText().trim();
+        if (!email.equals("")) {
+            novo.setEmail(email);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO E-MAIL É OBRIGATORIO");
+        }
+        
+        String nestabelecimento = txtNEstabelecimento.getText().trim();
+        if (!nestabelecimento.equals("")) {
+            novo.setnEstabelecimento(nestabelecimento);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO N° ESTABELECIMENTO É OBRIGATORIO");
+        }
+        
+        String nome = txtNome.getText().trim();
+        if (!nome.equals("")) {
+            novo.setNome(nome);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NOME É OBRIGATORIO");
+        }
+        
+        String rua = txtRua.getText().trim();
+        if (!rua.equals("")) {
+            novo.setRua(rua);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO RUA É OBRIGATORIO");
+        }
+        
+        String telefone = txtTelefone.getText().trim();
+        if (!telefone.equals("")) {
+            novo.setTelefone(telefone);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO TELEFONE É OBRIGATORIO");
+        }
+        
+        String uf = txtUF.getText().trim();
+        if (!uf.equals("")) {
+            novo.setUF(uf);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO  UF É OBRIGATORIO");
+        }
+        
     }
 }
