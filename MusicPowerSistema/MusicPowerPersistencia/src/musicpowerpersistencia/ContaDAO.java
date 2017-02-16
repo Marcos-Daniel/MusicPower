@@ -23,7 +23,7 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
         setConsultaSalvar("INSERT INTO conta(descricao, valor, mesReferente, vencimento,StatusConta)VALUES(?,?,?,?,?)");
         setConsultaAlterar("UPDATE conta SET descricao = ?, valor = ?, mesReferente = ?, vencimento = ?,StatusConta = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM conta WHERE id = ?");
-        setConsultaAbrir("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM WHERE id = ?");
+        setConsultaAbrir("SELECT id,descricao,valor,mesReferente,vencimento,StatusConta FROM conta");
     }
     
     @Override

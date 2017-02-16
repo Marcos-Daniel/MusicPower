@@ -5,17 +5,29 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Conta;
+import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
 public class ListarContas extends javax.swing.JFrame {
 
+    ContaRepositorio dao;
+    Conta novo = new Conta();
+    ArrayList<Conta> busca = new ArrayList<>();
+
     /**
      * Creates new form ListarClientes
      */
     public ListarContas() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getConta();
     }
 
     /**
@@ -37,7 +49,7 @@ public class ListarContas extends javax.swing.JFrame {
         btnLimparCampos = new javax.swing.JButton();
         pnlContas = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblListarClientes = new javax.swing.JTable();
+        tblListarContas = new javax.swing.JTable();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -106,7 +118,7 @@ public class ListarContas extends javax.swing.JFrame {
 
         pnlContas.setBorder(javax.swing.BorderFactory.createTitledBorder("Contas"));
 
-        tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarContas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -117,7 +129,7 @@ public class ListarContas extends javax.swing.JFrame {
                 "Cod conta", "Descrição", "Valor", "Mês referente", "Data de vencimento", "Status"
             }
         ));
-        jScrollPane1.setViewportView(tblListarClientes);
+        jScrollPane1.setViewportView(tblListarContas);
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscartodos.setText("Buscar Todos");
@@ -226,7 +238,7 @@ public class ListarContas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -283,8 +295,38 @@ public class ListarContas extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlContas;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarClientes;
+    private javax.swing.JTable tblListarContas;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    public void buscarTodos() {
+        this.busca = (ArrayList<Conta>) dao.Abrir();
+        
+        preencheTabela(busca);
+    }
+    
+    public void preencheTabela(List<Conta> lista){
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cod Conta");
+        modelo.addColumn("Descrição");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Mês referente");
+        modelo.addColumn("Data de vencimento");
+        modelo.addColumn("Status");
+        
+        for(Conta c : lista){
+            Vector linha = new Vector();
+            linha.add(c.getId());
+            linha.add(c.getDescricao());
+            linha.add(c.getValor());
+            linha.add(c.getMesReferente());
+            linha.add(c.getVencimento());
+            linha.add(c.getStatus());
+            modelo.addRow(linha);
+        }
+        
+        tblListarContas.setModel(modelo);
+    }
+
 }
