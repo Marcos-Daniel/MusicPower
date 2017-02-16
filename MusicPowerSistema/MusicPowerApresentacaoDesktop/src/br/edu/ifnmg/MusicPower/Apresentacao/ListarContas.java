@@ -10,6 +10,7 @@ import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -42,9 +43,9 @@ public class ListarContas extends javax.swing.JFrame {
         pnlListarCliente = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         lblCodCliente = new javax.swing.JLabel();
-        txtCodCliente = new javax.swing.JTextField();
+        txtMesReferente = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         pnlContas = new javax.swing.JPanel();
@@ -68,6 +69,11 @@ public class ListarContas extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -88,8 +94,8 @@ public class ListarContas extends javax.swing.JFrame {
                     .addComponent(lblNome))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodCliente)
-                    .addComponent(txtNome))
+                    .addComponent(txtMesReferente)
+                    .addComponent(txtDescricao))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(587, Short.MAX_VALUE)
@@ -104,11 +110,11 @@ public class ListarContas extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMesReferente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -242,8 +248,26 @@ public class ListarContas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarContas.getSelectedRow();
+       
+        if(posicao>=0){
+           Conta conta = busca.get(posicao);
+           String mensagem = "Deseja realmente excluir esta Conta?";
+           int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+           
+           if( opcao == JOptionPane.YES_OPTION){
+               dao.Excluir(conta);
+               JOptionPane.showMessageDialog(rootPane, "Conta excluída com sucesso!");
+               buscarTodos();
+           }
+        }else{
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        } 
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar(txtDescricao.getText(),txtMesReferente.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,17 +320,25 @@ public class ListarContas extends javax.swing.JFrame {
     private javax.swing.JPanel pnlContas;
     private javax.swing.JPanel pnlListarCliente;
     private javax.swing.JTable tblListarContas;
-    private javax.swing.JTextField txtCodCliente;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtMesReferente;
     // End of variables declaration//GEN-END:variables
+
+    public void buscar(String descricao,String mesReferente) {
+        Conta filtro = new Conta(0,descricao,null,mesReferente,null,null);
+   
+        this.busca = (ArrayList<Conta>) dao.Buscar(filtro);
+     
+        preencheTabela(busca);
+    }
 
     public void buscarTodos() {
         this.busca = (ArrayList<Conta>) dao.Abrir();
-        
+
         preencheTabela(busca);
     }
-    
-    public void preencheTabela(List<Conta> lista){
+
+    public void preencheTabela(List<Conta> lista) {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod Conta");
         modelo.addColumn("Descrição");
@@ -314,8 +346,8 @@ public class ListarContas extends javax.swing.JFrame {
         modelo.addColumn("Mês referente");
         modelo.addColumn("Data de vencimento");
         modelo.addColumn("Status");
-        
-        for(Conta c : lista){
+
+        for (Conta c : lista) {
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getDescricao());
@@ -325,7 +357,7 @@ public class ListarContas extends javax.swing.JFrame {
             linha.add(c.getStatus());
             modelo.addRow(linha);
         }
-        
+
         tblListarContas.setModel(modelo);
     }
 
