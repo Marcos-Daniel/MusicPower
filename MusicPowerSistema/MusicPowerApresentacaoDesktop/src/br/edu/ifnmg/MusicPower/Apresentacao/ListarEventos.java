@@ -5,12 +5,26 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Evento;
+import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
 public class ListarEventos extends javax.swing.JFrame {
 
+    EventoRepositorio dao;
+    Evento evento = new Evento();
+    ArrayList<Evento> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
@@ -38,12 +52,12 @@ public class ListarEventos extends javax.swing.JFrame {
         lblDataInicio = new javax.swing.JLabel();
         lblDataTerminio = new javax.swing.JLabel();
         txtDataInicio = new javax.swing.JTextField();
-        txtDataEvento = new javax.swing.JTextField();
+        txtDataTerminio = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
         pnlEventos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblListarClientes = new javax.swing.JTable();
+        tblListarEventos = new javax.swing.JTable();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -62,6 +76,11 @@ public class ListarEventos extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -75,9 +94,9 @@ public class ListarEventos extends javax.swing.JFrame {
 
         lblDataTerminio.setText("Data terminio:");
 
-        txtDataEvento.addActionListener(new java.awt.event.ActionListener() {
+        txtDataTerminio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataEventoActionPerformed(evt);
+                txtDataTerminioActionPerformed(evt);
             }
         });
 
@@ -102,7 +121,7 @@ public class ListarEventos extends javax.swing.JFrame {
                             .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
                             .addComponent(txtCodEvento)
                             .addComponent(txtDataInicio)
-                            .addComponent(txtDataEvento)
+                            .addComponent(txtDataTerminio)
                             .addComponent(txtStatus)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFiltrarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -129,7 +148,7 @@ public class ListarEventos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataTerminio)
-                    .addComponent(txtDataEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataTerminio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblStatus)
@@ -143,7 +162,7 @@ public class ListarEventos extends javax.swing.JFrame {
 
         pnlEventos.setBorder(javax.swing.BorderFactory.createTitledBorder("Eventos"));
 
-        tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -154,7 +173,7 @@ public class ListarEventos extends javax.swing.JFrame {
                 "Nome", "Cod Evento", "Data inicio", "Data terminio", "Valor Investido", "Status"
             }
         ));
-        jScrollPane1.setViewportView(tblListarClientes);
+        jScrollPane1.setViewportView(tblListarEventos);
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscartodos.setText("Buscar Todos");
@@ -166,6 +185,11 @@ public class ListarEventos extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386770_trash_bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -259,20 +283,43 @@ public class ListarEventos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
-
+    
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarEventos.getSelectedRow();
+        if(posicao>=0){
+            Evento evento = busca.get(posicao);
+            String mensagem = "Deseja realmente excluir esta Evento?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if(opcao == JOptionPane.YES_OPTION){
+                dao.Excluir(evento);
+                JOptionPane.showMessageDialog(rootPane, "Evento excluída com sucesso!");
+                buscarTodos();
+            }
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void txtDataEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataEventoActionPerformed
+    private void txtDataTerminioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataTerminioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataEventoActionPerformed
+    }//GEN-LAST:event_txtDataTerminioActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+     
+        Date dataDeInicio = new java.sql.Date( format.parse(txtDataInicio.getText().trim()).getTime());
+        
+        buscar(txtNome.getText(),txtCodEvento.getText(),txtDataInicio.getText(),txtDataTerminio.getText(),txtStatus.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -327,11 +374,64 @@ public class ListarEventos extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEventos;
     private javax.swing.JPanel pnlFiltrar;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarClientes;
+    private javax.swing.JTable tblListarEventos;
     private javax.swing.JTextField txtCodEvento;
-    private javax.swing.JTextField txtDataEvento;
     private javax.swing.JTextField txtDataInicio;
+    private javax.swing.JTextField txtDataTerminio;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        
+        txtNome.setText("");
+        txtCodEvento.setText("");
+        txtDataInicio.setText("");
+        txtDataTerminio.setText("");
+        txtStatus.setText("");
+        
+    }
+    
+   /* private void buscar(String nome, int codEvento, Date dataInicio, Date dataTerminio, String status) {
+         
+      Evento filtro = new Evento(codEvento,nome,dataInicio,dataTerminio,null,status);
+      busca = (ArrayList<Evento>) dao.Buscar(filtro);
+      preencherTabela(busca);
+      
+    } */
+
+    private void buscarTodos() {
+        
+        this.busca = (ArrayList<Evento>) dao.Abrir();
+        preencherTabela(busca);
+        
+    }
+
+    private void preencherTabela(ArrayList<Evento> busca) {
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nome");
+        modelo.addColumn("Cod Evento");
+        modelo.addColumn("Data inicio");
+        modelo.addColumn("Data terminio");
+        modelo.addColumn("Valor investido");
+        modelo.addColumn("Status");
+        
+        for(Evento c: busca){
+            
+            Vector linha = new Vector();
+            linha.add(c.getNome());
+            linha.add(c.getId());
+            linha.add(c.getInicio());
+            linha.add(c.getTermino());
+            linha.add(c.getValor());
+            linha.add(c.getStatus());
+            modelo.addRow(linha);
+            
+        }
+        
+        tblListarEventos.setModel(modelo);
+        
+    }
+
 }

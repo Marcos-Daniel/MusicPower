@@ -23,7 +23,8 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         setConsultaSalvar("INSERT INTO evento(descricao, inicio, fim, valor, statusEvento)VALUES(?,?,?,?,?)");
         setConsultaAlterar("UPDATE evento SET descricao = ?, inicio = ?, fim = ?, valor = ?, statusEvento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM evento WHERE id = ?");
-        setConsultaAbrir("SELECT id, descricao, inicio, fim, valor, statusEvento FROM WHERE id = ?");
+        setConsultaAbrir("SELECT id, descricao, inicio, fim, valor, statusEvento FROM evento WHERE id = ?");
+        setConsultaBusca("SELECT id, descricao, inicio, fim, valor, statusEvento FROM evento");
     }
     
     @Override
