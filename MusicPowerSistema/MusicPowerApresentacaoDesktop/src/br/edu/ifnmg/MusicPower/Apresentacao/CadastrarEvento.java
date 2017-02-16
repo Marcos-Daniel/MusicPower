@@ -7,15 +7,21 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import java.sql.Date;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import muiscpowerapresentacao.MuiscPowerApresentacao;
 
 /**
  *
  * @author marcos
  */
 public class CadastrarEvento extends javax.swing.JFrame {
-
+    
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
     Evento novo = new Evento();
 
     /**
@@ -176,11 +182,22 @@ public class CadastrarEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        
         this.dispose();
+        
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
+       
+        try {
+            this.recuperaCampos();
+            MPA.criarEvento(novo);
+            this.limparCampos();
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+        } catch (Exception ex) {
+            Logger.getLogger(CadastrarEvento.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
@@ -240,14 +257,14 @@ public class CadastrarEvento extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void recuperaCampos() throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyy");
-
-        Date dataDeInicio = (Date) format.parse(txtDataInicio.getText().trim());
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+     
+        Date dataDeInicio = new Date( format.parse(txtDataInicio.getText().trim()).getTime());
         if (!dataDeInicio.equals("")) {
-            novo.setInicio(dataDeInicio);
+           novo.setInicio(dataDeInicio);
         }
 
-        Date dataDeTerminio = (Date) format.parse(txtDataTerminio.getText().trim());
+        Date dataDeTerminio = new Date( format.parse(txtDataTerminio.getText().trim()).getTime());
         if (!dataDeTerminio.equals("")) {
             novo.setTermino(dataDeTerminio);
         }
@@ -266,6 +283,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         if (valor != 0) {
             novo.setValor(valor);
         }
+        
     }
 
     public void limparCampos() {
@@ -275,4 +293,5 @@ public class CadastrarEvento extends javax.swing.JFrame {
         txtNome.setText("");
         txtValorInvestimento.setText("");
     }
+    
 }

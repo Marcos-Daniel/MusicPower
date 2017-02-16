@@ -24,7 +24,7 @@ public class Evento implements Entidade {
         
     }
     public Evento(int id, String descricao, Date inicio, Date termino, Double valor, String status) {
-        this.id = id;
+        this.id = id = 0;
         this.descricao = descricao;
         this.inicio = inicio;
         this.termino = termino;
