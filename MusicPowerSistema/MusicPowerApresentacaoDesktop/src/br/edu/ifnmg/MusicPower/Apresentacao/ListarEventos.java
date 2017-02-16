@@ -7,10 +7,13 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -302,6 +305,9 @@ public class ListarEventos extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Evento excluída com sucesso!");
                 buscarTodos();
             }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -314,11 +320,11 @@ public class ListarEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-     
-        Date dataDeInicio = new java.sql.Date( format.parse(txtDataInicio.getText().trim()).getTime());
-        
-        buscar(txtNome.getText(),txtCodEvento.getText(),txtDataInicio.getText(),txtDataTerminio.getText(),txtStatus.getText());
+        try {
+            buscar(txtNome.getText(),txtCodEvento.getText(), txtDataInicio.getText(),txtDataTerminio.getText(),txtStatus.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -392,13 +398,18 @@ public class ListarEventos extends javax.swing.JFrame {
         
     }
     
-   /* private void buscar(String nome, int codEvento, Date dataInicio, Date dataTerminio, String status) {
-         
-      Evento filtro = new Evento(codEvento,nome,dataInicio,dataTerminio,null,status);
+    private void buscar(String nome, String codEvento, String dataInicio, String dataTerminio, String status) throws ParseException {
+      
+      int id = Integer.parseInt(codEvento); 
+      SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+      java.sql.Date dataI = new java.sql.Date(format.parse(dataInicio).getTime());
+      java.sql.Date dataT = new java.sql.Date(format.parse(dataTerminio).getTime());
+      
+      Evento filtro = new Evento(id,nome,dataI,dataT,null,status);
       busca = (ArrayList<Evento>) dao.Buscar(filtro);
       preencherTabela(busca);
       
-    } */
+    } 
 
     private void buscarTodos() {
         

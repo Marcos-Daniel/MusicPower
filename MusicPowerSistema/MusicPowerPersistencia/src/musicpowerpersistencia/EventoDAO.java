@@ -44,10 +44,9 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
     protected void preencheFiltros(Evento filtro) {
         if(filtro.getId() > 0) adicionarFiltro("id", "=");
         if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
-        if(filtro.getInicio()!= null) adicionarFiltro("cpf", "=");
+        if(filtro.getInicio()!= null) adicionarFiltro("inicio", "=");
         if(filtro.getTermino()!= null) adicionarFiltro("termino", "=");
         if(filtro.getValor()!= null) adicionarFiltro("valor", "=");
-        if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
         if(filtro.getStatus()!= null) adicionarFiltro("status", "=");
     }
 

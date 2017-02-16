@@ -54,6 +54,8 @@ public class CadastrarEvento extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
+        txtStatus = new javax.swing.JFormattedTextField();
+        lblDescicao1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +101,10 @@ public class CadastrarEvento extends javax.swing.JFrame {
             }
         });
 
+        txtStatus.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        lblDescicao1.setText("*Status:");
+
         javax.swing.GroupLayout pnlCadastrarEventoLayout = new javax.swing.GroupLayout(pnlCadastrarEvento);
         pnlCadastrarEvento.setLayout(pnlCadastrarEventoLayout);
         pnlCadastrarEventoLayout.setHorizontalGroup(
@@ -106,12 +112,13 @@ public class CadastrarEvento extends javax.swing.JFrame {
             .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarEventoLayout.createSequentialGroup()
-                        .addGap(0, 138, Short.MAX_VALUE)
+                        .addGap(0, 132, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCadastrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSair))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSair)
+                        .addGap(6, 6, 6))
                     .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -120,9 +127,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
                                 .addComponent(lblNome, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblDescicao, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(lblDataInicio, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(lblValorInvestimento)))
+                                .addComponent(lblValorInvestimento))
+                            .addComponent(lblDescicao1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDataTerminio, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtValorInvestimento)
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -153,12 +162,16 @@ public class CadastrarEvento extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorInvestimento)
                     .addComponent(txtValorInvestimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSair)
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDescicao1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLimparCampos)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnLimparCampos))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSair))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -246,6 +259,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private javax.swing.JLabel lblDataInicio;
     private javax.swing.JLabel lblDataTerminio;
     private javax.swing.JLabel lblDescicao;
+    private javax.swing.JLabel lblDescicao1;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblValorInvestimento;
     private javax.swing.JPanel pnlCadastrarEvento;
@@ -253,6 +267,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDataTerminio;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtStatus;
     private javax.swing.JFormattedTextField txtValorInvestimento;
     // End of variables declaration//GEN-END:variables
 
@@ -282,6 +297,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
         Double valor = Double.parseDouble(txtValorInvestimento.getText().trim());
         if (valor != 0) {
             novo.setValor(valor);
+        }
+        
+        String status = txtStatus.getText().trim();
+        if (!status.equals("")) {
+            novo.setStatus(status);
         }
         
     }
