@@ -312,6 +312,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         txtDescricao.setText("");
         txtNome.setText("");
         txtValorInvestimento.setText("");
+        txtStatus.setText("");
     }
     
 }

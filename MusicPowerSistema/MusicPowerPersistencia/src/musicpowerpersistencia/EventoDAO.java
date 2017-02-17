@@ -20,11 +20,11 @@ import java.util.logging.Logger;
  */
 public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio {
     public EventoDAO() {
-        setConsultaSalvar("INSERT INTO evento(descricao, inicio, fim, valor, statusEvento)VALUES(?,?,?,?,?)");
+        setConsultaSalvar("INSERT INTO evento(nome,descricao, inicio, fim, valor, statusEvento)VALUES(?,?,?,?,?,?)");
         setConsultaAlterar("UPDATE evento SET descricao = ?, inicio = ?, fim = ?, valor = ?, statusEvento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM evento WHERE id = ?");
-        setConsultaAbrir("SELECT id, descricao, inicio, fim, valor, statusEvento FROM evento WHERE id = ?");
-        setConsultaBusca("SELECT id, descricao, inicio, fim, valor, statusEvento FROM evento");
+        setConsultaAbrir("SELECT id, nome, descricao, inicio, fim, valor, statusEvento FROM evento");
+        setConsultaBusca("SELECT id, nome,descricao, inicio, fim, valor, statusEvento FROM evento");
     }
     
     @Override
@@ -43,11 +43,10 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
     @Override
     protected void preencheFiltros(Evento filtro) {
         if(filtro.getId() > 0) adicionarFiltro("id", "=");
-        if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
+        if(filtro.getNome()!= null) adicionarFiltro("nome", "=");
         if(filtro.getInicio()!= null) adicionarFiltro("inicio", "=");
-        if(filtro.getTermino()!= null) adicionarFiltro("termino", "=");
-        if(filtro.getValor()!= null) adicionarFiltro("valor", "=");
-        if(filtro.getStatus()!= null) adicionarFiltro("status", "=");
+        if(filtro.getTermino()!= null) adicionarFiltro("fim", "=");
+        if(filtro.getStatus()!= null) adicionarFiltro("statusEvento", "=");
     }
 
     @Override()
@@ -55,10 +54,9 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
          try {
             int cont = 1;
             if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
-            if(filtro.getDescricao() != null ){ sql.setString(cont, filtro.getDescricao()); cont++; }
+            if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
             if(filtro.getInicio()!= null){ sql.setDate(cont, (Date) filtro.getInicio()); cont++; }
             if(filtro.getTermino()!= null){ sql.setDate(cont, (Date) filtro.getTermino()); cont++; }
-            if(filtro.getValor() != null ){ sql.setDouble(cont, filtro.getValor()); cont++; }
             if(filtro.getStatus()!= null ){ sql.setString(cont, filtro.getStatus()); cont++; }
             
         } catch (SQLException ex) {
@@ -71,11 +69,12 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         try {
             Evento tmp = new Evento();
             tmp.setId(resultado.getInt(1));
-            tmp.setDescricao(resultado.getString(2));
-            tmp.setInicio(resultado.getDate(3));
-            tmp.setTermino(resultado.getDate(4));
-            tmp.setValor(resultado.getDouble(5));
-            tmp.setStatus(resultado.getString(6));
+            tmp.setNome(resultado.getString(2));
+            tmp.setDescricao(resultado.getString(3));
+            tmp.setInicio(resultado.getDate(4));
+            tmp.setTermino(resultado.getDate(5));
+            tmp.setValor(resultado.getDouble(6));
+            tmp.setStatus(resultado.getString(7));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
@@ -86,11 +85,12 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
     @Override
     protected void preencheConsulta(PreparedStatement sql, Evento obj) {
          try{
-            sql.setString(1, obj.getDescricao());
-            sql.setDate(2, (Date) obj.getInicio());
-            sql.setDate(3, (Date) obj.getTermino());
-            sql.setDouble(4, obj.getValor());
-            sql.setString(5, obj.getStatus());
+            sql.setString(1, obj.getNome());
+            sql.setString(2, obj.getDescricao());
+            sql.setDate(3, (Date) obj.getInicio());
+            sql.setDate(4, (Date) obj.getTermino());
+            sql.setDouble(5, obj.getValor());
+            sql.setString(6, obj.getStatus());
         } catch(SQLException ex){
             System.out.println(ex);
         }

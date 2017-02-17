@@ -33,6 +33,7 @@ public class ListarEventos extends javax.swing.JFrame {
      */
     public ListarEventos() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getEvento();
     }
 
     /**
@@ -402,6 +403,7 @@ public class ListarEventos extends javax.swing.JFrame {
       
       int id = Integer.parseInt(codEvento); 
       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+      
       java.sql.Date dataI = new java.sql.Date(format.parse(dataInicio).getTime());
       java.sql.Date dataT = new java.sql.Date(format.parse(dataTerminio).getTime());
       
