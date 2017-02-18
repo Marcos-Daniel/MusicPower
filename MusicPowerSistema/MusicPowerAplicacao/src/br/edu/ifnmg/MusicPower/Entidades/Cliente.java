@@ -12,27 +12,14 @@ import java.util.Date;
  *
  * @author marcos
  */
-public class Cliente extends Pessoa implements Entidade {
+public class Cliente extends Pessoa {
 
-   // private int id;
-   
     public Cliente() {
 
     }
 
     public Cliente(int id, String nome, String cpf, Date dataNascimento, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
         super();
-     //   this.id = id;
-    }
-/*
-    @Override
-    public int getId() {
-        return id;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
-  */  
 }

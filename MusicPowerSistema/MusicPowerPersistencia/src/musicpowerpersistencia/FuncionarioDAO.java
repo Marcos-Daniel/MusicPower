@@ -23,8 +23,9 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
     public FuncionarioDAO() throws ClassNotFoundException, SQLException{
         setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,cidade,uf,bairro,rua,numResidencia,cargo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
         setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? cargo = ? WHERE id = ?");
-        setConsultaExcluir("DELETE FROM Funcionario WHERE id = ?");
-        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM Funcionario");
+        setConsultaExcluir("DELETE FROM funcionario WHERE id = ?");
+        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM funcionario");
+        setConsultaBusca("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM funcionario");
     }
     
     @Override
@@ -42,16 +43,25 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
 
     @Override
     protected void preencheFiltros(Funcionario filtro) {
-        if(filtro.getId() > 0) adicionarFiltro("id", "=");
-        if(filtro.getNome() != null) adicionarFiltro("nome", "=");
+        if(filtro.getNome() != null) 
+            adicionarFiltro("nome", "like ");
+        if(filtro.getCpf() != null) 
+            adicionarFiltro("cpf", "=");
     }
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Funcionario filtro) {
         try {
+            
             int cont = 1;
-            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
-            if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
+            if(filtro.getNome() != null ){ 
+                sql.setString(cont, filtro.getNome()); 
+                cont++; 
+            }
+            if(filtro.getCpf() != null){ 
+                sql.setString(cont, filtro.getCpf()); 
+                cont++; 
+            }
                  
         } catch (SQLException ex) {
             Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,7 +75,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             tmp.setId(resultado.getInt(1));
             tmp.setNome(resultado.getString(2));
             tmp.setCpf(resultado.getString(3));
-         //   tmp.getDataNascimento((Date) resultado.getString(4));
+            tmp.setDataNascimento(resultado.getDate(4));
             tmp.setTelefone(resultado.getString(5));
             tmp.setEmail(resultado.getString(6));
             tmp.setUF(resultado.getString(7));
@@ -73,6 +83,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             tmp.setBairro(resultado.getString(9));
             tmp.setRua(resultado.getString(10));
             tmp.setnResidencia(resultado.getString(11));
+            tmp.setCargo(resultado.getString(12));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);

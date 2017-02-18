@@ -5,8 +5,6 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author marcos
@@ -174,6 +172,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu2.add(jMenuItem5);
 
         jMenuItem6.setText("Buscar funcionário");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         menuBuscarFilial.setText("Buscar filial");
@@ -334,6 +337,11 @@ public class TelaInicial extends javax.swing.JFrame {
         ListarClientes telaListarClientes = new ListarClientes();
         telaListarClientes.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        ListarFuncionarios telaListarFuncionario = new ListarFuncionarios();
+        telaListarFuncionario.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

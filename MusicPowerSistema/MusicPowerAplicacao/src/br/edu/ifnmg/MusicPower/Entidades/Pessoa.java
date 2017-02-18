@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author breno
  */
-public abstract class Pessoa {
+public abstract class Pessoa implements Entidade {
     private int id = 0;
     private String nome;
     private String cpf;
@@ -43,10 +43,12 @@ public abstract class Pessoa {
         this.nResidencia = nResidencia;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }

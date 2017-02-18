@@ -23,8 +23,8 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
         setConsultaSalvar("INSERT INTO filial(uf,cidade,bairro,rua,numEstabelicimento)VALUES(?,?,?,?,?)");
         setConsultaAlterar("UPDATE filial SET uf = ?,cidade = ?,bairro = ?,rua = ?,numEstabelicimento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM filial WHERE id = ?");
-        setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM Filial");
-        setConsultaBusca("select id,uf,cidade,bairro,rua,numEstabelicimento from Filial ");
+        setConsultaAbrir("SELECT id,uf,cidade,bairro,rua,numEstabelicimento FROM filial");
+        setConsultaBusca("select id,uf,cidade,bairro,rua,numEstabelicimento from filial ");
     }
 
     @Override

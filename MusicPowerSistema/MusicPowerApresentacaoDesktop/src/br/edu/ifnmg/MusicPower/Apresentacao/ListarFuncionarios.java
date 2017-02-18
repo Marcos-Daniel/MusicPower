@@ -5,17 +5,29 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
+import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
 public class ListarFuncionarios extends javax.swing.JFrame {
 
+    FuncionarioRepositorio dao;
+    Funcionario funcionario = new Funcionario();
+    ArrayList<Funcionario> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
     public ListarFuncionarios() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getFuncionario();
     }
 
     /**
@@ -32,7 +44,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCodFuncionário = new javax.swing.JLabel();
-        txtCodFuncionario = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         pnlFuncionarios = new javax.swing.JPanel();
@@ -52,10 +64,15 @@ public class ListarFuncionarios extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        lblCodFuncionário.setText("Cod funcionário:");
+        lblCodFuncionário.setText("Cpf:");
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -77,7 +94,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome)
-                    .addComponent(txtCodFuncionario))
+                    .addComponent(txtCpf))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFiltrarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -96,7 +113,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodFuncionário)
-                    .addComponent(txtCodFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -108,20 +125,20 @@ public class ListarFuncionarios extends javax.swing.JFrame {
 
         tblListarFuncionários.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cod funcionário", "CPF", "Nome", "Telefone", "Email", "UF", "CIdade", "Bairro", "Rua", "Nº residência"
+                "Cod funcionário", "Nome", "CPF", "Nascimento", "Telefone", "Email", "UF", "CIdade", "Bairro", "Rua", "Nº residência", "Cargo"
             }
         ));
         jScrollPane1.setViewportView(tblListarFuncionários);
         if (tblListarFuncionários.getColumnModel().getColumnCount() > 0) {
-            tblListarFuncionários.getColumnModel().getColumn(5).setMinWidth(50);
-            tblListarFuncionários.getColumnModel().getColumn(5).setPreferredWidth(50);
-            tblListarFuncionários.getColumnModel().getColumn(5).setMaxWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(6).setMinWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(6).setPreferredWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(6).setMaxWidth(50);
         }
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -134,6 +151,11 @@ public class ListarFuncionarios extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386770_trash_bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -227,16 +249,37 @@ public class ListarFuncionarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarFuncionários.getSelectedRow();
+        
+        if(posicao>=0){
+            Funcionario funcionario = busca.get(posicao);
+            String mensagem = "Deseja realmente excluir esse Funcionário?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
+           
+            if(opcao == JOptionPane.YES_OPTION){
+                dao.Excluir(funcionario);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar(txtNome.getText(),txtCpf.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,7 +334,67 @@ public class ListarFuncionarios extends javax.swing.JFrame {
     private javax.swing.JPanel pnlFuncionarios;
     private javax.swing.JPanel pnlListarFuncionário;
     private javax.swing.JTable tblListarFuncionários;
-    private javax.swing.JTextField txtCodFuncionario;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        txtNome.setText("");
+        txtCpf.setText("");
+    }
+
+    private void buscarTodos() {
+        
+        busca =(ArrayList<Funcionario>) dao.Abrir();
+        preencherTabela(busca);
+        
+    }
+
+    private void buscar(String nome, String cpf) {
+
+        Funcionario filtro = new Funcionario(0,nome,cpf,null,null,null,null,null,null,null,null,null);
+        busca = (ArrayList<Funcionario>) dao.Buscar(filtro);
+        preencherTabela(busca);
+        
+    }
+
+    private void preencherTabela(ArrayList<Funcionario> busca) {
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("CodCli");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Cpf");
+        modelo.addColumn("Nascimento");
+        modelo.addColumn("Telefone");
+        modelo.addColumn("Email");
+        modelo.addColumn("Cidade");
+        modelo.addColumn("UF");
+        modelo.addColumn("Rua");
+        modelo.addColumn("Bairro");
+        modelo.addColumn("NumResidência");
+        modelo.addColumn("Cargo");
+       
+        for(Funcionario c:busca){
+            Vector linha = new Vector();
+            linha.add(c.getId());
+            linha.add(c.getNome());
+            linha.add(c.getCpf());
+            linha.add(c.getDataNascimento());
+            linha.add(c.getTelefone());
+            linha.add(c.getEmail());
+            linha.add(c.getCidade());
+            linha.add(c.getUF());
+            linha.add(c.getRua());
+            linha.add(c.getBairro());
+            linha.add(c.getnResidencia());
+            linha.add(c.getCargo());
+            
+            modelo.addRow(linha);
+           
+        }
+        
+        tblListarFuncionários.setModel(modelo);
+    }
+    
 }
