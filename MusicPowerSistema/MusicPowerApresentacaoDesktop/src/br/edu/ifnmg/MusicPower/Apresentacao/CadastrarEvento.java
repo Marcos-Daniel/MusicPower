@@ -286,8 +286,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
 
         String descricao = txtDescricao.getText().trim();
         if (!descricao.equals("")) {
-            novo.setDescricao(descricao);
-        }
+            novo.setDescricao(descricao);        }
 
         String nome = txtNome.getText().trim();
         if (!descricao.equals("")) {
