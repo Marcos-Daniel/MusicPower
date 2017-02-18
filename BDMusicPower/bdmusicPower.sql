@@ -1,16 +1,17 @@
-create database BDMusicPower;
-use BDMusicPower;
+create database bdmusicPower;
+use bdmusicPower;
 
 create table cliente (
 	id int auto_increment,
     nome varchar(50),
     cpf varchar(12),
+    dataNascimento date,
     telefone varchar(12),
     email varchar(40),
-    uf varchar(3),
     cidade varchar(20),
-    bairro varchar(20),
+    uf varchar(3),
     rua varchar(30),
+    bairro varchar(20),
     numResidencia varchar(5),
     primary key(id)
 ); 
@@ -37,7 +38,8 @@ create table servico (
 
 create table evento (
 	id int auto_increment,
-    descricao varchar(30),
+    nome varchar(30),
+    descricao varchar(200),
     inicio datetime,
     fim datetime,
     valor double,
@@ -71,16 +73,17 @@ create table fornecedor (
 
 create table funcionario (
 	id int auto_increment,
-    nome varchar(30),
+    nome varchar(50),
     cpf varchar(12),
     dataNascimento date,
     telefone varchar(12),
     email varchar(40),
-    uf varchar(3),
     cidade varchar(20),
-    bairro varchar(20),
+    uf varchar(3),
     rua varchar(30),
+    bairro varchar(20),
     numResidencia varchar(5),
+    cargo varchar(30),
     primary key(id)
 );
 
@@ -129,4 +132,3 @@ create table itensVenda (
     foreign key(fk_venda) references venda(id),
     foreign key(fk_produto) references produto(id)
 );
-

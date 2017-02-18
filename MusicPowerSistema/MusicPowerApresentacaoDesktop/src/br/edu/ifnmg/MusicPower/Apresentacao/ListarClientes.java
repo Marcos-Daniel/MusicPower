@@ -5,17 +5,29 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Cliente;
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
 public class ListarClientes extends javax.swing.JFrame {
 
+    ClienteRepositorio dao;
+    Cliente novo = new Cliente();
+    ArrayList<Cliente> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
     public ListarClientes() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getCliente();
     }
 
     /**
@@ -32,7 +44,7 @@ public class ListarClientes extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCodCliente = new javax.swing.JLabel();
-        txtCodCliente = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         pnlCLientes = new javax.swing.JPanel();
@@ -52,10 +64,15 @@ public class ListarClientes extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        lblCodCliente.setText("Cod Cliente:");
+        lblCodCliente.setText("Cpf");
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -77,7 +94,7 @@ public class ListarClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome)
-                    .addComponent(txtCodCliente))
+                    .addComponent(txtCpf))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -96,7 +113,7 @@ public class ListarClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -108,24 +125,24 @@ public class ListarClientes extends javax.swing.JFrame {
 
         tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CodCLiente", "Nome", "Telefone", "Email", "UF", "CIdade", "Bairro", "Rua", "Nº residência"
+                "CodCLiente", "Nome", "Cpf", "Nascimento", "Telefone", "Email", "CIdade", "UF", "Rua", "Bairro", "Nº residência"
             }
         ));
         jScrollPane1.setViewportView(tblListarClientes);
         if (tblListarClientes.getColumnModel().getColumnCount() > 0) {
             tblListarClientes.getColumnModel().getColumn(0).setPreferredWidth(70);
             tblListarClientes.getColumnModel().getColumn(0).setMaxWidth(70);
-            tblListarClientes.getColumnModel().getColumn(4).setMinWidth(50);
-            tblListarClientes.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tblListarClientes.getColumnModel().getColumn(4).setMaxWidth(50);
-            tblListarClientes.getColumnModel().getColumn(8).setPreferredWidth(70);
-            tblListarClientes.getColumnModel().getColumn(8).setMaxWidth(70);
+            tblListarClientes.getColumnModel().getColumn(7).setMinWidth(50);
+            tblListarClientes.getColumnModel().getColumn(7).setPreferredWidth(50);
+            tblListarClientes.getColumnModel().getColumn(7).setMaxWidth(50);
+            tblListarClientes.getColumnModel().getColumn(10).setPreferredWidth(70);
+            tblListarClientes.getColumnModel().getColumn(10).setMaxWidth(70);
         }
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -138,6 +155,11 @@ public class ListarClientes extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386770_trash_bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -231,16 +253,37 @@ public class ListarClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarClientes.getSelectedRow();
+        if (posicao>=0) {
+            Cliente cliente = busca.get(posicao);
+            String mensagem = "Deseja realmente excluir este Cliente?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem,"Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if(opcao == JOptionPane.YES_OPTION){
+                dao.Excluir(cliente);
+                JOptionPane.showMessageDialog(rootPane, "Conta excluída com sucesso!");
+                buscarTodos();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar(txtNome.getText(),txtCpf.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,7 +335,65 @@ public class ListarClientes extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCLientes;
     private javax.swing.JPanel pnlListarCliente;
     private javax.swing.JTable tblListarClientes;
-    private javax.swing.JTextField txtCodCliente;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        
+        txtNome.setText("");
+        txtCpf.setText("");
+        
+    }
+
+    private void buscarTodos() {
+   
+        busca = (ArrayList<Cliente>) dao.Abrir();
+        preencherTabela(busca);
+        
+    }
+
+    private void buscar(String nome, String cpf) {
+        
+        Cliente filtro = new Cliente(0,nome,cpf,null,null,null,null,null,null,null,null);
+        busca =(ArrayList<Cliente>) dao.Buscar(filtro);
+        preencherTabela(busca);
+        
+    }
+
+    private void preencherTabela(ArrayList<Cliente> lista) {
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("CodCli");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Cpf");
+        modelo.addColumn("Nascimento");
+        modelo.addColumn("Telefone");
+        modelo.addColumn("Email");
+        modelo.addColumn("Cidade");
+        modelo.addColumn("UF");
+        modelo.addColumn("Rua");
+        modelo.addColumn("Bairro");
+        modelo.addColumn("NumResidência");
+       
+        for(Cliente c: lista){
+            Vector linha = new Vector();
+            linha.add(c.getId());
+            linha.add(c.getNome());
+            linha.add(c.getCpf());
+            linha.add(c.getDataNascimento());
+            linha.add(c.getTelefone());
+            linha.add(c.getEmail());
+            linha.add(c.getCidade());
+            linha.add(c.getUF());
+            linha.add(c.getRua());
+            linha.add(c.getBairro());
+            linha.add(c.getnResidencia());
+            modelo.addRow(linha);
+           
+        }
+        
+        tblListarClientes.setModel(modelo);
+    }
 }

@@ -22,7 +22,8 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
        setConsultaSalvar("INSERT INTO cliente(nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia)VALUES(?,?,?,?,?,?,?,?,?,?)");
        setConsultaAlterar("UPDATE cliente SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email = ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? WHERE id = ?");
        setConsultaExcluir("DELETE FROM cliente WHERE id = ?");
-       setConsultaAbrir("SELECT id, nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia FROM Cliente WHERE cpf = ?");
+       setConsultaAbrir("SELECT id, nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia FROM cliente");
+        setConsultaBusca("SELECT id, nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia FROM cliente");
     } 
     
     @Override
@@ -60,7 +61,6 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
     
     @Override
     protected void preencheFiltros(Cliente filtro) {
-        if(filtro.getId() > 0) adicionarFiltro("id", "=");
         if(filtro.getNome() != null) adicionarFiltro("nome", " like ");
         if(filtro.getCpf() != null) adicionarFiltro("cpf", "=");
     }
