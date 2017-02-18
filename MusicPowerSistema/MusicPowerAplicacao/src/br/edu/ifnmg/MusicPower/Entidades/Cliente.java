@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.util.Date;
+
 
 /**
  *
@@ -12,17 +14,17 @@ package br.edu.ifnmg.MusicPower.Entidades;
  */
 public class Cliente extends Pessoa implements Entidade {
 
-    private int id;
+   // private int id;
    
     public Cliente() {
 
     }
 
-    public Cliente(int id, String nome, String cpf, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
+    public Cliente(int id, String nome, String cpf, Date dataNascimento, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
         super();
-        this.id = id;
+     //   this.id = id;
     }
-
+/*
     @Override
     public int getId() {
         return id;
@@ -32,5 +34,5 @@ public class Cliente extends Pessoa implements Entidade {
     public void setId(int id) {
         this.id = id;
     }
-    
+  */  
 }

@@ -5,17 +5,37 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Cliente;
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import muiscpowerapresentacao.MuiscPowerApresentacao;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarCliente extends javax.swing.JFrame {
-
+    
+    Cliente novo = new Cliente();
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
+    ListarClientes telalistarClientes;
+    ClienteRepositorio dao = GerenciadorDeReferencias.getCliente();
+    
     /**
      * Creates new form CadastrarCliente
      */
     public CadastrarCliente() {
         initComponents();
+    }
+    
+    CadastrarCliente(Cliente cliente, ListarClientes telalistarClientes){
+        preencherCampos();
+        this.telalistarClientes = telalistarClientes; 
     }
 
     /**
@@ -48,6 +68,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         btnCadastar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtCpf = new javax.swing.JTextField();
+        lblNome1 = new javax.swing.JLabel();
+        txtNascimento = new javax.swing.JTextField();
+        lblNome2 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -73,6 +97,11 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         btnCadastar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         btnCadastar.setText("Cadastrar");
+        btnCadastar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -84,41 +113,59 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         jButton1.setText("Limpar campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblNome1.setText("*Cpf:");
+
+        lblNome2.setText("*Nascimento:");
 
         javax.swing.GroupLayout pnlCadastrarClienteLayout = new javax.swing.GroupLayout(pnlCadastrarCliente);
         pnlCadastrarCliente.setLayout(pnlCadastrarClienteLayout);
         pnlCadastrarClienteLayout.setHorizontalGroup(
             pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadastrarClienteLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCadastrarClienteLayout.createSequentialGroup()
-                        .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblNumeroResidencia)
-                            .addComponent(lblRua)
-                            .addComponent(lblBairro)
-                            .addComponent(lblCidade)
-                            .addComponent(lblUF)
-                            .addComponent(lblEmail)
-                            .addComponent(lblTelefone)
-                            .addComponent(lblNome))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addComponent(txtTelefone)
-                            .addComponent(txtEmail)
-                            .addComponent(txtUf)
-                            .addComponent(txtCidade)
-                            .addComponent(txtBairro)
-                            .addComponent(txtRua)
-                            .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
+                        .addGap(62, 62, 62)
+                        .addComponent(lblNome))
                     .addGroup(pnlCadastrarClienteLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNumeroResidencia)
+                                    .addComponent(lblUF, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblRua, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(lblNome2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblTelefone, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(lblCidade, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(lblNome1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastrarClienteLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblBairro)))
+                .addGap(23, 23, 23)
+                .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtNascimento)
+                    .addComponent(txtCpf)
+                    .addGroup(pnlCadastrarClienteLayout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCadastar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSair)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                        .addComponent(btnSair))
+                    .addComponent(txtNome)
+                    .addComponent(txtTelefone)
+                    .addComponent(txtEmail)
+                    .addComponent(txtUf)
+                    .addComponent(txtCidade)
+                    .addComponent(txtBairro)
+                    .addComponent(txtRua)
+                    .addComponent(txtNumeroResidencia))
                 .addContainerGap())
         );
         pnlCadastrarClienteLayout.setVerticalGroup(
@@ -130,38 +177,46 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEmail)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUF)
-                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCidade)
-                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUF))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBairro)
-                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblRua))
+                .addGap(14, 14, 14)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblRua)
-                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBairro))
+                .addGap(16, 16, 16)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumeroResidencia)
-                    .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumeroResidencia))
+                .addGap(18, 18, 18)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSair)
+                    .addComponent(jButton1)
                     .addComponent(btnCadastar)
-                    .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSair))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,6 +242,31 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCadastarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastarActionPerformed
+       
+        try {
+            this.recuperarCampos();
+            int codigo = novo.getId();
+            if (codigo == 0) {
+                MPA.criarCliente(novo);
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");      
+             } else {
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
+        }
+      
+    }//GEN-LAST:event_btnCadastarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,6 +312,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel lblCidade;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblNome1;
+    private javax.swing.JLabel lblNome2;
     private javax.swing.JLabel lblNumeroResidencia;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblTelefone;
@@ -239,11 +321,98 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCadastrarCliente;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumeroResidencia;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtTelefone;
     private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtNascimento.setText("");
+        txtTelefone.setText("");
+        txtEmail.setText("");
+        txtCidade.setText("");
+        txtUf.setText("");
+        txtRua.setText("");
+        txtBairro.setText("");
+        txtNumeroResidencia.setText("");
+        
+    }
+
+    private void recuperarCampos() throws ParseException {
+         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        String nome = txtNome.getText().trim();
+        if(!nome.equals("")){
+            novo.setNome(nome);
+        }
+        
+        String cpf = txtCpf.getText().trim();
+        if(!cpf.equals("")){
+            novo.setCpf(cpf);
+        }
+        
+        Date nascimento = new Date( format.parse(txtNascimento.getText().trim()).getTime());
+        if(!nascimento.equals("")){
+            novo.setDataNascimento(nascimento);
+        }
+        
+        String telefone = txtTelefone.getText().trim();
+        if(!telefone.equals("")){
+            novo.setTelefone(telefone);
+        }
+        
+        String email = txtEmail.getText().trim();
+        if(!email.equals("")){
+            novo.setEmail(email);
+        }
+        
+        String cidade = txtCidade.getText().trim();
+        if(!cidade.equals("")){
+            novo.setCidade(cidade);
+        }
+        
+        String uf = txtUf.getText().trim();
+        if(!uf.equals("")){
+            novo.setUF(cpf);
+        }
+        
+        String rua = txtRua.getText().trim();
+        if(!rua.equals("")){
+            novo.setRua(rua);
+        }
+        
+        String bairro = txtBairro.getText().trim();
+        if(!bairro.equals("")){
+            novo.setBairro(bairro);
+        }
+            
+        String numResidencia = txtNumeroResidencia.getText().trim();
+        if(!numResidencia.equals("")){
+            novo.setnResidencia(numResidencia);
+        }
+        
+    }
+
+    private void preencherCampos() {
+        
+        txtNome.setText(novo.getNome());
+        txtCpf.setText(novo.getCpf());
+       // txtNascimento.setText(novo.getDataNascimento());
+        txtTelefone.setText(novo.getTelefone());
+        txtEmail.setText(novo.getEmail());
+        txtCidade.setText(novo.getCidade());
+        txtUf.setText(novo.getUF());
+        txtRua.setText(novo.getRua());
+        txtBairro.setText(novo.getBairro());
+        txtNumeroResidencia.setText(novo.getnResidencia());
+        
+    }
 }

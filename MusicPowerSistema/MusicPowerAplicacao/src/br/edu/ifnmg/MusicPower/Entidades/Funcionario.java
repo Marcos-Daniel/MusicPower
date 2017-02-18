@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.util.Date;
+
 
 /**
  *
@@ -20,13 +22,13 @@ public class Funcionario extends Pessoa implements Entidade {
         
     }
     
-    public Funcionario(int id, String cargo, String nome, String cpf, String idade, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
+    public Funcionario(int id, String cargo, String nome, String cpf, Date dataNascimento, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
         super();
-        this.id = id;
+      //  this.id = id;
         this.cargo = cargo;
     }
     
-    @Override
+ /*   @Override
     public int getId() {
         return id;
     }
@@ -35,7 +37,7 @@ public class Funcionario extends Pessoa implements Entidade {
     public void setId(int id) {
         this.id = id;
     }
-    
+   */ 
     public String getCargo() {
         return cargo;
     }

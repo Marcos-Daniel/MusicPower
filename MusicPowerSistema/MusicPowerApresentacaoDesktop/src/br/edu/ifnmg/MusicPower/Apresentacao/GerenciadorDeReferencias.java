@@ -1,11 +1,13 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.SQLException;
 import java.util.Locale;
+import musicpowerpersistencia.ClienteDAO;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
@@ -26,6 +28,7 @@ public class GerenciadorDeReferencias {
     private static ContaRepositorio daoConta;
     private static FornecedorRepositorio daoFornecedor;
     private static EventoRepositorio daoEvento;
+    private static ClienteRepositorio daoCliente;
 
     public static FilialRepositorio getFilial() {
         try {
@@ -69,6 +72,18 @@ public class GerenciadorDeReferencias {
                 daoEvento = new EventoDAO();
             }
             return daoEvento;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+     public static ClienteRepositorio getCliente() {
+        try {
+            if (daoCliente == null) {
+                daoCliente = new ClienteDAO();
+            }
+            return daoCliente;
         } catch (Exception e) {
             System.out.print(e);
         }

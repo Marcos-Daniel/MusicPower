@@ -7,6 +7,7 @@ package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,7 +64,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             tmp.setId(resultado.getInt(1));
             tmp.setNome(resultado.getString(2));
             tmp.setCpf(resultado.getString(3));
-            tmp.setIdade(resultado.getString(4));
+         //   tmp.getDataNascimento((Date) resultado.getString(4));
             tmp.setTelefone(resultado.getString(5));
             tmp.setEmail(resultado.getString(6));
             tmp.setUF(resultado.getString(7));
@@ -83,7 +84,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
       try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
-            sql.setString(3, obj.getIdade());
+         //   sql.setString(3, obj.getIdade());
             sql.setString(4, obj.getTelefone());
             sql.setString(5, obj.getEmail());
             sql.setString(6, obj.getUF());

@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.MusicPower.Entidades;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,9 +13,10 @@ import java.util.Objects;
  * @author breno
  */
 public abstract class Pessoa {
-    private int id;
+    private int id = 0;
     private String nome;
     private String cpf;
+    private Date dataNascimento;
     private String telefone;
     private String email;
     private String UF;
@@ -27,10 +29,11 @@ public abstract class Pessoa {
 
     }
 
-    public Pessoa(int id, String nome, String cpf, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
+    public Pessoa(int id, String nome, String cpf, Date dataNascimento, String telefone, String email, String UF, String cidade, String bairro, String rua, String nResidencia) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
         this.telefone = telefone;
         this.email = email;
         this.UF = UF;
@@ -62,6 +65,14 @@ public abstract class Pessoa {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getTelefone() {

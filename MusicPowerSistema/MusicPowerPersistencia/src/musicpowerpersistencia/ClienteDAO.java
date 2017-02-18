@@ -7,6 +7,7 @@ package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositorio {
     public ClienteDAO(){
-       setConsultaSalvar("INSERT INTO cliente(nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia)VALUES(?,?,?,?,?,?,?,?,?)");
-       setConsultaAlterar("UPDATE cliente SET nome = ?,cpf = ?,telefone = ?,email = ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
+       setConsultaSalvar("INSERT INTO cliente(nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia)VALUES(?,?,?,?,?,?,?,?,?,?)");
+       setConsultaAlterar("UPDATE cliente SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email = ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? WHERE id = ?");
        setConsultaExcluir("DELETE FROM cliente WHERE id = ?");
-       setConsultaAbrir("SELECT id, nome,cpf,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Cliente WHERE cpf = ?");
+       setConsultaAbrir("SELECT id, nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia FROM Cliente WHERE cpf = ?");
     } 
     
     @Override
@@ -29,13 +30,14 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
          try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
-            sql.setString(3, obj.getTelefone());
-            sql.setString(4, obj.getEmail());
-            sql.setString(5, obj.getUF());
+            sql.setDate(3, (Date) obj.getDataNascimento());
+            sql.setString(4, obj.getTelefone());
+            sql.setString(5, obj.getEmail());
             sql.setString(6, obj.getCidade());
-            sql.setString(7, obj.getBairro());
+            sql.setString(7, obj.getUF());
             sql.setString(8, obj.getRua());
-            sql.setString(9, obj.getnResidencia());
+            sql.setString(9, obj.getBairro());
+            sql.setString(10, obj.getnResidencia());
         } catch(SQLException ex){
             System.out.println(ex);
         }

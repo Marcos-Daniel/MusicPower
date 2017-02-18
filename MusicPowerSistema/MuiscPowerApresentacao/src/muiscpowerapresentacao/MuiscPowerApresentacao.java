@@ -5,6 +5,8 @@
  */
 package muiscpowerapresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Cliente;
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
@@ -14,6 +16,7 @@ import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.SQLException;
+import musicpowerpersistencia.ClienteDAO;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
@@ -57,6 +60,13 @@ public class MuiscPowerApresentacao {
         
         EventoRepositorio bd_evento = new EventoDAO();
         bd_evento.Salvar(evento);
+        
+    }
+    
+    public static void criarCliente(Cliente cliente) throws SQLException {
+        
+        ClienteRepositorio bd_cliente = new ClienteDAO();
+        bd_cliente.Salvar(cliente);
         
     }
 
