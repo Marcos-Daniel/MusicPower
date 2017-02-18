@@ -62,42 +62,39 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblIdade" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNumeroResidencia" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblRua" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblUF" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTelefone" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNome" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNumeroResidencia1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lblIdade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblNumeroResidencia" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblRua" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblBairro" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblUF" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblTelefone" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblNome" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtNome" max="32767" attributes="0"/>
-                              <Component id="txtTelefone" max="32767" attributes="0"/>
-                              <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtUf" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCidade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtBairro" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtRua" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtNumeroResidencia" alignment="0" pref="380" max="32767" attributes="0"/>
-                              <Component id="txtIdade" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCpf" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace pref="22" max="32767" attributes="0"/>
                           <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnSair" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="txtNome" max="32767" attributes="0"/>
+                      <Component id="txtTelefone" max="32767" attributes="0"/>
+                      <Component id="txtEmail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCidade" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtUf" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtRua" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtBairro" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNumeroResidencia" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNascimento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCpf" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCargo" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -119,7 +116,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblIdade" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtIdade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -134,22 +131,22 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblUF" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtUf" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCidade" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtUf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblBairro" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtBairro" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtRua" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblRua" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtRua" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtBairro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -158,9 +155,16 @@
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCargo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblNumeroResidencia1" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jButton1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -191,31 +195,34 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblUF">
           <Properties>
-            <Property name="text" type="java.lang.String" value="*UF:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtUf">
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblCidade">
-          <Properties>
             <Property name="text" type="java.lang.String" value="*Cidade:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCidade">
         </Component>
-        <Component class="javax.swing.JLabel" name="lblBairro">
+        <Component class="javax.swing.JLabel" name="lblCidade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="*Bairro:"/>
+            <Property name="text" type="java.lang.String" value="*UF:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtBairro">
+        <Component class="javax.swing.JTextField" name="txtUf">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUfActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblRua">
+        <Component class="javax.swing.JLabel" name="lblBairro">
           <Properties>
             <Property name="text" type="java.lang.String" value="*Rua:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtRua">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblRua">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="*Bairro:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtBairro">
         </Component>
         <Component class="javax.swing.JLabel" name="lblNumeroResidencia">
           <Properties>
@@ -226,10 +233,10 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblIdade">
           <Properties>
-            <Property name="text" type="java.lang.String" value="*idade:"/>
+            <Property name="text" type="java.lang.String" value="*Nascimento:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtIdade">
+        <Component class="javax.swing.JTextField" name="txtNascimento">
         </Component>
         <Component class="javax.swing.JLabel" name="lblCpf">
           <Properties>
@@ -245,6 +252,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cadastrar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSair">
           <Properties>
@@ -263,6 +273,16 @@
               <Image iconType="3" name="/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Limpar campos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtCargo">
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNumeroResidencia1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="*Cargo:"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -19,11 +19,12 @@ import java.util.logging.Logger;
  * @author breno
  */
 public class FuncionarioDAO extends DAOGenerica<Funcionario> implements FuncionarioRepositorio {
+    
     public FuncionarioDAO() throws ClassNotFoundException, SQLException{
-        setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,uf = ?,cidade = ?,bairro = ?,rua = ?,numResidencia = ? WHERE id = ?");
+        setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,cidade,uf,bairro,rua,numResidencia,cargo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? cargo = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM Funcionario WHERE id = ?");
-        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia FROM Funcionario WHERE id = ?");
+        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM Funcionario");
     }
     
     @Override
@@ -84,14 +85,15 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
       try{
             sql.setString(1, obj.getNome());
             sql.setString(2, obj.getCpf());
-         //   sql.setString(3, obj.getIdade());
+            sql.setDate(3, (Date) obj.getDataNascimento());
             sql.setString(4, obj.getTelefone());
             sql.setString(5, obj.getEmail());
-            sql.setString(6, obj.getUF());
-            sql.setString(7, obj.getCidade());
-            sql.setString(8, obj.getBairro());
-            sql.setString(9, obj.getRua());
+            sql.setString(6, obj.getCidade());
+            sql.setString(7, obj.getUF());
+            sql.setString(8, obj.getRua());
+            sql.setString(9, obj.getBairro());
             sql.setString(10, obj.getnResidencia());
+            sql.setString(11, obj.getCargo());
         } catch(SQLException ex){
             System.out.println(ex);
         }

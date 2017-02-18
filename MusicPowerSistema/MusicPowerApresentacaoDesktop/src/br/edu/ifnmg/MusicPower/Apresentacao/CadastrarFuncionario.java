@@ -5,17 +5,39 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
+import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import muiscpowerapresentacao.MuiscPowerApresentacao;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarFuncionario extends javax.swing.JFrame {
 
+    Funcionario novo = new Funcionario();
+    MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
+    ListarFuncionarios telaListarFuncionario = new ListarFuncionarios();
+    FuncionarioRepositorio dao = GerenciadorDeReferencias.getFuncionario();
+    
     /**
      * Creates new form CadastrarCliente
      */
     public CadastrarFuncionario() {
         initComponents();
+    }
+    
+    CadastrarFuncionario(Funcionario funcionario, ListarFuncionarios telaListarFuncionario){
+        
+        preencherCampos();
+        this.telaListarFuncionario = telaListarFuncionario;
+     
     }
 
     /**
@@ -36,22 +58,24 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblUF = new javax.swing.JLabel();
-        txtUf = new javax.swing.JTextField();
-        lblCidade = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
+        lblCidade = new javax.swing.JLabel();
+        txtUf = new javax.swing.JTextField();
         lblBairro = new javax.swing.JLabel();
-        txtBairro = new javax.swing.JTextField();
-        lblRua = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
+        lblRua = new javax.swing.JLabel();
+        txtBairro = new javax.swing.JTextField();
         lblNumeroResidencia = new javax.swing.JLabel();
         txtNumeroResidencia = new javax.swing.JTextField();
         lblIdade = new javax.swing.JLabel();
-        txtIdade = new javax.swing.JTextField();
+        txtNascimento = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
         txtCpf = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtCargo = new javax.swing.JTextField();
+        lblNumeroResidencia1 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -65,22 +89,33 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         lblEmail.setText("*E-mail:");
 
-        lblUF.setText("*UF:");
+        lblUF.setText("*Cidade:");
 
-        lblCidade.setText("*Cidade:");
+        lblCidade.setText("*UF:");
 
-        lblBairro.setText("*Bairro:");
+        txtUf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUfActionPerformed(evt);
+            }
+        });
 
-        lblRua.setText("*Rua:");
+        lblBairro.setText("*Rua:");
+
+        lblRua.setText("*Bairro:");
 
         lblNumeroResidencia.setText("*Nº residencia:");
 
-        lblIdade.setText("*idade:");
+        lblIdade.setText("*Nascimento:");
 
         lblCpf.setText("*Cpf:");
 
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -92,6 +127,13 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         jButton1.setText("Limpar campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblNumeroResidencia1.setText("*Cargo:");
 
         javax.swing.GroupLayout pnlCadastarFuncinarioLayout = new javax.swing.GroupLayout(pnlCadastarFuncinario);
         pnlCadastarFuncinario.setLayout(pnlCadastarFuncinarioLayout);
@@ -99,38 +141,37 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCadastarFuncinarioLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblIdade)
+                    .addComponent(lblNumeroResidencia)
+                    .addComponent(lblRua)
+                    .addComponent(lblBairro)
+                    .addComponent(lblCidade)
+                    .addComponent(lblUF)
+                    .addComponent(lblEmail)
+                    .addComponent(lblTelefone)
+                    .addComponent(lblNome)
+                    .addComponent(lblCpf)
+                    .addComponent(lblNumeroResidencia1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCadastarFuncinarioLayout.createSequentialGroup()
-                        .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblIdade)
-                            .addComponent(lblNumeroResidencia)
-                            .addComponent(lblRua)
-                            .addComponent(lblBairro)
-                            .addComponent(lblCidade)
-                            .addComponent(lblUF)
-                            .addComponent(lblEmail)
-                            .addComponent(lblTelefone)
-                            .addComponent(lblNome)
-                            .addComponent(lblCpf))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addComponent(txtTelefone)
-                            .addComponent(txtEmail)
-                            .addComponent(txtUf)
-                            .addComponent(txtCidade)
-                            .addComponent(txtBairro)
-                            .addComponent(txtRua)
-                            .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                            .addComponent(txtIdade)
-                            .addComponent(txtCpf)))
-                    .addGroup(pnlCadastarFuncinarioLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSair)))
+                        .addComponent(btnSair))
+                    .addComponent(txtNome)
+                    .addComponent(txtTelefone)
+                    .addComponent(txtEmail)
+                    .addComponent(txtCidade)
+                    .addComponent(txtUf)
+                    .addComponent(txtRua)
+                    .addComponent(txtBairro)
+                    .addComponent(txtNumeroResidencia)
+                    .addComponent(txtNascimento)
+                    .addComponent(txtCpf)
+                    .addComponent(txtCargo))
                 .addContainerGap())
         );
         pnlCadastarFuncinarioLayout.setVerticalGroup(
@@ -147,7 +188,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdade)
-                    .addComponent(txtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
@@ -159,28 +200,33 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblUF)
-                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCidade)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCidade)
+                    .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBairro)
-                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRua)
-                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumeroResidencia)
                     .addComponent(txtNumeroResidencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSair)
-                    .addComponent(btnCadastrar)
-                    .addComponent(jButton1))
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumeroResidencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addGroup(pnlCadastarFuncinarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCadastrar)
+                        .addComponent(btnSair)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -207,6 +253,34 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        try {
+            
+            this.recuperarCampos();
+            int codigo = novo.getId();
+            if (codigo==0) {
+            MPA.criarFuncionario(novo);
+            this.limparCampos();
+            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            } else {
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtUfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -262,19 +336,102 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumeroResidencia;
+    private javax.swing.JLabel lblNumeroResidencia1;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblTelefone;
     private javax.swing.JLabel lblUF;
     private javax.swing.JPanel pnlCadastarFuncinario;
     private javax.swing.JTextField txtBairro;
+    private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtIdade;
+    private javax.swing.JTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumeroResidencia;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtTelefone;
     private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherCampos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void limparCampos() {
+        
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtNascimento.setText("");
+        txtTelefone.setText("");
+        txtEmail.setText("");
+        txtCidade.setText("");
+        txtUf.setText("");
+        txtRua.setText("");
+        txtBairro.setText("");
+        txtNumeroResidencia.setText("");
+        txtCargo.setText("");
+        
+    }
+
+    private void recuperarCampos() throws ParseException {
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        String nome = txtNome.getText().trim();
+        if(!nome.equals("")){
+            novo.setNome(nome);
+        }
+        
+        String cpf = txtCpf.getText().trim();
+        if(!cpf.equals("")){
+            novo.setCpf(cpf);
+        }
+        
+        Date nascimento = new Date( format.parse(txtNascimento.getText().trim()).getTime());
+        if(!nascimento.equals("")){
+            novo.setDataNascimento(nascimento);
+        }
+        
+        String telefone = txtTelefone.getText().trim();
+        if(!telefone.equals("")){
+            novo.setTelefone(telefone);
+        }
+        
+        String email = txtEmail.getText().trim();
+        if(!email.equals("")){
+            novo.setEmail(email);
+        }
+        
+        String cidade = txtCidade.getText().trim();
+        if(!cidade.equals("")){
+            novo.setCidade(cidade);
+        }
+        
+        String uf = txtUf.getText().trim();
+        if(!uf.equals("")){
+            novo.setUF(cpf);
+        }
+        
+        String rua = txtRua.getText().trim();
+        if(!rua.equals("")){
+            novo.setRua(rua);
+        }
+        
+        String bairro = txtBairro.getText().trim();
+        if(!bairro.equals("")){
+            novo.setBairro(bairro);
+        }
+            
+        String numResidencia = txtNumeroResidencia.getText().trim();
+        if(!numResidencia.equals("")){
+            novo.setnResidencia(numResidencia);
+        }
+        
+        String cargo = txtCargo.getText().trim();
+        if(!cargo.equals("")){
+            novo.setCargo(cargo);
+        }
+           
+    }
 }
