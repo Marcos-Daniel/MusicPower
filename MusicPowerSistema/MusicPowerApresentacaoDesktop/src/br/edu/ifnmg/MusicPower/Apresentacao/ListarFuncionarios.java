@@ -131,14 +131,14 @@ public class ListarFuncionarios extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Cod funcionário", "Nome", "CPF", "Nascimento", "Telefone", "Email", "UF", "CIdade", "Bairro", "Rua", "Nº residência", "Cargo"
+                "Cod funcionário", "Nome", "CPF", "Nascimento", "Telefone", "Email", "CIdade", "UF", "Rua", "Bairro", "Nº residência", "Cargo"
             }
         ));
         jScrollPane1.setViewportView(tblListarFuncionários);
         if (tblListarFuncionários.getColumnModel().getColumnCount() > 0) {
-            tblListarFuncionários.getColumnModel().getColumn(6).setMinWidth(50);
-            tblListarFuncionários.getColumnModel().getColumn(6).setPreferredWidth(50);
-            tblListarFuncionários.getColumnModel().getColumn(6).setMaxWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(7).setMinWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(7).setPreferredWidth(50);
+            tblListarFuncionários.getColumnModel().getColumn(7).setMaxWidth(50);
         }
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -167,9 +167,19 @@ public class ListarFuncionarios extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlFuncionariosLayout = new javax.swing.GroupLayout(pnlFuncionarios);
         pnlFuncionarios.setLayout(pnlFuncionariosLayout);
@@ -266,6 +276,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
            
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(funcionario);
+                buscarTodos();
             }
         } else {
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -280,6 +291,30 @@ public class ListarFuncionarios extends javax.swing.JFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar(txtNome.getText(),txtCpf.getText());
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int posicao = tblListarFuncionários.getSelectedRow();
+        
+        if(posicao >= 0){
+            Funcionario funcionario = busca.get(posicao);
+            String mensagem = "Deseja realemente editar esse funcionário?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
+            
+            if(opcao == JOptionPane.YES_OPTION ){
+                CadastrarFuncionario telaCadastrarFuncionario = new CadastrarFuncionario(funcionario,this);
+                telaCadastrarFuncionario.setVisible(true);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Escolha uma posição na tabela, o qual você deseja editar");
+            }
+            
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        CadastrarFuncionario telaCadastrarFuncionario = new CadastrarFuncionario();
+        telaCadastrarFuncionario.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

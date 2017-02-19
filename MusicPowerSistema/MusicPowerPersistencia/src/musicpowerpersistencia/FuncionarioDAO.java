@@ -21,8 +21,8 @@ import java.util.logging.Logger;
 public class FuncionarioDAO extends DAOGenerica<Funcionario> implements FuncionarioRepositorio {
     
     public FuncionarioDAO() throws ClassNotFoundException, SQLException{
-        setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,cidade,uf,bairro,rua,numResidencia,cargo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? cargo = ? WHERE id = ?");
+        setConsultaSalvar("INSERT INTO funcionario(nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo)VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+        setConsultaAlterar("UPDATE funcionario SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? ,cargo = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM funcionario WHERE id = ?");
         setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM funcionario");
         setConsultaBusca("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM funcionario");
@@ -78,10 +78,10 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             tmp.setDataNascimento(resultado.getDate(4));
             tmp.setTelefone(resultado.getString(5));
             tmp.setEmail(resultado.getString(6));
-            tmp.setUF(resultado.getString(7));
-            tmp.setCidade(resultado.getString(8));
-            tmp.setBairro(resultado.getString(9));
+            tmp.setCidade(resultado.getString(7));
+            tmp.setUF(resultado.getString(8));
             tmp.setRua(resultado.getString(10));
+            tmp.setBairro(resultado.getString(9));
             tmp.setnResidencia(resultado.getString(11));
             tmp.setCargo(resultado.getString(12));
             return tmp;

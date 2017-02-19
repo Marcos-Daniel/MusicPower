@@ -34,8 +34,8 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     }
     
     CadastrarFuncionario(Funcionario funcionario, ListarFuncionarios telaListarFuncionario){
-        
-        preencherCampos();
+        initComponents();
+        preencherCampos(funcionario);
         this.telaListarFuncionario = telaListarFuncionario;
      
     }
@@ -270,6 +270,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
             } else {
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             }
             
         } catch (Exception e) {
@@ -354,8 +355,23 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherCampos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void preencherCampos(Funcionario funcionario) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String dataNascimento = format.format(funcionario.getDataNascimento());
+        
+        novo = funcionario;
+        txtNome.setText(funcionario.getNome());
+        txtCpf.setText(funcionario.getCpf());
+        txtNascimento.setText(dataNascimento);
+        txtTelefone.setText(funcionario.getTelefone());
+        txtEmail.setText(funcionario.getEmail());
+        txtCidade.setText(funcionario.getCidade());
+        txtUf.setText(funcionario.getUF());
+        txtRua.setText(funcionario.getRua());
+        txtBairro.setText(funcionario.getBairro());
+        txtNumeroResidencia.setText(funcionario.getnResidencia());
+        txtCargo.setText(funcionario.getCargo());
+        
     }
 
     private void limparCampos() {
