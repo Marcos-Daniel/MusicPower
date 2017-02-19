@@ -86,6 +86,7 @@ public class ContaDAO extends DAOGenerica<Conta> implements ContaRepositorio {
             sql.setString(3, obj.getMesReferente());
             sql.setDate(4, (Date) obj.getVencimento());
             sql.setString(5, obj.getStatus());
+            if(obj.getId() > 0) sql.setInt(6,obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

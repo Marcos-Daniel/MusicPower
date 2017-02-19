@@ -39,6 +39,7 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             sql.setString(8, obj.getRua());
             sql.setString(9, obj.getBairro());
             sql.setString(10, obj.getnResidencia());
+            if(obj.getId() > 0) sql.setInt(11,obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

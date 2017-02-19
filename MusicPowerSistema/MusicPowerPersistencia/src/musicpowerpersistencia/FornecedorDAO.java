@@ -21,7 +21,7 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
 
     public FornecedorDAO() {
         setConsultaSalvar("INSERT INTO fornecedor(nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento)VALUES(?,?,?,?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE fornecedor SET nome = ?,cnpj = ?,telefone = ?,email = ?,uf = ?, cidade = ? nestabelecimento = ?, WHERE id = ?");
+        setConsultaAlterar("UPDATE fornecedor SET nome = ?,cnpj = ?,telefone = ?,email = ?,uf = ?,bairro = ?,rua = ?, cidade = ?, numestabelecimento  = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM fornecedor WHERE id = ?");
         setConsultaAbrir("SELECT id,nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento FROM fornecedor");
         setConsultaBusca("SELECT id,nome,cnpj,telefone,email,uf,cidade,bairro,rua,numestabelecimento FROM fornecedor");
@@ -110,6 +110,7 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
             sql.setString(7, obj.getBairro());
             sql.setString(8, obj.getRua());
             sql.setString(9, obj.getnEstabelecimento());
+            if(obj.getId() > 0) sql.setInt(10,obj.getId());
         } catch (SQLException ex) {
             System.out.println(ex);
         }

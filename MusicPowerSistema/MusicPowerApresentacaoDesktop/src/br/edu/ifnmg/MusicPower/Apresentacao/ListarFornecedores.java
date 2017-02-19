@@ -300,7 +300,7 @@ public class ListarFornecedores extends javax.swing.JFrame {
             int opcao = JOptionPane.showConfirmDialog(this, mensagem,"Mensagem de Confirmação",JOptionPane.YES_NO_OPTION);
             
             if (opcao == JOptionPane.YES_OPTION) {
-                CadastrarFornecedor telaCadastrarFornecedor = new CadastrarFornecedor();
+                CadastrarFornecedor telaCadastrarFornecedor = new CadastrarFornecedor(fornecedor,this);
                 telaCadastrarFornecedor.setVisible(true);
             } 
             

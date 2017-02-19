@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio {
     public EventoDAO() {
         setConsultaSalvar("INSERT INTO evento(nome,descricao, inicio, fim, valor, statusEvento)VALUES(?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE evento SET descricao = ?, inicio = ?, fim = ?, valor = ?, statusEvento = ? WHERE id = ?");
+        setConsultaAlterar("UPDATE evento SET nome = ?, descricao = ?, inicio = ?, fim = ?, valor = ?, statusEvento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM evento WHERE id = ?");
         setConsultaAbrir("SELECT id, nome, descricao, inicio, fim, valor, statusEvento FROM evento");
         setConsultaBusca("SELECT id, nome,descricao, inicio, fim, valor, statusEvento FROM evento");
@@ -91,6 +91,7 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             sql.setDate(4, (Date) obj.getTermino());
             sql.setDouble(5, obj.getValor());
             sql.setString(6, obj.getStatus());
+            if(obj.getId() > 0) sql.setInt(7,obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

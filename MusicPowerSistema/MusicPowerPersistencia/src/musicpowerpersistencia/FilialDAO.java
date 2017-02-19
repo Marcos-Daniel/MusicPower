@@ -52,6 +52,7 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
             sql.setString(3, obj.getBairro());
             sql.setString(4, obj.getRua());
             sql.setString(5, obj.getnEstabelecimento());
+            if(obj.getId() > 0) sql.setInt(6,obj.getId());
         } catch (SQLException ex) {
             System.out.println(ex + " FILIAL DAO PREENCHER CONSULTA");
         }

@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
+import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -23,12 +24,20 @@ public class CadastrarEvento extends javax.swing.JFrame {
     
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
     Evento novo = new Evento();
-
+    ListarEventos telaListarEventos;
+    EventoRepositorio dao = GerenciadorDeReferencias.getEvento();        
+ 
     /**
      * Creates new form CadastrarEvento
      */
     public CadastrarEvento() {
         initComponents();
+    }
+
+    CadastrarEvento(Evento evento, ListarEventos telaListarEventos) {
+        initComponents();
+        this.preencherCampos(evento);
+        this.telaListarEventos = telaListarEventos;
     }
 
     /**
@@ -201,16 +210,22 @@ public class CadastrarEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-       
         try {
             this.recuperaCampos();
-            MPA.criarEvento(novo);
-            this.limparCampos();
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
-        } catch (Exception ex) {
-            Logger.getLogger(CadastrarEvento.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+            int codigo = novo.getId();
+            
+            if(codigo == 0){
+                dao.Salvar(novo);
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            }else{    
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Evento editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
@@ -314,4 +329,17 @@ public class CadastrarEvento extends javax.swing.JFrame {
         txtStatus.setText("");
     }
     
+    public void preencherCampos(Evento evento){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String inicio = format.format(evento.getInicio());
+        String termino = format.format(evento.getTermino());
+        String valor = String.valueOf(evento.getValor());
+        
+        txtDataInicio.setText(inicio);
+        txtDataTerminio.setText(termino);
+        txtDescricao.setText( evento.getDescricao());
+        txtNome.setText( evento.getNome());
+        txtStatus.setText(evento.getStatus());
+        txtValorInvestimento.setText(valor);
+    }
 }

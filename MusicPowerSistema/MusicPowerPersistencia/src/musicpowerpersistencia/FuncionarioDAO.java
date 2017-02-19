@@ -105,6 +105,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             sql.setString(9, obj.getBairro());
             sql.setString(10, obj.getnResidencia());
             sql.setString(11, obj.getCargo());
+            if(obj.getId() > 0) sql.setInt(12,obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

@@ -68,7 +68,7 @@ public class ListarEventos extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlListarCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -205,6 +205,11 @@ public class ListarEventos extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
@@ -327,6 +332,22 @@ public class ListarEventos extends javax.swing.JFrame {
             Logger.getLogger(ListarEventos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+       int posicao = tblListarEventos.getSelectedRow();
+       if(posicao >= 0){
+           Evento evento = busca.get(posicao);
+            String mensagem = "Deseja realmente editar este evento?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+            
+            if( opcao == JOptionPane.YES_OPTION){
+               CadastrarEvento telaCadastrarFilial = new CadastrarEvento(evento,this);
+               telaCadastrarFilial.setVisible(true); 
+            }
+       }else{
+           JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
+       }    
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

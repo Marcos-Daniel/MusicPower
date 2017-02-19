@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
+import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -23,12 +24,20 @@ public class CadastrarContas extends javax.swing.JFrame {
 
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
     Conta novo = new Conta();
+    ListarContas telaListarContas;
+    ContaRepositorio dao = GerenciadorDeReferencias.getConta();
 
     /**
      * Creates new form CadastrarContas
      */
     public CadastrarContas() {
         initComponents();
+    }
+
+    CadastrarContas(Conta conta, ListarContas telaListarContas) {
+        initComponents();
+        this.preencherCampos(conta);
+        this.telaListarContas = telaListarContas;
     }
 
     /**
@@ -178,12 +187,18 @@ public class CadastrarContas extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try {
             this.recuperarCampos();
-            MPA.criarConta(novo);
-            this.limparCampos();
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            int codigo = novo.getId();
+            
+            if(codigo == 0){
+                dao.Salvar(novo);
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            }else{    
+                dao.Alterar(novo);
+                JOptionPane.showMessageDialog(this, "Conta editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
         } catch (ParseException ex) {
-            Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
             Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
@@ -275,5 +290,18 @@ public class CadastrarContas extends javax.swing.JFrame {
         txtMesReferente.setText("");
         txtStatus.setText("");
         txtValor.setText("");
+    }
+    
+    public void preencherCampos(Conta conta){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String vencimento= format.format(conta.getVencimento());
+        String valor = String.valueOf(conta.getValor());
+        
+        novo = conta;
+        txtDataDeVencimento.setText(vencimento);
+        txtDescricao.setText( conta.getDescricao());
+        txtMesReferente.setText( conta.getMesReferente());
+        txtStatus.setText( conta.getStatus());
+        txtValor.setText( valor);
     }
 }
