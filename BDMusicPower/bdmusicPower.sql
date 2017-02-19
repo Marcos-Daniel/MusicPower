@@ -132,3 +132,11 @@ create table itensVenda (
     foreign key(fk_venda) references venda(id),
     foreign key(fk_produto) references produto(id)
 );
+
+create table administrador(
+	id int auto_increment,
+    cargo varchar(56),
+    login varchar(15),
+    senha varchar(20),
+    primary key (id)
+);
