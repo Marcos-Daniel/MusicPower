@@ -86,13 +86,14 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             tmp.setId(resultado.getInt(1));
             tmp.setNome(resultado.getString(2));
             tmp.setCpf(resultado.getString(3));
-            tmp.setTelefone(resultado.getString(4));
-            tmp.setEmail(resultado.getString(5));
-            tmp.setUF(resultado.getString(6));
+            tmp.setDataNascimento(resultado.getDate(4));
+            tmp.setTelefone(resultado.getString(5));
+            tmp.setEmail(resultado.getString(6));
             tmp.setCidade(resultado.getString(7));
-            tmp.setBairro(resultado.getString(8));
+            tmp.setUF(resultado.getString(8));
             tmp.setRua(resultado.getString(9));
-            tmp.setnResidencia(resultado.getString(10));
+            tmp.setBairro(resultado.getString(10));
+            tmp.setnResidencia(resultado.getString(11));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);

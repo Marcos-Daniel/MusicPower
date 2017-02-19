@@ -304,6 +304,8 @@ public class ListarClientes extends javax.swing.JFrame {
             int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
             
             if(opcao == JOptionPane.YES_OPTION){
+                System.out.println(cliente.getDataNascimento());
+                System.out.println(cliente.getId());
                 CadastrarCliente telaCadastrarCliente = new CadastrarCliente(cliente,this);
                 telaCadastrarCliente.setVisible(true);
             }
@@ -399,7 +401,7 @@ public class ListarClientes extends javax.swing.JFrame {
         
         DefaultTableModel modelo = new DefaultTableModel();
         
-        modelo.addColumn("CodCli");
+        modelo.addColumn("CodCliente");
         modelo.addColumn("Nome");
         modelo.addColumn("Cpf");
         modelo.addColumn("Nascimento");

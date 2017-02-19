@@ -382,7 +382,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
         String uf = txtUf.getText().trim();
         if(!uf.equals("")){
-            novo.setUF(cpf);
+            novo.setUF(uf);
         }
         
         String rua = txtRua.getText().trim();
@@ -403,20 +403,21 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
 
     private void preencherCampos(Cliente cliente) {
-        novo = cliente;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String data = format.format(novo.getDataNascimento());
+        System.out.println(cliente.getDataNascimento());
+        String dataNascimento = format.format(cliente.getDataNascimento());
         
-        txtNome.setText(novo.getNome());
-        txtCpf.setText(novo.getCpf());
-        txtNascimento.setText(data);
-        txtTelefone.setText(novo.getTelefone());
-        txtEmail.setText(novo.getEmail());
-        txtCidade.setText(novo.getCidade());
-        txtUf.setText(novo.getUF());
-        txtRua.setText(novo.getRua());
-        txtBairro.setText(novo.getBairro());
-        txtNumeroResidencia.setText(novo.getnResidencia());
+        novo = cliente;
+        txtNome.setText(cliente.getNome());
+        txtCpf.setText(cliente.getCpf());
+        txtNascimento.setText(dataNascimento);
+        txtTelefone.setText(cliente.getTelefone());
+        txtEmail.setText(cliente.getEmail());
+        txtCidade.setText(cliente.getCidade());
+        txtUf.setText(cliente.getUF());
+        txtRua.setText(cliente.getRua());
+        txtBairro.setText(cliente.getBairro());
+        txtNumeroResidencia.setText(cliente.getnResidencia());
         
     }
 }
