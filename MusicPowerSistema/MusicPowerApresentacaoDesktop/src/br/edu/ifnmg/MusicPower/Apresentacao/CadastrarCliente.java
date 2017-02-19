@@ -34,7 +34,8 @@ public class CadastrarCliente extends javax.swing.JFrame {
     }
     
     CadastrarCliente(Cliente cliente, ListarClientes telalistarClientes){
-        preencherCampos();
+        initComponents();
+        this.preencherCampos(cliente);
         this.telalistarClientes = telalistarClientes; 
     }
 
@@ -401,11 +402,14 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
     }
 
-    private void preencherCampos() {
+    private void preencherCampos(Cliente cliente) {
+        novo = cliente;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String data = format.format(novo.getDataNascimento());
         
         txtNome.setText(novo.getNome());
         txtCpf.setText(novo.getCpf());
-       // txtNascimento.setText(novo.getDataNascimento());
+        txtNascimento.setText(data);
         txtTelefone.setText(novo.getTelefone());
         txtEmail.setText(novo.getEmail());
         txtCidade.setText(novo.getCidade());
