@@ -1,5 +1,6 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
@@ -8,6 +9,9 @@ import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import java.sql.SQLException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import musicpowerpersistencia.AdministradorDao;
 import musicpowerpersistencia.ClienteDAO;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.EventoDAO;
@@ -32,6 +36,7 @@ public class GerenciadorDeReferencias {
     private static EventoRepositorio daoEvento;
     private static ClienteRepositorio daoCliente;
     private static FuncionarioRepositorio daoFuncionario;
+     private static AdministradorRepositorio daoAdministrador;
 
     public static FilialRepositorio getFilial() {
         try {
@@ -44,10 +49,10 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-    
-    public static FornecedorRepositorio getFornecedor(){
+
+    public static FornecedorRepositorio getFornecedor() {
         try {
-            if(daoFornecedor == null){
+            if (daoFornecedor == null) {
                 daoFornecedor = new FornecedorDAO();
             }
             return daoFornecedor;
@@ -56,7 +61,7 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-    
+
     public static ContaRepositorio getConta() {
         try {
             if (daoConta == null) {
@@ -68,7 +73,7 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-    
+
     public static EventoRepositorio getEvento() {
         try {
             if (daoEvento == null) {
@@ -80,8 +85,8 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-    
-     public static ClienteRepositorio getCliente() {
+
+    public static ClienteRepositorio getCliente() {
         try {
             if (daoCliente == null) {
                 daoCliente = new ClienteDAO();
@@ -92,7 +97,7 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-     
+
     public static FuncionarioRepositorio getFuncionario() {
         try {
             if (daoFuncionario == null) {
@@ -104,7 +109,17 @@ public class GerenciadorDeReferencias {
         }
         return null;
     }
-     
-     
+    
+    public static AdministradorRepositorio getAdministrador() {
+        try {
+            if (daoAdministrador == null) {
+                daoAdministrador = new AdministradorDao();
+            }
+            return daoAdministrador;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
 
 }

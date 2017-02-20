@@ -400,7 +400,7 @@ public class ListarFiliais extends javax.swing.JFrame {
     
     public void limparCampos(){
         txtBairro.setText("");
-        txtCidade.setText("1");
+        txtCidade.setText("");
         txtRua.setText("");
     }
 }
