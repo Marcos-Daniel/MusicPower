@@ -9,6 +9,6 @@ package br.edu.ifnmg.MusicPower.Entidades;
  *
  * @author Mdan
  */
-public interface AdministradorRepositorio {
+public interface AdministradorRepositorio extends Repositorio<Administrador> {
     public Administrador Abrir(String cpf);
 }
