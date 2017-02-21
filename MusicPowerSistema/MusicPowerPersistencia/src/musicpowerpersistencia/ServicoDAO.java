@@ -23,7 +23,8 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
         setConsultaSalvar("INSERT INTO servico(descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso,idcliente, idfuncionario,nomecliente,nomefuncionario)VALUES(?,?,?,?,?,?,?,?,?,?)");
         setConsultaAlterar("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ?,idcliente = ?, idfuncionario = ?,nomecliente = ?,nomefuncionario = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM servico WHERE id = ?");
-        setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
+        setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso,idcliente, idfuncionario,nomecliente,nomefuncionario FROM servico");
+        setConsultaBusca("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso,idcliente, idfuncionario,nomecliente,nomefuncionario FROM servico");
     }
   
     @Override
@@ -40,14 +41,30 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
 
     @Override
     protected void preencheFiltros(Serviço filtro) {
-        if(filtro.getId() > 0) adicionarFiltro("id", "=");
+        
+        if(filtro.getId() > 0) adicionarFiltro("id", "= ");
+        if(filtro.getIdCliente() > 0) adicionarFiltro(" idcliente", "=");
+        if(filtro.getNomeCliente() != null) adicionarFiltro(" nomecliente", "=");
+        
     }
 
     @Override
     protected void preencheParametros(PreparedStatement sql, Serviço filtro) {
          try {
             int cont = 1;
-            if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
+            
+            if(filtro.getId() > 0){ 
+                sql.setInt(cont, filtro.getId()); 
+                cont++; 
+            }
+            if(filtro.getIdCliente() > 0){ 
+                sql.setInt(cont, filtro.getIdCliente());
+                cont++;
+            }
+            if(filtro.getNomeCliente() != null){
+                sql.setString(cont, filtro.getNomeCliente());
+                cont++;
+            }
             
         } catch (SQLException ex) {
             Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -65,6 +82,10 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             tmp.setValor(resultado.getDouble(5));
             tmp.setStatusPagamanto(resultado.getString(6));
             tmp.setStatusProgresso(resultado.getString(7));
+            tmp.setIdCliente(resultado.getInt(8));
+            tmp.setIdFuncionario(resultado.getInt(9));
+            tmp.setNomeCliente(resultado.getString(10));
+            tmp.setNomeFuncionario(resultado.getString(11));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
@@ -85,7 +106,8 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             sql.setInt(8, obj.getIdFuncionario());
             sql.setString(9, obj.getNomeCliente());
             sql.setString(10, obj.getNomeFuncionario());
-            if(obj.getId()>0) sql.setInt(11, obj.getId());
+            if(obj.getId() > 0)
+                sql.setInt(11, obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

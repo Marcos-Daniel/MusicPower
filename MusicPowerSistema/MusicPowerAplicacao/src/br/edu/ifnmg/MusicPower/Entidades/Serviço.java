@@ -60,15 +60,21 @@ public class Serviço implements Entidade {
     public Serviço() {
         
     }
-    public Serviço(int id, String descricao, Date solicitacao, Date entrega, Double valor, String statusPagamanto, String statusProgresso) {
-        this.id = id;
+
+    public Serviço(int id, String descricao, Date solicitacao, Date entrega, Double valor, String statusPagamanto, String statusProgresso, int idCliente, int idFuncionario, String nomeCliente, String nomeFuncionario) {
+        this.id = 0;
         this.descricao = descricao;
         this.solicitacao = solicitacao;
         this.entrega = entrega;
         this.valor = valor;
         this.statusPagamanto = statusPagamanto;
         this.statusProgresso = statusProgresso;
+        this.idCliente = idCliente;
+        this.idFuncionario = idFuncionario;
+        this.nomeCliente = nomeCliente;
+        this.nomeFuncionario = nomeFuncionario;
     }
+    
     @Override
     public int getId() {
         return id;
