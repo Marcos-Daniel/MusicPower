@@ -5,12 +5,18 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Administrador;
+import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author marcos
  */
 public class TelaLogin extends javax.swing.JFrame {
-
+     
+    Administrador novo = new Administrador();
+    AdministradorRepositorio dao = GerenciadorDeReferencias.getAdministrador();
     /**
      * Creates new form TelaLogin
      */
@@ -46,6 +52,11 @@ public class TelaLogin extends javax.swing.JFrame {
         btnLogin.setFont(new java.awt.Font("Ubuntu", 1, 19)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472541559_Cancel_Icon.png"))); // NOI18N
         btnLogin.setText("Play");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472540113_sound_speaker.png"))); // NOI18N
 
@@ -63,7 +74,7 @@ public class TelaLogin extends javax.swing.JFrame {
                             .addComponent(lblLogin))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                            .addComponent(txtLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                             .addComponent(txtSenha)))
                     .addGroup(pnlLoginLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -79,8 +90,8 @@ public class TelaLogin extends javax.swing.JFrame {
                     .addComponent(lblLogin))
                 .addGap(18, 18, 18)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSenha))
+                    .addComponent(lblSenha)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -108,6 +119,15 @@ public class TelaLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        this.recumperaCampos();
+        if(dao.VerificaLogin(novo.getLogin(), novo.getSenha())){
+            TelaInicial telaPrincipal = new TelaInicial();
+            telaPrincipal.setVisible(true);
+            this.dispose();
+        }else JOptionPane.showMessageDialog(this,"USUÁRIO OU SENHA INCORRETOS");
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,4 +173,18 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+    private void recumperaCampos() {
+       String login = txtLogin.getText().trim();
+        if( !login.equals("")){
+            novo.setLogin( login);
+        }
+      
+        String senha = new String( txtSenha.getPassword()).trim();
+        if( !senha.equals("")){
+             novo.setSenha(senha);
+        }
+        
+    }
+    
 }

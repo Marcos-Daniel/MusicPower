@@ -11,4 +11,5 @@ package br.edu.ifnmg.MusicPower.Entidades;
  */
 public interface AdministradorRepositorio extends Repositorio<Administrador> {
     public Administrador Abrir(String cpf);
+    public boolean VerificaLogin(String login, String senha);
 }

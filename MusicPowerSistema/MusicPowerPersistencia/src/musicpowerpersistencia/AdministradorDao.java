@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -112,6 +113,23 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
             System.out.println(ex+"Abrir");
         }
         return null;
+    }
+
+    @Override
+    public boolean VerificaLogin(String login, String senha) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT ID FROM administrador WHERE LOGIN = ? AND SENHA = ?");
+            sql.setString(1, login);
+            sql.setString(2, senha);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()){
+                return true ;
+            }else
+                return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(AdministradorDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
 }
