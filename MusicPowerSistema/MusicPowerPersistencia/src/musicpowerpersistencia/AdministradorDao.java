@@ -22,8 +22,8 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
     public AdministradorDao() throws ClassNotFoundException, SQLException{
         setConsultaSalvar("INSERT INTO administrador(nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo,login,senha)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
         setConsultaAlterar("UPDATE administrador SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? ,cargo = ?, login = ?, senha = ? WHERE id = ?");
-        setConsultaExcluir("DELETE FROM adminisrador WHERE id = ?");
-        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM administrador");
+        setConsultaExcluir("DELETE FROM administrador WHERE id = ?");
+        setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo,login,senha FROM administrador");
         setConsultaBusca("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM administrador");
     }
     
@@ -43,6 +43,8 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
             tmp.setBairro(resultado.getString(9));
             tmp.setnResidencia(resultado.getString(11));
             tmp.setCargo(resultado.getString(12));
+            tmp.setLogin(resultado.getString(13));
+            tmp.setSenha(resultado.getString(14));
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
@@ -102,12 +104,12 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
     @Override
     public Administrador Abrir(String cpf) {
         try{
-          PreparedStatement sql = conn.prepareStatement("SELECT id,nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia,cargo FROM Administrador WHERE cpf = ?");
+          PreparedStatement sql = conn.prepareStatement("SELECT id,nome,cpf,dataNascimento,telefone,email,uf,cidade,bairro,rua,numResidencia,cargo,login,senha FROM Administrador WHERE cpf = ?");
           sql.setString(1, cpf);
           ResultSet resultado = sql.executeQuery();
           if(resultado.next()) return preencheObjeto(resultado);
         } catch (SQLException ex){
-            System.out.println(ex);
+            System.out.println(ex+"Abrir");
         }
         return null;
     }

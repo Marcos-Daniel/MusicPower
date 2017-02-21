@@ -24,21 +24,27 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
 
     Administrador novo = new Administrador();
     AdministradorRepositorio dao = GerenciadorDeReferencias.getAdministrador();
-    
+    ListarAdministradores telaListarAdministradores;
+
     /**
      * Creates new form CadastrarCliente
      */
     public CadastrarAdministrador() {
         initComponents();
     }
-    
-   /* cadastrarAdministrador(Funcionario funcionario, ListarFuncionarios telaListarFuncionario){
+
+    CadastrarAdministrador(Administrador administrador, ListarAdministradores telaListarAdministradores) {
+        initComponents();
+        this.preencherCampos(administrador);
+        this.telaListarAdministradores = telaListarAdministradores;
+    }
+
+    /* cadastrarAdministrador(Funcionario funcionario, ListarFuncionarios telaListarFuncionario){
         initComponents();
         preencherCampos(funcionario);
         this.telaListarFuncionario = telaListarFuncionario;
      
     }*/
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -279,19 +285,19 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try {
-            
+
             this.recuperarCampos();
             int codigo = novo.getId();
-            if (codigo==0) {
-            dao.Salvar(novo);
-            this.limparCampos();
-            JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            if (codigo == 0) {
+                dao.Salvar(novo);
+                this.limparCampos();
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
             } else {
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Administrador editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
@@ -405,7 +411,7 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
     private void preencherCampos(Administrador administrador) {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         String dataNascimento = format.format(administrador.getDataNascimento());
-        
+
         novo = administrador;
         txtNome.setText(administrador.getNome());
         txtCpf.setText(administrador.getCpf());
@@ -418,11 +424,10 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
         txtBairro.setText(administrador.getBairro());
         txtNumeroResidencia.setText(administrador.getnResidencia());
         txtCargo.setText(administrador.getCargo());
-        
+
     }
 
     private void limparCampos() {
-        
         txtNome.setText("");
         txtCpf.setText("");
         txtNascimento.setText("");
@@ -435,77 +440,92 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
         txtNumeroResidencia.setText("");
         txtCargo.setText("");
         txtLogin.setText("");
-        
+        txtSenha.setText("");
     }
 
     private void recuperarCampos() throws ParseException {
-        
+        int codigo = novo.getId();
+
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         String nome = txtNome.getText().trim();
-        if(!nome.equals("")){
+        if (!nome.equals("")) {
             novo.setNome(nome);
         }
-        
+
         String cpf = txtCpf.getText().trim();
-        if(!cpf.equals("")){
+        if (!cpf.equals("")) {
             novo.setCpf(cpf);
         }
-        
-        Date nascimento = new Date( format.parse(txtNascimento.getText().trim()).getTime());
-        if(!nascimento.equals("")){
+
+        Date nascimento = new Date(format.parse(txtNascimento.getText().trim()).getTime());
+        if (!nascimento.equals("")) {
             novo.setDataNascimento(nascimento);
         }
-        
+
         String telefone = txtTelefone.getText().trim();
-        if(!telefone.equals("")){
+        if (!telefone.equals("")) {
             novo.setTelefone(telefone);
         }
-        
+
         String email = txtEmail.getText().trim();
-        if(!email.equals("")){
+        if (!email.equals("")) {
             novo.setEmail(email);
         }
-        
+
         String cidade = txtCidade.getText().trim();
-        if(!cidade.equals("")){
+        if (!cidade.equals("")) {
             novo.setCidade(cidade);
         }
-        
+
         String uf = txtUf.getText().trim();
-        if(!uf.equals("")){
-            novo.setUF(cpf);
+        if (!uf.equals("")) {
+            novo.setUF(uf);
         }
-        
+
         String rua = txtRua.getText().trim();
-        if(!rua.equals("")){
+        if (!rua.equals("")) {
             novo.setRua(rua);
         }
-        
+
         String bairro = txtBairro.getText().trim();
-        if(!bairro.equals("")){
+        if (!bairro.equals("")) {
             novo.setBairro(bairro);
         }
-            
+
         String numResidencia = txtNumeroResidencia.getText().trim();
-        if(!numResidencia.equals("")){
+        if (!numResidencia.equals("")) {
             novo.setnResidencia(numResidencia);
         }
-        
+
         String cargo = txtCargo.getText().trim();
-        if(!cargo.equals("")){
+        if (!cargo.equals("")) {
             novo.setCargo(cargo);
         }
         
         String login = txtLogin.getText().trim();
-        if(!cargo.equals("")){
-            novo.setLogin(login);
+        if (codigo == 0) {
+            if (!login.equals("")) {
+                novo.setLogin(login);
+            }
+        }else{
+            if(!login.equals("")){
+                novo.setLogin(login);
+            }else
+                novo.setLogin(novo.getLogin());
         }
         
         String senha = txtSenha.getText().trim();
-        if(!cargo.equals("")){
-            novo.setSenha(senha);
+        if (codigo == 0) {
+            if (!senha.equals("")) {
+                novo.setSenha(senha);
+            }
+        }else{
+            if(!login.equals("")){
+                novo.setSenha(senha);
+            }else
+                novo.setSenha(novo.getSenha());
         }
-            
+
     }
 }
