@@ -5,6 +5,23 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Filial;
+import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author marcos
@@ -44,6 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         menuBuscarFilial = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
@@ -203,6 +221,14 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem7);
 
+        jMenuItem12.setText("relatorioFilial");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem12);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695856_Events_2.png"))); // NOI18N
@@ -343,6 +369,12 @@ public class TelaInicial extends javax.swing.JFrame {
         telaListarFuncionario.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        FilialRepositorio dao = GerenciadorDeReferencias.getFilial();
+        
+        exibeRelatorioJasper("RelatorioFilial.jasper", dao.Abrir() );
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -391,6 +423,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
@@ -407,4 +440,29 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTelaInicial;
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables
+
+    private void exibeRelatorioJasper(String caminho_relatorio, List<Filial> dados) {
+         try {
+            // Parâmetros
+            Map parametros = new HashMap();
+
+            // Pega o caminho do arquivo do relatório
+            URL arquivo = getClass().getResource(caminho_relatorio);
+            
+            // Carrega o relatório na memória
+            JasperReport relatorio = (JasperReport) JRLoader.loadObject(arquivo);
+            
+            JRDataSource fontededados = new JRBeanCollectionDataSource(dados, true);
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parametros, fontededados);
+            
+            // Visualiza o relatório
+            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+            
+            jrviewer.setVisible(true);
+        
+        } catch (JRException ex) {
+            Logger.getLogger(JasperReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
