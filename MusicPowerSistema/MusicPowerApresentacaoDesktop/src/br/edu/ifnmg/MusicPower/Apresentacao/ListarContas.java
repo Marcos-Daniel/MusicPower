@@ -171,6 +171,11 @@ public class ListarContas extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlContasLayout = new javax.swing.GroupLayout(pnlContas);
         pnlContas.setLayout(pnlContasLayout);
@@ -299,6 +304,15 @@ public class ListarContas extends javax.swing.JFrame {
        }    
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        this.dispose();
+        CadastrarContas telaCadastrarContas = new CadastrarContas();
+        telaCadastrarContas.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
