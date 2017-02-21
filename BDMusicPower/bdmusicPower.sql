@@ -15,6 +15,23 @@ create table cliente (
     numResidencia varchar(5),
     primary key(id)
 ); 
+
+create table funcionario (
+	id int auto_increment,
+    nome varchar(50),
+    cpf varchar(12),
+    dataNascimento date,
+    telefone varchar(12),
+    email varchar(40),
+    cidade varchar(20),
+    uf varchar(3),
+    rua varchar(30),
+    bairro varchar(20),
+    numResidencia varchar(5),
+    cargo varchar(30),
+    primary key(id)
+);
+
 create table filial (
 	id int auto_increment,
     uf varchar(3),
@@ -33,7 +50,13 @@ create table servico (
     valor double,
     statusPagamento varchar(30),
     statusProgresso varchar(30),
-    primary key(id)
+    idcliente int,
+    idfuncionario int,
+    nomeCliente varchar(50),
+    nomeFuncionario varchar(50),
+    primary key(id),
+    foreign key(idcliente) references cliente(id),
+    foreign key(idfuncionario) references funcionario(id)
 );
 
 create table evento (
@@ -71,21 +94,7 @@ create table fornecedor (
     primary key(id)
 );
 
-create table funcionario (
-	id int auto_increment,
-    nome varchar(50),
-    cpf varchar(12),
-    dataNascimento date,
-    telefone varchar(12),
-    email varchar(40),
-    cidade varchar(20),
-    uf varchar(3),
-    rua varchar(30),
-    bairro varchar(20),
-    numResidencia varchar(5),
-    cargo varchar(30),
-    primary key(id)
-);
+
 
 create table produto (
 	id int auto_increment,

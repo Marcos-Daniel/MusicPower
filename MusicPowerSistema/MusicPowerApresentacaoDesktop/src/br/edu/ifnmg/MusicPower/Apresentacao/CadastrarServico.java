@@ -16,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -204,6 +205,11 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473025465_save.png"))); // NOI18N
         btnCadastrar.setText("Cadastrar");
@@ -215,6 +221,11 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         jButton1.setText("Limpar campos");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         pnlIdentificarCliente1.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificar cliente"));
 
@@ -318,6 +329,10 @@ public class CadastrarServico extends javax.swing.JFrame {
             boolean vFuncionario = daoFuncionario.validarFuncionario(novoServico.getIdFuncionario(), novoServico.getNomeFuncionario());
             if(vCliente && vFuncionario){
                 daoServico.Salvar(novoServico);
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+
+            }else {
+                JOptionPane.showMessageDialog(this, "Funcionário ou cliente não encontrado!!!");
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarServico.class.getName()).log(Level.SEVERE, null, ex);
@@ -328,6 +343,14 @@ public class CadastrarServico extends javax.swing.JFrame {
     private void txtStatusPagamantoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusPagamantoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStatusPagamantoActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limparCampos();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,8 +477,17 @@ public void recuperaCamposPessoa() throws ParseException{
     
   }
 
-
-
-
+    private void limparCampos() {
+        txtIdCliente.setText("");
+        txtDataEntrega.setText("");
+        txtDataSolicitacao.setText("");
+        txtDescricao.setText("");
+        txtIdFuncinario.setText("");
+        txtNomeCliente.setText("");
+        txtNomeFuncionario.setText("");
+        txtStatusPagamanto.setText("");
+        txtStatusProgresso.setText("");
+        txtValor.setText("");                
+    }
 
 }
