@@ -23,18 +23,24 @@ import javax.swing.JOptionPane;
  * @author marcos
  */
 public class CadastrarServico extends javax.swing.JFrame {
-    
-    Cliente novoCliente = new Cliente();
-    Funcionario novoFuncionario = new Funcionario();
+   
     Serviço novoServico = new Serviço();
     ClienteRepositorio daoCliente = GerenciadorDeReferencias.getCliente();
     FuncionarioRepositorio daoFuncionario = GerenciadorDeReferencias.getFuncionario();
     ServiçoRepositorio daoServico = GerenciadorDeReferencias.getServiço();
+    ListarServiços telaListarServiço;
+    
     /**
      * Creates new form CadastrarServiços
      */
     public CadastrarServico() {
         initComponents();
+    }
+    
+    CadastrarServico(Serviço serviço, ListarServiços telaListarServiço){
+        initComponents();
+        preencherCampos(serviço);
+        this.telaListarServiço = telaListarServiço;
     }
 
     /**
@@ -488,6 +494,27 @@ public void recuperaCamposPessoa() throws ParseException{
         txtStatusPagamanto.setText("");
         txtStatusProgresso.setText("");
         txtValor.setText("");                
+    }
+
+    private void preencherCampos(Serviço serviço) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String dataEntrega = format.format(serviço.getEntrega());
+        String dataSolitacao = format.format(serviço.getSolicitacao());
+        String idCliente = String.valueOf(serviço.getIdCliente());
+        String idFuncionario = String.valueOf(serviço.getIdFuncionario());
+        String valor = String.valueOf(serviço.getValor());
+        
+        txtIdCliente.setText(idCliente);
+        txtDataEntrega.setText(dataEntrega);
+        txtDataSolicitacao.setText(dataSolitacao);
+        txtDescricao.setText(serviço.getDescricao());
+        txtIdFuncinario.setText(idFuncionario);
+        txtNomeCliente.setText(serviço.getNomeCliente());
+        txtNomeFuncionario.setText(serviço.getNomeFuncionario());
+        txtStatusPagamanto.setText(serviço.getStatusPagamanto());
+        txtStatusProgresso.setText(serviço.getStatusProgresso());
+        txtValor.setText(valor); 
+        
     }
 
 }

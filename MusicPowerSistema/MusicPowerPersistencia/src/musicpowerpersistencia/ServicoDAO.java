@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoRepositorio {
     public ServicoDAO() throws ClassNotFoundException, SQLException{
         setConsultaSalvar("INSERT INTO servico(descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso,idcliente, idfuncionario,nomecliente,nomefuncionario)VALUES(?,?,?,?,?,?,?,?,?,?)");
-        setConsultaAlterar("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ? WHERE id = ?");
+        setConsultaAlterar("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ?,idcliente = ?, idfuncionario = ?,nomecliente = ?,nomefuncionario = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM servico WHERE id = ?");
         setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
     }
@@ -85,6 +85,7 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             sql.setInt(8, obj.getIdFuncionario());
             sql.setString(9, obj.getNomeCliente());
             sql.setString(10, obj.getNomeFuncionario());
+            if(obj.getId()>0) sql.setInt(11, obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }

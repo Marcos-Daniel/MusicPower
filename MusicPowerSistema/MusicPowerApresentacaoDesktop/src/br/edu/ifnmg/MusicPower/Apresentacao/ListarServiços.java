@@ -5,17 +5,27 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Serviço;
+import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author marcos
  */
 public class ListarServiços extends javax.swing.JFrame {
-
+    
+    ServiçoRepositorio dao;
+    Serviço servico = new Serviço();
+    ArrayList<Serviço> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
     public ListarServiços() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getServiço();
     }
 
     /**
@@ -30,16 +40,16 @@ public class ListarServiços extends javax.swing.JFrame {
         pnlListarCliente = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        txtCodServiço = new javax.swing.JTextField();
         lblCodCliente = new javax.swing.JLabel();
         txtCodCliente = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtNomeCliente = new javax.swing.JTextField();
         pnlCLientes = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblListarClientes = new javax.swing.JTable();
+        tblListarServiços = new javax.swing.JTable();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -83,9 +93,9 @@ public class ListarServiços extends javax.swing.JFrame {
                             .addComponent(lblNome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                            .addComponent(txtCodServiço, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
                             .addComponent(txtCodCliente)
-                            .addComponent(jTextField1)))
+                            .addComponent(txtNomeCliente)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
@@ -99,7 +109,7 @@ public class ListarServiços extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodServiço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
@@ -107,7 +117,7 @@ public class ListarServiços extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -117,7 +127,7 @@ public class ListarServiços extends javax.swing.JFrame {
 
         pnlCLientes.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviços"));
 
-        tblListarClientes.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarServiços.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -136,9 +146,9 @@ public class ListarServiços extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblListarClientes);
-        if (tblListarClientes.getColumnModel().getColumnCount() > 0) {
-            tblListarClientes.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(tblListarServiços);
+        if (tblListarServiços.getColumnModel().getColumnCount() > 0) {
+            tblListarServiços.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnBuscartodos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -162,6 +172,11 @@ public class ListarServiços extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
@@ -244,16 +259,49 @@ public class ListarServiços extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblListarServiços.getSelectedRow();
+        if(posicao >= 0){
+           Serviço serviço = busca.get(posicao);
+           String mensagem = "Deseja realmente excluir este Serviço?";
+           int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+           
+            if (opcao == JOptionPane.YES_OPTION) {
+                dao.Excluir(serviço);
+                JOptionPane.showMessageDialog(rootPane, "Serviço excluído com sucesso!");
+                buscarTodos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+            }
+            
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+         int posicao = tblListarServiços.getSelectedRow();
+        if(posicao >= 0){
+           Serviço serviço = busca.get(posicao);
+           String mensagem = "Deseja realmente editar este Serviço?";
+           int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+           
+            if (opcao == JOptionPane.YES_OPTION) {
+                
+                CadastrarServico telaCadastrarServico = new CadastrarServico(serviço,this);
+                telaCadastrarServico.setVisible(true);
+                        
+            } else {
+                JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
+            }
+        }
+            
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,13 +350,23 @@ public class ListarServiços extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCodCliente;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlCLientes;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarClientes;
+    private javax.swing.JTable tblListarServiços;
     private javax.swing.JTextField txtCodCliente;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtCodServiço;
+    private javax.swing.JTextField txtNomeCliente;
     // End of variables declaration//GEN-END:variables
+
+    private void limparCampos() {
+        txtCodCliente.setText("");
+        txtCodServiço.setText("");
+        txtNomeCliente.setText("");
+    }
+
+    private void buscarTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
