@@ -100,5 +100,22 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
         }
         return null;
     }
+
+    @Override
+    public boolean validarCliente(int id, String nome) {
+         try {
+            PreparedStatement sql = conn.prepareStatement("SELECT ID FROM cliente WHERE id = ? AND nome = ?");
+            sql.setInt(1,id);
+            sql.setString(2, nome);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()){
+                return true ;
+            }else
+                return false;
+        } catch (SQLException ex) {
+            System.out.println(ex+" Validar Cliente!");
+        }
+        return false; 
+    }
     
  }  

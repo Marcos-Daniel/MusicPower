@@ -13,4 +13,5 @@ import java.sql.SQLException;
  */
 public interface ClienteRepositorio extends Repositorio<Cliente> {
     public Cliente Abrir(String cpf) throws SQLException;
+    public boolean validarCliente(int id, String nome);
 }

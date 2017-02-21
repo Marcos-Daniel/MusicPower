@@ -110,4 +110,21 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             System.out.println(ex);
         }
     }
+
+    @Override
+    public boolean validarFuncionario(int id, String nome) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT ID FROM funcionario WHERE id = ? AND nome = ?");
+            sql.setInt(1,id);
+            sql.setString(2, nome);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()){
+                return true ;
+            }else
+                return false;
+        } catch (SQLException ex) {
+            System.out.println(ex+" Validar funcionário!");
+        }
+        return false;
+    }
 }

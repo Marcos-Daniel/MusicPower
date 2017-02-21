@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoRepositorio {
     public ServicoDAO() throws ClassNotFoundException, SQLException{
-        setConsultaSalvar("INSERT INTO (descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso)VALUES(?,?,?,?,?,?)");
+        setConsultaSalvar("INSERT INTO (descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso,idcliente, idfuncionario,nomecliente,noomefuncionario)VALUES(?,?,?,?,?,?,?,?,?,?)");
         setConsultaAlterar("UPDATE servico SET descricao = ?, dataSolicitacao = ?, dataEntrega = ?, valor = ?, statusPagamento = ?, statusProgresso = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM servico WHERE id = ?");
         setConsultaAbrir("SELECT id,descricao, dataSolicitacao, dataEntrega, valor, statusPagamento, statusProgresso FROM servivo WHERE id = ?");
