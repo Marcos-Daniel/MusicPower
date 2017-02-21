@@ -144,6 +144,16 @@ create table itensVenda (
 
 create table administrador(
 	id int auto_increment,
+    nome varchar(50),
+    cpf varchar(20),
+    dataNascimento date,
+    telefone varchar(12),
+    email varchar(40),
+    cidade varchar(20),
+    uf varchar(5),
+    rua varchar(30),
+    bairro varchar(20),
+    numResidencia varchar(5),
     cargo varchar(56),
     login varchar(15),
     senha varchar(20),
