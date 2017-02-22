@@ -98,9 +98,12 @@ create table fornecedor (
 
 create table produto (
 	id int auto_increment,
-    descricao varchar(20),
+    descricao varchar(50),
+    marca varchar(50),
+    modelo varchar(50),
     qtd int,
     valor double,
+    lote varchar(50),
     primary key(id)
 );
 
