@@ -14,8 +14,12 @@ import java.util.Objects;
 public class Produto implements Entidade {
     private int id;
     private String descricao;
+    private String marca;
+    private String modelo;
     private int qtd;
     private Double valor;
+    private String lote;
+    
     public Produto() {
         
     }
@@ -25,6 +29,31 @@ public class Produto implements Entidade {
         this.qtd = qtd;
         this.valor = valor;
     }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getLote() {
+        return lote;
+    }
+
+    public void setLote(String lote) {
+        this.lote = lote;
+    }
+    
     @Override
     public int getId() {
         return id;

@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Entidades;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,8 @@ public class Venda implements Entidade {
     private int cliente;
     private Double valor;
     private Date dataVenda;
+    private List<ItensVenda> itens;
+    
     public Venda() {
         
     }

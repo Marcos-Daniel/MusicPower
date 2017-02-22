@@ -5,11 +5,28 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Compra;
+import br.edu.ifnmg.MusicPower.Entidades.ItensCompra;
+import br.edu.ifnmg.MusicPower.Entidades.Produto;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author marcos
  */
 public class CadastrarCompra extends javax.swing.JFrame {
+
+    ArrayList<Produto> produtos = new ArrayList<>();
+    ArrayList<ItensCompra> itens = new ArrayList<>();
+    Compra compras = new Compra();
+    Produto produto = new Produto();
+    ItensCompra itensCompra = new ItensCompra();
+    CarinhoCompras carrinhoCompras = new CarinhoCompras();
 
     /**
      * Creates new form CadastrarCompra
@@ -37,8 +54,6 @@ public class CadastrarCompra extends javax.swing.JFrame {
         txtCodFornecedor = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        txtCodProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
@@ -51,7 +66,7 @@ public class CadastrarCompra extends javax.swing.JFrame {
         txtQTD = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtLote = new javax.swing.JTextField();
-        txtAddProduto = new javax.swing.JButton();
+        btnAddProduto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
@@ -108,8 +123,6 @@ public class CadastrarCompra extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados produto"));
 
-        jLabel3.setText("*Cod produto:");
-
         jLabel4.setText("*Descrição:");
 
         jLabel5.setText("*Marca:");
@@ -127,24 +140,22 @@ public class CadastrarCompra extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCodProduto)
-                    .addComponent(txtDescricao)
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.DEFAULT_SIZE, 439, Short.MAX_VALUE)
                     .addComponent(txtMarca)
                     .addComponent(txtModelo)
-                    .addComponent(txtPreco)
                     .addComponent(txtQTD)
-                    .addComponent(txtLote))
+                    .addComponent(txtLote)
+                    .addComponent(txtPreco))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -152,40 +163,36 @@ public class CadastrarCompra extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtQTD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtQTD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        txtAddProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
-        txtAddProduto.setText("Add produto");
-        txtAddProduto.addActionListener(new java.awt.event.ActionListener() {
+        btnAddProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
+        btnAddProduto.setText("Add produto");
+        btnAddProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAddProdutoActionPerformed(evt);
+                btnAddProdutoActionPerformed(evt);
             }
         });
 
@@ -218,7 +225,7 @@ public class CadastrarCompra extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(txtAddProduto)
+                        .addComponent(btnAddProduto)
                         .addGap(18, 18, 18)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -228,12 +235,12 @@ public class CadastrarCompra extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(txtAddProduto)
+                    .addComponent(btnAddProduto)
                     .addComponent(jButton3)
                     .addComponent(btnLimparCampos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -259,9 +266,18 @@ public class CadastrarCompra extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddProdutoActionPerformed
-        this.limparCamposNovo();
-    }//GEN-LAST:event_txtAddProdutoActionPerformed
+    private void btnAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProdutoActionPerformed
+        try {
+            this.recuperaCampos();
+            this.limparCamposNovo();
+            produtos.add(produto);
+            itens.add(itensCompra);
+            carrinhoCompras.setVisible(true);
+            carrinhoCompras.PreencherTabela(produtos);
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarCompra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAddProdutoActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
         this.limparCampos();
@@ -303,13 +319,13 @@ public class CadastrarCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddProduto;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -320,9 +336,7 @@ public class CadastrarCompra extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JButton txtAddProduto;
     private javax.swing.JTextField txtCodFornecedor;
-    private javax.swing.JTextField txtCodProduto;
     private javax.swing.JTextField txtDataDaCompra;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtLote;
@@ -333,9 +347,60 @@ public class CadastrarCompra extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorDaCompra;
     // End of variables declaration//GEN-END:variables
 
-    private void limparCampos(){
+    public void recuperaCampos() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date dataDaCompra = new Date(format.parse(txtDataDaCompra.getText().trim()).getTime());
+        if (!txtDataDaCompra.equals("")) {
+            compras.setDataCompra(dataDaCompra);
+        }
+
+        Double valorDacompra = Double.parseDouble(txtValorDaCompra.getText().trim());
+        if (!txtValorDaCompra.equals("")) {
+            compras.setValor(valorDacompra);
+        }
+
+        int codFornecedor = Integer.parseInt(txtCodFornecedor.getText().trim());
+        if (!txtCodFornecedor.equals("")) {
+            compras.setFornecedor(codFornecedor);
+        }
+
+        String descricao = txtDescricao.getText().trim();
+        if (!descricao.equals("")) {
+            produto.setDescricao(descricao);
+        }
+
+        String marca = txtMarca.getText().trim();
+        if (!marca.equals("")) {
+            produto.setMarca(marca);
+        }
+
+        String modelo = txtModelo.getText().trim();
+        if (!modelo.equals("")) {
+            produto.setModelo(modelo);
+        }
+
+        Double preco = Double.parseDouble(txtPreco.getText().trim());
+        if (!txtPreco.equals("")) {
+            produto.setValor(preco);
+            itensCompra.setValor(preco);
+        }
+
+        int qtd = Integer.parseInt(txtQTD.getText().trim());
+        if (!txtQTD.equals("")) {
+            produto.setQtd(qtd);
+            itensCompra.setQtd(qtd);
+        }
+
+        String lote = txtLote.getText().trim();
+        if (!lote.equals("")) {
+            produto.setLote(lote);
+        }
+
+    }
+
+    private void limparCampos() {
         txtCodFornecedor.setText("");
-        txtCodProduto.setText("");
         txtDataDaCompra.setText("");
         txtDescricao.setText("");
         txtLote.setText("");
@@ -345,9 +410,8 @@ public class CadastrarCompra extends javax.swing.JFrame {
         txtQTD.setText("");
         txtValorDaCompra.setText("");
     }
-    
-    private void limparCamposNovo(){
-        txtCodProduto.setText("");
+
+    private void limparCamposNovo() {
         txtDescricao.setText("");
         txtLote.setText("");
         txtMarca.setText("");
@@ -355,5 +419,5 @@ public class CadastrarCompra extends javax.swing.JFrame {
         txtPreco.setText("");
         txtQTD.setText("");
     }
-    
+
 }

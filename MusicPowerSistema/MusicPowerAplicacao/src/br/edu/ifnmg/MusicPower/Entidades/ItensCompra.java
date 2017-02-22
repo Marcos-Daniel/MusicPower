@@ -14,6 +14,7 @@ public class ItensCompra implements Entidade {
     private int compra;
     private int produto;
     private Double valor;
+    private int qtd;
     public ItensCompra() {
         
     }
@@ -30,7 +31,16 @@ public class ItensCompra implements Entidade {
     @Override
     public void setId(int id) {
         this.id = id;
-    }    
+    }  
+
+    public int getQtd() {
+        return qtd;
+    }
+
+    public void setQtd(int qtd) {
+        this.qtd = qtd;
+    }
+    
     public int getCompra() {
         return compra;
     }
