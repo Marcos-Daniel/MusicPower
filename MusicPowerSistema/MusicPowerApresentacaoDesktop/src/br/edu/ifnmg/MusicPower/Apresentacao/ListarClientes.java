@@ -316,9 +316,11 @@ public class ListarClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
         this.dispose();
         CadastrarCliente telaCadastrarCliente = new CadastrarCliente();
         telaCadastrarCliente.setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

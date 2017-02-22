@@ -7,8 +7,11 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Serviço;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
+import groovy.model.DefaultTableModel;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -68,6 +71,11 @@ public class ListarServiços extends javax.swing.JFrame {
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -161,6 +169,11 @@ public class ListarServiços extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386770_trash_bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -180,6 +193,11 @@ public class ListarServiços extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCLientesLayout = new javax.swing.GroupLayout(pnlCLientes);
         pnlCLientes.setLayout(pnlCLientesLayout);
@@ -277,10 +295,9 @@ public class ListarServiços extends javax.swing.JFrame {
                 dao.Excluir(serviço);
                 JOptionPane.showMessageDialog(rootPane, "Serviço excluído com sucesso!");
                 buscarTodos();
-            } else {
-                JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
-            }
-            
+            }     
+        }else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -296,12 +313,30 @@ public class ListarServiços extends javax.swing.JFrame {
                 CadastrarServico telaCadastrarServico = new CadastrarServico(serviço,this);
                 telaCadastrarServico.setVisible(true);
                         
-            } else {
-                JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
-            }
+            } 
+        }else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
         }
+        
             
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        
+        buscar(txtCodServiço.getText(),txtCodCliente.getText(),txtNomeCliente.getText());
+        
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        CadastrarServico telaCdastraServiço = new CadastrarServico();
+        telaCdastraServiço.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,6 +402,48 @@ public class ListarServiços extends javax.swing.JFrame {
     }
 
     private void buscarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.busca = (ArrayList<Serviço>) dao.Abrir();
+        preencherTabela(busca);
+    }
+
+    private void buscar(String CodServiço, String CodCliente, String NomeCliente) {
+        int id = Integer.parseInt(CodServiço);
+        int idcliente = Integer.parseInt(CodCliente);
+        Serviço filtro = new Serviço(id,null, null, null, null, null, null,idcliente, 0,NomeCliente,null);
+        this.busca = (ArrayList<Serviço>) dao.Buscar(filtro);
+        preencherTabela(busca);
+    }
+
+    private void preencherTabela(ArrayList<Serviço> lista) {
+        javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
+        modelo.addColumn("Cod Serviço");
+        modelo.addColumn("Descrição");
+        modelo.addColumn("Data Solicitação");
+        modelo.addColumn("Data Entrega");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Status Pagamento");
+        modelo.addColumn("Status Processo");
+        modelo.addColumn("ID Cliente");
+        modelo.addColumn("Nome Cliente");
+        modelo.addColumn("ID Funcionário");
+        modelo.addColumn("Nome Funcionário");
+        
+        for(Serviço c: lista){
+            Vector linha = new Vector();
+            linha.add(c.getId());
+            linha.add(c.getDescricao());
+            linha.add(c.getEntrega());
+            linha.add(c.getSolicitacao());
+            linha.add(c.getValor());
+            linha.add(c.getStatusPagamanto());
+            linha.add(c.getStatusProgresso());
+            linha.add(c.getIdCliente());
+            linha.add(c.getNomeCliente());
+            linha.add(c.getIdFuncionario());
+            linha.add(c.getNomeFuncionario());
+            
+            modelo.addRow(linha);
+        }
+        tblListarServiços.setModel(modelo);
     }
 }

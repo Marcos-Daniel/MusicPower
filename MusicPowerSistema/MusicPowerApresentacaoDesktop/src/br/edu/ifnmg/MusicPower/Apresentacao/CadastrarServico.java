@@ -38,6 +38,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     }
     
     CadastrarServico(Serviço serviço, ListarServiços telaListarServiço){
+        novoServico.setId(serviço.getId());
         initComponents();
         preencherCampos(serviço);
         this.telaListarServiço = telaListarServiço;
@@ -331,14 +332,22 @@ public class CadastrarServico extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try {
             this.recuperaCamposPessoa();
+            int codigo = novoServico.getId();
             boolean vCliente = daoCliente.validarCliente(novoServico.getIdCliente(), novoServico.getNomeCliente());
             boolean vFuncionario = daoFuncionario.validarFuncionario(novoServico.getIdFuncionario(), novoServico.getNomeFuncionario());
-            if(vCliente && vFuncionario){
-                daoServico.Salvar(novoServico);
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+            if(codigo == 0){
+                if(vCliente && vFuncionario){
+                    daoServico.Salvar(novoServico);
+                    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                    limparCampos();
 
-            }else {
-                JOptionPane.showMessageDialog(this, "Funcionário ou cliente não encontrado!!!");
+                }else {
+                    JOptionPane.showMessageDialog(this, "Funcionário ou cliente não encontrado!!!");
+                }
+            } else {
+                daoServico.Alterar(novoServico);
+                JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso!!!");
+                this.dispose();
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarServico.class.getName()).log(Level.SEVERE, null, ex);
