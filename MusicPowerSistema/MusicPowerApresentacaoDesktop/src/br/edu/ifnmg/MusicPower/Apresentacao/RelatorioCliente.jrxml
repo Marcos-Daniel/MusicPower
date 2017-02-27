@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e444f2fc-044a-4f86-befb-26ca96732615">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="0" width="297" height="35" uuid="4124a39b-244c-4be9-bece-889f79604625"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Listagem de Clientes]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="82" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="14" width="30" height="20" uuid="4f25f28b-f7b3-420a-89f0-b136d636b353"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="51" y="14" width="115" height="20" uuid="c87fd809-b4e4-40f8-8a1a-619764a07e07"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="14" width="80" height="20" uuid="cb4b3991-5bdb-4235-9712-97910c00a26c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CPF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="14" width="73" height="20" uuid="666c2ac1-b31d-4bca-b09f-fa7d372bb6b3"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NASCIMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="14" width="58" height="20" uuid="dd12767f-b08b-40c9-9865-fa91a10d98d4"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELEFONE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="14" width="111" height="20" uuid="76649fa1-024b-481b-8863-f3f0d18c7a73"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MAIL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="49" width="83" height="20" uuid="f182d7f2-6e1d-4475-99c9-fce7cff3c64b"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="49" width="55" height="20" uuid="e21c09a2-d654-4458-851d-7765ac21991c"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="49" width="100" height="20" uuid="b7869968-96fc-4c3a-8a03-c7e5a4c7bbaf"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RUA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="301" y="49" width="100" height="20" uuid="702a33fe-5463-4fd7-b8f8-37c55e4cb0ef"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[BAIRRO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="49" width="123" height="20" uuid="850c45df-06c3-4799-aa1d-5d449a81b058"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO RESIDÊNCIA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="81" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="18" width="29" height="20" uuid="3735ca4d-f148-4571-8674-a254adebd510"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="18" width="115" height="20" uuid="397e2987-378e-4e34-a4e2-7ba1cd63bf4a"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="18" width="80" height="20" uuid="052ba810-4d77-4338-be14-083b727a4065"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="275" y="18" width="73" height="20" uuid="06d91b52-cb6a-43bd-8027-b04ee2f4a911"/>
+				<textFieldExpression><![CDATA[$F{dataNascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="363" y="18" width="58" height="20" uuid="89661b3f-d1f6-4087-860c-536f8104f772"/>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="18" width="111" height="20" uuid="ebb89154-4383-4059-86aa-17fd2d1eb2a5"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="51" width="82" height="20" uuid="0591f500-7efd-4e52-9bff-f80f14fa5a8a"/>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="51" width="55" height="20" uuid="fa262fff-3a08-4213-9002-90ee48d16f07"/>
+				<textFieldExpression><![CDATA[$F{UF}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="51" width="100" height="20" uuid="9b7ba590-885d-4816-92dd-b9d52178ca22"/>
+				<textFieldExpression><![CDATA[$F{rua}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="301" y="51" width="100" height="20" uuid="fc710096-5b30-4839-b5d7-fb95aa54a173"/>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="51" width="123" height="20" uuid="d8c0d9c4-461f-4952-a9db-e72f2928e3d2"/>
+				<textFieldExpression><![CDATA[$F{nResidencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
