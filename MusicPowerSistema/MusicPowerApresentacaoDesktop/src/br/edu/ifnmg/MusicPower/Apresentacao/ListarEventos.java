@@ -458,8 +458,9 @@ public class ListarEventos extends javax.swing.JFrame {
     private void preencherTabela(ArrayList<Evento> busca) {
         
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nome");
         modelo.addColumn("Cod Evento");
+        modelo.addColumn("Nome");
+        modelo.addColumn("Descrição");
         modelo.addColumn("Data inicio");
         modelo.addColumn("Data terminio");
         modelo.addColumn("Valor investido");
@@ -468,8 +469,9 @@ public class ListarEventos extends javax.swing.JFrame {
         for(Evento c: busca){
             
             Vector linha = new Vector();
-            linha.add(c.getNome());
             linha.add(c.getId());
+            linha.add(c.getNome());
+            linha.add(c.getDescricao());
             linha.add(c.getInicio());
             linha.add(c.getTermino());
             linha.add(c.getValor());

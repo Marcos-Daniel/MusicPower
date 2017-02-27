@@ -7,6 +7,8 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Evento;
+import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.net.URL;
@@ -76,6 +78,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -308,6 +311,14 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem12);
 
+        jMenuItem15.setText("Relatório Evento");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem15ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem15);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -430,6 +441,13 @@ public class TelaInicial extends javax.swing.JFrame {
          
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
+        
+        EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento();
+        exibeRelatorioJasperEvento("RelatorioEvento.jasper", daoEvento.Abrir() );
+        
+    }//GEN-LAST:event_jMenuItem15ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -482,6 +500,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -524,6 +543,31 @@ public class TelaInicial extends javax.swing.JFrame {
     }
     
     private void exibeRelatorioJasperCliente(String caminho_relatorio, List<Cliente> dados) {
+         try {
+            // Parâmetros
+            Map parametros = new HashMap();
+
+            // Pega o caminho do arquivo do relatório
+            URL arquivo = getClass().getResource(caminho_relatorio);
+            
+            // Carrega o relatório na memória
+            JasperReport relatorio = (JasperReport) JRLoader.loadObject(arquivo);
+            
+            JRDataSource fontededados = new JRBeanCollectionDataSource(dados, true);
+            
+            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parametros, fontededados);
+            
+            // Visualiza o relatório
+            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
+            
+            jrviewer.setVisible(true);
+        
+        } catch (JRException ex) {
+            Logger.getLogger(JasperReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     private void exibeRelatorioJasperEvento(String caminho_relatorio, List<Evento> dados) {
          try {
             // Parâmetros
             Map parametros = new HashMap();
