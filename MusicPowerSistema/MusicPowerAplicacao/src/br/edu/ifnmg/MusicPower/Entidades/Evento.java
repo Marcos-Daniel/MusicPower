@@ -20,6 +20,7 @@ public class Evento implements Entidade {
     private Date termino;
     private Double valor;
     private String status;
+
     public Evento() {
         
     }
@@ -106,6 +107,7 @@ public class Evento implements Entidade {
     }
     @Override
     public String toString() {
-        return "Evento{" + "id=" + id + ", descricao=" + descricao + '}';
+        return "Evento{" + "id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", inicio=" + inicio + ", termino=" + termino + ", valor=" + valor + ", status=" + status + '}';
     }
+    
 }

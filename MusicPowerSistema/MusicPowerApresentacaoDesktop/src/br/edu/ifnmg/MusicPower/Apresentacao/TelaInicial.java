@@ -11,14 +11,22 @@ import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import musicpowerpersistencia.Conexao;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -31,12 +39,16 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author marcos
  */
 public class TelaInicial extends javax.swing.JFrame {
-
+    ArrayList<Filial> buscaFilial = new ArrayList<>();
+    ArrayList<Evento> buscaEvento = new ArrayList<>();
+    ArrayList<Cliente> buscaCliente = new ArrayList<>();
     /**
      * Creates new form TelaInicial
      */
     public TelaInicial() {
+      
         initComponents();
+        
     }
 
     /**
@@ -425,9 +437,10 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
         
-        FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
-        exibeRelatorioJasperFilial("RelatorioFilial.jasper", daoFilial.Abrir() );
-        
+       FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
+       buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
+       exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );
+       
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -436,15 +449,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
         
-        ClienteRepositorio daoCliente = GerenciadorDeReferencias.getCliente();
-        exibeRelatorioJasperCliente("RelatorioCliente.jasper", daoCliente.Abrir() );
+      ClienteRepositorio daoCliente = GerenciadorDeReferencias.getCliente();
+      buscaCliente = (ArrayList<Cliente>) daoCliente.Abrir();  
+      exibeRelatorioJasper("RelatorioCliente.jasper", buscaCliente );
          
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-        
-        EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento();
-        exibeRelatorioJasperEvento("RelatorioEvento.jasper", daoEvento.Abrir() );
+    
+      EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento(); 
+      buscaEvento = (ArrayList<Evento>) daoEvento.Abrir();   
+      exibeRelatorioJasper("RelatorioEvento.jasper", buscaEvento);
         
     }//GEN-LAST:event_jMenuItem15ActionPerformed
 
@@ -517,57 +532,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables
 
-    private void exibeRelatorioJasperFilial(String caminho_relatorio, List<Filial> dados) {
-         try {
-            // Parâmetros
-            Map parametros = new HashMap();
-
-            // Pega o caminho do arquivo do relatório
-            URL arquivo = getClass().getResource(caminho_relatorio);
-            
-            // Carrega o relatório na memória
-            JasperReport relatorio = (JasperReport) JRLoader.loadObject(arquivo);
-            
-            JRDataSource fontededados = new JRBeanCollectionDataSource(dados, true);
-            
-            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parametros, fontededados);
-            
-            // Visualiza o relatório
-            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
-            
-            jrviewer.setVisible(true);
-        
-        } catch (JRException ex) {
-            Logger.getLogger(JasperReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
-    private void exibeRelatorioJasperCliente(String caminho_relatorio, List<Cliente> dados) {
-         try {
-            // Parâmetros
-            Map parametros = new HashMap();
-
-            // Pega o caminho do arquivo do relatório
-            URL arquivo = getClass().getResource(caminho_relatorio);
-            
-            // Carrega o relatório na memória
-            JasperReport relatorio = (JasperReport) JRLoader.loadObject(arquivo);
-            
-            JRDataSource fontededados = new JRBeanCollectionDataSource(dados, true);
-            
-            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parametros, fontededados);
-            
-            // Visualiza o relatório
-            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
-            
-            jrviewer.setVisible(true);
-        
-        } catch (JRException ex) {
-            Logger.getLogger(JasperReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-     private void exibeRelatorioJasperEvento(String caminho_relatorio, List<Evento> dados) {
+    private void exibeRelatorioJasper(String caminho_relatorio, List dados) {
          try {
             // Parâmetros
             Map parametros = new HashMap();
