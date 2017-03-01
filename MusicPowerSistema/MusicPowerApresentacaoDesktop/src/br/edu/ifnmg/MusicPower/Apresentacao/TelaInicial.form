@@ -145,13 +145,19 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem25">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem25"/>
+                <Property name="text" type="java.lang.String" value="Cadastro Estoque"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem25ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem26">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem26"/>
+                <Property name="text" type="java.lang.String" value="Listagem Estoque"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem26ActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem27">
               <Properties>

@@ -25,7 +25,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
     
     Produto novo = new Produto();
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
-  //  ListarProduto telalistarProduto;
+    ListarProdutos telalistarProduto;
     ProdutoRepositorio dao = GerenciadorDeReferencias.getProduto();
     
     /**
@@ -35,10 +35,12 @@ public class CadastrarProduto extends javax.swing.JFrame {
         initComponents();
     }
     
-    CadastrarProduto(Produto produto){
+    CadastrarProduto(Produto produto,ListarProdutos telalistarProduto){
+        
         initComponents();
         this.preencherCampos(produto);
-       //this.telalistarProduto = telalistarProduto; 
+        this.telalistarProduto = telalistarProduto;
+        
     }
 
     /**

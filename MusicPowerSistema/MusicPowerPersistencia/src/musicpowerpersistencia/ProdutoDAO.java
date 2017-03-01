@@ -23,6 +23,7 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
        setConsultaAlterar("UPDATE produto SET descricao = ?,marca = ?,modelo = ?,qtd = ?,valor = ?,lote = ? WHERE id = ?");
        setConsultaExcluir("DELETE FROM produto WHERE id = ?");
        setConsultaAbrir("SELECT id,descricao,marca,modelo,qtd,valor,lote FROM produto");
+       setConsultaBusca("SELECT id,descricao,marca,modelo,qtd,valor,lote FROM produto");
     }
   
     @Override
@@ -42,6 +43,7 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
     protected void preencheFiltros(Produto filtro) {
         if(filtro.getId() > 0) adicionarFiltro("id", "=");
         if(filtro.getDescricao()!= null) adicionarFiltro("descricao", "=");
+        if(filtro.getMarca()!= null) adicionarFiltro("marca", "=");
     }
 
     @Override
@@ -50,6 +52,7 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
             int cont = 1;
             if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
             if(filtro.getDescricao()!= null ){ sql.setString(cont, filtro.getDescricao()); cont++; }
+            if(filtro.getMarca()!=null){ sql.setString(cont, filtro.getMarca());}
             
         } catch (SQLException ex) {
             Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);

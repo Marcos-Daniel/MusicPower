@@ -271,10 +271,20 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695671_box-open-3d.png"))); // NOI18N
         jMenu5.setText("Estoque");
 
-        jMenuItem25.setText("jMenuItem25");
+        jMenuItem25.setText("Cadastro Estoque");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem25);
 
-        jMenuItem26.setText("jMenuItem26");
+        jMenuItem26.setText("Listagem Estoque");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem26);
 
         jMenuItem27.setText("jMenuItem27");
@@ -515,6 +525,20 @@ public class TelaInicial extends javax.swing.JFrame {
         ListarFiliais telaListarFiliais = new ListarFiliais();
         telaListarFiliais.setVisible(true);
     }//GEN-LAST:event_jMenuItem34ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+       
+        CadastrarProduto telaCadastrarProduto = new CadastrarProduto();
+        telaCadastrarProduto.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        
+        ListarProdutos telaListarProdutos = new ListarProdutos ();
+        telaListarProdutos.setVisible(true);
+        
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     /**
      * @param args the command line arguments

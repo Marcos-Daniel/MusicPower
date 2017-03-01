@@ -5,17 +5,28 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Produto;
+import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author marcos
  */
-public class ListarEstoque extends javax.swing.JFrame {
-
+public class ListarProdutos extends javax.swing.JFrame {
+    ProdutoRepositorio dao;
+    Produto produto = new Produto();
+    ArrayList<Produto> busca = new ArrayList<>();
+    
     /**
      * Creates new form ListarClientes
      */
-    public ListarEstoque() {
+    public ListarProdutos() {
         initComponents();
+        this.dao = GerenciadorDeReferencias.getProduto();
     }
 
     /**
@@ -30,15 +41,13 @@ public class ListarEstoque extends javax.swing.JFrame {
         pnlListarCliente = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
-        txtNome = new javax.swing.JTextField();
+        txtCodProduto = new javax.swing.JTextField();
         lblCodCliente = new javax.swing.JLabel();
-        txtCodCliente = new javax.swing.JTextField();
+        txtDescricao = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
         pnlCLientes = new javax.swing.JPanel();
         btnBuscartodos = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
@@ -46,7 +55,7 @@ public class ListarEstoque extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,12 +63,17 @@ public class ListarEstoque extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtrar"));
 
-        lblNome.setText("Descrição:");
+        lblNome.setText("Cod Produto:");
 
-        lblCodCliente.setText("Marca:");
+        lblCodCliente.setText("Descrição:");
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnLimparCampos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386963_Broom_stick.png"))); // NOI18N
         btnLimparCampos.setText("Limpar campos");
@@ -69,9 +83,7 @@ public class ListarEstoque extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Modelo:");
-
-        jLabel2.setText("Preço:");
+        jLabel1.setText("Marca:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -84,14 +96,12 @@ public class ListarEstoque extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(lblCodCliente)
-                            .addComponent(lblNome)
-                            .addComponent(jLabel2))
+                            .addComponent(lblNome))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNome)
-                            .addComponent(txtCodCliente)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)))
+                            .addComponent(txtCodProduto)
+                            .addComponent(txtDescricao)
+                            .addComponent(txtMarca)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 545, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
@@ -105,23 +115,19 @@ public class ListarEstoque extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodCliente)
-                    .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscar)
-                    .addComponent(btnLimparCampos))
+                    .addComponent(btnLimparCampos)
+                    .addComponent(btnBuscar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -137,6 +143,11 @@ public class ListarEstoque extends javax.swing.JFrame {
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474386770_trash_bin.png"))); // NOI18N
         btnExcluir.setText("Excluir");
@@ -148,11 +159,21 @@ public class ListarEstoque extends javax.swing.JFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"))); // NOI18N
         jButton1.setText("Novo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -163,7 +184,7 @@ public class ListarEstoque extends javax.swing.JFrame {
                 "Cod produto", "Descrição", "Marca", "Modelo", "Preço", "QTD", "Lote"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblProduto);
 
         javax.swing.GroupLayout pnlCLientesLayout = new javax.swing.GroupLayout(pnlCLientes);
         pnlCLientes.setLayout(pnlCLientesLayout);
@@ -218,8 +239,8 @@ public class ListarEstoque extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlCLientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlCLientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -235,24 +256,74 @@ public class ListarEstoque extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlListarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlListarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
-        // TODO add your handling code here:
+        limpasCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        // TODO add your handling code here:
+        buscarTodos();
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        int posicao = tblProduto.getSelectedRow();
+        
+        if(posicao >= 0){
+            Produto produto = busca.get(posicao);     
+            String mensagem = "Deseja realmente excluir este Produto?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação!", JOptionPane.YES_NO_OPTION);
+            
+            if(opcao == JOptionPane.YES_OPTION){
+               dao.Excluir(produto); 
+               JOptionPane.showMessageDialog(this, "Produto excluido com sucesso!!!");
+               buscarTodos();
+            }
+       
+        } else {
+            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        int id = Integer.parseInt(txtCodProduto.getText());
+        buscar(id,txtDescricao.getText(),txtMarca.getText());
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int posicao = tblProduto.getSelectedRow();
+        
+        if(posicao >= 0){
+            Produto produto = busca.get(posicao);
+            String mensagem = "Deseja realmente alterar esse Produto?";
+            int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Confirmação de alteração", JOptionPane.YES_NO_OPTION);
+            
+            if(opcao == JOptionPane.YES_OPTION){
+                CadastrarProduto telaCadastrarProduto = new CadastrarProduto(produto,this);
+                telaCadastrarProduto.setVisible(true);
+            }
+        }
+        else{
+           JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
+       } 
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        this.dispose();
+        CadastrarProduto telaCadastrarProduto = new CadastrarProduto();
+        telaCadastrarProduto.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,14 +342,18 @@ public class ListarEstoque extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListarEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListarEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListarEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListarEstoque.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -287,7 +362,7 @@ public class ListarEstoque extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarEstoque().setVisible(true);
+                new ListarProdutos().setVisible(true);
             }
         });
     }
@@ -301,17 +376,69 @@ public class ListarEstoque extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblCodCliente;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlCLientes;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTextField txtCodCliente;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTable tblProduto;
+    private javax.swing.JTextField txtCodProduto;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtMarca;
     // End of variables declaration//GEN-END:variables
+
+    private void limpasCampos() {
+        
+        txtCodProduto.setText("");
+        txtDescricao.setText("");
+        txtMarca.setText("");
+        
+    }
+
+    private void buscarTodos() {
+        
+        busca = (ArrayList<Produto>) dao.Abrir();
+        preencherCampos(busca);
+        
+    }
+
+    private void buscar(int id, String descricao, String marca) {
+        
+        Produto produto = new Produto(id,descricao,marca,null,0,0.0,null);
+        busca = (ArrayList<Produto>) dao.Buscar(produto);
+        preencherCampos(busca);
+        
+    }
+
+    private void preencherCampos(ArrayList<Produto> busca) {
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        modelo.addColumn("Cod Produto");
+        modelo.addColumn("Descrição");
+        modelo.addColumn("Marca");
+        modelo.addColumn("Modelo");
+        modelo.addColumn("Qtd");
+        modelo.addColumn("Valor");
+        modelo.addColumn("Lote");
+        
+        for(Produto c: busca){
+            Vector linha = new Vector();
+            
+            linha.add(c.getId());
+            linha.add(c.getDescricao());
+            linha.add(c.getMarca());
+            linha.add(c.getModelo());
+            linha.add(c.getQtd());
+            linha.add(c.getValor());
+            linha.add(c.getLote());
+            
+            modelo.addRow(linha);
+            
+        }
+        
+        tblProduto.setModel(modelo);
+        
+    }
 }

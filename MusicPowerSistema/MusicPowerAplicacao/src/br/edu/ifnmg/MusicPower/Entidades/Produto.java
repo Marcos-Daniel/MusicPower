@@ -23,13 +23,22 @@ public class Produto implements Entidade {
     public Produto() {
         
     }
-    public Produto(int id, String descricao, int qtd, Double valor) {
+    
+
+    public Produto(int id, String descricao, String marca, String modelo, int qtd, Double valor, String lote) {
+        if(id > 0){
         this.id = id;
+        }else{
+          this.id = 0;  
+        }
         this.descricao = descricao;
+        this.marca = marca;
+        this.modelo = modelo;
         this.qtd = qtd;
         this.valor = valor;
+        this.lote = lote;
     }
-
+  
     public String getMarca() {
         return marca;
     }
