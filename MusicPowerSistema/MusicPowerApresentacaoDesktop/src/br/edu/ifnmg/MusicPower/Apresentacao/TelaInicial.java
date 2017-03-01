@@ -68,29 +68,42 @@ public class TelaInicial extends javax.swing.JFrame {
         menuCadastrar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        menuCadastrarContas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        menuBuscarFilial = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
         jMenuItem9 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        mnCadastrarEventos = new javax.swing.JMenuItem();
+        mnBuscarEvento = new javax.swing.JMenuItem();
+        mnRelatorioEventos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        mnCadastrarservico = new javax.swing.JMenuItem();
+        mnBuscarServico = new javax.swing.JMenuItem();
+        mnRelatorioSevico = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
+        jMenuItem27 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
+        mnCadastrarCompra = new javax.swing.JMenuItem();
+        mnBuscarCompra = new javax.swing.JMenuItem();
+        mnRelatorioCompra = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
+        mnCadastrarVenda = new javax.swing.JMenuItem();
+        mnBuscarVenda = new javax.swing.JMenuItem();
+        mnRelatorioVendas = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        mnCadastrarContas = new javax.swing.JMenuItem();
+        mnBuscarContas = new javax.swing.JMenuItem();
+        mnRelatorioContas = new javax.swing.JMenuItem();
+        jMenu9 = new javax.swing.JMenu();
+        mnCadastrarFornecedores = new javax.swing.JMenuItem();
+        mnBuscarFornecedores = new javax.swing.JMenuItem();
+        mnRelatoriofornecedores = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        mnBuscarFiliais = new javax.swing.JMenuItem();
+        jMenuItem34 = new javax.swing.JMenuItem();
+        mnRelatorioFiliais = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,9 +143,9 @@ public class TelaInicial extends javax.swing.JFrame {
         pnlTelaInicialLayout.setHorizontalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaInicialLayout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
+                .addContainerGap(273, Short.MAX_VALUE)
                 .addComponent(pnlTituloImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addContainerGap(274, Short.MAX_VALUE))
         );
         pnlTelaInicialLayout.setVerticalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +156,7 @@ public class TelaInicial extends javax.swing.JFrame {
         );
 
         menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694467_user_profile_edit.png"))); // NOI18N
-        menuCadastrar.setText("Cadastrar");
+        menuCadastrar.setText("Cadastrar pessoas");
         menuCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCadastrarActionPerformed(evt);
@@ -166,34 +179,10 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuCadastrar.add(jMenuItem2);
 
-        jMenuItem3.setText("Cadastrar filial");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        menuCadastrar.add(jMenuItem3);
-
-        jMenuItem4.setText("Cadastrar fornecedor");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
-            }
-        });
-        menuCadastrar.add(jMenuItem4);
-
-        menuCadastrarContas.setText("Cadastrar contas");
-        menuCadastrarContas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCadastrarContasActionPerformed(evt);
-            }
-        });
-        menuCadastrar.add(menuCadastrarContas);
-
         jMenuBar1.add(menuCadastrar);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
-        jMenu2.setText("Buscar");
+        jMenu2.setText("Buscar pessoas");
         jMenu2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu2ActionPerformed(evt);
@@ -216,122 +205,192 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
-        menuBuscarFilial.setText("Buscar filial");
-        menuBuscarFilial.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem9.setText("jMenuItem9");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuBuscarFilialActionPerformed(evt);
+                jMenuItem9ActionPerformed(evt);
             }
         });
-        jMenu2.add(menuBuscarFilial);
-
-        jMenuItem8.setText("Buscar fornecedor");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem8);
-
-        jMenuItem7.setText("Buscar conta");
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem7ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem7);
+        jMenu2.add(jMenuItem9);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695856_Events_2.png"))); // NOI18N
         jMenu3.setText("Eventos");
 
-        jMenuItem9.setText("Cadastrar Evento");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        mnCadastrarEventos.setText("Cadastrar evento");
+        mnCadastrarEventos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                mnCadastrarEventosActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem9);
+        jMenu3.add(mnCadastrarEventos);
 
-        jMenuItem10.setText("Buscar Evento");
-        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+        mnBuscarEvento.setText("Buscar evento");
+        mnBuscarEvento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem10ActionPerformed(evt);
+                mnBuscarEventoActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem10);
+        jMenu3.add(mnBuscarEvento);
+
+        mnRelatorioEventos.setText("Relatorio eventos");
+        mnRelatorioEventos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioEventosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnRelatorioEventos);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694983_case.png"))); // NOI18N
         jMenu4.setText("Serviços");
 
-        jMenuItem11.setText("Cadastrar serviço");
-        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+        mnCadastrarservico.setText("Cadastrar serviço");
+        mnCadastrarservico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem11ActionPerformed(evt);
+                mnCadastrarservicoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem11);
+        jMenu4.add(mnCadastrarservico);
 
-        jMenuItem13.setText("Buscar serviço");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        mnBuscarServico.setText("Buscar serviço");
+        mnBuscarServico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                mnBuscarServicoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem13);
+        jMenu4.add(mnBuscarServico);
+
+        mnRelatorioSevico.setText("Relatorio serviço");
+        jMenu4.add(mnRelatorioSevico);
 
         jMenuBar1.add(jMenu4);
 
         jMenu5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695671_box-open-3d.png"))); // NOI18N
         jMenu5.setText("Estoque");
+
+        jMenuItem25.setText("jMenuItem25");
+        jMenu5.add(jMenuItem25);
+
+        jMenuItem26.setText("jMenuItem26");
+        jMenu5.add(jMenuItem26);
+
+        jMenuItem27.setText("jMenuItem27");
+        jMenu5.add(jMenuItem27);
+
         jMenuBar1.add(jMenu5);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695776_shopping-cart.png"))); // NOI18N
         jMenu6.setText("Compras");
+
+        mnCadastrarCompra.setText("Cadastrar compra");
+        jMenu6.add(mnCadastrarCompra);
+
+        mnBuscarCompra.setText("Buscar compra");
+        jMenu6.add(mnBuscarCompra);
+
+        mnRelatorioCompra.setText("Relatorio compra");
+        jMenu6.add(mnRelatorioCompra);
+
         jMenuBar1.add(jMenu6);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695828_aiga_cashier.png"))); // NOI18N
         jMenu7.setText("Vendas");
+
+        mnCadastrarVenda.setText("Cadastrar venda");
+        jMenu7.add(mnCadastrarVenda);
+
+        mnBuscarVenda.setText("Buscar venda");
+        mnBuscarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnBuscarVendaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnBuscarVenda);
+
+        mnRelatorioVendas.setText("Relatorio venda");
+        jMenu7.add(mnRelatorioVendas);
+
         jMenuBar1.add(jMenu7);
 
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695684_calculator.png"))); // NOI18N
         jMenu8.setText("Contas");
+
+        mnCadastrarContas.setText("Cadastrar contas");
+        mnCadastrarContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastrarContasActionPerformed(evt);
+            }
+        });
+        jMenu8.add(mnCadastrarContas);
+
+        mnBuscarContas.setText("Buscar contas");
+        mnBuscarContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnBuscarContasActionPerformed(evt);
+            }
+        });
+        jMenu8.add(mnBuscarContas);
+
+        mnRelatorioContas.setText("Relatorio contas");
+        jMenu8.add(mnRelatorioContas);
+
         jMenuBar1.add(jMenu8);
 
-        jMenu1.setText("Relatório");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1488404328_truck.png"))); // NOI18N
+        jMenu9.setText("Fornecedores");
+
+        mnCadastrarFornecedores.setText("Cadastrar fornecedores");
+        mnCadastrarFornecedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                mnCadastrarFornecedoresActionPerformed(evt);
             }
         });
+        jMenu9.add(mnCadastrarFornecedores);
 
-        jMenuItem14.setText("Relatório filial");
-        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+        mnBuscarFornecedores.setText("Buscar fornecedores");
+        mnBuscarFornecedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem14ActionPerformed(evt);
+                mnBuscarFornecedoresActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem14);
+        jMenu9.add(mnBuscarFornecedores);
 
-        jMenuItem12.setText("Relatório Cliente");
-        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+        mnRelatoriofornecedores.setText("Relatorio fornecedores");
+        jMenu9.add(mnRelatoriofornecedores);
+
+        jMenuBar1.add(jMenu9);
+
+        jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1488404390_architecture-interior-02.png"))); // NOI18N
+        jMenu10.setText("Filiais");
+
+        mnBuscarFiliais.setText("Cadastrar filiais");
+        mnBuscarFiliais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem12ActionPerformed(evt);
+                mnBuscarFiliaisActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem12);
+        jMenu10.add(mnBuscarFiliais);
 
-        jMenuItem15.setText("Relatório Evento");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem34.setText("Buscar filiais");
+        jMenuItem34.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem15ActionPerformed(evt);
+                jMenuItem34ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem15);
+        jMenu10.add(jMenuItem34);
 
-        jMenuBar1.add(jMenu1);
+        mnRelatorioFiliais.setText("Relatorio filiais");
+        mnRelatorioFiliais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioFiliaisActionPerformed(evt);
+            }
+        });
+        jMenu10.add(mnRelatorioFiliais);
+
+        jMenuBar1.add(jMenu10);
 
         setJMenuBar(jMenuBar1);
 
@@ -365,16 +424,6 @@ public class TelaInicial extends javax.swing.JFrame {
         telaCadastrarFuncionario.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        CadastrarFilial telaCadastrarFilial = new CadastrarFilial();
-        telaCadastrarFilial.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        CadastrarFornecedor telaCadastrarFornecedor = new CadastrarFornecedor();
-        telaCadastrarFornecedor.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
-
     private void menuCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarActionPerformed
         
     }//GEN-LAST:event_menuCadastrarActionPerformed
@@ -383,35 +432,15 @@ public class TelaInicial extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2ActionPerformed
 
-    private void menuBuscarFilialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarFilialActionPerformed
-        ListarFiliais telaListarFiliais = new ListarFiliais();
-        telaListarFiliais.setVisible(true);
-    }//GEN-LAST:event_menuBuscarFilialActionPerformed
-
-    private void menuCadastrarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarContasActionPerformed
-        CadastrarContas telaCadastrarContas = new CadastrarContas();
-        telaCadastrarContas.setVisible(true);
-    }//GEN-LAST:event_menuCadastrarContasActionPerformed
-
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        ListarFornecedores telaListarFornecedor = new ListarFornecedores();
-        telaListarFornecedor.setVisible(true);
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void mnCadastrarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarEventosActionPerformed
         CadastrarEvento telaCadastrarEvento = new CadastrarEvento();
         telaCadastrarEvento.setVisible(true);
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_mnCadastrarEventosActionPerformed
 
-    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+    private void mnBuscarEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarEventoActionPerformed
         ListarEventos telaListarEventos = new ListarEventos();
         telaListarEventos.setVisible(true);
-    }//GEN-LAST:event_jMenuItem10ActionPerformed
-
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ListarContas telaListarContas = new ListarContas();
-        telaListarContas.setVisible(true);
-    }//GEN-LAST:event_jMenuItem7ActionPerformed
+    }//GEN-LAST:event_mnBuscarEventoActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         ListarClientes telaListarClientes = new ListarClientes();
@@ -423,45 +452,69 @@ public class TelaInicial extends javax.swing.JFrame {
         telaListarFuncionario.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+    private void mnCadastrarservicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarservicoActionPerformed
         CadastrarServico telaCadastrarServico = new CadastrarServico();
         telaCadastrarServico.setVisible(true);
-    }//GEN-LAST:event_jMenuItem11ActionPerformed
+    }//GEN-LAST:event_mnCadastrarservicoActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+    private void mnBuscarServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarServicoActionPerformed
         
         ListarServiços telaListarServiços = new ListarServiços();
         telaListarServiços.setVisible(true);
         
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_mnBuscarServicoActionPerformed
 
-    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
-        
+    private void mnBuscarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarVendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnBuscarVendaActionPerformed
+
+    private void mnBuscarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarContasActionPerformed
+        ListarContas telaListarContas = new ListarContas();
+        telaListarContas.setVisible(true);
+    }//GEN-LAST:event_mnBuscarContasActionPerformed
+
+    private void mnBuscarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarFornecedoresActionPerformed
+        ListarFornecedores telaListarFornecedor = new ListarFornecedores();
+        telaListarFornecedor.setVisible(true);
+    }//GEN-LAST:event_mnBuscarFornecedoresActionPerformed
+
+    private void mnRelatorioFiliaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioFiliaisActionPerformed
        FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
        buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
        exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );
-       
-    }//GEN-LAST:event_jMenuItem14ActionPerformed
+    }//GEN-LAST:event_mnRelatorioFiliaisActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    private void mnBuscarFiliaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarFiliaisActionPerformed
+        CadastrarFilial telaCadastrarFilial = new CadastrarFilial();
+        telaCadastrarFilial.setVisible(true);
+    }//GEN-LAST:event_mnBuscarFiliaisActionPerformed
 
-    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
-        
-      ClienteRepositorio daoCliente = GerenciadorDeReferencias.getCliente();
-      buscaCliente = (ArrayList<Cliente>) daoCliente.Abrir();  
-      exibeRelatorioJasper("RelatorioCliente.jasper", buscaCliente );
-         
-    }//GEN-LAST:event_jMenuItem12ActionPerformed
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
+       buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
+       exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
-    private void jMenuItem15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
-    
+    private void mnRelatorioEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioEventosActionPerformed
       EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento(); 
       buscaEvento = (ArrayList<Evento>) daoEvento.Abrir();   
       exibeRelatorioJasper("RelatorioEvento.jasper", buscaEvento);
-        
-    }//GEN-LAST:event_jMenuItem15ActionPerformed
+    }//GEN-LAST:event_mnRelatorioEventosActionPerformed
+
+    private void mnCadastrarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarFornecedoresActionPerformed
+        CadastrarFornecedor telaCadastrarFornecedor = new CadastrarFornecedor();
+        telaCadastrarFornecedor.setVisible(true);
+    }//GEN-LAST:event_mnCadastrarFornecedoresActionPerformed
+
+    private void mnCadastrarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarContasActionPerformed
+        CadastrarContas telaCadastrarContas = new CadastrarContas();
+        telaCadastrarContas.setVisible(true);
+    }//GEN-LAST:event_mnCadastrarContasActionPerformed
+
+    private void jMenuItem34ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem34ActionPerformed
+        ListarFiliais telaListarFiliais = new ListarFiliais();
+        telaListarFiliais.setVisible(true);
+    }//GEN-LAST:event_jMenuItem34ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -500,7 +553,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -508,26 +561,39 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
+    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblImagem;
-    private javax.swing.JMenuItem menuBuscarFilial;
     private javax.swing.JMenu menuCadastrar;
-    private javax.swing.JMenuItem menuCadastrarContas;
+    private javax.swing.JMenuItem mnBuscarCompra;
+    private javax.swing.JMenuItem mnBuscarContas;
+    private javax.swing.JMenuItem mnBuscarEvento;
+    private javax.swing.JMenuItem mnBuscarFiliais;
+    private javax.swing.JMenuItem mnBuscarFornecedores;
+    private javax.swing.JMenuItem mnBuscarServico;
+    private javax.swing.JMenuItem mnBuscarVenda;
+    private javax.swing.JMenuItem mnCadastrarCompra;
+    private javax.swing.JMenuItem mnCadastrarContas;
+    private javax.swing.JMenuItem mnCadastrarEventos;
+    private javax.swing.JMenuItem mnCadastrarFornecedores;
+    private javax.swing.JMenuItem mnCadastrarVenda;
+    private javax.swing.JMenuItem mnCadastrarservico;
+    private javax.swing.JMenuItem mnRelatorioCompra;
+    private javax.swing.JMenuItem mnRelatorioContas;
+    private javax.swing.JMenuItem mnRelatorioEventos;
+    private javax.swing.JMenuItem mnRelatorioFiliais;
+    private javax.swing.JMenuItem mnRelatorioSevico;
+    private javax.swing.JMenuItem mnRelatorioVendas;
+    private javax.swing.JMenuItem mnRelatoriofornecedores;
     private javax.swing.JPanel pnlTelaInicial;
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables

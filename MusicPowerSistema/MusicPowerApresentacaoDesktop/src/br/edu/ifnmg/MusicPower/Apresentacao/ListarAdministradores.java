@@ -57,7 +57,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlListarFuncionário.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

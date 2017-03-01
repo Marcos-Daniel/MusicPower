@@ -84,7 +84,7 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlCadastrarServico.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar serviço"));
 

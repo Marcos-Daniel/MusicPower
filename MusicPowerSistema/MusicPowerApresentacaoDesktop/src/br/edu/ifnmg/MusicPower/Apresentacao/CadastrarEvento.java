@@ -66,7 +66,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         txtStatus = new javax.swing.JFormattedTextField();
         lblDescicao1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlCadastrarEvento.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar evento"));
 

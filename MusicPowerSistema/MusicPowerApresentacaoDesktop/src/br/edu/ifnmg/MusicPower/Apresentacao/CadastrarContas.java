@@ -64,7 +64,7 @@ public class CadastrarContas extends javax.swing.JFrame {
         btnLimparCampos = new javax.swing.JButton();
         txtDataDeVencimento = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastrar Contas"));
 
