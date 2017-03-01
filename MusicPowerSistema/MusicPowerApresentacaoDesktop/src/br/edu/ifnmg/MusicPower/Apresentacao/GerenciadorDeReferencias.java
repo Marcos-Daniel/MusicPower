@@ -7,6 +7,7 @@ import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -19,6 +20,7 @@ import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ProdutoDAO;
 import musicpowerpersistencia.ServicoDAO;
 
 /*
@@ -40,7 +42,7 @@ public class GerenciadorDeReferencias {
     private static FuncionarioRepositorio daoFuncionario;
     private static AdministradorRepositorio daoAdministrador;
     private static ServiçoRepositorio daoServiço;
-
+     private static ProdutoRepositorio daoProduto;
     public static FilialRepositorio getFilial() {
         try {
             if (daoFilial == null) {
@@ -131,6 +133,18 @@ public class GerenciadorDeReferencias {
                 daoServiço = new ServicoDAO();
             }
             return daoServiço;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+    public static ProdutoRepositorio getProduto() {
+        try {
+            if (daoProduto == null) {
+                daoProduto = new ProdutoDAO();
+            }
+            return daoProduto;
         } catch (Exception e) {
             System.out.print(e);
         }

@@ -17,6 +17,8 @@ import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Produto;
+import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import java.sql.SQLException;
 import musicpowerpersistencia.ClienteDAO;
 import musicpowerpersistencia.ContaDAO;
@@ -24,6 +26,7 @@ import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ProdutoDAO;
 
 /**
  *
@@ -77,6 +80,13 @@ public class MuiscPowerApresentacao {
         
         FuncionarioRepositorio bd_funcionario = new FuncionarioDAO();
         bd_funcionario.Salvar(funcionario);
+        
+    }
+    
+    public static void criarProduto(Produto produto) throws SQLException, ClassNotFoundException {
+        
+        ProdutoRepositorio bd_produto = new ProdutoDAO();
+        bd_produto.Salvar(produto);
         
     }
 

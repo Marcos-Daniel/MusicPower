@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositorio {
     public ProdutoDAO() throws SQLException{
-       setConsultaSalvar("INSERT INTO produto(descricao,qtd,valor)VALUES(?,?,?)");
-       setConsultaAlterar("UPDATE produto SET descricao = ?,qtd = ?, WHERE id = ?");
+       setConsultaSalvar("INSERT INTO produto(descricao,marca,modelo,qtd,valor,lote)VALUES(?,?,?,?,?,?)");
+       setConsultaAlterar("UPDATE produto SET descricao = ?,marca = ?,modelo = ?,qtd = ?,valor = ?,lote = ? WHERE id = ?");
        setConsultaExcluir("DELETE FROM produto WHERE id = ?");
-       setConsultaAbrir("SELECT id,descricao,qtd,valor FROM produto WHERE id = ?");
+       setConsultaAbrir("SELECT id,descricao,marca,modelo,qtd,valor,lote FROM produto");
     }
   
     @Override
@@ -62,8 +62,11 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
             Produto tmp = new Produto();
             tmp.setId(resultado.getInt(1));
             tmp.setDescricao(resultado.getString(2));
-            tmp.setQtd(resultado.getInt(3));
-            tmp.setValor(resultado.getDouble(4));
+            tmp.setMarca(resultado.getString(3));
+            tmp.setModelo(resultado.getString(4));
+            tmp.setQtd(resultado.getInt(5));
+            tmp.setValor(resultado.getDouble(6));
+            tmp.setLote(resultado.getString(7));
             return tmp;
       } catch(SQLException ex){
           System.out.println(ex);
@@ -75,8 +78,12 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
     protected void preencheConsulta(PreparedStatement sql, Produto obj) {
        try{
             sql.setString(1, obj.getDescricao());
-            sql.setInt(2, obj.getQtd());
-            sql.setDouble(3, obj.getValor());
+            sql.setString(2, obj.getMarca());
+            sql.setString(3, obj.getModelo());
+            sql.setInt(4, obj.getQtd());
+            sql.setDouble(5, obj.getValor());
+            sql.setString(6, obj.getLote());
+            if(obj.getId() >0) sql.setInt(7, obj.getId());
         } catch(SQLException ex){
             System.out.println(ex);
         }
