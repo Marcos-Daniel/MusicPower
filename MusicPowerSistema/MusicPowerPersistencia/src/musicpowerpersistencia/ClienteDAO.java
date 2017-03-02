@@ -61,6 +61,23 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
     }
     
     @Override
+    public Boolean Verificar(String cpf) throws SQLException {
+        try {
+            PreparedStatement sql = conn.prepareStatement("select id,nome,cpf,dataNascimento from cliente where cpf = ?");
+            sql.setString(1, cpf);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()){   
+                return true;
+            }else{
+                return false;
+            }            
+        }  catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return null;
+    }
+    
+    @Override
     protected void preencheFiltros(Cliente filtro) {
         if(filtro.getNome() != null) adicionarFiltro("nome", " like ");
         if(filtro.getCpf() != null) adicionarFiltro("cpf", "=");

@@ -5,12 +5,18 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.Cliente;
+import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import java.awt.Color;
+import java.sql.SQLException;
+
 /**
  *
  * @author breno
  */
 public class TelaOperacoesVenda extends javax.swing.JFrame {
 
+    ClienteRepositorio dao = GerenciadorDeReferencias.getCliente();
     /**
      * Creates new form TelaVenda
      */
@@ -112,16 +118,16 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, 18)
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlClienteLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnConsultarCliente))
+                        .addComponent(txtVerificacaoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                        .addGap(319, 319, 319))
                     .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(txtVerificacaoCliente)))
-                .addGap(0, 43, Short.MAX_VALUE)
+                        .addComponent(btnConsultarCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlClienteLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -429,8 +435,23 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCpfActionPerformed
 
     private void btnConsultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarClienteActionPerformed
-        // TODO add your handling code here:
-       
+        
+        String cpf = txtCpf.getText().trim();
+        if(cpf != null){
+            
+            try {
+              boolean resultado = dao.Verificar(cpf);
+                if (resultado) {
+                    txtVerificacaoCliente.setText("Usuário cadastrado!");
+                    txtVerificacaoCliente.setForeground(Color.green);
+                } else {
+                    txtVerificacaoCliente.setText("Usuário não Encontrado!");
+                    txtVerificacaoCliente.setForeground(Color.red);
+                }
+            } catch (Exception e) {
+            }
+            
+        }
     }//GEN-LAST:event_btnConsultarClienteActionPerformed
 
     private void btnConsultarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarProdutoActionPerformed
@@ -468,7 +489,6 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        this.dispose();
         CadastrarCliente telaCadastrarCliente = new CadastrarCliente();
         telaCadastrarCliente.setVisible(true);
 
