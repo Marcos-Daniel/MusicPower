@@ -490,14 +490,13 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarProdutoActionPerformed
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
-        if(novo.getId() >= 0){
-            busca= (ArrayList<Produto>) daoProduto.Buscar(novo);
+
             novo = new Produto();
             this.recuperacampos();
             listaVenda.add(novo);
             preencherCampos(listaVenda);
-        }
-        
+            this.limparCampos();
+
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
 
     private void btnEditarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdutoActionPerformed
@@ -628,8 +627,9 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         novo.setLote(txtLote.getText());
         novo.setMarca(txtMarca.getText());
         novo.setModelo(txtModelo.getText());
-        novo.setQtd(Integer.parseInt(txtQuantidade.getText()));
-        novo.setValor(Double.parseDouble(txtLote.getText()));
+        int qtd =Integer.parseInt(txtQuantidade.getText());
+        novo.setQtd(qtd);
+        novo.setValor(Double.parseDouble(txtValorUnitarioProduto.getText()));
     }
 
     private void limparCampos() {
