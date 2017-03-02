@@ -24,10 +24,9 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
 
     ClienteRepositorio daoCliente = GerenciadorDeReferencias.getCliente();
     ProdutoRepositorio daoProduto = GerenciadorDeReferencias.getProduto();
-    Produto novo = new Produto();
+    Produto novo;
     ArrayList<Produto> listaVenda = new ArrayList<>();
     ArrayList<Produto> busca = new ArrayList<>();
-    int cont = 1;
     
     /**
      * Creates new form TelaVenda
@@ -141,14 +140,11 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
                     .addGroup(pnlClienteLayout.createSequentialGroup()
                         .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnConsultarCliente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnConsultarCliente)))
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlClienteLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblClienteAtivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblClienteAtivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlClienteLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -451,8 +447,6 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblOperacoesVenda.getAccessibleContext().setAccessibleName("Operações de Vendas - Music Power");
-
         getAccessibleContext().setAccessibleName("Operação de Venda ");
 
         pack();
@@ -498,9 +492,10 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
         if(novo.getId() >= 0){
             busca= (ArrayList<Produto>) daoProduto.Buscar(novo);
-            preencherCampos(busca);
-            listaVenda.set(cont, novo);
-            cont++;
+            novo = new Produto();
+            this.recuperacampos();
+            listaVenda.add(novo);
+            preencherCampos(listaVenda);
         }
         
     }//GEN-LAST:event_btnAdicionarProdutoActionPerformed
@@ -626,6 +621,15 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         txtQtd.setText(qtd);
         txtValorUnitarioProduto.setText(valor);
         txtLote.setText(novo.getLote());
+    }
+    
+    private void recuperacampos(){
+        novo.setDescricao(txtDescricaoProduto.getText());
+        novo.setLote(txtLote.getText());
+        novo.setMarca(txtMarca.getText());
+        novo.setModelo(txtModelo.getText());
+        novo.setQtd(Integer.parseInt(txtQuantidade.getText()));
+        novo.setValor(Double.parseDouble(txtLote.getText()));
     }
 
     private void limparCampos() {
