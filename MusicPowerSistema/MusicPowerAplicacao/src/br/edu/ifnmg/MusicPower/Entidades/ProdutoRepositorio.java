@@ -13,4 +13,5 @@ import java.sql.SQLException;
  */
 public interface ProdutoRepositorio extends Repositorio<Produto>{
     public Produto Abrir(String descricao) throws SQLException;
+    public Produto Abrir(int codProduto) throws SQLException;
 }

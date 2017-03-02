@@ -84,7 +84,7 @@
                       <Component id="btnCancelar1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="btnLiquidar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -241,54 +241,55 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblCodigoProduto" min="-2" pref="79" max="-2" attributes="0"/>
                           <Component id="lblDescricaoProduto1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDescricaoProduto3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtDescricao" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="txtCodigoProduto" min="-2" pref="81" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnConsultarProduto" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                              <Component id="lblDescricaoProduto2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtDescricao1" min="-2" pref="208" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnAdicionarProduto" alignment="1" min="-2" pref="156" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="lblQuantidadeProduto" min="-2" pref="95" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="txtQuantidadeProduto" min="-2" pref="59" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                      <Component id="lblValorUnitarioProduto1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="txtModelo" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="txtCodigoProduto" min="-2" pref="81" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="btnConsultarProduto" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblDescricaoProduto2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblQuantidadeProduto" min="-2" pref="95" max="-2" attributes="0"/>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="txtValorUnitarioProduto" min="-2" pref="45" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="txtDescricaoProduto" alignment="0" min="-2" pref="208" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="txtQtd" min="-2" pref="56" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="lblValorUnitarioProduto1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="txtValorUnitarioProduto" min="-2" pref="45" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblDescricaoProduto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblValorUnitarioProduto" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtLote" min="-2" pref="208" max="-2" attributes="0"/>
+                                  <Component id="txtMarca" min="-2" pref="208" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="txtQuantidade" min="-2" pref="55" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnAdicionarProduto" min="-2" pref="156" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnLimparCampos" min="-2" pref="156" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblDescricaoProduto" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblValorUnitarioProduto" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                      <Component id="txtDescricao2" min="-2" pref="208" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="796" max="32767" attributes="0"/>
-                          <Component id="txtDescricao3" min="-2" pref="208" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -300,30 +301,29 @@
                           <Component id="txtCodigoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnConsultarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDescricaoProduto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtDescricao1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDescricaoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDescricaoProduto2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblDescricaoProduto1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtDescricao" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblQuantidadeProduto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtQuantidadeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblValorUnitarioProduto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="txtValorUnitarioProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDescricao2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtLote" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblValorUnitarioProduto1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtQtd" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btnAdicionarProduto" min="-2" pref="32" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtDescricao3" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="96" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnAdicionarProduto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="btnLimparCampos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDescricaoProduto3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -360,7 +360,7 @@
                 <Property name="text" type="java.lang.String" value="Marca :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDescricao">
+            <Component class="javax.swing.JTextField" name="txtModelo">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -376,14 +376,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Quantidade:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="txtQuantidadeProduto">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="#0" subtype="-1" type="0"/>
-                </Property>
+                <Property name="text" type="java.lang.String" value="Estoque:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblValorUnitarioProduto">
@@ -421,7 +414,7 @@
                 <Property name="text" type="java.lang.String" value="Modelo :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDescricao1">
+            <Component class="javax.swing.JTextField" name="txtDescricaoProduto">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -440,7 +433,7 @@
                 <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o :"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDescricao2">
+            <Component class="javax.swing.JTextField" name="txtLote">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -459,7 +452,7 @@
                 <Property name="text" type="java.lang.String" value="Valor Unit R$:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDescricao3">
+            <Component class="javax.swing.JTextField" name="txtMarca">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -468,6 +461,35 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnLimparCampos">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Limpar Campos"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCamposActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtQtd">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ea" green="c0" red="88" type="rgb"/>
+                </Property>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#,##0.00" subtype="-1" type="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtQuantidade">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblDescricaoProduto3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Ubuntu" size="15" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Informe a quantidade:"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -490,7 +512,7 @@
                       <Component id="btnExcluir" min="-2" pref="115" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" pref="1067" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -514,7 +536,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tblItensCompra">
+                <Component class="javax.swing.JTable" name="tblItensVendas">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="7" rowCount="4">

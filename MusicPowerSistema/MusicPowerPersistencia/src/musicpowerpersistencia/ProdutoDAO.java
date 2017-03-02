@@ -38,6 +38,19 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
         }
         return null;
     }
+    
+    @Override
+    public Produto Abrir(int codProduto) throws SQLException{
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT id,descricao,marca,modelo,qtd,valor,lote FROM produto WHERE id = ?");
+            sql.setInt(1, codProduto);
+            ResultSet resultado = sql.executeQuery();
+            if(resultado.next()) return preencheObjeto(resultado);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 
     @Override
     protected void preencheFiltros(Produto filtro) {
