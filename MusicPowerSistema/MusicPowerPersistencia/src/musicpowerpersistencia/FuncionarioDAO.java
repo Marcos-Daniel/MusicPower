@@ -44,7 +44,7 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
     @Override
     protected void preencheFiltros(Funcionario filtro) {
         if(filtro.getNome() != null) 
-            adicionarFiltro("nome", "like ");
+            adicionarFiltro("nome", " = ");
         if(filtro.getCpf() != null) 
             adicionarFiltro("cpf", "=");
     }

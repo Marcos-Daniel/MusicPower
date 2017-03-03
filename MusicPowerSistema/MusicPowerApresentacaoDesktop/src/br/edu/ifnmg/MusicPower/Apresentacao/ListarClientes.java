@@ -56,7 +56,7 @@ public class ListarClientes extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlListarCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -279,7 +279,7 @@ public class ListarClientes extends javax.swing.JFrame {
             
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(cliente);
-                JOptionPane.showMessageDialog(rootPane, "Conta excluída com sucesso!");
+                JOptionPane.showMessageDialog(rootPane, "Cliente excluído com sucesso!");
                 buscarTodos();
             }
         } else {
@@ -317,7 +317,6 @@ public class ListarClientes extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-        this.dispose();
         CadastrarCliente telaCadastrarCliente = new CadastrarCliente();
         telaCadastrarCliente.setVisible(true);
         

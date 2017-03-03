@@ -277,6 +277,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
            
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(administrador);
+                JOptionPane.showMessageDialog(rootPane, "Administrador excluído com sucesso!");
                 buscarTodos();
             }
         } else {
@@ -403,7 +404,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
         
         DefaultTableModel modelo = new DefaultTableModel();
         
-        modelo.addColumn("CodCli");
+        modelo.addColumn("Codadm");
         modelo.addColumn("Nome");
         modelo.addColumn("Cpf");
         modelo.addColumn("Nascimento");
@@ -415,7 +416,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
         modelo.addColumn("Bairro");
         modelo.addColumn("NumResidência");
         modelo.addColumn("Cargo");
-       
+
         for(Administrador c:busca){
             Vector linha = new Vector();
             linha.add(c.getId());

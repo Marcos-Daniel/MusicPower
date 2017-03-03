@@ -68,10 +68,11 @@ public class TelaInicial extends javax.swing.JFrame {
         menuCadastrar = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        mnCadastrarAdministrador = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        mnBuscarAdminisrador = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnCadastrarEventos = new javax.swing.JMenuItem();
         mnBuscarEvento = new javax.swing.JMenuItem();
@@ -84,10 +85,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        mnCadastrarCompra = new javax.swing.JMenuItem();
-        mnBuscarCompra = new javax.swing.JMenuItem();
-        mnRelatorioCompra = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         mnCadastrarVenda = new javax.swing.JMenuItem();
         mnBuscarVenda = new javax.swing.JMenuItem();
@@ -143,9 +140,9 @@ public class TelaInicial extends javax.swing.JFrame {
         pnlTelaInicialLayout.setHorizontalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaInicialLayout.createSequentialGroup()
-                .addContainerGap(273, Short.MAX_VALUE)
+                .addContainerGap(228, Short.MAX_VALUE)
                 .addComponent(pnlTituloImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(274, Short.MAX_VALUE))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         pnlTelaInicialLayout.setVerticalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,6 +176,14 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         menuCadastrar.add(jMenuItem2);
 
+        mnCadastrarAdministrador.setText("Cadatrar administrador");
+        mnCadastrarAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastrarAdministradorActionPerformed(evt);
+            }
+        });
+        menuCadastrar.add(mnCadastrarAdministrador);
+
         jMenuBar1.add(menuCadastrar);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
@@ -205,13 +210,13 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem6);
 
-        jMenuItem9.setText("jMenuItem9");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        mnBuscarAdminisrador.setText("Buscar administrador");
+        mnBuscarAdminisrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                mnBuscarAdminisradorActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem9);
+        jMenu2.add(mnBuscarAdminisrador);
 
         jMenuBar1.add(jMenu2);
 
@@ -291,20 +296,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu5.add(jMenuItem27);
 
         jMenuBar1.add(jMenu5);
-
-        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695776_shopping-cart.png"))); // NOI18N
-        jMenu6.setText("Compras");
-
-        mnCadastrarCompra.setText("Cadastrar compra");
-        jMenu6.add(mnCadastrarCompra);
-
-        mnBuscarCompra.setText("Buscar compra");
-        jMenu6.add(mnBuscarCompra);
-
-        mnRelatorioCompra.setText("Relatorio compra");
-        jMenu6.add(mnRelatorioCompra);
-
-        jMenuBar1.add(jMenu6);
 
         jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695828_aiga_cashier.png"))); // NOI18N
         jMenu7.setText("Vendas");
@@ -499,11 +490,10 @@ public class TelaInicial extends javax.swing.JFrame {
         telaCadastrarFilial.setVisible(true);
     }//GEN-LAST:event_mnBuscarFiliaisActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
-       FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
-       buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
-       exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    private void mnBuscarAdminisradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarAdminisradorActionPerformed
+       ListarAdministradores telaListarAdministradores = new ListarAdministradores();
+       telaListarAdministradores.setVisible(true);
+    }//GEN-LAST:event_mnBuscarAdminisradorActionPerformed
 
     private void mnRelatorioEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioEventosActionPerformed
       EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento(); 
@@ -539,6 +529,11 @@ public class TelaInicial extends javax.swing.JFrame {
         telaListarProdutos.setVisible(true);
         
     }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void mnCadastrarAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarAdministradorActionPerformed
+        CadastrarAdministrador telaCadastrarAdministrador = new CadastrarAdministrador();
+        telaCadastrarAdministrador.setVisible(true);
+    }//GEN-LAST:event_mnCadastrarAdministradorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -582,7 +577,6 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
@@ -595,23 +589,21 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem34;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JLabel lblImagem;
     private javax.swing.JMenu menuCadastrar;
-    private javax.swing.JMenuItem mnBuscarCompra;
+    private javax.swing.JMenuItem mnBuscarAdminisrador;
     private javax.swing.JMenuItem mnBuscarContas;
     private javax.swing.JMenuItem mnBuscarEvento;
     private javax.swing.JMenuItem mnBuscarFiliais;
     private javax.swing.JMenuItem mnBuscarFornecedores;
     private javax.swing.JMenuItem mnBuscarServico;
     private javax.swing.JMenuItem mnBuscarVenda;
-    private javax.swing.JMenuItem mnCadastrarCompra;
+    private javax.swing.JMenuItem mnCadastrarAdministrador;
     private javax.swing.JMenuItem mnCadastrarContas;
     private javax.swing.JMenuItem mnCadastrarEventos;
     private javax.swing.JMenuItem mnCadastrarFornecedores;
     private javax.swing.JMenuItem mnCadastrarVenda;
     private javax.swing.JMenuItem mnCadastrarservico;
-    private javax.swing.JMenuItem mnRelatorioCompra;
     private javax.swing.JMenuItem mnRelatorioContas;
     private javax.swing.JMenuItem mnRelatorioEventos;
     private javax.swing.JMenuItem mnRelatorioFiliais;

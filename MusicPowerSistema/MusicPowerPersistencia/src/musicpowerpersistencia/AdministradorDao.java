@@ -25,7 +25,7 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
         setConsultaAlterar("UPDATE administrador SET nome = ?,cpf = ?,dataNascimento = ?,telefone = ?,email= ?,cidade = ?,uf = ?,rua = ?,bairro = ?,numResidencia = ? ,cargo = ?, login = ?, senha = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM administrador WHERE id = ?");
         setConsultaAbrir("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo,login,senha FROM administrador");
-        setConsultaBusca("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM administrador");
+        setConsultaBusca("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo,login,senha FROM administrador");
     }
     
     @Override
@@ -78,7 +78,7 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
     @Override
     protected void preencheFiltros(Administrador filtro) {
        if(filtro.getNome() != null) 
-            adicionarFiltro("nome", "like ");
+            adicionarFiltro("nome", " = ");
         if(filtro.getCpf() != null) 
             adicionarFiltro("cpf", "=");
     }

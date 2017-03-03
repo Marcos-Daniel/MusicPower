@@ -276,6 +276,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
            
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(funcionario);
+                JOptionPane.showMessageDialog(rootPane, "Fucionário excluído com sucesso!");
                 buscarTodos();
             }
         } else {

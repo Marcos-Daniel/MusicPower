@@ -426,7 +426,7 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         
         String uf = txtUf.getText().trim();
         if(!uf.equals("")){
-            novo.setUF(cpf);
+            novo.setUF(uf);
         }
         
         String rua = txtRua.getText().trim();

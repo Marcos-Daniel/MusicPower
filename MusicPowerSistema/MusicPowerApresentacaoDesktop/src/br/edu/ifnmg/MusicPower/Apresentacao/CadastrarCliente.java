@@ -23,7 +23,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
     
     Cliente novo = new Cliente();
     MuiscPowerApresentacao MPA = new MuiscPowerApresentacao();
-    ListarClientes telalistarClientes;
+    ListarClientes telalistarClientes ;
     ClienteRepositorio dao = GerenciadorDeReferencias.getCliente();
     
     /**
@@ -263,7 +263,7 @@ public class CadastrarCliente extends javax.swing.JFrame {
                 this.dispose();
              }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Coloque um modelo de data váido" + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
         }
       

@@ -31,6 +31,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarAdministrador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cadatrar administrador"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnCadastrarAdministradorActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenu2">
@@ -60,12 +68,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem6ActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
+            <MenuItem class="javax.swing.JMenuItem" name="mnBuscarAdminisrador">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jMenuItem9"/>
+                <Property name="text" type="java.lang.String" value="Buscar administrador"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem9ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnBuscarAdminisradorActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -162,31 +170,6 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem27">
               <Properties>
                 <Property name="text" type="java.lang.String" value="jMenuItem27"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu6">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695776_shopping-cart.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Compras"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mnCadastrarCompra">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastrar compra"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnBuscarCompra">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Buscar compra"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="mnRelatorioCompra">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Relatorio compra"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -372,9 +355,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="273" max="32767" attributes="0"/>
+                  <EmptySpace pref="228" max="32767" attributes="0"/>
                   <Component id="pnlTituloImagem" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="274" max="32767" attributes="0"/>
+                  <EmptySpace pref="228" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
