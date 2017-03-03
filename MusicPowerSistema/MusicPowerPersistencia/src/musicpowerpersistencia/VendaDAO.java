@@ -18,8 +18,9 @@ import java.util.logging.Logger;
  * @author marcos
  */
 public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
+    Venda tmp;
     public VendaDAO() throws SQLException{
-        setConsultaSalvar("INSERT INTO venda (cliente,valor,datavenda)VALUES(?,?,?)");
+        setConsultaSalvar("INSERT INTO venda (cliente,funcionario,valor,datavenda)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE venda SET cliente = ?, valor = ?, datavenda = ?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM venda WHERE id = ?");
         setConsultaAbrir("SELECT id,cliente,valor,datavenda FROM venda WHERE id = ?");
@@ -61,11 +62,35 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
     protected void preencheConsulta(PreparedStatement sql, Venda obj) {
           try{
             sql.setInt(1, obj.getCliente());
-            sql.setDouble(2, obj.getValor());
-            sql.setDate(3, obj.getDataVenda());
+            sql.setInt(2, obj.getFuncionario());
+            sql.setDouble(3, obj.getValor());
+            sql.setDate(4, obj.getDataVenda());
         } catch(SQLException ex){
             System.out.println(ex);
         }
+    }
+    
+    @Override
+     public Venda SalvarVenda(Venda obj) {
+        try {
+            if (obj.getId() == 0) {
+                PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
+                preencheConsulta(sql, obj);
+                ResultSet resultado = sql.executeQuery();
+                tmp = preencheObjeto(resultado);
+                return tmp;
+            } else {
+                PreparedStatement sql = conn.prepareStatement(getConsultaAlterar());
+                preencheConsulta(sql, obj);
+                sql.executeUpdate();
+                return null;
+            }
+            
+        } catch (SQLException e) {
+            System.out.print(e + " Dg Salvar");
+
+        }
+        return null;
     }
 
 }

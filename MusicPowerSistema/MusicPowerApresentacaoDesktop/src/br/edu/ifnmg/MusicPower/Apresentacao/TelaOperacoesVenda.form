@@ -62,8 +62,9 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Component id="btnCancelar1" min="-2" pref="119" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnLiquidar" min="-2" pref="125" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -79,12 +80,12 @@
                   <Component id="pnlProduto" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="pnlItensVenda" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnCancelar1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="btnLiquidar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnCancelar1" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnLiquidar" min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,7 +95,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Cliente"/>
+                <TitledBorder title="Dados da Venda"/>
               </Border>
             </Property>
           </Properties>
@@ -104,29 +105,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblCPF" min="-2" pref="164" max="-2" attributes="0"/>
-                          <Component id="lblCPF1" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblCPF" pref="164" max="32767" attributes="0"/>
+                          <Component id="lblCPF1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="txtVerificacaoCliente" pref="186" max="32767" attributes="0"/>
+                              <Component id="txtIdFuncionario" pref="186" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="319" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="txtCpf" min="-2" pref="188" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnConsultarCliente" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtIdCliente" min="-2" pref="188" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblClienteAtivo" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="22" max="32767" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="lblClienteAtivo" pref="106" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -136,10 +130,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnConsultarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCPF1" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -148,7 +140,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="txtVerificacaoCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtIdFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblCPF" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
@@ -164,16 +156,8 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Reposta de Verica&#xe7;&#xe3;o"/>
+                <Property name="text" type="java.lang.String" value="*ID Funcion&#xe1;rio:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnConsultarCliente">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Verificar"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarClienteActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblClienteAtivo">
               <Properties>
@@ -185,17 +169,14 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtCpf">
+            <Component class="javax.swing.JTextField" name="txtIdCliente">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCpfActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtVerificacaoCliente">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="txtIdFuncionario">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtVerificacaoClienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdFuncionarioActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblCPF1">
@@ -203,19 +184,8 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CPF (*):"/>
+                <Property name="text" type="java.lang.String" value="*ID Cliente:"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1474392208_add.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Novo"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -502,24 +472,21 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnEditarProduto" min="-2" pref="102" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnExcluir" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="87" max="32767" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnEditarProduto" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                          <Component id="btnExcluir" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jScrollPane1" pref="90" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnExcluir" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -592,14 +559,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btnEditarProduto">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Editar Item"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarProdutoActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btnExcluir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Remover Item"/>

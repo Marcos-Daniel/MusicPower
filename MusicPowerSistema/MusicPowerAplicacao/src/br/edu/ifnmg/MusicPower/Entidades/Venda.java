@@ -15,19 +15,22 @@ import java.util.List;
 public class Venda implements Entidade {
     private int id;
     private int cliente;
+    private int funcionario;
     private Double valor;
     private Date dataVenda;
-    private List<ItensVenda> itens;
     
     public Venda() {
         
     }
-    public Venda(int id, int cliente, Double valor, Date dataVenda) {
+    
+    public Venda(int id, int cliente, int funcionario, Double valor, Date dataVenda) {
         this.id = id;
         this.cliente = cliente;
+        this.funcionario = funcionario;
         this.valor = valor;
         this.dataVenda = dataVenda;
     }
+    
     @Override
     public int getId() {
         return id;
@@ -36,11 +39,20 @@ public class Venda implements Entidade {
     public void setId(int id) {
         this.id = id;
     }
+
     public int getCliente() {
         return cliente;
     }
     public void setCliente(int cliente) {
         this.cliente = cliente;
+    }
+    
+    public int getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(int funcionario) {
+        this.funcionario = funcionario;
     }
     public Double getValor() {
         return valor;

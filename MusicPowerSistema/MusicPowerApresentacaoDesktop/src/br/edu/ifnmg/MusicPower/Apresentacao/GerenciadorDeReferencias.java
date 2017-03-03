@@ -9,6 +9,7 @@ import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
 import musicpowerpersistencia.ProdutoDAO;
 import musicpowerpersistencia.ServicoDAO;
+import musicpowerpersistencia.VendaDAO;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -42,7 +44,9 @@ public class GerenciadorDeReferencias {
     private static FuncionarioRepositorio daoFuncionario;
     private static AdministradorRepositorio daoAdministrador;
     private static ServiçoRepositorio daoServiço;
-     private static ProdutoRepositorio daoProduto;
+    private static ProdutoRepositorio daoProduto;
+    private static VendaRepositorio daoVenda;
+    
     public static FilialRepositorio getFilial() {
         try {
             if (daoFilial == null) {
@@ -145,6 +149,18 @@ public class GerenciadorDeReferencias {
                 daoProduto = new ProdutoDAO();
             }
             return daoProduto;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+    public static VendaRepositorio getVenda() {
+        try {
+            if (daoVenda == null) {
+                daoVenda = new VendaDAO();
+            }
+            return daoVenda;
         } catch (Exception e) {
             System.out.print(e);
         }

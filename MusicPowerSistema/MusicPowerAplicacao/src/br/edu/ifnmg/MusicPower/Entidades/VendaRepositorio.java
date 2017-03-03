@@ -10,4 +10,5 @@ package br.edu.ifnmg.MusicPower.Entidades;
  * @author breno
  */
 public interface VendaRepositorio extends Repositorio<Venda>{
+    public Venda SalvarVenda(Venda obj);
 }

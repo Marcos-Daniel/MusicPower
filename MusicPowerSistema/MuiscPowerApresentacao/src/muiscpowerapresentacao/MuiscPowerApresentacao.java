@@ -17,8 +17,12 @@ import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ItensVenda;
+import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Venda;
+import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
 import java.sql.SQLException;
 import musicpowerpersistencia.ClienteDAO;
 import musicpowerpersistencia.ContaDAO;
@@ -26,7 +30,9 @@ import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ItensVendaDAO;
 import musicpowerpersistencia.ProdutoDAO;
+import musicpowerpersistencia.VendaDAO;
 
 /**
  *
@@ -87,6 +93,20 @@ public class MuiscPowerApresentacao {
         
         ProdutoRepositorio bd_produto = new ProdutoDAO();
         bd_produto.Salvar(produto);
+        
+    }
+    
+    public static Venda criarVenda(Venda venda) throws SQLException, ClassNotFoundException {
+        
+        VendaRepositorio bd_venda = new VendaDAO();
+        return bd_venda.SalvarVenda(venda);
+        
+    }
+    
+    public static void criarItensVenda(ItensVenda Itensvenda) throws SQLException, ClassNotFoundException {
+        
+        ItensVendaRepositorio bd_Itensvenda = new ItensVendaDAO();
+        bd_Itensvenda.Salvar(Itensvenda);
         
     }
 
