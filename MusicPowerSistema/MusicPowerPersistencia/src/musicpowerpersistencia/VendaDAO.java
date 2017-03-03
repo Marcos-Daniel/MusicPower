@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
     Venda tmp;
     public VendaDAO() throws SQLException{
-        setConsultaSalvar("INSERT INTO venda (cliente,funcionario,valor,datavenda)VALUES(?,?,?,?)");
+        setConsultaSalvar("INSERT INTO venda (fk_cliente,fk_funcionario,valor,datavenda)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE venda SET cliente = ?, valor = ?, datavenda = ?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM venda WHERE id = ?");
         setConsultaAbrir("SELECT id,cliente,valor,datavenda FROM venda WHERE id = ?");
@@ -69,28 +69,21 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
             System.out.println(ex);
         }
     }
-    
+
     @Override
-     public Venda SalvarVenda(Venda obj) {
+    public int buscarUltimoId() {
         try {
-            if (obj.getId() == 0) {
-                PreparedStatement sql = conn.prepareStatement(getConsultaSalvar());
-                preencheConsulta(sql, obj);
-                ResultSet resultado = sql.executeQuery();
-                tmp = preencheObjeto(resultado);
-                return tmp;
-            } else {
-                PreparedStatement sql = conn.prepareStatement(getConsultaAlterar());
-                preencheConsulta(sql, obj);
-                sql.executeUpdate();
-                return null;
-            }
+            PreparedStatement sql = conn.prepareStatement("SELECT MAX(ID) as id FROM venda");
+            ResultSet resultado = sql.executeQuery();
             
-        } catch (SQLException e) {
-            System.out.print(e + " Dg Salvar");
-
+            if(resultado.next()){
+                int tmp = resultado.getInt(1);
+                return tmp; 
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex + "Dg Abrir");
         }
-        return null;
+        return 0;
     }
-
+    
 }

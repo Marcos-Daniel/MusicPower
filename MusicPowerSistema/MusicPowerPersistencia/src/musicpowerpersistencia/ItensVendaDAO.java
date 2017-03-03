@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVendaRepositorio {
     public ItensVendaDAO() throws SQLException{
-        setConsultaSalvar("INSERT INTO itensvenda (venda, produto, valor)VALUES(?,?,?)");
+        setConsultaSalvar("INSERT INTO itensVenda (fk_venda, fk_produto, qtd, valor)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE itensvenda SET venda = ?, produto = ?, valor =?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM itensvenda WHERE id = ?");
         setConsultaAbrir("SELECT id,venda, produto, valor FROM ItensVenda from id = ?");
@@ -55,7 +55,8 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
         try {
             sql.setInt(1, obj.getVenda());
             sql.setInt(2, obj.getProduto());
-            sql.setDouble(3, obj.getValor());
+            sql.setInt(3, obj.getQtd());
+            sql.setDouble(4, obj.getValor());
         } catch (SQLException ex) {
             Logger.getLogger(ItensVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -96,10 +96,17 @@ public class MuiscPowerApresentacao {
         
     }
     
-    public static Venda criarVenda(Venda venda) throws SQLException, ClassNotFoundException {
+    public static void criarVenda(Venda venda) throws SQLException, ClassNotFoundException {
         
         VendaRepositorio bd_venda = new VendaDAO();
-        return bd_venda.SalvarVenda(venda);
+        bd_venda.Salvar(venda);
+        
+    }
+    
+    public static void criarBuscaVenda(Venda venda) throws SQLException, ClassNotFoundException {
+        
+        VendaRepositorio bd_venda = new VendaDAO();
+        bd_venda.buscarUltimoId();
         
     }
     

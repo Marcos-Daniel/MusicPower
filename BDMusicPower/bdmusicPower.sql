@@ -137,12 +137,14 @@ create table venda (
 );
 
 create table itensVenda (
-	fk_venda int,
+	id int auto_increment,
+    fk_venda int,
     fk_produto int,
     qtd int,
     valor double,
     foreign key(fk_venda) references venda(id),
-    foreign key(fk_produto) references produto(id)
+    foreign key(fk_produto) references produto(id),
+    primary key(id)
 );
 
 create table administrador(

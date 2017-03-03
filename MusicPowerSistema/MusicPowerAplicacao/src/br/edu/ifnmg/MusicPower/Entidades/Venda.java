@@ -24,7 +24,7 @@ public class Venda implements Entidade {
     }
     
     public Venda(int id, int cliente, int funcionario, Double valor, Date dataVenda) {
-        this.id = id;
+        this.id = 0;
         this.cliente = cliente;
         this.funcionario = funcionario;
         this.valor = valor;

@@ -32,7 +32,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     ArrayList<Produto> listaVenda = new ArrayList<>();
     ArrayList<Produto> busca = new ArrayList<>();
     Venda venda;
-    Venda ultimaVenda;
+    int ultimaVenda;
     VendaRepositorio daoVenda = GerenciadorDeReferencias.getVenda();
     ItensVenda daoItensVenda = new ItensVenda();
     Double valorUnitario = 0.0;
@@ -468,6 +468,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
 
     private void btnLiquidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLiquidarActionPerformed
         efetuarVenda();
+        buscarUltimoId();
         guardaItensVenda();
         JOptionPane.showMessageDialog(this, "Venda realizada com sucesso!!!");
     }//GEN-LAST:event_btnLiquidarActionPerformed
@@ -641,8 +642,10 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         Double valorVenda = calcularCompra();
         Date date = new Date( new java.util.Date().getTime());
         venda = new Venda(0,idCliente,idFuncionario,valorVenda,date);
+       
         try {
-            ultimaVenda = MPA.criarVenda(venda);
+           MPA.criarVenda(venda);
+            
         } catch (SQLException ex) {
             Logger.getLogger(TelaOperacoesVenda.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -653,11 +656,10 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
 
     private void guardaItensVenda() {
         for(Produto c: listaVenda){
-            int idVenda = ultimaVenda.getId();
             idProduto = c.getId();
             qtd = c.getQtd();
             valorUnitario = c.getValor();
-            daoItensVenda = new ItensVenda(0,idVenda,idProduto,qtd,valorUnitario);
+            daoItensVenda = new ItensVenda(0,ultimaVenda,idProduto,qtd,valorUnitario);
             try {
                 MPA.criarItensVenda(daoItensVenda);
             } catch (SQLException ex) {
@@ -667,5 +669,12 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
             }
         }
     }
+
+    private void buscarUltimoId() {
+        ultimaVenda = daoVenda.buscarUltimoId();
+        System.out.print(ultimaVenda);
+    }
+    
+    
     
 }
