@@ -7,6 +7,8 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Conta;
+import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
@@ -40,6 +42,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class TelaInicial extends javax.swing.JFrame {
     ArrayList<Filial> buscaFilial = new ArrayList<>();
+    ArrayList<Conta> buscaConta = new ArrayList<>();
     ArrayList<Evento> buscaEvento = new ArrayList<>();
     ArrayList<Cliente> buscaCliente = new ArrayList<>();
     /**
@@ -336,6 +339,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu8.add(mnBuscarContas);
 
         mnRelatorioContas.setText("Relatorio contas");
+        mnRelatorioContas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioContasActionPerformed(evt);
+            }
+        });
         jMenu8.add(mnRelatorioContas);
 
         jMenuBar1.add(jMenu8);
@@ -534,6 +542,15 @@ public class TelaInicial extends javax.swing.JFrame {
         CadastrarAdministrador telaCadastrarAdministrador = new CadastrarAdministrador();
         telaCadastrarAdministrador.setVisible(true);
     }//GEN-LAST:event_mnCadastrarAdministradorActionPerformed
+
+    private void mnRelatorioContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioContasActionPerformed
+      /*FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
+      buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
+      exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );*/
+      ContaRepositorio daoConta = GerenciadorDeReferencias.getConta(); 
+      buscaConta = (ArrayList<Conta>) daoConta.Abrir();   
+      exibeRelatorioJasper("RepositorioContas.jasper", buscaConta);
+    }//GEN-LAST:event_mnRelatorioContasActionPerformed
 
     /**
      * @param args the command line arguments

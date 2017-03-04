@@ -49,14 +49,10 @@ public class ListarEventos extends javax.swing.JFrame {
         pnlFiltrar = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        lblCodCliente = new javax.swing.JLabel();
-        txtCodEvento = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         lblDataInicio = new javax.swing.JLabel();
-        lblDataTerminio = new javax.swing.JLabel();
         txtDataInicio = new javax.swing.JTextField();
-        txtDataTerminio = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
         pnlEventos = new javax.swing.JPanel();
@@ -76,8 +72,6 @@ public class ListarEventos extends javax.swing.JFrame {
 
         lblNome.setText("Nome:");
 
-        lblCodCliente.setText("Cod Evento:");
-
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472697069_search.png"))); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,14 +90,6 @@ public class ListarEventos extends javax.swing.JFrame {
 
         lblDataInicio.setText("DataInicio:");
 
-        lblDataTerminio.setText("Data terminio:");
-
-        txtDataTerminio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDataTerminioActionPerformed(evt);
-            }
-        });
-
         lblStatus.setText("Status:");
 
         javax.swing.GroupLayout pnlFiltrarLayout = new javax.swing.GroupLayout(pnlFiltrar);
@@ -111,57 +97,45 @@ public class ListarEventos extends javax.swing.JFrame {
         pnlFiltrarLayout.setHorizontalGroup(
             pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFiltrarLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlFiltrarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCodCliente)
                             .addComponent(lblNome)
                             .addComponent(lblDataInicio)
-                            .addComponent(lblDataTerminio)
                             .addComponent(lblStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
-                            .addComponent(txtCodEvento)
                             .addComponent(txtDataInicio)
-                            .addComponent(txtDataTerminio)
                             .addComponent(txtStatus)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlFiltrarLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscar)))
                 .addContainerGap())
         );
         pnlFiltrarLayout.setVerticalGroup(
             pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFiltrarLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodCliente)
-                    .addComponent(txtCodEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDataInicio))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataInicio)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataTerminio)
-                    .addComponent(txtDataTerminio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblStatus)
-                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblStatus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlFiltrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnLimparCampos))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnlEventos.setBorder(javax.swing.BorderFactory.createTitledBorder("Eventos"));
@@ -230,13 +204,13 @@ public class ListarEventos extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnBuscartodos)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair)))
                 .addContainerGap())
         );
@@ -244,15 +218,15 @@ public class ListarEventos extends javax.swing.JFrame {
             pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEventosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEventosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBuscartodos)
                     .addComponent(btnSair)
                     .addComponent(btnExcluir)
                     .addComponent(btnEditar)
+                    .addComponent(btnBuscartodos)
                     .addComponent(jButton1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlListarClienteLayout = new javax.swing.GroupLayout(pnlListarCliente);
@@ -322,17 +296,13 @@ public class ListarEventos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void txtDataTerminioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataTerminioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataTerminioActionPerformed
-
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         try {
-            buscar(txtNome.getText(),txtCodEvento.getText(), txtDataInicio.getText(),txtDataTerminio.getText(),txtStatus.getText());
+            buscar(txtNome.getText(), txtDataInicio.getText(),txtStatus.getText());
         } catch (ParseException ex) {
             Logger.getLogger(ListarEventos.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -346,8 +316,8 @@ public class ListarEventos extends javax.swing.JFrame {
             int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
             
             if( opcao == JOptionPane.YES_OPTION){
-               CadastrarEvento telaCadastrarFilial = new CadastrarEvento(evento,this);
-               telaCadastrarFilial.setVisible(true); 
+               CadastrarEvento telaCadastrarEvento = new CadastrarEvento(evento,this);
+               telaCadastrarEvento.setVisible(true); 
             }
        }else{
            JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja editar");
@@ -408,18 +378,14 @@ public class ListarEventos extends javax.swing.JFrame {
     private javax.swing.JButton btnSair;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCodCliente;
     private javax.swing.JLabel lblDataInicio;
-    private javax.swing.JLabel lblDataTerminio;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JPanel pnlEventos;
     private javax.swing.JPanel pnlFiltrar;
     private javax.swing.JPanel pnlListarCliente;
     private javax.swing.JTable tblListarEventos;
-    private javax.swing.JTextField txtCodEvento;
     private javax.swing.JTextField txtDataInicio;
-    private javax.swing.JTextField txtDataTerminio;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtStatus;
     // End of variables declaration//GEN-END:variables
@@ -427,22 +393,18 @@ public class ListarEventos extends javax.swing.JFrame {
     private void limparCampos() {
         
         txtNome.setText("");
-        txtCodEvento.setText("");
         txtDataInicio.setText("");
-        txtDataTerminio.setText("");
         txtStatus.setText("");
         
     }
     
-    private void buscar(String nome, String codEvento, String dataInicio, String dataTerminio, String status) throws ParseException {
-      
-      int id = Integer.parseInt(codEvento); 
+    private void buscar(String nome, String dataInicio,String status) throws ParseException {
+       
       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
       
       java.sql.Date dataI = new java.sql.Date(format.parse(dataInicio).getTime());
-      java.sql.Date dataT = new java.sql.Date(format.parse(dataTerminio).getTime());
       
-      Evento filtro = new Evento(id,nome,dataI,dataT,null,status);
+      Evento filtro = new Evento(0,nome,dataI,null,null,status);
       busca = (ArrayList<Evento>) dao.Buscar(filtro);
       preencherTabela(busca);
       

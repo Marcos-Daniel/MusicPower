@@ -439,7 +439,7 @@ public class CadastrarServico extends javax.swing.JFrame {
 public void recuperaCamposPessoa() throws ParseException{
     
     int idCliente = Integer.parseInt(txtIdCliente.getText().trim());
-    if(idCliente > 0){
+    if(!txtIdCliente.getText().equals("")){
         novoServico.setIdCliente(idCliente);
     }
     
@@ -449,14 +449,14 @@ public void recuperaCamposPessoa() throws ParseException{
     }
     
     int idFuncionario = Integer.parseInt(txtIdFuncinario.getText().trim());
-    if(idFuncionario > 0){
+    if(!txtIdFuncinario.getText().equals("")){
         novoServico.setIdFuncionario(idFuncionario);
     }
     
-    String nomeFuncionario = txtNomeCliente.getText().trim();
+    String nomeFuncionario = txtNomeFuncionario.getText().trim();
     if(!nomeFuncionario.equals("")){
         novoServico.setNomeFuncionario(nomeFuncionario);
-    }
+    } 
     
     String descricao = txtDescricao.getText().trim();
     if(!descricao.equals("")){

@@ -24,7 +24,7 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         setConsultaAlterar("UPDATE evento SET nome = ?, descricao = ?, inicio = ?, fim = ?, valor = ?, statusEvento = ? WHERE id = ?");
         setConsultaExcluir("DELETE FROM evento WHERE id = ?");
         setConsultaAbrir("SELECT id, nome, descricao, inicio, fim, valor, statusEvento FROM evento");
-        setConsultaBusca("SELECT id, nome,descricao, inicio, fim, valor, statusEvento FROM evento");
+        setConsultaBusca("SELECT id, nome, descricao, inicio, fim, valor, statusEvento FROM evento");
     }
     
     @Override
@@ -45,7 +45,6 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
         if(filtro.getId() > 0) adicionarFiltro("id", "=");
         if(filtro.getNome()!= null) adicionarFiltro("nome", "=");
         if(filtro.getInicio()!= null) adicionarFiltro("inicio", "=");
-        if(filtro.getTermino()!= null) adicionarFiltro("fim", "=");
         if(filtro.getStatus()!= null) adicionarFiltro("statusEvento", "=");
     }
 
@@ -56,7 +55,6 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             if(filtro.getId() > 0){ sql.setInt(cont, filtro.getId()); cont++; }
             if(filtro.getNome() != null ){ sql.setString(cont, filtro.getNome()); cont++; }
             if(filtro.getInicio()!= null){ sql.setDate(cont, (Date) filtro.getInicio()); cont++; }
-            if(filtro.getTermino()!= null){ sql.setDate(cont, (Date) filtro.getTermino()); cont++; }
             if(filtro.getStatus()!= null ){ sql.setString(cont, filtro.getStatus()); cont++; }
             
         } catch (SQLException ex) {

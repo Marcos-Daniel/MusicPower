@@ -335,6 +335,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         String termino = format.format(evento.getTermino());
         String valor = String.valueOf(evento.getValor());
         
+        novo = evento;
         txtDataInicio.setText(inicio);
         txtDataTerminio.setText(termino);
         txtDescricao.setText( evento.getDescricao());
