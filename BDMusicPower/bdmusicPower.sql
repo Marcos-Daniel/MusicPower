@@ -74,7 +74,7 @@ create table conta (
 	id int auto_increment,
     descricao varchar(30),
     valor double,
-    mesReferente varchar(3),
+    mesReferente varchar(20),
     vencimento date,
     statusConta varchar(30),
     primary key(id)
