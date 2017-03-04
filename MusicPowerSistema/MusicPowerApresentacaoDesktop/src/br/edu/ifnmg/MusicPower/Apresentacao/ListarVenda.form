@@ -323,7 +323,7 @@
                       <Table columnCount="5" rowCount="4">
                         <Column editable="true" title="Cod Item" type="java.lang.Object"/>
                         <Column editable="true" title="Cod Venda" type="java.lang.Object"/>
-                        <Column editable="true" title="Data Produto" type="java.lang.Object"/>
+                        <Column editable="true" title="Cod Produto" type="java.lang.Object"/>
                         <Column editable="true" title="Quantidade" type="java.lang.Object"/>
                         <Column editable="true" title="Valor Unitario" type="java.lang.Object"/>
                       </Table>

@@ -275,7 +275,11 @@ public class ListarEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
     
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        buscarTodos();
+        try {
+            buscarTodos();
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarEventos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -288,7 +292,11 @@ public class ListarEventos extends javax.swing.JFrame {
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(evento);
                 JOptionPane.showMessageDialog(rootPane, "Evento excluída com sucesso!");
-                buscarTodos();
+                try {
+                    buscarTodos();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ListarEventos.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             
         } else {
@@ -410,14 +418,14 @@ public class ListarEventos extends javax.swing.JFrame {
       
     } 
 
-    private void buscarTodos() {
+    private void buscarTodos() throws ParseException {
         
         this.busca = (ArrayList<Evento>) dao.Abrir();
         preencherTabela(busca);
         
     }
 
-    private void preencherTabela(ArrayList<Evento> busca) {
+    private void preencherTabela(ArrayList<Evento> busca) throws ParseException {
         
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod Evento");
@@ -429,13 +437,17 @@ public class ListarEventos extends javax.swing.JFrame {
         modelo.addColumn("Status");
         
         for(Evento c: busca){
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String dataInicio = out.format(in.parse(c.getInicio().toString()));
+            String dataTerminio = out.format(in.parse(c.getTermino().toString()));
             
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getNome());
             linha.add(c.getDescricao());
-            linha.add(c.getInicio());
-            linha.add(c.getTermino());
+            linha.add(dataInicio);
+            linha.add(dataTerminio);
             linha.add(c.getValor());
             linha.add(c.getStatus());
             modelo.addRow(linha);

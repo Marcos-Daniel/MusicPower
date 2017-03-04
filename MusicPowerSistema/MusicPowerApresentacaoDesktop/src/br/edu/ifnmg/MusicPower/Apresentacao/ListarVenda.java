@@ -176,7 +176,7 @@ public class ListarVenda extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cod Item", "Cod Venda", "Data Produto", "Quantidade", "Valor Unitario"
+                "Cod Item", "Cod Venda", "Cod Produto", "Quantidade", "Valor Unitario"
             }
         ));
         jScrollPane2.setViewportView(tblListarItensVenda);
@@ -395,7 +395,7 @@ public class ListarVenda extends javax.swing.JFrame {
       
     } 
 
-    private void preencherTabela1(ArrayList<Venda> busca) {
+    private void preencherTabela1(ArrayList<Venda> busca) throws ParseException {
         
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod Venda");
@@ -405,13 +405,17 @@ public class ListarVenda extends javax.swing.JFrame {
         modelo.addColumn("Data Venda");
         
         for(Venda c: busca){
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String dataVenda = out.format(in.parse(c.getDataVenda().toString()));
+            
             idvenda = c.getId();
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getCliente());
             linha.add(c.getFuncionario());
             linha.add(c.getValor());
-            linha.add(c.getDataVenda());
+            linha.add(dataVenda);
             
             modelo.addRow(linha);
             

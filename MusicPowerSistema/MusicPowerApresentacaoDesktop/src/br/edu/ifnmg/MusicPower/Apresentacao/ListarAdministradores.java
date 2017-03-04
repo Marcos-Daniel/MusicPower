@@ -8,8 +8,12 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 import br.edu.ifnmg.MusicPower.Entidades.Administrador;
 import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -264,7 +268,11 @@ public class ListarAdministradores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        buscarTodos();
+        try {
+            buscarTodos();
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarAdministradores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -278,7 +286,11 @@ public class ListarAdministradores extends javax.swing.JFrame {
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(administrador);
                 JOptionPane.showMessageDialog(rootPane, "Administrador excluído com sucesso!");
-                buscarTodos();
+                try {
+                    buscarTodos();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ListarAdministradores.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -291,7 +303,11 @@ public class ListarAdministradores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscar(txtNome.getText(),txtCpf.getText());
+        try {
+            buscar(txtNome.getText(),txtCpf.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarAdministradores.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -384,14 +400,14 @@ public class ListarAdministradores extends javax.swing.JFrame {
         txtCpf.setText("");
     }
 
-    private void buscarTodos() {
+    private void buscarTodos() throws ParseException {
         
         busca =(ArrayList<Administrador>) dao.Abrir();
         preencherTabela(busca);
         
     }
 
-    private void buscar(String nome, String cpf) {
+    private void buscar(String nome, String cpf) throws ParseException {
 
         Administrador filtro;
         filtro = new Administrador(0,nome,cpf,null,null,null,null,null,null,null,null,null,null,null);
@@ -400,7 +416,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
         
     }
 
-    private void preencherTabela(ArrayList<Administrador> busca) {
+    private void preencherTabela(ArrayList<Administrador> busca) throws ParseException {
         
         DefaultTableModel modelo = new DefaultTableModel();
         
@@ -418,11 +434,15 @@ public class ListarAdministradores extends javax.swing.JFrame {
         modelo.addColumn("Cargo");
 
         for(Administrador c:busca){
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String nascimento = out.format(in.parse(c.getDataNascimento().toString()));
+            
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getNome());
             linha.add(c.getCpf());
-            linha.add(c.getDataNascimento());
+            linha.add(nascimento);
             linha.add(c.getTelefone());
             linha.add(c.getEmail());
             linha.add(c.getCidade());
@@ -431,8 +451,7 @@ public class ListarAdministradores extends javax.swing.JFrame {
             linha.add(c.getBairro());
             linha.add(c.getnResidencia());
             linha.add(c.getCargo());
-         //   linha.add(c.getLogin());
-          //  linha.add(c.getSenha());
+         
             modelo.addRow(linha);
            
         }

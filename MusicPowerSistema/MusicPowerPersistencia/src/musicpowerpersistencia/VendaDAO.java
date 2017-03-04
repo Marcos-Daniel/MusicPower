@@ -65,9 +65,8 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
           try{
             sql.setInt(1, obj.getCliente());
             sql.setInt(2, obj.getFuncionario());
-            sql.setInt(3, obj.getFuncionario());
-            sql.setDouble(4, obj.getValor());
-            sql.setDate(5, obj.getDataVenda());
+            sql.setDouble(3, obj.getValor());
+            sql.setDate(4, obj.getDataVenda());
         } catch(SQLException ex){
             System.out.println(ex);
         }

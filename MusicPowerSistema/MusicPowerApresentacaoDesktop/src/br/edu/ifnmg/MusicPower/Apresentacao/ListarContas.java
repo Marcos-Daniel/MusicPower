@@ -7,9 +7,13 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -259,7 +263,11 @@ public class ListarContas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        buscarTodos();
+        try {
+            buscarTodos();
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarContas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -273,7 +281,11 @@ public class ListarContas extends javax.swing.JFrame {
            if( opcao == JOptionPane.YES_OPTION){
                dao.Excluir(conta);
                JOptionPane.showMessageDialog(rootPane, "Conta excluída com sucesso!");
-               buscarTodos();
+               try {
+                   buscarTodos();
+               } catch (ParseException ex) {
+                   Logger.getLogger(ListarContas.class.getName()).log(Level.SEVERE, null, ex);
+               }
            }
         }else{
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -281,7 +293,11 @@ public class ListarContas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscar(txtDescricao.getText(),txtMesReferente.getText());
+        try {
+            buscar(txtDescricao.getText(),txtMesReferente.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarContas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
@@ -368,7 +384,7 @@ public class ListarContas extends javax.swing.JFrame {
     private javax.swing.JTextField txtMesReferente;
     // End of variables declaration//GEN-END:variables
 
-    public void buscar(String descricao,String mesReferente) {
+    public void buscar(String descricao,String mesReferente) throws ParseException {
         Conta filtro = new Conta(0,descricao,null,mesReferente,null,null);
    
         this.busca = (ArrayList<Conta>) dao.Buscar(filtro);
@@ -376,13 +392,13 @@ public class ListarContas extends javax.swing.JFrame {
         preencheTabela(busca);
     }
 
-    public void buscarTodos() {
+    public void buscarTodos() throws ParseException {
         this.busca = (ArrayList<Conta>) dao.Abrir();
 
         preencheTabela(busca);
     }
 
-    public void preencheTabela(List<Conta> lista) {
+    public void preencheTabela(List<Conta> lista) throws ParseException {
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod Conta");
         modelo.addColumn("Descrição");
@@ -392,12 +408,16 @@ public class ListarContas extends javax.swing.JFrame {
         modelo.addColumn("Status");
 
         for (Conta c : lista) {
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String vencimento = out.format(in.parse(c.getVencimento().toString()));
+            
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getDescricao());
             linha.add(c.getValor());
             linha.add(c.getMesReferente());
-            linha.add(c.getVencimento());
+            linha.add(vencimento);
             linha.add(c.getStatus());
             modelo.addRow(linha);
         }

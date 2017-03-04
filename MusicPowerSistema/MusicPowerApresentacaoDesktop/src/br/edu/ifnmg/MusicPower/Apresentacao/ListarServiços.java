@@ -8,8 +8,12 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 import br.edu.ifnmg.MusicPower.Entidades.Serviço;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
 import groovy.model.DefaultTableModel;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -281,7 +285,11 @@ public class ListarServiços extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        buscarTodos();
+        try {
+            buscarTodos();
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarServiços.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -294,7 +302,11 @@ public class ListarServiços extends javax.swing.JFrame {
             if (opcao == JOptionPane.YES_OPTION) {
                 dao.Excluir(serviço);
                 JOptionPane.showMessageDialog(rootPane, "Serviço excluído com sucesso!");
-                buscarTodos();
+               try {
+                   buscarTodos();
+               } catch (ParseException ex) {
+                   Logger.getLogger(ListarServiços.class.getName()).log(Level.SEVERE, null, ex);
+               }
             }     
         }else {
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -323,7 +335,11 @@ public class ListarServiços extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
-        buscar(txtCodServiço.getText(),txtCodCliente.getText(),txtNomeCliente.getText());
+        try {
+            buscar(txtCodServiço.getText(),txtCodCliente.getText(),txtNomeCliente.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarServiços.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -401,12 +417,12 @@ public class ListarServiços extends javax.swing.JFrame {
         txtNomeCliente.setText("");
     }
 
-    private void buscarTodos() {
+    private void buscarTodos() throws ParseException {
         this.busca = (ArrayList<Serviço>) dao.Abrir();
         preencherTabela(busca);
     }
 
-    private void buscar(String CodServiço, String CodCliente, String NomeCliente) {
+    private void buscar(String CodServiço, String CodCliente, String NomeCliente) throws ParseException {
         int id = Integer.parseInt(CodServiço);
         int idcliente = Integer.parseInt(CodCliente);
         Serviço filtro = new Serviço(id,null, null, null, null, null, null,idcliente, 0,NomeCliente,null);
@@ -414,7 +430,7 @@ public class ListarServiços extends javax.swing.JFrame {
         preencherTabela(busca);
     }
 
-    private void preencherTabela(ArrayList<Serviço> lista) {
+    private void preencherTabela(ArrayList<Serviço> lista) throws ParseException {
         javax.swing.table.DefaultTableModel modelo = new javax.swing.table.DefaultTableModel();
         modelo.addColumn("Cod Serviço");
         modelo.addColumn("Descrição");
@@ -429,11 +445,16 @@ public class ListarServiços extends javax.swing.JFrame {
         modelo.addColumn("Nome Funcionário");
         
         for(Serviço c: lista){
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String dataEntreda = out.format(in.parse(c.getEntrega().toString()));
+            String dataSolicitacao = out.format(in.parse(c.getSolicitacao().toString()));
+            
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getDescricao());
-            linha.add(c.getEntrega());
-            linha.add(c.getSolicitacao());
+            linha.add(dataSolicitacao);
+            linha.add(dataEntreda);
             linha.add(c.getValor());
             linha.add(c.getStatusPagamanto());
             linha.add(c.getStatusProgresso());

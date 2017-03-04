@@ -7,8 +7,12 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -263,7 +267,11 @@ public class ListarFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
     private void btnBuscartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscartodosActionPerformed
-        buscarTodos();
+        try {
+            buscarTodos();
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscartodosActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -277,7 +285,11 @@ public class ListarFuncionarios extends javax.swing.JFrame {
             if(opcao == JOptionPane.YES_OPTION){
                 dao.Excluir(funcionario);
                 JOptionPane.showMessageDialog(rootPane, "Fucionário excluído com sucesso!");
-                buscarTodos();
+                try {
+                    buscarTodos();
+                } catch (ParseException ex) {
+                    Logger.getLogger(ListarFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Escolha uma posição na tabela, o qual você deseja excluir");
@@ -290,7 +302,11 @@ public class ListarFuncionarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscar(txtNome.getText(),txtCpf.getText());
+        try {
+            buscar(txtNome.getText(),txtCpf.getText());
+        } catch (ParseException ex) {
+            Logger.getLogger(ListarFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -381,14 +397,14 @@ public class ListarFuncionarios extends javax.swing.JFrame {
         txtCpf.setText("");
     }
 
-    private void buscarTodos() {
+    private void buscarTodos() throws ParseException {
         
         busca =(ArrayList<Funcionario>) dao.Abrir();
         preencherTabela(busca);
         
     }
 
-    private void buscar(String nome, String cpf) {
+    private void buscar(String nome, String cpf) throws ParseException {
 
         Funcionario filtro = new Funcionario(0,nome,cpf,null,null,null,null,null,null,null,null,null);
         busca = (ArrayList<Funcionario>) dao.Buscar(filtro);
@@ -396,7 +412,7 @@ public class ListarFuncionarios extends javax.swing.JFrame {
         
     }
 
-    private void preencherTabela(ArrayList<Funcionario> busca) {
+    private void preencherTabela(ArrayList<Funcionario> busca) throws ParseException {
         
         DefaultTableModel modelo = new DefaultTableModel();
         
@@ -414,11 +430,15 @@ public class ListarFuncionarios extends javax.swing.JFrame {
         modelo.addColumn("Cargo");
        
         for(Funcionario c:busca){
+            SimpleDateFormat in= new SimpleDateFormat("yyyy-MM-dd"); 
+            SimpleDateFormat out = new SimpleDateFormat("dd/MM/yyyy"); 
+            String nascimento = out.format(in.parse(c.getDataNascimento().toString()));
+            
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getNome());
             linha.add(c.getCpf());
-            linha.add(c.getDataNascimento());
+            linha.add(nascimento);
             linha.add(c.getTelefone());
             linha.add(c.getEmail());
             linha.add(c.getCidade());
