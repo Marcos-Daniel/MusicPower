@@ -271,7 +271,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu4.add(mnBuscarServico);
 
-        mnRelatorioSevico.setText("Relatorio serviço");
+        mnRelatorioSevico.setText("Relatorio serviços");
         jMenu4.add(mnRelatorioSevico);
 
         jMenuBar1.add(jMenu4);
@@ -295,7 +295,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem26);
 
-        jMenuItem27.setText("jMenuItem27");
+        jMenuItem27.setText("Relatorio Estoques");
         jMenu5.add(jMenuItem27);
 
         jMenuBar1.add(jMenu5);
@@ -319,7 +319,7 @@ public class TelaInicial extends javax.swing.JFrame {
         });
         jMenu7.add(mnBuscarVenda);
 
-        mnRelatorioVendas.setText("Relatorio venda");
+        mnRelatorioVendas.setText("Relatorio vendas");
         jMenu7.add(mnRelatorioVendas);
 
         jMenuBar1.add(jMenu7);
@@ -479,7 +479,8 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mnBuscarServicoActionPerformed
 
     private void mnBuscarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarVendaActionPerformed
-        // TODO add your handling code here:
+        ListarVenda telaListarVenda = new ListarVenda();
+        telaListarVenda.setVisible(true);
     }//GEN-LAST:event_mnBuscarVendaActionPerformed
 
     private void mnBuscarContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarContasActionPerformed

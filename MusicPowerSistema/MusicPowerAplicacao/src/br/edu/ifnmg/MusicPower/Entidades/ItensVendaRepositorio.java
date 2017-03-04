@@ -9,5 +9,6 @@ package br.edu.ifnmg.MusicPower.Entidades;
  *
  * @author breno
  */
-public interface ItensVendaRepositorio extends Repositorio<ItensVenda> {    
+public interface ItensVendaRepositorio extends Repositorio<ItensVenda> {  
+    public boolean ExcluirItens(int idvenda);
 }

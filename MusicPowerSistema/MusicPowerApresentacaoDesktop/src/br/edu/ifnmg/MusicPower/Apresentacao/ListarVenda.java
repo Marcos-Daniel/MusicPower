@@ -7,6 +7,8 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ItensVenda;
+import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Venda;
 import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
 import java.text.ParseException;
@@ -26,16 +28,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListarVenda extends javax.swing.JFrame {
 
-    VendaRepositorio dao;
+    VendaRepositorio daoVenda;
+    ItensVendaRepositorio daoItensVenda;
     Venda venda = new Venda();
-    ArrayList<Venda> busca = new ArrayList<>();
+    ArrayList<Venda> buscaVenda = new ArrayList<>();
+    ArrayList<ItensVenda> buscaItensVenda = new ArrayList<>();
+    int idvenda;
     
     /**
      * Creates new form ListarClientes
      */
     public ListarVenda() {
         initComponents();
-        this.dao = GerenciadorDeReferencias.getVenda();
+        this.daoVenda = GerenciadorDeReferencias.getVenda();
+        this.daoItensVenda = GerenciadorDeReferencias.getItensVenda();
     }
 
     /**
@@ -60,10 +66,9 @@ public class ListarVenda extends javax.swing.JFrame {
         tblListarVenda = new javax.swing.JTable();
         pnlEventos1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblListarEventos1 = new javax.swing.JTable();
+        tblListarItensVenda = new javax.swing.JTable();
         btnSair1 = new javax.swing.JButton();
         btnExcluir1 = new javax.swing.JButton();
-        btnEditar1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -163,7 +168,7 @@ public class ListarVenda extends javax.swing.JFrame {
 
         pnlEventos1.setBorder(javax.swing.BorderFactory.createTitledBorder("Itens da Venda"));
 
-        tblListarEventos1.setModel(new javax.swing.table.DefaultTableModel(
+        tblListarItensVenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -174,7 +179,7 @@ public class ListarVenda extends javax.swing.JFrame {
                 "Cod Item", "Cod Venda", "Data Produto", "Quantidade", "Valor Unitario"
             }
         ));
-        jScrollPane2.setViewportView(tblListarEventos1);
+        jScrollPane2.setViewportView(tblListarItensVenda);
 
         btnSair1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473144169_logout.png"))); // NOI18N
         btnSair1.setText("Sair");
@@ -189,14 +194,6 @@ public class ListarVenda extends javax.swing.JFrame {
         btnExcluir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExcluir1ActionPerformed(evt);
-            }
-        });
-
-        btnEditar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473023353_editor-pencil-pen-edit-write-glyph.png"))); // NOI18N
-        btnEditar1.setText("Editar");
-        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditar1ActionPerformed(evt);
             }
         });
 
@@ -219,9 +216,7 @@ public class ListarVenda extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEventos1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnExcluir1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSair1)))
@@ -236,7 +231,6 @@ public class ListarVenda extends javax.swing.JFrame {
                 .addGroup(pnlEventos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSair1)
                     .addComponent(btnExcluir1)
-                    .addComponent(btnEditar1)
                     .addComponent(jButton2))
                 .addContainerGap())
         );
@@ -298,19 +292,25 @@ public class ListarVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSair1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnSair1ActionPerformed
 
     private void btnExcluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluir1ActionPerformed
-        // TODO add your handling code here:
+        String mensagem = "Tem certeza que deseja excluir essa venda?";
+        int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação", JOptionPane.YES_NO_OPTION);
+        
+        if(opcao == JOptionPane.YES_OPTION){
+            daoItensVenda.ExcluirItens(idvenda);
+            daoVenda.ExcluirItens(idvenda);
+            JOptionPane.showMessageDialog(rootPane, "Venda excluida com sucesso!!!");
+            this.dispose();
+        }
     }//GEN-LAST:event_btnExcluir1ActionPerformed
 
-    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditar1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        TelaOperacoesVenda telaCadastrarVenda = new TelaOperacoesVenda();
+        telaCadastrarVenda.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     
@@ -354,7 +354,6 @@ public class ListarVenda extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnEditar1;
     private javax.swing.JButton btnExcluir1;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton btnSair1;
@@ -367,7 +366,7 @@ public class ListarVenda extends javax.swing.JFrame {
     private javax.swing.JPanel pnlEventos1;
     private javax.swing.JPanel pnlFiltrar;
     private javax.swing.JPanel pnlListarCliente;
-    private javax.swing.JTable tblListarEventos1;
+    private javax.swing.JTable tblListarItensVenda;
     private javax.swing.JTable tblListarVenda;
     private javax.swing.JTextField txtDataVenda;
     private javax.swing.JTextField txtIdCliente;
@@ -387,12 +386,16 @@ public class ListarVenda extends javax.swing.JFrame {
       java.sql.Date dataI = new java.sql.Date(format.parse(dataVenda).getTime());
       
       Venda filtro = new Venda(0,id,0,0.0,dataI);
-      busca = (ArrayList<Venda>) dao.Buscar(filtro);
-      preencherTabela(busca);
+      buscaVenda = (ArrayList<Venda>) daoVenda.Buscar(filtro);
+      preencherTabela1(buscaVenda);
+      
+      ItensVenda itensVenda = new ItensVenda(0,idvenda,0,0,0.0);
+      buscaItensVenda = (ArrayList<ItensVenda>) daoItensVenda.Buscar(itensVenda);
+      preencherTabela2(buscaItensVenda);
       
     } 
 
-    private void preencherTabela(ArrayList<Venda> busca) {
+    private void preencherTabela1(ArrayList<Venda> busca) {
         
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Cod Venda");
@@ -402,7 +405,7 @@ public class ListarVenda extends javax.swing.JFrame {
         modelo.addColumn("Data Venda");
         
         for(Venda c: busca){
-            
+            idvenda = c.getId();
             Vector linha = new Vector();
             linha.add(c.getId());
             linha.add(c.getCliente());
@@ -415,6 +418,32 @@ public class ListarVenda extends javax.swing.JFrame {
         }
         
         tblListarVenda.setModel(modelo);
+        
+    }
+    
+    private void preencherTabela2(ArrayList<ItensVenda> busca) {
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Cod Item Venda");
+        modelo.addColumn("Cod Venda");
+        modelo.addColumn("Cod Produto");
+        modelo.addColumn("Quantidade");
+        modelo.addColumn("Valor Unitário");
+        
+        for(ItensVenda c: busca){
+            
+            Vector linha = new Vector();
+            linha.add(c.getId());
+            linha.add(c.getVenda());
+            linha.add(c.getProduto());
+            linha.add(c.getQtd());
+            linha.add(c.getValor());
+            
+            modelo.addRow(linha);
+            
+        }
+        
+        tblListarItensVenda.setModel(modelo);
         
     }
 

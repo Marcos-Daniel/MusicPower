@@ -21,18 +21,23 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
     public ItensVendaDAO() throws SQLException{
         setConsultaSalvar("INSERT INTO itensVenda (fk_venda, fk_produto, qtd, valor)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE itensvenda SET venda = ?, produto = ?, valor =?, WHERE datacompra = ?");
-        setConsultaExcluir("DELETE FROM itensvenda WHERE id = ?");
-        setConsultaAbrir("SELECT id,venda, produto, valor FROM ItensVenda from id = ?");
+        setConsultaExcluir("DELETE FROM itensVenda WHERE k_venda = ?");
+        setConsultaAbrir("SELECT id,fk_venda, fk_produto, qtd, valor FROM itensVenda");
+        setConsultaBusca("SELECT id,fk_venda, fk_produto, qtd, valor FROM itensVenda");
     }
 
     @Override
     protected void preencheFiltros(ItensVenda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        adicionarFiltro("fk_venda", "=");
     }
 
     @Override
     protected void preencheParametros(PreparedStatement sql, ItensVenda filtro) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            sql.setInt(1, filtro.getVenda());
+        } catch (SQLException ex) {
+            Logger.getLogger(ItensVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -42,7 +47,8 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
             tmp.setId(resultado.getInt(1));
             tmp.setVenda(resultado.getInt(2));
             tmp.setProduto(resultado.getInt(3));
-            tmp.setValor(resultado.getDouble(4));
+            tmp.setQtd(resultado.getInt(4));
+            tmp.setValor(resultado.getDouble(5));
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -57,10 +63,25 @@ public class ItensVendaDAO extends DAOGenerica<ItensVenda> implements ItensVenda
             sql.setInt(2, obj.getProduto());
             sql.setInt(3, obj.getQtd());
             sql.setDouble(4, obj.getValor());
+            if(obj.getId() > 0) 
+                sql.setInt(5, obj.getId());
         } catch (SQLException ex) {
             Logger.getLogger(ItensVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
        
+    }
+    
+    @Override
+    public boolean ExcluirItens(int idvenda) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("DELETE FROM itensVenda WHERE fk_venda = ?");
+            sql.setInt(1, idvenda);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex + "Dg Excluir");
+        }
+        return false;
     }
 
 }

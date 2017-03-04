@@ -89,4 +89,17 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
         return 0;
     }
     
+    @Override
+    public boolean ExcluirItens(int idvenda) {
+        try {
+            PreparedStatement sql = conn.prepareStatement("DELETE FROM venda WHERE id = ?");
+            sql.setInt(1, idvenda);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex + "Dg Excluir");
+        }
+        return false;
+    }
+    
 }

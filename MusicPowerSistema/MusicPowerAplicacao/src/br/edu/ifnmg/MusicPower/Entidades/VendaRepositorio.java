@@ -11,4 +11,5 @@ package br.edu.ifnmg.MusicPower.Entidades;
  */
 public interface VendaRepositorio extends Repositorio<Venda>{
     public int buscarUltimoId();
+    public boolean ExcluirItens(int idvenda);
 }

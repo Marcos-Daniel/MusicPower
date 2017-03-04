@@ -7,6 +7,7 @@ import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
@@ -21,6 +22,7 @@ import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ItensVendaDAO;
 import musicpowerpersistencia.ProdutoDAO;
 import musicpowerpersistencia.ServicoDAO;
 import musicpowerpersistencia.VendaDAO;
@@ -46,6 +48,7 @@ public class GerenciadorDeReferencias {
     private static ServiçoRepositorio daoServiço;
     private static ProdutoRepositorio daoProduto;
     private static VendaRepositorio daoVenda;
+    private static ItensVendaRepositorio daoItensVenda;
     
     public static FilialRepositorio getFilial() {
         try {
@@ -161,6 +164,18 @@ public class GerenciadorDeReferencias {
                 daoVenda = new VendaDAO();
             }
             return daoVenda;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+    public static ItensVendaRepositorio getItensVenda() {
+        try {
+            if (daoItensVenda == null) {
+                daoItensVenda = new ItensVendaDAO();
+            }
+            return daoItensVenda;
         } catch (Exception e) {
             System.out.print(e);
         }
