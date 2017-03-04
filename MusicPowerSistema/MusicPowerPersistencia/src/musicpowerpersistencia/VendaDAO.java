@@ -23,7 +23,8 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
         setConsultaSalvar("INSERT INTO venda (fk_cliente,fk_funcionario,valor,datavenda)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE venda SET cliente = ?, valor = ?, datavenda = ?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM venda WHERE id = ?");
-        setConsultaAbrir("SELECT id,cliente,valor,datavenda FROM venda WHERE id = ?");
+        setConsultaAbrir("SELECT id,fk_cliente,fk_funcionario,valor,datavenda FROM venda");
+        setConsultaBusca("SELECT id,fk_cliente,fk_funcionario,valor,datavenda FROM venda");
     }
 
     @Override
@@ -49,8 +50,9 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
             Venda tmp = new Venda();
             tmp.setId(resultado.getInt(1));
             tmp.setCliente(resultado.getInt(2));
-            tmp.setValor(resultado.getDouble(3));
-            tmp.setDataVenda(resultado.getDate(4));
+            tmp.setFuncionario(resultado.getInt(3));
+            tmp.setValor(resultado.getDouble(4));
+            tmp.setDataVenda(resultado.getDate(5));
             return tmp;
         }catch(SQLException ex){
             System.out.println(ex);
@@ -63,8 +65,9 @@ public class VendaDAO extends DAOGenerica<Venda> implements VendaRepositorio {
           try{
             sql.setInt(1, obj.getCliente());
             sql.setInt(2, obj.getFuncionario());
-            sql.setDouble(3, obj.getValor());
-            sql.setDate(4, obj.getDataVenda());
+            sql.setInt(3, obj.getFuncionario());
+            sql.setDouble(4, obj.getValor());
+            sql.setDate(5, obj.getDataVenda());
         } catch(SQLException ex){
             System.out.println(ex);
         }

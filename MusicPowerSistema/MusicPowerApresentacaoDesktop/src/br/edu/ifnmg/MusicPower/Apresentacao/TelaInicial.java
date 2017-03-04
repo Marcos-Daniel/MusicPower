@@ -304,6 +304,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu7.setText("Vendas");
 
         mnCadastrarVenda.setText("Cadastrar venda");
+        mnCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastrarVendaActionPerformed(evt);
+            }
+        });
         jMenu7.add(mnCadastrarVenda);
 
         mnBuscarVenda.setText("Buscar venda");
@@ -551,6 +556,13 @@ public class TelaInicial extends javax.swing.JFrame {
       buscaConta = (ArrayList<Conta>) daoConta.Abrir();   
       exibeRelatorioJasper("RepositorioContas.jasper", buscaConta);
     }//GEN-LAST:event_mnRelatorioContasActionPerformed
+
+    private void mnCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarVendaActionPerformed
+        
+        TelaOperacoesVenda telaoperaçaovenda = new TelaOperacoesVenda();
+        telaoperaçaovenda.setVisible(true);
+        
+    }//GEN-LAST:event_mnCadastrarVendaActionPerformed
 
     /**
      * @param args the command line arguments

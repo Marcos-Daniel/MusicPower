@@ -448,7 +448,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarProdutoActionPerformed
 
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
-
+            busca.add(novo);
             novo = new Produto();
             this.recuperacampos();
             listaVenda.add(novo);
@@ -459,7 +459,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         int posicao = tblItensVendas.getSelectedRow();
-        
+        busca.remove(posicao);
         if(posicao >= 0 ){
             listaVenda.remove(posicao);
             preencherTabela(listaVenda);
@@ -471,10 +471,11 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         buscarUltimoId();
         guardaItensVenda();
         JOptionPane.showMessageDialog(this, "Venda realizada com sucesso!!!");
+        this.dispose();
     }//GEN-LAST:event_btnLiquidarActionPerformed
 
     private void btnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelar1ActionPerformed
 
     private void txtIdFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdFuncionarioActionPerformed
@@ -660,6 +661,12 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
             qtd = c.getQtd();
             valorUnitario = c.getValor();
             daoItensVenda = new ItensVenda(0,ultimaVenda,idProduto,qtd,valorUnitario);
+            for(Produto a: busca){
+                if(a.getId() == idProduto){
+                    a.setQtd(a.getQtd() - qtd);
+                    daoProduto.Alterar(a);
+                }
+            }
             try {
                 MPA.criarItensVenda(daoItensVenda);
             } catch (SQLException ex) {
