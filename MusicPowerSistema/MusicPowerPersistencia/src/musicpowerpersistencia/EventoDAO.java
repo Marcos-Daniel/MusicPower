@@ -77,6 +77,8 @@ public class EventoDAO extends DAOGenerica<Evento> implements EventoRepositorio 
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(EventoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import java.sql.Date;
@@ -215,9 +216,12 @@ public class CadastrarEvento extends javax.swing.JFrame {
             int codigo = novo.getId();
             
             if(codigo == 0){
-                dao.Salvar(novo);
+                if(dao.Salvar(novo)){
                 this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro durante a execução!");        
+                }    
             }else{    
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Evento editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
@@ -225,6 +229,8 @@ public class CadastrarEvento extends javax.swing.JFrame {
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErroValidacao ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -286,36 +292,49 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtValorInvestimento;
     // End of variables declaration//GEN-END:variables
 
-    public void recuperaCampos() throws ParseException {
+    public void recuperaCampos() throws ParseException, ErroValidacao {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
      
         Date dataDeInicio = new Date( format.parse(txtDataInicio.getText().trim()).getTime());
         if (!dataDeInicio.equals("")) {
            novo.setInicio(dataDeInicio);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DATA INICIO É OBRIGATORIO");
         }
 
         Date dataDeTerminio = new Date( format.parse(txtDataTerminio.getText().trim()).getTime());
         if (!dataDeTerminio.equals("")) {
             novo.setTermino(dataDeTerminio);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DATA TERMINIO É OBRIGATORIO");
         }
 
         String descricao = txtDescricao.getText().trim();
         if (!descricao.equals("")) {
-            novo.setDescricao(descricao);        }
+            novo.setDescricao(descricao);        
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DESCRIÇÃO É OBRIGATORIO");
+        }
 
         String nome = txtNome.getText().trim();
         if (!descricao.equals("")) {
             novo.setNome(nome);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NOME É OBRIGATORIO");
         }
 
         Double valor = Double.parseDouble(txtValorInvestimento.getText().trim());
         if (valor != 0) {
             novo.setValor(valor);
-        }
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO VALOR É OBRIGATORIO");
+        }   
         
         String status = txtStatus.getText().trim();
         if (!status.equals("")) {
             novo.setStatus(status);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO STATUS É OBRIGATORIO");
         }
         
     }
