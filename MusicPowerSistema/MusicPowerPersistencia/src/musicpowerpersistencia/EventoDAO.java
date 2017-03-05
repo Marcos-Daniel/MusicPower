@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import java.sql.Date;

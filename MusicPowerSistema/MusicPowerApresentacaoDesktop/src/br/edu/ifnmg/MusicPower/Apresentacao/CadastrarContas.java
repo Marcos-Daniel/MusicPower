@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -49,6 +50,7 @@ public class CadastrarContas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
@@ -63,6 +65,8 @@ public class CadastrarContas extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         txtDataDeVencimento = new javax.swing.JFormattedTextField();
+
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -102,8 +106,6 @@ public class CadastrarContas extends javax.swing.JFrame {
             }
         });
 
-        txtDataDeVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,7 +126,9 @@ public class CadastrarContas extends javax.swing.JFrame {
                             .addComponent(txtValor)
                             .addComponent(txtMesReferente)
                             .addComponent(txtStatus)
-                            .addComponent(txtDataDeVencimento)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDataDeVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 123, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
@@ -137,7 +141,7 @@ public class CadastrarContas extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -162,7 +166,7 @@ public class CadastrarContas extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(btnCadastrar)
                     .addComponent(btnLimparCampos))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,9 +199,12 @@ public class CadastrarContas extends javax.swing.JFrame {
             int codigo = novo.getId();
             
             if(codigo == 0){
-                dao.Salvar(novo);
-                this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                if(dao.Salvar(novo)){
+                    this.limparCampos();
+                        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro na execução!");       
+                }    
             }else{    
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Conta editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
@@ -205,6 +212,8 @@ public class CadastrarContas extends javax.swing.JFrame {
             }
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarContas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErroValidacao ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -251,6 +260,7 @@ public class CadastrarContas extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnLimparCampos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -264,32 +274,42 @@ public class CadastrarContas extends javax.swing.JFrame {
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
-    public void recuperarCampos() throws ParseException{
+    public void recuperarCampos() throws ParseException, ErroValidacao{
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         Date dataDeVencimento = new Date( format.parse(txtDataDeVencimento.getText().trim()).getTime());
         if (!dataDeVencimento.equals("")) {
             novo.setVencimento(dataDeVencimento);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DATA VENCIMENTO É OBRIGATORIO");
         }
 
         String descricao = txtDescricao.getText().trim();
         if (!descricao.equals("")) {
             novo.setDescricao(descricao);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DESCRIÇÃO É OBRIGATORIO");
         }
 
         String mesReferente = txtMesReferente.getText().trim();
         if (!mesReferente.equals("")) {
             novo.setMesReferente(mesReferente);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO MÊS REFERENTE É OBRIGATORIO");
         }
 
         String status = txtStatus.getText().trim();
         if (!status.equals("")) {
             novo.setStatus(status);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO STATUS É OBRIGATORIO");
         }
 
         Double valor = Double.parseDouble(txtValor.getText().trim());
         if (valor != 0) {
             novo.setValor(valor);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO VALOR É OBRIGATORIO");
         }
     }
 
