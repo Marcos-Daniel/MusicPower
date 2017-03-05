@@ -14,9 +14,10 @@ import javax.swing.JOptionPane;
  * @author marcos
  */
 public class TelaLogin extends javax.swing.JFrame {
-     
+
     Administrador novo = new Administrador();
     AdministradorRepositorio dao = GerenciadorDeReferencias.getAdministrador();
+
     /**
      * Creates new form TelaLogin
      */
@@ -105,28 +106,35 @@ public class TelaLogin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        this.recumperaCampos();
-        if(dao.VerificaLogin(novo.getLogin(), novo.getSenha())){
-            TelaInicial telaPrincipal = new TelaInicial();
-            telaPrincipal.setVisible(true);
-            this.dispose();
-        }else JOptionPane.showMessageDialog(this,"USUÁRIO OU SENHA INCORRETOS");
+        if(!this.verificaLoginSenha()){   
+            this.verificaLoginSenha();
+            this.recumperaCampos();
+            if (dao.VerificaLogin(novo.getLogin(), novo.getSenha())) {
+                TelaInicial telaPrincipal = new TelaInicial();
+                telaPrincipal.setVisible(true);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "USUÁRIO OU SENHA INCORRETOS");
+            }
+        }else
+            JOptionPane.showMessageDialog(this, "INFORME LOGIN E SENHA");
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -174,17 +182,27 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 
-    private void recumperaCampos() {
-       String login = txtLogin.getText().trim();
-        if( !login.equals("")){
-            novo.setLogin( login);
-        }
-      
-        String senha = new String( txtSenha.getPassword()).trim();
-        if( !senha.equals("")){
-             novo.setSenha(senha);
-        }
+    public boolean verificaLoginSenha(){
+        int cont=0;
+        String login =txtLogin.getText();
+        String senha = txtSenha.getText();
         
+        if( login.equals("") || senha.equals("")){
+           return true;
+        }
+        return false;
     }
     
+    private void recumperaCampos() {
+        String login = txtLogin.getText().trim();
+        if (!login.equals("")) {
+            novo.setLogin(login);
+        }
+
+        String senha = new String(txtSenha.getPassword()).trim();
+        if (!senha.equals("")) {
+            novo.setSenha(senha);
+        }
+    }
+
 }

@@ -47,7 +47,9 @@ public class Filial implements Entidade {
         return UF;
     }
 
-    public void setUF(String UF) {
+    public void setUF(String UF) throws ErroValidacao{
+        if(UF.length() > 3)
+            throw new ErroValidacao("O atributo UF deve ter no máximo 3 caracteres!");
         this.UF = UF;
     }
 
@@ -55,7 +57,9 @@ public class Filial implements Entidade {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade)  throws ErroValidacao {
+        if(cidade.length() > 20)
+            throw new ErroValidacao("O atributo CIDADE deve ter no máximo 20 caracteres!");
         this.cidade = cidade;
     }
 
@@ -63,7 +67,9 @@ public class Filial implements Entidade {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+    public void setBairro(String bairro)  throws ErroValidacao {
+        if(bairro.length() > 20)
+            throw new ErroValidacao("O atributo BAIRRO deve ter no máximo 20 caracteres!");
         this.bairro = bairro;
     }
 
@@ -71,7 +77,9 @@ public class Filial implements Entidade {
         return rua;
     }
 
-    public void setRua(String rua) {
+    public void setRua(String rua)  throws ErroValidacao {
+        if(rua.length() > 30)
+            throw new ErroValidacao("O atributo RUA deve ter no máximo 30 caracteres!");
         this.rua = rua;
     }
 
@@ -79,7 +87,9 @@ public class Filial implements Entidade {
         return nEstabelecimento;
     }
 
-    public void setnEstabelecimento(String nEstabelecimento) {
+    public void setnEstabelecimento(String nEstabelecimento)  throws ErroValidacao {
+        if(nEstabelecimento.length() > 5)
+            throw new ErroValidacao("O atributo NºEstabelecimento deve ter no máximo 5 caracteres!");
         this.nEstabelecimento = nEstabelecimento;
     }
 

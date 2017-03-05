@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.sql.SQLException;
@@ -191,23 +192,25 @@ public class CadastrarFilial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        this.recuperaCampos();
-        int codigo = novo.getId();
-        
         try {
+            this.recuperaCampos();
+             int codigo = novo.getId();
+        
             if(codigo == 0){
-                MPA.criarFilial(novo);
+                if(dao.Salvar(novo)){
                 this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                }else
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro durante a execução!");
             }else{    
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Filial editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + ex.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErroValidacao ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
+       
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnLimparCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparCamposActionPerformed
@@ -271,7 +274,7 @@ public class CadastrarFilial extends javax.swing.JFrame {
     private javax.swing.JTextField txtUF;
     // End of variables declaration//GEN-END:variables
 
-    private void recuperaCampos() {
+    private void recuperaCampos() throws ErroValidacao{
 
         String bairro = txtBairro.getText().trim();
         if (!bairro.equals("")) {

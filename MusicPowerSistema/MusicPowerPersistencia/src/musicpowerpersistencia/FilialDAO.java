@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Filial;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import java.sql.PreparedStatement;
@@ -40,7 +41,10 @@ public class FilialDAO extends DAOGenerica<Filial> implements FilialRepositorio 
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex + " FILIAL DAO PREENCHER OBJETO");
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(FilialDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return null;
     }
 
