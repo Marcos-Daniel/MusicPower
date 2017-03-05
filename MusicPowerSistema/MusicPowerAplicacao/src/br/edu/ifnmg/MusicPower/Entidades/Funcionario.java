@@ -30,7 +30,9 @@ public class Funcionario extends Pessoa {
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(String cargo) throws ErroValidacao {
+        if(cargo.length() > 30)
+            throw new ErroValidacao("O atributo CARGO deve ter no máximo 30 caracteres!");
         this.cargo = cargo;
     }
     

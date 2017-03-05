@@ -61,8 +61,8 @@ public abstract class Pessoa implements Entidade {
     }
 
     public void setCpf(String cpf) throws ErroValidacao {
-        if(cpf.length() > 11)
-            throw new ErroValidacao("O atributo CPF deve ter no máximo 11 caracteres!");
+        if(cpf.length() > 18)
+            throw new ErroValidacao("O atributo CPF deve ter no máximo 18 caracteres!");
         
         CPF pf = new CPF(cpf);
         if(pf.isCPF()== true){            

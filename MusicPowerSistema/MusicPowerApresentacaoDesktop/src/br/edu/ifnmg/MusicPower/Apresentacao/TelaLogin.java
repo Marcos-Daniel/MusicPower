@@ -7,6 +7,9 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Administrador;
 import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -124,7 +127,11 @@ public class TelaLogin extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(!this.verificaLoginSenha()){   
             this.verificaLoginSenha();
-            this.recumperaCampos();
+            try {
+                this.recumperaCampos();
+            } catch (ErroValidacao ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
             if (dao.VerificaLogin(novo.getLogin(), novo.getSenha())) {
                 TelaInicial telaPrincipal = new TelaInicial();
                 telaPrincipal.setVisible(true);
@@ -193,7 +200,7 @@ public class TelaLogin extends javax.swing.JFrame {
         return false;
     }
     
-    private void recumperaCampos() {
+    private void recumperaCampos() throws ErroValidacao {
         String login = txtLogin.getText().trim();
         if (!login.equals("")) {
             novo.setLogin(login);

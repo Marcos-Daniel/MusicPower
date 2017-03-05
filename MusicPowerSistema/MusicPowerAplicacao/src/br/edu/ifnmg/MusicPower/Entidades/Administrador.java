@@ -30,7 +30,9 @@ public class Administrador extends Pessoa{
         return cargo;
     }
 
-    public void setCargo(String cargo) {
+    public void setCargo(String cargo) throws ErroValidacao {
+        if(cargo.length() > 56)
+            throw new ErroValidacao("O atributo CARGO deve ter no máximo 56 caracteres!");
         this.cargo = cargo;
     }
 
@@ -38,7 +40,9 @@ public class Administrador extends Pessoa{
         return login;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(String login) throws ErroValidacao {
+        if(login.length() > 15)
+            throw new ErroValidacao("O atributo LOGIN deve ter no máximo 15 caracteres!");
         this.login = login;
     }
 
@@ -46,7 +50,9 @@ public class Administrador extends Pessoa{
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(String senha) throws ErroValidacao {
+        if(senha.length() > 20)
+            throw new ErroValidacao("atributo SENHA deve ter no máximo 20 caracteres!");
         this.senha = senha;
     }
     
