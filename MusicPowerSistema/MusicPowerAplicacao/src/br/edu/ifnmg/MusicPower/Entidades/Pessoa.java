@@ -8,6 +8,8 @@ package br.edu.ifnmg.MusicPower.Entidades;
 
 import java.sql.Date;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -58,15 +60,26 @@ public abstract class Pessoa implements Entidade {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpf(String cpf) throws ErroValidacao {
+        if(cpf.length() > 11)
+            throw new ErroValidacao("O atributo CPF deve ter no máximo 11 caracteres!");
+        
+        CPF pf = new CPF(cpf);
+        if(pf.isCPF()== true){            
+           this.cpf = cpf;
+        }else{
+            throw new ErroValidacao("CPF Invalido!");
+        }
+                
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(String nome) throws ErroValidacao {
+        if(nome.length() > 50)
+            throw new ErroValidacao("O atributo NOME deve ter no máximo 50 caracteres!");
         this.nome = nome;
     }
     
@@ -82,7 +95,9 @@ public abstract class Pessoa implements Entidade {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone) throws ErroValidacao {
+        if(telefone.length() > 12)
+            throw new ErroValidacao("O atributo TELEFONE deve ter no máximo 12 caracteres!");
         this.telefone = telefone;
     }
 
@@ -90,15 +105,27 @@ public abstract class Pessoa implements Entidade {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String email) throws ErroValidacao {
+        if(email.length() > 40){
+            throw new ErroValidacao("O atributo EMAIL deve ter no máximo 40 caracteres!");
+        }
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher m = p.matcher(email);
+        boolean matchFoud = m.matches();
+        if(matchFoud){
+            this.email = email;
+        }else{
+             throw new ErroValidacao("E-mail Invalido!!!");
+        }
     }
 
     public String getUF() {
         return UF;
     }
 
-    public void setUF(String UF) {
+    public void setUF(String UF) throws ErroValidacao {
+        if(UF.length() > 3)
+            throw new ErroValidacao("O atributo UF deve ter no máximo 3 caracteres!");
         this.UF = UF;
     }
 
@@ -106,7 +133,9 @@ public abstract class Pessoa implements Entidade {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade) throws ErroValidacao {
+        if(cidade.length() > 20)
+            throw new ErroValidacao("O atributo CIDADE deve ter no máximo 20 caracteres!");
         this.cidade = cidade;
     }
 
@@ -114,7 +143,9 @@ public abstract class Pessoa implements Entidade {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+    public void setBairro(String bairro) throws ErroValidacao {
+        if(bairro.length() > 20)
+            throw new ErroValidacao("O atributo BAIRRO deve ter no máximo 20 caracteres!");
         this.bairro = bairro;
     }
 
@@ -122,7 +153,9 @@ public abstract class Pessoa implements Entidade {
         return rua;
     }
 
-    public void setRua(String rua) {
+    public void setRua(String rua) throws ErroValidacao {
+        if(rua.length() > 30)
+            throw new ErroValidacao("O atributo RUA deve ter no máximo 30 caracteres!");
         this.rua = rua;
     }
 
@@ -130,7 +163,9 @@ public abstract class Pessoa implements Entidade {
         return nResidencia;
     }
 
-    public void setnResidencia(String nResidencia) {
+    public void setnResidencia(String nResidencia) throws ErroValidacao {
+        if(nResidencia.length() > 5)
+            throw new ErroValidacao("O atributo NUMERO RESIDÊNCIA deve ter no máximo 5 caracteres!");
         this.nResidencia = nResidencia;
     }
 

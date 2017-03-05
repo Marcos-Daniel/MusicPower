@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Administrador;
 import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import java.sql.Date;
 import java.text.ParseException;
@@ -443,64 +444,86 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
         txtSenha.setText("");
     }
 
-    private void recuperarCampos() throws ParseException {
+    private void recuperarCampos() throws ParseException, ErroValidacao {
         int codigo = novo.getId();
 
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         String nome = txtNome.getText().trim();
-        if (!nome.equals("")) {
+        if(!nome.equals("")){
             novo.setNome(nome);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NOME É OBRIGATORIO");
         }
-
+        
         String cpf = txtCpf.getText().trim();
-        if (!cpf.equals("")) {
+        if(!cpf.equals("")){
             novo.setCpf(cpf);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CPF É OBRIGATORIO");
         }
-
-        Date nascimento = new Date(format.parse(txtNascimento.getText().trim()).getTime());
-        if (!nascimento.equals("")) {
+        
+        Date nascimento = new Date( format.parse(txtNascimento.getText().trim()).getTime());
+        if(!nascimento.equals("")){
             novo.setDataNascimento(nascimento);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DATA NASCIMENTO É OBRIGATORIO");
         }
-
+        
         String telefone = txtTelefone.getText().trim();
-        if (!telefone.equals("")) {
+        if(!telefone.equals("")){
             novo.setTelefone(telefone);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO TELEFONE É OBRIGATORIO");
         }
-
+        
         String email = txtEmail.getText().trim();
-        if (!email.equals("")) {
+        if(!email.equals("")){
             novo.setEmail(email);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO EMAIL É OBRIGATORIO");
         }
-
+        
         String cidade = txtCidade.getText().trim();
-        if (!cidade.equals("")) {
+        if(!cidade.equals("")){
             novo.setCidade(cidade);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CIDADE É OBRIGATORIO");
         }
-
+        
         String uf = txtUf.getText().trim();
-        if (!uf.equals("")) {
+        if(!uf.equals("")){
             novo.setUF(uf);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO UF É OBRIGATORIO");
         }
-
+        
         String rua = txtRua.getText().trim();
-        if (!rua.equals("")) {
+        if(!rua.equals("")){
             novo.setRua(rua);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO RUA É OBRIGATORIO");
         }
-
+        
         String bairro = txtBairro.getText().trim();
-        if (!bairro.equals("")) {
+        if(!bairro.equals("")){
             novo.setBairro(bairro);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO BAIRRO É OBRIGATORIO");
         }
-
+            
         String numResidencia = txtNumeroResidencia.getText().trim();
-        if (!numResidencia.equals("")) {
+        if(!numResidencia.equals("")){
             novo.setnResidencia(numResidencia);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NUMERO RESIDÊNCIA É OBRIGATORIO");
         }
-
+        
         String cargo = txtCargo.getText().trim();
-        if (!cargo.equals("")) {
+        if(!cargo.equals("")){
             novo.setCargo(cargo);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CARGO É OBRIGATORIO");
         }
         
         String login = txtLogin.getText().trim();
@@ -508,6 +531,9 @@ public class CadastrarAdministrador extends javax.swing.JFrame {
             if (!login.equals("")) {
                 novo.setLogin(login);
             }
+            else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO LOGIN É OBRIGATORIO");
+        }
         }else{
             if(!login.equals("")){
                 novo.setLogin(login);

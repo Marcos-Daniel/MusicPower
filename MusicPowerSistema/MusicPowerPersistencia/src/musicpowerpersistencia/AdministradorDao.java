@@ -7,6 +7,7 @@ package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Administrador;
 import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,6 +50,8 @@ public class AdministradorDao extends DAOGenerica<Administrador> implements Admi
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(AdministradorDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

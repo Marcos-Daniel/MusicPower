@@ -4,7 +4,7 @@ use bdmusicPower;
 create table cliente (
 	id int auto_increment,
     nome varchar(50),
-    cpf varchar(18),
+    cpf varchar(12),
     dataNascimento date,
     telefone varchar(12),
     email varchar(40),
@@ -19,7 +19,7 @@ create table cliente (
 create table funcionario (
 	id int auto_increment,
     nome varchar(50),
-    cpf varchar(18),
+    cpf varchar(12),
     dataNascimento date,
     telefone varchar(12),
     email varchar(40),

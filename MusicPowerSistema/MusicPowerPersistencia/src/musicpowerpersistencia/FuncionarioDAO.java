@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import java.sql.Date;
@@ -87,6 +88,8 @@ public class FuncionarioDAO extends DAOGenerica<Funcionario> implements Funciona
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

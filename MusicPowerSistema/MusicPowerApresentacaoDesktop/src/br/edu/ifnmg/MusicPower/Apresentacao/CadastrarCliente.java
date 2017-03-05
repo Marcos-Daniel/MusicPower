@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -256,8 +257,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
             if (codigo == 0) {
                 MPA.criarCliente(novo);
                 this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");      
-             } else {
+                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                
+            } else {
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Cliente editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
@@ -347,57 +349,77 @@ public class CadastrarCliente extends javax.swing.JFrame {
         
     }
 
-    private void recuperarCampos() throws ParseException {
+    private void recuperarCampos() throws ParseException, ErroValidacao {
          SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         String nome = txtNome.getText().trim();
         if(!nome.equals("")){
             novo.setNome(nome);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NOME É OBRIGATORIO");
         }
         
         String cpf = txtCpf.getText().trim();
         if(!cpf.equals("")){
             novo.setCpf(cpf);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CPF É OBRIGATORIO");
         }
         
         Date nascimento = new Date( format.parse(txtNascimento.getText().trim()).getTime());
         if(!nascimento.equals("")){
             novo.setDataNascimento(nascimento);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO DATA NASCIMENTO É OBRIGATORIO");
         }
         
         String telefone = txtTelefone.getText().trim();
         if(!telefone.equals("")){
             novo.setTelefone(telefone);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO TELEFONE É OBRIGATORIO");
         }
         
         String email = txtEmail.getText().trim();
         if(!email.equals("")){
             novo.setEmail(email);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO EMAIL É OBRIGATORIO");
         }
         
         String cidade = txtCidade.getText().trim();
         if(!cidade.equals("")){
             novo.setCidade(cidade);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO CIDADE É OBRIGATORIO");
         }
         
         String uf = txtUf.getText().trim();
         if(!uf.equals("")){
             novo.setUF(uf);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO UF É OBRIGATORIO");
         }
         
         String rua = txtRua.getText().trim();
         if(!rua.equals("")){
             novo.setRua(rua);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO RUA É OBRIGATORIO");
         }
         
         String bairro = txtBairro.getText().trim();
         if(!bairro.equals("")){
             novo.setBairro(bairro);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO BAIRRO É OBRIGATORIO");
         }
             
         String numResidencia = txtNumeroResidencia.getText().trim();
         if(!numResidencia.equals("")){
             novo.setnResidencia(numResidencia);
+        }else {
+            JOptionPane.showMessageDialog(this, "ERRO, O CAMPO NUMERO RESIDÊNCIA É OBRIGATORIO");
         }
         
     }

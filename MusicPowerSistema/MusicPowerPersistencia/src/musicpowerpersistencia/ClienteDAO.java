@@ -7,6 +7,7 @@ package musicpowerpersistencia;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -114,6 +115,8 @@ public class ClienteDAO extends DAOGenerica<Cliente> implements ClienteRepositor
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
