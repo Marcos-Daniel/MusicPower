@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.ItensVenda;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
@@ -450,7 +451,11 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     private void btnAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarProdutoActionPerformed
             busca.add(novo);
             novo = new Produto();
+        try {
             this.recuperacampos();
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(TelaOperacoesVenda.class.getName()).log(Level.SEVERE, null, ex);
+        }
             listaVenda.add(novo);
             preencherTabela(listaVenda);
             this.limparCampos();
@@ -573,7 +578,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         txtLote.setText(novo.getLote());
     }
     
-    private void recuperacampos(){
+    private void recuperacampos() throws ErroValidacao{
         int id = Integer.parseInt(txtCodigoProduto.getText());
         novo.setId(id);
         novo.setDescricao(txtDescricaoProduto.getText());

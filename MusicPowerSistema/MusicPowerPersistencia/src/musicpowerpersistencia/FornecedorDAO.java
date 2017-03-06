@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.sql.PreparedStatement;
@@ -94,6 +95,8 @@ public class FornecedorDAO extends DAOGenerica<Fornecedor> implements Fornecedor
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

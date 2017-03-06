@@ -46,55 +46,73 @@ public class Fornecedor implements Entidade {
     public String getNome() {
         return nome;
     }
-    public void setNome(String nome) {
+    public void setNome(String nome) throws ErroValidacao {
+        if(nome.length() > 30)
+           throw new ErroValidacao("O atributo NOME deve ter no máximo 30 caracteres!");
         this.nome = nome;
     }
     public String getCnpj() {
         return cnpj;
     }
-    public void setCnpj(String cnpj) {
+    public void setCnpj(String cnpj) throws ErroValidacao {
+        if(cnpj.length() > 40)
+           throw new ErroValidacao("O atributo CNPJ deve ter no máximo 40 caracteres!");
         this.cnpj = cnpj;
     }
     public String getTelefone() {
         return telefone;
     }
-    public void setTelefone(String telefone) {
+    public void setTelefone(String telefone) throws ErroValidacao {
+         if(telefone.length() > 12)
+           throw new ErroValidacao("O atributo TELEFONE deve ter no máximo 12 caracteres!");
         this.telefone = telefone;
     }
     public String getEmail() {
         return email;
     }
-    public void setEmail(String email) {
+    public void setEmail(String email) throws ErroValidacao {
+        if(email.length() > 40)
+           throw new ErroValidacao("O atributo EMAIL deve ter no máximo 40 caracteres!");
         this.email = email;
     }
     public String getUF() {
         return UF;
     }
-    public void setUF(String UF) {
+    public void setUF(String UF) throws ErroValidacao{
+        if(UF.length() > 3)
+           throw new ErroValidacao("O atributo UF deve ter no máximo 3 caracteres!");
         this.UF = UF;
     }
     public String getCidade() {
         return cidade;
     }
-    public void setCidade(String cidade) {
+    public void setCidade(String cidade) throws ErroValidacao{
+        if(cidade.length() > 20)
+           throw new ErroValidacao("O atributo CIDADE deve ter no máximo 20 caracteres!");
         this.cidade = cidade;
     }
     public String getBairro() {
         return bairro;
     }
-    public void setBairro(String bairro) {
+    public void setBairro(String bairro) throws ErroValidacao{
+        if(bairro.length() > 20)
+            throw new ErroValidacao("O atributo BAIRRO deve ter no máximo 20 caracteres!");
         this.bairro = bairro;
     }
     public String getRua() {
         return rua;
     }
-    public void setRua(String rua) {
+    public void setRua(String rua) throws ErroValidacao{
+        if(rua.length() > 30)
+           throw new ErroValidacao("O atributo RUA deve ter no máximo 30 caracteres!");
         this.rua = rua;
     }
     public String getnEstabelecimento() {
         return nEstabelecimento;
     }
-    public void setnEstabelecimento(String nEstabelecimento) {
+    public void setnEstabelecimento(String nEstabelecimento) throws ErroValidacao{
+        if(nEstabelecimento.length() > 5)
+            throw new ErroValidacao("O atributo NºESTABELECIMENTO deve ter no máximo 5 caracteres!");
         this.nEstabelecimento = nEstabelecimento;
     }
     @Override

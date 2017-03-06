@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Serviço;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
 import java.sql.Date;
@@ -89,6 +90,8 @@ public class ServicoDAO extends DAOGenerica<Serviço> implements ServiçoReposit
             return tmp;
         } catch(SQLException ex){
             System.out.println(ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

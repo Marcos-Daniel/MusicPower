@@ -7,9 +7,11 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -212,17 +214,20 @@ public class CadastrarProduto extends javax.swing.JFrame {
             this.recuperarCampos();
             int codigo = novo.getId();
             if (codigo == 0) {
-                MPA.criarProduto(novo);
-                this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");      
+               if( dao.Salvar(novo)){
+                   this.limparCampos();
+                   JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");   
+               }else
+                   JOptionPane.showMessageDialog(this, "Ocorreu um erro durante a execução!");
              } else {
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Produto editado com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
              }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ErroValidacao e) {
+           JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastrarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
       
     }//GEN-LAST:event_btnCadastarActionPerformed
@@ -294,7 +299,7 @@ public class CadastrarProduto extends javax.swing.JFrame {
         
     }
 
-    private void recuperarCampos() throws ParseException {
+    private void recuperarCampos() throws ParseException, ErroValidacao {
 
         String descricao = txtDescricao.getText().trim();
         if(!descricao.equals("")){

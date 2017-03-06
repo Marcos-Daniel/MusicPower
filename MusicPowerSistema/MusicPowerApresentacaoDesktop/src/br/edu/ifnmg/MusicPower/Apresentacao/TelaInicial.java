@@ -379,6 +379,11 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1488404390_architecture-interior-02.png"))); // NOI18N
         jMenu10.setText("Filiais");
+        jMenu10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu10ActionPerformed(evt);
+            }
+        });
 
         mnBuscarFiliais.setText("Cadastrar filiais");
         mnBuscarFiliais.addActionListener(new java.awt.event.ActionListener() {
@@ -564,6 +569,10 @@ public class TelaInicial extends javax.swing.JFrame {
         telaoperaçaovenda.setVisible(true);
         
     }//GEN-LAST:event_mnCadastrarVendaActionPerformed
+
+    private void jMenu10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu10ActionPerformed
 
     /**
      * @param args the command line arguments

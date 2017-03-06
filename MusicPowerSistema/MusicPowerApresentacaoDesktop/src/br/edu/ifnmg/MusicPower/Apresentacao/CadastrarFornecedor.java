@@ -5,6 +5,7 @@
  */
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import java.util.logging.Level;
@@ -235,23 +236,24 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        this.recuperarCampos();
-        int codigo = novo.getId();
-        
-        try {
+       
+         try {
+            this.recuperarCampos();
+            int codigo = novo.getId();
             if(codigo == 0){
-                MPA.criarFornecedor(novo);
-                this.limparCampos();
-                JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                if(dao.Salvar(novo)){
+                    this.limparCampos();
+                    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                }else     
+                    JOptionPane.showMessageDialog(this, "Ocorreu um erro durante a execução!");
             }
             else{
                 dao.Alterar(novo);
                 JOptionPane.showMessageDialog(this, "Fornecedor editada com sucesso!!!", "Mensagem de confirmação", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Cadastro não realizado falha na conexao com o banco de dados: " + e.getMessage(), "Mensagem de erro", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(CadastrarFilial.class.getName()).log(Level.SEVERE, null, e);
+        } catch (ErroValidacao ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -345,7 +347,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         
     }
 
-    private void recuperarCampos() {
+    private void recuperarCampos() throws ErroValidacao {
         
         String bairro = txtBairro.getText().trim();
         if(!bairro.equals("")){

@@ -86,7 +86,9 @@ public class Serviço implements Entidade {
     public String getDescricao() {
         return descricao;
     }
-    public void setDescricao(String descricao) {
+    public void setDescricao(String descricao) throws ErroValidacao{
+        if(descricao.length() > 30)
+            throw new ErroValidacao("O atributo DESCRICÃO deve ter no máximo 30 caracteres!");
         this.descricao = descricao;
     }
     public Date getSolicitacao() {
@@ -110,13 +112,17 @@ public class Serviço implements Entidade {
     public String getStatusPagamanto() {
         return statusPagamanto;
     }
-    public void setStatusPagamanto(String statusPagamanto) {
+    public void setStatusPagamanto(String statusPagamanto) throws ErroValidacao{
+        if(statusPagamanto.length() > 30)
+            throw new ErroValidacao("O atributo STATUSPAGAMETO deve ter no máximo 30 caracteres!");
         this.statusPagamanto = statusPagamanto;
     }
     public String getStatusProgresso() {
         return statusProgresso;
     }
-    public void setStatusProgresso(String statusProgresso) {
+    public void setStatusProgresso(String statusProgresso) throws ErroValidacao{
+        if(statusProgresso.length() > 30)
+            throw new ErroValidacao("O atributo STATUSPROGRESSO deve ter no máximo 30 caracteres!");
         this.statusProgresso = statusProgresso;
     }
     @Override

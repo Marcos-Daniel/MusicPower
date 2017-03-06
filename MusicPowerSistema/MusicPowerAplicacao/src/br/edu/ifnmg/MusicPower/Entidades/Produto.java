@@ -43,7 +43,9 @@ public class Produto implements Entidade {
         return marca;
     }
 
-    public void setMarca(String marca) {
+    public void setMarca(String marca) throws ErroValidacao{
+          if(marca.length() > 50)
+            throw new ErroValidacao("O atributo MARCA deve ter no máximo 50 caracteres!");
         this.marca = marca;
     }
 
@@ -51,7 +53,9 @@ public class Produto implements Entidade {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
+    public void setModelo(String modelo) throws ErroValidacao{
+        if(modelo.length() > 50)
+            throw new ErroValidacao("O atributo MODELO deve ter no máximo 50 caracteres!");
         this.modelo = modelo;
     }
 
@@ -59,7 +63,9 @@ public class Produto implements Entidade {
         return lote;
     }
 
-    public void setLote(String lote) {
+    public void setLote(String lote) throws ErroValidacao{
+        if(lote.length() > 50)
+            throw new ErroValidacao("O atributo LOTE deve ter no máximo 50 caracteres!");
         this.lote = lote;
     }
     
@@ -74,7 +80,9 @@ public class Produto implements Entidade {
     public String getDescricao() {
         return descricao;
     }
-    public void setDescricao(String descricao) {
+    public void setDescricao(String descricao) throws ErroValidacao{
+          if(descricao.length() > 50)
+            throw new ErroValidacao("O atributo DESCRICAO deve ter no máximo 50 caracteres!");
         this.descricao = descricao;
     }
     public int getQtd() {

@@ -5,6 +5,7 @@
  */
 package musicpowerpersistencia;
 
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import java.sql.PreparedStatement;
@@ -86,7 +87,9 @@ public class ProdutoDAO extends DAOGenerica<Produto> implements ProdutoRepositor
             return tmp;
       } catch(SQLException ex){
           System.out.println(ex);
-      }
+      } catch (ErroValidacao ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
       return null;
     }
 

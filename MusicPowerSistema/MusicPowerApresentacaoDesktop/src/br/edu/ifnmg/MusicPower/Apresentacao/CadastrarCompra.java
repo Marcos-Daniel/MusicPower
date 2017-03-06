@@ -6,6 +6,7 @@
 package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Compra;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.ItensCompra;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
 import java.sql.Date;
@@ -276,6 +277,8 @@ public class CadastrarCompra extends javax.swing.JFrame {
             carrinhoCompras.PreencherTabela(produtos);
         } catch (ParseException ex) {
             Logger.getLogger(CadastrarCompra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErroValidacao ex) {
+            Logger.getLogger(CadastrarCompra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAddProdutoActionPerformed
 
@@ -347,7 +350,7 @@ public class CadastrarCompra extends javax.swing.JFrame {
     private javax.swing.JTextField txtValorDaCompra;
     // End of variables declaration//GEN-END:variables
 
-    public void recuperaCampos() throws ParseException {
+    public void recuperaCampos() throws ParseException, ErroValidacao {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
         Date dataDaCompra = new Date(format.parse(txtDataDaCompra.getText().trim()).getTime());

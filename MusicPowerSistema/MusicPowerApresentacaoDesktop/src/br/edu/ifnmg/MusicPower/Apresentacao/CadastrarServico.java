@@ -7,6 +7,7 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ErroValidacao;
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Serviço;
@@ -337,10 +338,11 @@ public class CadastrarServico extends javax.swing.JFrame {
             boolean vFuncionario = daoFuncionario.validarFuncionario(novoServico.getIdFuncionario(), novoServico.getNomeFuncionario());
             if(codigo == 0){
                 if(vCliente && vFuncionario){
-                    daoServico.Salvar(novoServico);
-                    JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
-                    limparCampos();
-
+                    if(daoServico.Salvar(novoServico)){
+                        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!!!");
+                        limparCampos();
+                    }else 
+                        JOptionPane.showMessageDialog(this, "Ocorreu um erro durante a execução!");
                 }else {
                     JOptionPane.showMessageDialog(this, "Funcionário ou cliente não encontrado!!!");
                 }
@@ -350,6 +352,8 @@ public class CadastrarServico extends javax.swing.JFrame {
                 this.dispose();
             }
         } catch (ParseException ex) {
+            Logger.getLogger(CadastrarServico.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ErroValidacao ex) {
             Logger.getLogger(CadastrarServico.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -436,7 +440,7 @@ public class CadastrarServico extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
-public void recuperaCamposPessoa() throws ParseException{
+public void recuperaCamposPessoa() throws ParseException, ErroValidacao{
     
     int idCliente = Integer.parseInt(txtIdCliente.getText().trim());
     if(!txtIdCliente.getText().equals("")){
