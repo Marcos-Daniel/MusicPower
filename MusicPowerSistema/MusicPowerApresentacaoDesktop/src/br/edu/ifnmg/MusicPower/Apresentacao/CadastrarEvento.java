@@ -64,8 +64,8 @@ public class CadastrarEvento extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
-        txtStatus = new javax.swing.JFormattedTextField();
         lblDescicao1 = new javax.swing.JLabel();
+        txtStatus = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -111,9 +111,13 @@ public class CadastrarEvento extends javax.swing.JFrame {
             }
         });
 
-        txtStatus.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-
         lblDescicao1.setText("*Status:");
+
+        txtStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStatusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlCadastrarEventoLayout = new javax.swing.GroupLayout(pnlCadastrarEvento);
         pnlCadastrarEvento.setLayout(pnlCadastrarEventoLayout);
@@ -141,12 +145,12 @@ public class CadastrarEvento extends javax.swing.JFrame {
                             .addComponent(lblDescicao1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStatus, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDataTerminio, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtValorInvestimento)
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescricao)
-                            .addComponent(txtDataInicio))))
+                            .addComponent(txtDataInicio)
+                            .addComponent(txtStatus))))
                 .addContainerGap())
         );
         pnlCadastrarEventoLayout.setVerticalGroup(
@@ -172,11 +176,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorInvestimento)
                     .addComponent(txtValorInvestimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDescicao1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparCampos)
                     .addComponent(btnCadastrar)
@@ -238,6 +242,10 @@ public class CadastrarEvento extends javax.swing.JFrame {
         this.limparCampos();
     }//GEN-LAST:event_btnLimparCamposActionPerformed
 
+    private void txtStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStatusActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -288,7 +296,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtDataTerminio;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JFormattedTextField txtStatus;
+    private javax.swing.JTextField txtStatus;
     private javax.swing.JFormattedTextField txtValorInvestimento;
     // End of variables declaration//GEN-END:variables
 
@@ -331,6 +339,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         }   
         
         String status = txtStatus.getText().trim();
+        System.out.print(status);
         if (!status.equals("")) {
             novo.setStatus(status);
         }else {

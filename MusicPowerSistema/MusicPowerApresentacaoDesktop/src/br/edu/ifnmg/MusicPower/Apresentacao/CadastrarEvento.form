@@ -78,12 +78,12 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtStatus" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtDataTerminio" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtValorInvestimento" max="32767" attributes="0"/>
                               <Component id="txtNome" alignment="1" max="32767" attributes="0"/>
                               <Component id="txtDescricao" max="32767" attributes="0"/>
                               <Component id="txtDataInicio" max="32767" attributes="0"/>
+                              <Component id="txtStatus" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -119,12 +119,12 @@
                       <Component id="lblValorInvestimento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtValorInvestimento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDescicao1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnLimparCampos" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -219,17 +219,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLimparCamposActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtStatus">
-          <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="lblDescicao1">
           <Properties>
             <Property name="text" type="java.lang.String" value="*Status:"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtStatus">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtStatusActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
