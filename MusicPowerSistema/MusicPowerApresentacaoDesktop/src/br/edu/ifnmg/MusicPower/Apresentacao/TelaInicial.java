@@ -87,6 +87,9 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         mnBuscarAdminisrador = new javax.swing.JMenuItem();
+        mnRelatorioCliente = new javax.swing.JMenuItem();
+        mnRelatorioFuncionario = new javax.swing.JMenuItem();
+        mnRelatorioAdministrador = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnCadastrarEventos = new javax.swing.JMenuItem();
         mnBuscarEvento = new javax.swing.JMenuItem();
@@ -231,6 +234,30 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenu2.add(mnBuscarAdminisrador);
+
+        mnRelatorioCliente.setText("Relatório cliente");
+        mnRelatorioCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioClienteActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnRelatorioCliente);
+
+        mnRelatorioFuncionario.setText("Relatório funcionário");
+        mnRelatorioFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioFuncionarioActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnRelatorioFuncionario);
+
+        mnRelatorioAdministrador.setText("Relatório administrador");
+        mnRelatorioAdministrador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioAdministradorActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnRelatorioAdministrador);
 
         jMenuBar1.add(jMenu2);
 
@@ -389,6 +416,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu9.add(mnBuscarFornecedores);
 
         mnRelatoriofornecedores.setText("Relatorio fornecedores");
+        mnRelatoriofornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatoriofornecedoresActionPerformed(evt);
+            }
+        });
         jMenu9.add(mnRelatoriofornecedores);
 
         jMenuBar1.add(jMenu9);
@@ -593,6 +625,30 @@ public class TelaInicial extends javax.swing.JFrame {
         exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioSevicoActionPerformed
 
+    private void mnRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioClienteActionPerformed
+        setConsulta("select * from cliente");
+        setArquivoJasper("RelatorioCliente.jasper");
+        exibeRelatorioJasper();
+    }//GEN-LAST:event_mnRelatorioClienteActionPerformed
+
+    private void mnRelatorioAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioAdministradorActionPerformed
+        setConsulta("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM administrador");
+        setArquivoJasper("RelatorioAdministrador.jasper");
+        exibeRelatorioJasper(); 
+    }//GEN-LAST:event_mnRelatorioAdministradorActionPerformed
+
+    private void mnRelatorioFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioFuncionarioActionPerformed
+        setConsulta("select * from funcionario");
+        setArquivoJasper("RelatorioFuncionario.jasper");
+        exibeRelatorioJasper(); 
+    }//GEN-LAST:event_mnRelatorioFuncionarioActionPerformed
+
+    private void mnRelatoriofornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatoriofornecedoresActionPerformed
+        setConsulta("select * from fornecedor");
+        setArquivoJasper("RelatorioFornecedor.jasper");
+        exibeRelatorioJasper(); 
+    }//GEN-LAST:event_mnRelatoriofornecedoresActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -662,9 +718,12 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnCadastrarFornecedores;
     private javax.swing.JMenuItem mnCadastrarVenda;
     private javax.swing.JMenuItem mnCadastrarservico;
+    private javax.swing.JMenuItem mnRelatorioAdministrador;
+    private javax.swing.JMenuItem mnRelatorioCliente;
     private javax.swing.JMenuItem mnRelatorioContas;
     private javax.swing.JMenuItem mnRelatorioEventos;
     private javax.swing.JMenuItem mnRelatorioFiliais;
+    private javax.swing.JMenuItem mnRelatorioFuncionario;
     private javax.swing.JMenuItem mnRelatorioSevico;
     private javax.swing.JMenuItem mnRelatorioVendas;
     private javax.swing.JMenuItem mnRelatoriofornecedores;
