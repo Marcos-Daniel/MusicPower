@@ -30,8 +30,8 @@
 	<title>
 		<band height="57">
 			<staticText>
-				<reportElement x="0" y="0" width="120" height="30" uuid="c0b256b5-6cef-46fe-a7fe-d4aaedc58cf1"/>
-				<textElement textAlignment="Justified">
+				<reportElement x="0" y="0" width="555" height="30" uuid="c0b256b5-6cef-46fe-a7fe-d4aaedc58cf1"/>
+				<textElement textAlignment="Center">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Music Power]]></text>
