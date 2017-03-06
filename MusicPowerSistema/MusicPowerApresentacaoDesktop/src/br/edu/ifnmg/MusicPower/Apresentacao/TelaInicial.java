@@ -339,6 +339,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu5.add(jMenuItem26);
 
         jMenuItem27.setText("Relatorio Estoques");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem27);
 
         jMenuBar1.add(jMenu5);
@@ -620,34 +625,40 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu10ActionPerformed
 
     private void mnRelatorioSevicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioSevicoActionPerformed
-        setConsulta("select * from servico");
+        setConsulta("select id,descricao,dataSolicitacao,dataEntrega,valor,statusPagamento,statusProgresso from servico");
         setArquivoJasper("RelatorioServiço.jasper");
         exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioSevicoActionPerformed
 
     private void mnRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioClienteActionPerformed
-        setConsulta("select * from cliente");
+        setConsulta("select id,nome,cpf,dataNascimento,telefone,email from cliente");
         setArquivoJasper("RelatorioCliente.jasper");
         exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioClienteActionPerformed
 
     private void mnRelatorioAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioAdministradorActionPerformed
-        setConsulta("SELECT id,nome,cpf,dataNascimento,telefone,email,cidade,uf,rua,bairro,numResidencia,cargo FROM administrador");
+        setConsulta("SELECT id,nome,cpf,dataNascimento,telefone,email  FROM administrador");
         setArquivoJasper("RelatorioAdministrador.jasper");
         exibeRelatorioJasper(); 
     }//GEN-LAST:event_mnRelatorioAdministradorActionPerformed
 
     private void mnRelatorioFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioFuncionarioActionPerformed
-        setConsulta("select * from funcionario");
+        setConsulta("select id,nome,cpf,telefone,email,cargo,dataNascimento from funcionario");
         setArquivoJasper("RelatorioFuncionario.jasper");
         exibeRelatorioJasper(); 
     }//GEN-LAST:event_mnRelatorioFuncionarioActionPerformed
 
     private void mnRelatoriofornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatoriofornecedoresActionPerformed
-        setConsulta("select * from fornecedor");
+        setConsulta("SELECT id,nome,cnpj,telefone,email,cidade,uf FROM fornecedor");
         setArquivoJasper("RelatorioFornecedor.jasper");
         exibeRelatorioJasper(); 
     }//GEN-LAST:event_mnRelatoriofornecedoresActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        setConsulta("select * from produto");
+        setArquivoJasper("RelatorioProduto.jasper");
+        exibeRelatorioJasper();
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
 
     /**
      * @param args the command line arguments
