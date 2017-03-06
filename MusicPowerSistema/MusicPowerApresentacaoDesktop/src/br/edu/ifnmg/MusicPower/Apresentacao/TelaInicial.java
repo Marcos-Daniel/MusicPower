@@ -41,6 +41,10 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author marcos
  */
 public class TelaInicial extends javax.swing.JFrame {
+    protected Connection conn;
+    String consulta; 
+    String arquivoJasper;
+
     ArrayList<Filial> buscaFilial = new ArrayList<>();
     ArrayList<Conta> buscaConta = new ArrayList<>();
     ArrayList<Evento> buscaEvento = new ArrayList<>();
@@ -49,7 +53,14 @@ public class TelaInicial extends javax.swing.JFrame {
      * Creates new form TelaInicial
      */
     public TelaInicial() {
-      
+         try {
+            Conexao.iniciar();
+            conn = Conexao.criarConexao();
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Driver não encontrado!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
         initComponents();
         
     }
@@ -499,9 +510,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mnBuscarFornecedoresActionPerformed
 
     private void mnRelatorioFiliaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioFiliaisActionPerformed
-       FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
-       buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
-       exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );
+        setConsulta("select * from filial");
+        setArquivoJasper("RelatorioFilial.jasper");
+        exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioFiliaisActionPerformed
 
     private void mnBuscarFiliaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnBuscarFiliaisActionPerformed
@@ -515,9 +526,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mnBuscarAdminisradorActionPerformed
 
     private void mnRelatorioEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioEventosActionPerformed
-      EventoRepositorio daoEvento = GerenciadorDeReferencias.getEvento(); 
-      buscaEvento = (ArrayList<Evento>) daoEvento.Abrir();   
-      exibeRelatorioJasper("RelatorioEvento.jasper", buscaEvento);
+        setConsulta("select * from evento");
+        setArquivoJasper("RelatorioEvento.jasper");
+        exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioEventosActionPerformed
 
     private void mnCadastrarFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarFornecedoresActionPerformed
@@ -555,12 +566,9 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_mnCadastrarAdministradorActionPerformed
 
     private void mnRelatorioContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioContasActionPerformed
-      /*FilialRepositorio daoFilial = GerenciadorDeReferencias.getFilial();
-      buscaFilial = (ArrayList<Filial>) daoFilial.Abrir();
-      exibeRelatorioJasper("RelatorioFilial.jasper", buscaFilial );*/
-      ContaRepositorio daoConta = GerenciadorDeReferencias.getConta(); 
-      buscaConta = (ArrayList<Conta>) daoConta.Abrir();   
-      exibeRelatorioJasper("RepositorioContas.jasper", buscaConta);
+        setConsulta("select * from conta");
+        setArquivoJasper("RelatorioConta.jasper");
+        exibeRelatorioJasper();
     }//GEN-LAST:event_mnRelatorioContasActionPerformed
 
     private void mnCadastrarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarVendaActionPerformed
@@ -654,28 +662,39 @@ public class TelaInicial extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     
-    private void exibeRelatorioJasper(String caminho_relatorio, List dados) {
-         try {
-            // Parâmetros
-            Map parametros = new HashMap();
+    private void exibeRelatorioJasper() {
+      try {
 
-            // Pega o caminho do arquivo do relatório
-            URL arquivo = getClass().getResource(caminho_relatorio);
-            
-            // Carrega o relatório na memória
-            JasperReport relatorio = (JasperReport) JRLoader.loadObject(arquivo);
-            
-            JRDataSource fontededados = new JRBeanCollectionDataSource(dados, true);
-            
-            JasperPrint jasperPrint = JasperFillManager.fillReport(relatorio, parametros, fontededados);
-            
-            // Visualiza o relatório
-            JasperViewer jrviewer = new JasperViewer(jasperPrint, false);
-            
-            jrviewer.setVisible(true);
-        
+            PreparedStatement sql = conn.prepareStatement(getConsulta());
+            ResultSet resultado = sql.executeQuery();
+            JRResultSetDataSource relaResul = new JRResultSetDataSource(resultado);
+            String reportDefinition = getArquivoJasper();
+
+            InputStream reportDefinitionStream = getClass().getResourceAsStream(reportDefinition);
+            JasperPrint jpPrint = JasperFillManager.fillReport(reportDefinitionStream, new HashMap(), relaResul);
+            JasperViewer jv = new JasperViewer(jpPrint,false);
+            jv.setVisible(true);
+
+        } catch (SQLException ex) {  
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         } catch (JRException ex) {
-            Logger.getLogger(JasperReport.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
+    
+    public String getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(String consulta) {
+        this.consulta = consulta;
+    }
+
+    public String getArquivoJasper() {
+        return arquivoJasper;
+    }
+
+    public void setArquivoJasper(String arquivoJasper) {
+        this.arquivoJasper = arquivoJasper;
     }
 }
