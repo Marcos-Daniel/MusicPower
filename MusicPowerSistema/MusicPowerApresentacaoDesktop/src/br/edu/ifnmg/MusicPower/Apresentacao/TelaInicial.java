@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import musicpowerpersistencia.Conexao;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
@@ -102,10 +103,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItem25 = new javax.swing.JMenuItem();
         jMenuItem26 = new javax.swing.JMenuItem();
         jMenuItem27 = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
-        mnCadastrarVenda = new javax.swing.JMenuItem();
-        mnBuscarVenda = new javax.swing.JMenuItem();
-        mnRelatorioVendas = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         mnCadastrarContas = new javax.swing.JMenuItem();
         mnBuscarContas = new javax.swing.JMenuItem();
@@ -118,6 +115,17 @@ public class TelaInicial extends javax.swing.JFrame {
         mnBuscarFiliais = new javax.swing.JMenuItem();
         jMenuItem34 = new javax.swing.JMenuItem();
         mnRelatorioFiliais = new javax.swing.JMenuItem();
+        jMenu7 = new javax.swing.JMenu();
+        mnCadastrarVenda = new javax.swing.JMenuItem();
+        mnBuscarVenda = new javax.swing.JMenuItem();
+        mnRelatorioVendas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        mnCadastrarCompra = new javax.swing.JMenuItem();
+        mnListarCompra = new javax.swing.JMenuItem();
+        mnRelatorioCompra = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        mnTrocarUsuário = new javax.swing.JMenuItem();
+        mnSairDoSistema = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,16 +165,16 @@ public class TelaInicial extends javax.swing.JFrame {
         pnlTelaInicialLayout.setHorizontalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlTelaInicialLayout.createSequentialGroup()
-                .addContainerGap(228, Short.MAX_VALUE)
+                .addContainerGap(304, Short.MAX_VALUE)
                 .addComponent(pnlTituloImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(304, Short.MAX_VALUE))
         );
         pnlTelaInicialLayout.setVerticalGroup(
             pnlTelaInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlTelaInicialLayout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
+                .addContainerGap(81, Short.MAX_VALUE)
                 .addComponent(pnlTituloImagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         menuCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472694467_user_profile_edit.png"))); // NOI18N
@@ -348,30 +356,6 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
-        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695828_aiga_cashier.png"))); // NOI18N
-        jMenu7.setText("Vendas");
-
-        mnCadastrarVenda.setText("Cadastrar venda");
-        mnCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnCadastrarVendaActionPerformed(evt);
-            }
-        });
-        jMenu7.add(mnCadastrarVenda);
-
-        mnBuscarVenda.setText("Buscar venda");
-        mnBuscarVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnBuscarVendaActionPerformed(evt);
-            }
-        });
-        jMenu7.add(mnBuscarVenda);
-
-        mnRelatorioVendas.setText("Relatorio vendas");
-        jMenu7.add(mnRelatorioVendas);
-
-        jMenuBar1.add(jMenu7);
-
         jMenu8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695684_calculator.png"))); // NOI18N
         jMenu8.setText("Contas");
 
@@ -463,6 +447,75 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu10.add(mnRelatorioFiliais);
 
         jMenuBar1.add(jMenu10);
+
+        jMenu7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695828_aiga_cashier.png"))); // NOI18N
+        jMenu7.setText("Vendas");
+        jMenu7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu7ActionPerformed(evt);
+            }
+        });
+
+        mnCadastrarVenda.setText("Cadastrar venda");
+        mnCadastrarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastrarVendaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnCadastrarVenda);
+
+        mnBuscarVenda.setText("Buscar venda");
+        mnBuscarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnBuscarVendaActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnBuscarVenda);
+
+        mnRelatorioVendas.setText("Relatorio vendas");
+        mnRelatorioVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnRelatorioVendasActionPerformed(evt);
+            }
+        });
+        jMenu7.add(mnRelatorioVendas);
+
+        jMenuBar1.add(jMenu7);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1472695776_shopping-cart.png"))); // NOI18N
+        jMenu1.setText("Compras");
+
+        mnCadastrarCompra.setText("Cadastrar compra");
+        jMenu1.add(mnCadastrarCompra);
+
+        mnListarCompra.setText("Listar Compras");
+        jMenu1.add(mnListarCompra);
+
+        mnRelatorioCompra.setText("Relatório compras");
+        jMenu1.add(mnRelatorioCompra);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/edu/ifnmg/MusicPower/Apresentacao/Imagens/1473024057_059_CircledOff.png"))); // NOI18N
+        jMenu6.setText("Sair");
+
+        mnTrocarUsuário.setText("Trocar usuário");
+        mnTrocarUsuário.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnTrocarUsuárioActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnTrocarUsuário);
+
+        mnSairDoSistema.setText("Sair do sistema");
+        mnSairDoSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnSairDoSistemaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(mnSairDoSistema);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -660,6 +713,32 @@ public class TelaInicial extends javax.swing.JFrame {
         exibeRelatorioJasper();
     }//GEN-LAST:event_jMenuItem27ActionPerformed
 
+    private void jMenu7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu7ActionPerformed
+
+    private void mnRelatorioVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnRelatorioVendasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnRelatorioVendasActionPerformed
+
+    private void mnTrocarUsuárioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnTrocarUsuárioActionPerformed
+        String mensagem = "Deseja realmente trocar de usuário?";
+        int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.YES_OPTION){
+            TelaLogin telaLogin = new TelaLogin();
+            telaLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_mnTrocarUsuárioActionPerformed
+
+    private void mnSairDoSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSairDoSistemaActionPerformed
+        String mensagem = "Deseja realmente sair do sistema?";
+        int opcao = JOptionPane.showConfirmDialog(this, mensagem, "Mensagem de confirmação",JOptionPane.YES_NO_OPTION);
+        if(opcao == JOptionPane.YES_OPTION){
+            this.dispose();
+        }
+    }//GEN-LAST:event_mnSairDoSistemaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -697,11 +776,13 @@ public class TelaInicial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
@@ -724,13 +805,16 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnBuscarServico;
     private javax.swing.JMenuItem mnBuscarVenda;
     private javax.swing.JMenuItem mnCadastrarAdministrador;
+    private javax.swing.JMenuItem mnCadastrarCompra;
     private javax.swing.JMenuItem mnCadastrarContas;
     private javax.swing.JMenuItem mnCadastrarEventos;
     private javax.swing.JMenuItem mnCadastrarFornecedores;
     private javax.swing.JMenuItem mnCadastrarVenda;
     private javax.swing.JMenuItem mnCadastrarservico;
+    private javax.swing.JMenuItem mnListarCompra;
     private javax.swing.JMenuItem mnRelatorioAdministrador;
     private javax.swing.JMenuItem mnRelatorioCliente;
+    private javax.swing.JMenuItem mnRelatorioCompra;
     private javax.swing.JMenuItem mnRelatorioContas;
     private javax.swing.JMenuItem mnRelatorioEventos;
     private javax.swing.JMenuItem mnRelatorioFiliais;
@@ -738,6 +822,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnRelatorioSevico;
     private javax.swing.JMenuItem mnRelatorioVendas;
     private javax.swing.JMenuItem mnRelatoriofornecedores;
+    private javax.swing.JMenuItem mnSairDoSistema;
+    private javax.swing.JMenuItem mnTrocarUsuário;
     private javax.swing.JPanel pnlTelaInicial;
     private javax.swing.JPanel pnlTituloImagem;
     // End of variables declaration//GEN-END:variables
