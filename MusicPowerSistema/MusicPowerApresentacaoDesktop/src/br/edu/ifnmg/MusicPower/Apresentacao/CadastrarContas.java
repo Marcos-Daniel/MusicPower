@@ -55,7 +55,6 @@ public class CadastrarContas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtDescricao = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtValor = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtMesReferente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -65,6 +64,7 @@ public class CadastrarContas extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnLimparCampos = new javax.swing.JButton();
         txtDataDeVencimento = new javax.swing.JFormattedTextField();
+        txtValor = new javax.swing.JFormattedTextField();
 
         jFormattedTextField1.setText("jFormattedTextField1");
 
@@ -106,6 +106,12 @@ public class CadastrarContas extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtDataDeVencimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -123,12 +129,10 @@ public class CadastrarContas extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDescricao)
-                            .addComponent(txtValor)
                             .addComponent(txtMesReferente)
                             .addComponent(txtStatus)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDataDeVencimento, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(txtDataDeVencimento)
+                            .addComponent(txtValor)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 123, Short.MAX_VALUE)
                         .addComponent(btnLimparCampos)
@@ -271,7 +275,7 @@ public class CadastrarContas extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtMesReferente;
     private javax.swing.JTextField txtStatus;
-    private javax.swing.JTextField txtValor;
+    private javax.swing.JFormattedTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
     public void recuperarCampos() throws ParseException, ErroValidacao{

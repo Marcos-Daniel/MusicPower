@@ -82,8 +82,8 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         btnLimparCampos = new javax.swing.JButton();
         txtQtd = new javax.swing.JFormattedTextField();
-        txtQuantidade = new javax.swing.JTextField();
         lblDescricaoProduto3 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JFormattedTextField();
         pnlItensVenda = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblItensVendas = new javax.swing.JTable();
@@ -229,6 +229,8 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
         lblDescricaoProduto3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         lblDescricaoProduto3.setText("Informe a quantidade:");
 
+        txtQuantidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+
         javax.swing.GroupLayout pnlProdutoLayout = new javax.swing.GroupLayout(pnlProduto);
         pnlProduto.setLayout(pnlProdutoLayout);
         pnlProdutoLayout.setHorizontalGroup(
@@ -270,7 +272,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
                             .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pnlProdutoLayout.createSequentialGroup()
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -302,8 +304,8 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
                 .addGroup(pnlProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparCampos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDescricaoProduto3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblDescricaoProduto3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -560,7 +562,7 @@ public class TelaOperacoesVenda extends javax.swing.JFrame {
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
     private javax.swing.JFormattedTextField txtQtd;
-    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JFormattedTextField txtQuantidade;
     private javax.swing.JFormattedTextField txtValorUnitarioProduto;
     // End of variables declaration//GEN-END:variables
 

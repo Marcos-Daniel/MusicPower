@@ -69,14 +69,14 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
         lblNumeroResidencia = new javax.swing.JLabel();
         txtNumeroResidencia = new javax.swing.JTextField();
         lblIdade = new javax.swing.JLabel();
-        txtNascimento = new javax.swing.JTextField();
         lblCpf = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         txtCargo = new javax.swing.JTextField();
         lblNumeroResidencia1 = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtNascimento = new javax.swing.JFormattedTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -136,6 +136,18 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
 
         lblNumeroResidencia1.setText("*Cargo:");
 
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout pnlCadastarFuncinarioLayout = new javax.swing.GroupLayout(pnlCadastarFuncinario);
         pnlCadastarFuncinario.setLayout(pnlCadastarFuncinarioLayout);
         pnlCadastarFuncinarioLayout.setHorizontalGroup(
@@ -170,9 +182,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
                     .addComponent(txtRua)
                     .addComponent(txtBairro)
                     .addComponent(txtNumeroResidencia)
-                    .addComponent(txtNascimento)
+                    .addComponent(txtCargo)
                     .addComponent(txtCpf)
-                    .addComponent(txtCargo))
+                    .addComponent(txtNascimento))
                 .addContainerGap())
         );
         pnlCadastarFuncinarioLayout.setVerticalGroup(
@@ -350,9 +362,9 @@ public class CadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNascimento;
+    private javax.swing.JFormattedTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumeroResidencia;
     private javax.swing.JTextField txtRua;

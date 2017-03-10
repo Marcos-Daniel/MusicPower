@@ -75,7 +75,11 @@ public class CadastrarEvento extends javax.swing.JFrame {
 
         lblDataInicio.setText("*Data de Inicio:");
 
-        txtDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try {
+            txtDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         lblDataTerminio.setText("*Data terminio:");
 

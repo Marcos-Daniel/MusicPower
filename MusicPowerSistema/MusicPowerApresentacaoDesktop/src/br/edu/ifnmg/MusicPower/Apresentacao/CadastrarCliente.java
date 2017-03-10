@@ -70,10 +70,10 @@ public class CadastrarCliente extends javax.swing.JFrame {
         btnCadastar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        txtCpf = new javax.swing.JTextField();
         lblNome1 = new javax.swing.JLabel();
-        txtNascimento = new javax.swing.JTextField();
         lblNome2 = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtNascimento = new javax.swing.JFormattedTextField();
 
         jTextField1.setText("jTextField1");
 
@@ -125,6 +125,18 @@ public class CadastrarCliente extends javax.swing.JFrame {
 
         lblNome2.setText("*Nascimento:");
 
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout pnlCadastrarClienteLayout = new javax.swing.GroupLayout(pnlCadastrarCliente);
         pnlCadastrarCliente.setLayout(pnlCadastrarClienteLayout);
         pnlCadastrarClienteLayout.setHorizontalGroup(
@@ -152,8 +164,6 @@ public class CadastrarCliente extends javax.swing.JFrame {
                         .addComponent(lblBairro)))
                 .addGap(23, 23, 23)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNascimento)
-                    .addComponent(txtCpf)
                     .addGroup(pnlCadastrarClienteLayout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -167,7 +177,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(txtCidade)
                     .addComponent(txtBairro)
                     .addComponent(txtRua)
-                    .addComponent(txtNumeroResidencia))
+                    .addComponent(txtNumeroResidencia)
+                    .addComponent(txtCpf)
+                    .addComponent(txtNascimento))
                 .addContainerGap())
         );
         pnlCadastrarClienteLayout.setVerticalGroup(
@@ -179,12 +191,12 @@ public class CadastrarCliente extends javax.swing.JFrame {
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome1))
+                    .addComponent(lblNome1)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNome2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(pnlCadastrarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTelefone)
@@ -327,9 +339,9 @@ public class CadastrarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCadastrarCliente;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtNascimento;
+    private javax.swing.JFormattedTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumeroResidencia;
     private javax.swing.JTextField txtRua;

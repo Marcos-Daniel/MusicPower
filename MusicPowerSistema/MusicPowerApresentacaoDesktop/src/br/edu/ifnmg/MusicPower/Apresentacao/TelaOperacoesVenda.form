@@ -248,7 +248,7 @@
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="txtQuantidade" min="-2" pref="55" max="-2" attributes="0"/>
+                              <Component id="txtQuantidade" min="-2" pref="70" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnAdicionarProduto" min="-2" pref="156" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -286,8 +286,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnAdicionarProduto" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="btnLimparCampos" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblDescricaoProduto3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -448,14 +448,19 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtQuantidade">
-            </Component>
             <Component class="javax.swing.JLabel" name="lblDescricaoProduto3">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Ubuntu" size="15" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Informe a quantidade:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtQuantidade">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format format="#0" subtype="-1" type="0"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

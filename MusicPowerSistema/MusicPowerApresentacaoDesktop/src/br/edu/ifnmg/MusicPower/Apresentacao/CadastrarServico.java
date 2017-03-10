@@ -130,7 +130,11 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         lblDataDaSolicitacao.setText("*Data da solicitação:");
 
-        txtDataSolicitacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try {
+            txtDataSolicitacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         txtDataSolicitacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDataSolicitacaoActionPerformed(evt);
@@ -139,7 +143,11 @@ public class CadastrarServico extends javax.swing.JFrame {
 
         lblDataEntrega.setText("*Data da entrega:");
 
-        txtDataEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try {
+            txtDataEntrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         lblValor.setText("*Valor:");
 
