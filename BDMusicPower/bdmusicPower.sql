@@ -110,19 +110,23 @@ create table produto (
 create table compra(
 	id int auto_increment,
     fk_fornecedor int,
+    fk_funcionario int,
     valor double,
     dataCompra date,
     foreign key(fk_fornecedor) references fornecedor(id),
+    foreign key(fk_funcionario) references funcionario(id),
     primary key(id)
 );
 
 create table itensCompra (
+	id int auto_increment,
 	fk_compra int,
     fk_produto int,
     qtd int,
     valor double,
     foreign key(fk_compra) references compra(id),
-    foreign key(fk_produto) references produto(id)
+    foreign key(fk_produto) references produto(id),
+    primary key(id)
 );
 
 create table venda (

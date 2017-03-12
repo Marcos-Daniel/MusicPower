@@ -10,4 +10,5 @@ package br.edu.ifnmg.MusicPower.Entidades;
  * @author breno
  */
 public interface CompraRepositorio extends Repositorio<Compra>{
+    public int buscarUltimoId();
 }

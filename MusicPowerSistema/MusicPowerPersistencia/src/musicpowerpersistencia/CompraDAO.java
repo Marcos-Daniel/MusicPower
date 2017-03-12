@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio {
 
     public CompraDAO() {
-        setConsultaSalvar("INSERT INTO compra (fornecedor,valor,datacompra)VALUES(?,?,?)");
-        setConsultaAlterar("UPDATE compra SET fornecedor = ?,valor = ?, WHERE datacompra = ?");
+        setConsultaSalvar("INSERT INTO compra (fk_fornecedor,fk_funcionario,valor,datacompra)VALUES(?,?,?,?)");
+        setConsultaAlterar("UPDATE compra SET fk_fornecedor = ?,fk_funcionario = ?,valor = ?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM compra WHERE id = ?");
-        setConsultaAbrir("SELECT id,fornecedor,valor,datacompra FROM Compra WHERE id = ?");
+        setConsultaAbrir("SELECT id,fk_fornecedor,fk_funcionario,valor,datacompra FROM Compra WHERE id = ?");
     }
 
     @Override
@@ -32,7 +32,7 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
             adicionarFiltro("id", "=");
         }
         if (filtro.getFornecedor() > 0) {
-            adicionarFiltro("fornecedor", "=");
+            adicionarFiltro("fk_fornecedor", "=");
         }
     }
 
@@ -60,8 +60,9 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
             Compra tmp = new Compra();
             tmp.setId(resultado.getInt(1));
             tmp.setFornecedor(resultado.getInt(2));
-            tmp.setValor(resultado.getDouble(3));
-            tmp.setDataCompra(resultado.getDate(4));
+            tmp.setFuncionario(resultado.getInt(3));
+            tmp.setValor(resultado.getDouble(4));
+            tmp.setDataCompra(resultado.getDate(5));
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -73,11 +74,28 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
     protected void preencheConsulta(PreparedStatement sql, Compra obj) {
         try {
             sql.setInt(1, obj.getFornecedor());
-            sql.setDouble(2, obj.getValor());
-            sql.setDate(3, obj.getDataCompra());
+            sql.setInt(2, obj.getFuncionario());
+            sql.setDouble(3, obj.getValor());
+            sql.setDate(4, obj.getDataCompra());
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+
+    @Override
+    public int buscarUltimoId() {
+        try {
+            PreparedStatement sql = conn.prepareStatement("SELECT MAX(ID) as id FROM compra");
+            ResultSet resultado = sql.executeQuery();
+            
+            if(resultado.next()){
+                int tmp = resultado.getInt(1);
+                return tmp; 
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex + "Dg Abrir");
+        }
+        return 0;
     }
 
 }

@@ -7,6 +7,8 @@ package muiscpowerapresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.Cliente;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.Compra;
+import br.edu.ifnmg.MusicPower.Entidades.CompraRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Conta;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Evento;
@@ -17,6 +19,8 @@ import br.edu.ifnmg.MusicPower.Entidades.Fornecedor;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Funcionario;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ItensCompra;
+import br.edu.ifnmg.MusicPower.Entidades.ItensCompraRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ItensVenda;
 import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.Produto;
@@ -25,11 +29,13 @@ import br.edu.ifnmg.MusicPower.Entidades.Venda;
 import br.edu.ifnmg.MusicPower.Entidades.VendaRepositorio;
 import java.sql.SQLException;
 import musicpowerpersistencia.ClienteDAO;
+import musicpowerpersistencia.CompraDAO;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ItensCompraDAO;
 import musicpowerpersistencia.ItensVendaDAO;
 import musicpowerpersistencia.ProdutoDAO;
 import musicpowerpersistencia.VendaDAO;
@@ -114,6 +120,20 @@ public class MuiscPowerApresentacao {
         
         ItensVendaRepositorio bd_Itensvenda = new ItensVendaDAO();
         bd_Itensvenda.Salvar(Itensvenda);
+        
+    }
+    
+    public static void criarCompra(Compra compra) throws SQLException, ClassNotFoundException {
+        
+        CompraRepositorio bd_compra = new CompraDAO();
+        bd_compra.Salvar(compra);
+        
+    }
+    
+    public static void criarItensCompra(ItensCompra Itenscompra) throws SQLException, ClassNotFoundException {
+        
+        ItensCompraRepositorio bd_Itenscompra = new ItensCompraDAO();
+        bd_Itenscompra.Salvar(Itenscompra);
         
     }
 

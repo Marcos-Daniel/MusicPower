@@ -2,11 +2,13 @@ package br.edu.ifnmg.MusicPower.Apresentacao;
 
 import br.edu.ifnmg.MusicPower.Entidades.AdministradorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ClienteRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.CompraRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ContaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.EventoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FilialRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FornecedorRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.FuncionarioRepositorio;
+import br.edu.ifnmg.MusicPower.Entidades.ItensCompraRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ItensVendaRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ProdutoRepositorio;
 import br.edu.ifnmg.MusicPower.Entidades.ServiçoRepositorio;
@@ -17,11 +19,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import musicpowerpersistencia.AdministradorDao;
 import musicpowerpersistencia.ClienteDAO;
+import musicpowerpersistencia.CompraDAO;
 import musicpowerpersistencia.ContaDAO;
 import musicpowerpersistencia.EventoDAO;
 import musicpowerpersistencia.FilialDAO;
 import musicpowerpersistencia.FornecedorDAO;
 import musicpowerpersistencia.FuncionarioDAO;
+import musicpowerpersistencia.ItensCompraDAO;
 import musicpowerpersistencia.ItensVendaDAO;
 import musicpowerpersistencia.ProdutoDAO;
 import musicpowerpersistencia.ServicoDAO;
@@ -49,6 +53,8 @@ public class GerenciadorDeReferencias {
     private static ProdutoRepositorio daoProduto;
     private static VendaRepositorio daoVenda;
     private static ItensVendaRepositorio daoItensVenda;
+    private static CompraRepositorio daoCompra;
+    private static ItensCompraRepositorio daoItensCompra;
     
     public static FilialRepositorio getFilial() {
         try {
@@ -176,6 +182,30 @@ public class GerenciadorDeReferencias {
                 daoItensVenda = new ItensVendaDAO();
             }
             return daoItensVenda;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+     public static CompraRepositorio getCompra() {
+        try {
+            if (daoCompra == null) {
+                daoCompra = new CompraDAO();
+            }
+            return daoCompra;
+        } catch (Exception e) {
+            System.out.print(e);
+        }
+        return null;
+    }
+    
+    public static ItensCompraRepositorio getItensCompra() {
+        try {
+            if (daoItensCompra == null) {
+                daoItensCompra = new ItensCompraDAO();
+            }
+            return daoItensCompra;
         } catch (Exception e) {
             System.out.print(e);
         }

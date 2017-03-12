@@ -20,10 +20,10 @@ import java.util.logging.Logger;
 public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCompraRepositorio {
 
     public ItensCompraDAO() throws SQLException {
-        setConsultaSalvar("INSERT INTO itenscompra (compra, produto, valor)VALUES(?,?,?)");
-        setConsultaAlterar("UPDATE itenscompra SET compra = ?, produto = ?, valor =?, WHERE datacompra = ?");
-        setConsultaExcluir("DELETE FROM itenscompra WHERE id = ?");
-        setConsultaAbrir("SELECT id,compra, produto, valor FROM ItensCompra from id = ?");
+        setConsultaSalvar("INSERT INTO itensCompra (fk_compra, fk_produto, qtd, valor)VALUES(?,?,?,?)");
+        setConsultaAlterar("UPDATE itensCompra SET fk_compra = ?, fk_produto = ?, valor =?, WHERE datacompra = ?");
+        setConsultaExcluir("DELETE FROM itensCompra WHERE id = ?");
+        setConsultaAbrir("SELECT id, fk_compra, fk_produto, valor FROM itensCompra from id = ?");
     }
 
     @Override
@@ -43,7 +43,8 @@ public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCom
             tmp.setId(resultado.getInt(1));
             tmp.setCompra(resultado.getInt(2));
             tmp.setProduto(resultado.getInt(3));
-            tmp.setValor(resultado.getDouble(4));
+            tmp.setQtd(resultado.getInt(4));
+            tmp.setValor(resultado.getDouble(5));
             return tmp;
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -56,7 +57,8 @@ public class ItensCompraDAO extends DAOGenerica<ItensCompra> implements ItensCom
         try {
             sql.setInt(1, obj.getCompra());
             sql.setInt(2, obj.getProduto());
-            sql.setDouble(3, obj.getValor());
+            sql.setInt(3, obj.getQtd());
+            sql.setDouble(4, obj.getValor());
         } catch (SQLException ex) {
             Logger.getLogger(ItensCompraDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

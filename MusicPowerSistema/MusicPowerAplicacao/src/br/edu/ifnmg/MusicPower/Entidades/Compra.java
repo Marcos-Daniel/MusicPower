@@ -15,6 +15,7 @@ public class Compra implements Entidade {
 
     private int id;
     private int fornecedor;
+    private int funcionario;
     private Double valor;
     private Date dataCompra;
 
@@ -22,9 +23,10 @@ public class Compra implements Entidade {
 
     }
 
-    public Compra(int id, int fornecedor, Double valor, Date dataCompra) {
+    public Compra(int id, int fornecedor, int funcionario, Double valor, Date dataCompra) {
         this.id = id;
         this.fornecedor = fornecedor;
+        this.funcionario = funcionario;
         this.valor = valor;
         this.dataCompra = dataCompra;
     }
@@ -46,6 +48,15 @@ public class Compra implements Entidade {
     public void setFornecedor(int fornecedor) {
         this.fornecedor = fornecedor;
     }
+
+    public int getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(int funcionario) {
+        this.funcionario = funcionario;
+    }
+    
 
     public Double getValor() {
         return valor;
