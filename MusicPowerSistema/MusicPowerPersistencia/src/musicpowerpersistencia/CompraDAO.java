@@ -23,16 +23,14 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
         setConsultaSalvar("INSERT INTO compra (fk_fornecedor,fk_funcionario,valor,datacompra)VALUES(?,?,?,?)");
         setConsultaAlterar("UPDATE compra SET fk_fornecedor = ?,fk_funcionario = ?,valor = ?, WHERE datacompra = ?");
         setConsultaExcluir("DELETE FROM compra WHERE id = ?");
-        setConsultaAbrir("SELECT id,fk_fornecedor,fk_funcionario,valor,datacompra FROM Compra WHERE id = ?");
+        setConsultaAbrir("SELECT id,fk_fornecedor,fk_funcionario,valor,datacompra FROM compra WHERE id = ?");
+        setConsultaBusca("SELECT id,fk_fornecedor,fk_funcionario,valor,datacompra FROM compra");
     }
 
     @Override
     protected void preencheFiltros(Compra filtro) {
         if (filtro.getId() > 0) {
             adicionarFiltro("id", "=");
-        }
-        if (filtro.getFornecedor() > 0) {
-            adicionarFiltro("fk_fornecedor", "=");
         }
     }
 
@@ -96,6 +94,19 @@ public class CompraDAO extends DAOGenerica<Compra> implements CompraRepositorio 
             System.out.println(ex + "Dg Abrir");
         }
         return 0;
+    }
+
+    @Override
+    public boolean ExcluirItens(int idcompra) {
+         try {
+            PreparedStatement sql = conn.prepareStatement("DELETE FROM compra WHERE id = ?");
+            sql.setInt(1, idcompra);
+            sql.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex + "Dg Excluir");
+        }
+        return false;
     }
 
 }

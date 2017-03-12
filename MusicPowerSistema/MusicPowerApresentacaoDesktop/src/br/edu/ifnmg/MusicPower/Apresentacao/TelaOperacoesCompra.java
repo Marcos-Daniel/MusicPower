@@ -409,7 +409,7 @@ public class TelaOperacoesCompra extends javax.swing.JFrame {
         lblOperacoesVenda.setFont(new java.awt.Font("Ubuntu", 1, 18)); // NOI18N
         lblOperacoesVenda.setForeground(new java.awt.Color(1, 1, 1));
         lblOperacoesVenda.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblOperacoesVenda.setText("Operações de Vendas - Music Power");
+        lblOperacoesVenda.setText("Operações de Compras - Music Power");
         lblOperacoesVenda.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         lblOperacoesVenda.setOpaque(true);
 
@@ -675,7 +675,7 @@ public class TelaOperacoesCompra extends javax.swing.JFrame {
             daoItensCompra = new ItensCompra(0,ultimaCompra,idProduto,qtd,valorUnitario);
             for(Produto a: busca){
                 if(a.getId() == idProduto){
-                    a.setQtd(a.getQtd() - qtd);
+                    a.setQtd(a.getQtd() + qtd);
                     daoProduto.Alterar(a);
                 }
             }

@@ -607,7 +607,7 @@
           <Color blue="1" green="1" red="1" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es de Vendas - Music Power"/>
+        <Property name="text" type="java.lang.String" value="Opera&#xe7;&#xf5;es de Compras - Music Power"/>
         <Property name="horizontalTextPosition" type="int" value="4"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>

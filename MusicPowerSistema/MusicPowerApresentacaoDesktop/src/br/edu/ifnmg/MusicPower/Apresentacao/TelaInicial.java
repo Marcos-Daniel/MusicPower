@@ -486,9 +486,19 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenu1.setText("Compras");
 
         mnCadastrarCompra.setText("Cadastrar compra");
+        mnCadastrarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnCadastrarCompraActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnCadastrarCompra);
 
         mnListarCompra.setText("Listar Compras");
+        mnListarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnListarCompraActionPerformed(evt);
+            }
+        });
         jMenu1.add(mnListarCompra);
 
         mnRelatorioCompra.setText("Relatório compras");
@@ -738,6 +748,16 @@ public class TelaInicial extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_mnSairDoSistemaActionPerformed
+
+    private void mnCadastrarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarCompraActionPerformed
+        TelaOperacoesCompra telaCompra = new TelaOperacoesCompra();
+        telaCompra.setVisible(true);
+    }//GEN-LAST:event_mnCadastrarCompraActionPerformed
+
+    private void mnListarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnListarCompraActionPerformed
+        ListarCompra telaListarCompra = new ListarCompra();
+        telaListarCompra.setVisible(true);
+    }//GEN-LAST:event_mnListarCompraActionPerformed
 
     /**
      * @param args the command line arguments
