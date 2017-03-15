@@ -49,7 +49,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCnpj = new javax.swing.JLabel();
-        txtCnpj = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
@@ -67,6 +66,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        txtCnpj = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -120,6 +120,12 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout pnlCadastrarFornecedorLayout = new javax.swing.GroupLayout(pnlCadastrarFornecedor);
         pnlCadastrarFornecedor.setLayout(pnlCadastrarFornecedorLayout);
         pnlCadastrarFornecedorLayout.setHorizontalGroup(
@@ -145,7 +151,6 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                         .addComponent(btnCadastrar)
                         .addGap(18, 18, 18)
                         .addComponent(btnSair))
-                    .addComponent(txtCnpj, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(txtNome)
                     .addComponent(txtEmail)
                     .addComponent(txtTelefone)
@@ -153,7 +158,8 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
                     .addComponent(txtBairro)
                     .addComponent(txtRua)
                     .addComponent(txtNEstabelecimento)
-                    .addComponent(txtUF, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtUF, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCnpj))
                 .addContainerGap())
         );
         pnlCadastrarFornecedorLayout.setVerticalGroup(
@@ -309,7 +315,7 @@ public class CadastrarFornecedor extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCadastrarFornecedor;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCnpj;
+    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNEstabelecimento;
     private javax.swing.JTextField txtNome;

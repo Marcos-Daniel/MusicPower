@@ -56,7 +56,6 @@ public class CadastrarEvento extends javax.swing.JFrame {
         lblDataInicio = new javax.swing.JLabel();
         txtDataInicio = new javax.swing.JFormattedTextField();
         lblDataTerminio = new javax.swing.JLabel();
-        txtDataTerminio = new javax.swing.JFormattedTextField();
         lblValorInvestimento = new javax.swing.JLabel();
         txtValorInvestimento = new javax.swing.JFormattedTextField();
         btnCadastrar = new javax.swing.JButton();
@@ -66,6 +65,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
         btnLimparCampos = new javax.swing.JButton();
         lblDescicao1 = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
+        txtDataTerminio = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -82,8 +82,6 @@ public class CadastrarEvento extends javax.swing.JFrame {
         }
 
         lblDataTerminio.setText("*Data terminio:");
-
-        txtDataTerminio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
         lblValorInvestimento.setText("*Valor do investimento:");
 
@@ -123,6 +121,12 @@ public class CadastrarEvento extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtDataTerminio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout pnlCadastrarEventoLayout = new javax.swing.GroupLayout(pnlCadastrarEvento);
         pnlCadastrarEvento.setLayout(pnlCadastrarEventoLayout);
         pnlCadastrarEventoLayout.setHorizontalGroup(
@@ -149,12 +153,12 @@ public class CadastrarEvento extends javax.swing.JFrame {
                             .addComponent(lblDescicao1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataTerminio, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtValorInvestimento)
                             .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtDescricao)
-                            .addComponent(txtDataInicio)
-                            .addComponent(txtStatus))))
+                            .addComponent(txtStatus)
+                            .addComponent(txtDataTerminio, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtDataInicio, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         pnlCadastrarEventoLayout.setVerticalGroup(
@@ -168,11 +172,14 @@ public class CadastrarEvento extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDescicao)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataInicio)
-                    .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(lblDataInicio))
+                    .addGroup(pnlCadastrarEventoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDataTerminio)
                     .addComponent(txtDataTerminio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -184,7 +191,7 @@ public class CadastrarEvento extends javax.swing.JFrame {
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDescicao1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnlCadastrarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLimparCampos)
                     .addComponent(btnCadastrar)

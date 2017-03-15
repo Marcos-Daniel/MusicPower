@@ -6,6 +6,8 @@
 package br.edu.ifnmg.MusicPower.Entidades;
 
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -57,7 +59,10 @@ public class Fornecedor implements Entidade {
     public void setCnpj(String cnpj) throws ErroValidacao {
         if(cnpj.length() > 40)
            throw new ErroValidacao("O atributo CNPJ deve ter no máximo 40 caracteres!");
-        this.cnpj = cnpj;
+        if (ValidaCNPJ.isCNPJ(cnpj) == true)
+            this.cnpj = cnpj;
+        else 
+            throw new ErroValidacao("Erro, CNPJ inválido !!!\n");    
     }
     public String getTelefone() {
         return telefone;
@@ -73,7 +78,14 @@ public class Fornecedor implements Entidade {
     public void setEmail(String email) throws ErroValidacao {
         if(email.length() > 40)
            throw new ErroValidacao("O atributo EMAIL deve ter no máximo 40 caracteres!");
-        this.email = email;
+        Pattern p = Pattern.compile(".+@.+\\.[a-z]+");
+        Matcher m = p.matcher(email);
+        boolean matchFoud = m.matches();
+        if(matchFoud){
+            this.email = email;
+        }else{
+             throw new ErroValidacao("E-mail Invalido!!!");
+        }
     }
     public String getUF() {
         return UF;
